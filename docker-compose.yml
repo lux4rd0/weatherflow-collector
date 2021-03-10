@@ -1,0 +1,17 @@
+services:
+  weatherflow-listener:
+    container_name: weatherflow-listener
+    environment:
+      WEATHERFLOW_LISTENER_DEBUG: "false"
+      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: user
+      WEATHERFLOW_LISTENER_INFLUXDB_URL: https://prometheus-us-central1.grafana.net/api/v1/push/influx/write
+      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: token
+      WEATHERFLOW_LISTENER_LOKI_CLIENT_URL: https://user:token@logs-prod-us-central1.grafana.net/api/prom/push
+      WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
+    image: lux4rd0/weatherflow-listener:latest
+    ports:
+    - protocol: udp
+      published: 50222
+      target: 50222
+    restart: always
+version: '3.8'
