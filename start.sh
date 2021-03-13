@@ -46,7 +46,7 @@ echo ""
 
 fi
 
-if [ "$api_type" = "udp" ]
+if [ "$api_type" = "UDP" ]
 then
 
 echo "api_type=$api_type"
@@ -71,7 +71,7 @@ echo "No Backend Configured"
 
 fi
 
-elif [ "$api_type" = "rest" ]
+elif [ "$api_type" = "REST" ]
 then
 
 echo "api_type=$api_type"
