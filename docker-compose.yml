@@ -1,14 +1,64 @@
 services:
-  weatherflow-listener:
-    container_name: weatherflow-listener
+  weatherflow-listener-forecast-loki:
+    container_name: weatherflow-listener-forecast-loki
     environment:
+      WEATHERFLOW_LISTENER_API_TYPE: forecast
+      WEATHERFLOW_LISTENER_BACKEND_TYPE: loki
       WEATHERFLOW_LISTENER_DEBUG: "false"
-      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: user
-      WEATHERFLOW_LISTENER_INFLUXDB_URL: https://prometheus-us-central1.grafana.net/api/v1/push/influx/write
-      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: token
-      WEATHERFLOW_LISTENER_LOKI_CLIENT_URL: https://user:token@logs-prod-us-central1.grafana.net/api/prom/push
+      WEATHERFLOW_LISTENER_LOKI_CLIENT_URL: http://log01.tylephony.com:3100/loki/api/v1/push
+      WEATHERFLOW_LISTENER_REST_DEVICE_ID: 122367
+      WEATHERFLOW_LISTENER_REST_STATION_ID: 40907
+      WEATHERFLOW_LISTENER_REST_TOKEN: TOKEN
+    image: lux4rd0/weatherflow-listener:1.07
+    restart: always
+  weatherflow-listener-rest-influxdb01:
+    container_name: weatherflow-listener-rest-influxdb01
+    environment:
+      WEATHERFLOW_LISTENER_API_TYPE: rest
       WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
-    image: lux4rd0/weatherflow-listener:latest
+      WEATHERFLOW_LISTENER_DEBUG: "false"
+      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: PASSWORD
+      WEATHERFLOW_LISTENER_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
+      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: influxdb
+      WEATHERFLOW_LISTENER_REST_DEVICE_ID: 122367
+      WEATHERFLOW_LISTENER_REST_STATION_ID: 40907
+      WEATHERFLOW_LISTENER_REST_TOKEN: TOKEN
+    image: lux4rd0/weatherflow-listener:1.07
+    restart: always
+  weatherflow-listener-rest-loki:
+    container_name: weatherflow-listener-rest-loki
+    environment:
+      WEATHERFLOW_LISTENER_API_TYPE: rest
+      WEATHERFLOW_LISTENER_BACKEND_TYPE: loki
+      WEATHERFLOW_LISTENER_DEBUG: "false"
+      WEATHERFLOW_LISTENER_LOKI_CLIENT_URL: http://log01.tylephony.com:3100/loki/api/v1/push
+      WEATHERFLOW_LISTENER_REST_DEVICE_ID: 122367
+      WEATHERFLOW_LISTENER_REST_STATION_ID: 40907
+      WEATHERFLOW_LISTENER_REST_TOKEN: TOKEN
+    image: lux4rd0/weatherflow-listener:1.07
+    restart: always
+  weatherflow-listener-rest-lux4rd0labs:
+    container_name: weatherflow-listener-rest-lux4rd0labs
+    environment:
+      WEATHERFLOW_LISTENER_API_TYPE: rest
+      WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
+      WEATHERFLOW_LISTENER_DEBUG: "false"
+      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: PASSWORD
+      WEATHERFLOW_LISTENER_INFLUXDB_URL: https://prometheus-us-central1.grafana.net/api/v1/push/influx/write
+      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: 14653
+      WEATHERFLOW_LISTENER_REST_DEVICE_ID: 122367
+      WEATHERFLOW_LISTENER_REST_STATION_ID: 40907
+      WEATHERFLOW_LISTENER_REST_TOKEN: TOKEN
+    image: lux4rd0/weatherflow-listener:1.07
+    restart: always
+  weatherflow-listener-udp-loki:
+    container_name: weatherflow-listener-udp-loki
+    environment:
+      WEATHERFLOW_LISTENER_API_TYPE: udp
+      WEATHERFLOW_LISTENER_BACKEND_TYPE: loki
+      WEATHERFLOW_LISTENER_DEBUG: "false"
+      WEATHERFLOW_LISTENER_LOKI_CLIENT_URL: http://log01.tylephony.com:3100/loki/api/v1/push
+    image: lux4rd0/weatherflow-listener:1.07
     ports:
     - protocol: udp
       published: 50222
