@@ -1,12 +1,34 @@
 #!/bin/bash
 
-debug=$WEATHERFLOW_LISTENER_DEBUG
-
 # InfluxDB Endpoint
 
 influxdb_url=$WEATHERFLOW_LISTENER_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_LISTENER_INFLUXDB_USERNAME
 influxdb_password=$WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD
+api=$WEATHERFLOW_LISTENER_API_TYPE
+debug=$WEATHERFLOW_LISTENER_DEBUG
+
+if [ "$debug" = "true" ]
+then
+
+echo ""
+echo "Starting WeatherFlow Listener"
+echo ""
+echo "Debug Environmental Variables"
+echo ""
+echo "influxdb_url=$WEATHERFLOW_LISTENER_INFLUXDB_URL"
+echo "influxdb_username=$WEATHERFLOW_LISTENER_INFLUXDB_USERNAME"
+echo "influxdb_password=$WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD"
+echo "api=$WEATHERFLOW_LISTENER_API_TYPE"
+echo ""
+
+else
+
+echo ""
+echo "Starting WeatherFlow Listener"
+echo ""
+
+fi
 
 # Curl Command
 
@@ -44,6 +66,7 @@ obs_serial_number=$(echo "${line}" | jq -r .serial_number)
 obs_hub_sn=$(echo "${line}" | jq -r .hub_sn)
 obs_firmware_revision=$(echo "${line}" | jq -r .firmware_revision)
 
+obs_time_epoch=$(echo "${line}" | jq ".obs[0][0]")
 obs_wind_lull=$(echo "${line}" | jq ".obs[0][1]")
 obs_wind_avg=$(echo "${line}" | jq ".obs[0][2]")
 obs_wind_gust=$(echo "${line}" | jq ".obs[0][3]")
@@ -71,6 +94,7 @@ echo "obs,serial_number ${obs_serial_number}"
 echo "obs,hub_sn ${obs_hub_sn}"
 echo "obs,firmware_revision ${obs_firmware_revision}"
 
+echo "obs,time_epoch ${obs_time_epoch}"
 echo "obs,wind_lull ${obs_wind_lull}"
 echo "obs,wind_avg ${obs_wind_avg}"
 echo "obs,wind_gust ${obs_wind_gust}"
@@ -94,24 +118,24 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} firmware_revision=${obs_firmware_revision}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_lull=${obs_wind_lull}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_avg=${obs_wind_avg}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_gust=${obs_wind_gust}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_direction=${obs_wind_direction}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_sample_interval=${obs_wind_sample_interval}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} station_pressure=${obs_station_pressure}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} air_temperature=${obs_air_temperature}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} relative_humidity=${obs_relative_humidity}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} illuminance=${obs_illuminance}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} uv=${obs_uv}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} solar_radiation=${obs_solar_radiation}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} precip_accumulated=${obs_precip_accumulated}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} precipitation_type=${obs_precipitation_type}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} lightning_strike_avg_distance=${obs_lightning_strike_avg_distance}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} lightning_strike_count=${obs_lightning_strike_count}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} battery=${obs_battery}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} report_interval=${obs_report_interval}"
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} firmware_revision=${obs_firmware_revision}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_lull=${obs_wind_lull}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_avg=${obs_wind_avg}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_gust=${obs_wind_gust}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_direction=${obs_wind_direction}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_sample_interval=${obs_wind_sample_interval}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} station_pressure=${obs_station_pressure}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} air_temperature=${obs_air_temperature}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} relative_humidity=${obs_relative_humidity}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} illuminance=${obs_illuminance}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} uv=${obs_uv}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} solar_radiation=${obs_solar_radiation}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} precip_accumulated=${obs_precip_accumulated}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} precipitation_type=${obs_precipitation_type}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} lightning_strike_avg_distance=${obs_lightning_strike_avg_distance}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} lightning_strike_count=${obs_lightning_strike_count}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} battery=${obs_battery}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} report_interval=${obs_report_interval}"
 
 fi
 
@@ -125,6 +149,7 @@ obs_serial_number=$(echo "${line}" | jq -r .serial_number)
 obs_hub_sn=$(echo "${line}" | jq -r .hub_sn)
 obs_firmware_revision=$(echo "${line}" | jq -r .firmware_revision)
 
+obs_time_epoch=$(echo "${line}" | jq ".obs[0][0]")
 obs_station_pressure=$(echo "${line}" | jq ".obs[0][1]")
 obs_air_temperature=$(echo "${line}" | jq ".obs[0][2]")
 obs_relative_humidity=$(echo "${line}" | jq ".obs[0][3]")
@@ -142,6 +167,7 @@ echo "obs,serial_number ${obs_serial_number}"
 echo "obs,hub_sn ${obs_hub_sn}"
 echo "obs,firmware_revision ${obs_firmware_revision}"
 
+echo "obs,time_epoch ${obs_time_epoch}"
 echo "obs,station_pressure ${obs_station_pressure}"
 echo "obs,air_temperature ${obs_air_temperature}"
 echo "obs,relative_humidity ${obs_relative_humidity}"
@@ -155,14 +181,15 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} firmware_revision=${obs_firmware_revision}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} station_pressure=${obs_station_pressure}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} air_temperature=${obs_air_temperature}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} relative_humidity=${obs_relative_humidity}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} lightning_strike_count=${obs_lightning_strike_count}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} lightning_strike_avg_distance=${obs_lightning_strike_avg_distance}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} battery=${obs_battery}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} report_interval=${obs_report_interval}"
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} firmware_revision=${obs_firmware_revision}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} time_epoch=${obs_time_epoch}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} station_pressure=${obs_station_pressure}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} air_temperature=${obs_air_temperature}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} relative_humidity=${obs_relative_humidity}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} lightning_strike_count=${obs_lightning_strike_count}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} lightning_strike_avg_distance=${obs_lightning_strike_avg_distance}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} battery=${obs_battery}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} report_interval=${obs_report_interval}"
 
 fi
 
@@ -176,6 +203,7 @@ obs_serial_number=$(echo "${line}" | jq -r .serial_number)
 obs_hub_sn=$(echo "${line}" | jq -r .hub_sn)
 obs_firmware_revision=$(echo "${line}" | jq -r .firmware_revision)
 
+obs_time_epoch=$(echo "${line}" | jq ".obs[0][0]")
 obs_illuminance=$(echo "${line}" | jq ".obs[0][1]")
 obs_uv=$(echo "${line}" | jq ".obs[0][2]")
 obs_precip_accumulated=$(echo "${line}" | jq ".obs[0][3]")
@@ -206,6 +234,7 @@ echo "obs,serial_number ${obs_serial_number}"
 echo "obs,hub_sn ${obs_hub_sn}"
 echo "obs,firmware_revision ${obs_firmware_revision}"
 
+echo "obs,time_epoch ${obs_time_epoch}"
 echo "obs,illuminance ${obs_illuminance}"
 echo "obs,uv ${obs_uv}"
 echo "obs,precip_accumulated ${obs_precip_accumulated}"
@@ -225,20 +254,21 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} firmware_revision=${obs_firmware_revision}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} illuminance=${obs_illuminance}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} uv=${obs_uv}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} precip_accumulated=${obs_precip_accumulated}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_lull=${obs_wind_lull}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_avg=${obs_wind_avg}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_gust=${obs_wind_gust}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_direction=${obs_wind_direction}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} battery=${obs_battery}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} report_interval=${obs_report_interval}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} solar_radiation=${obs_solar_radiation}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} precip_accumulated=${obs_precip_accumulated}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} precipitation_type=${obs_precipitation_type}
-weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn} wind_sample_interval=${obs_wind_sample_interval}"
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} firmware_revision=${obs_firmware_revision}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} time_epoch=${obs_time_epoch}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} illuminance=${obs_illuminance}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} uv=${obs_uv}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} precip_accumulated=${obs_precip_accumulated}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_lull=${obs_wind_lull}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_avg=${obs_wind_avg}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_gust=${obs_wind_gust}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_direction=${obs_wind_direction}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} battery=${obs_battery}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} report_interval=${obs_report_interval}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} solar_radiation=${obs_solar_radiation}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} precip_accumulated=${obs_precip_accumulated}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} precipitation_type=${obs_precipitation_type}
+weatherflow_obs,serial_number=${obs_serial_number},hub_sn=${obs_hub_sn},api=${api} wind_sample_interval=${obs_wind_sample_interval}"
 
 fi
 
@@ -251,6 +281,7 @@ if [[ $line == *"rapid_wind"* ]]; then
 rapid_wind_serial_number=$(echo "${line}" | jq -r .serial_number)
 rapid_wind_hub_sn=$(echo "${line}" | jq -r .hub_sn)
 
+rapid_wind_time_epoch=$(echo "${line}" | jq ".ob[0]")
 rapid_wind_wind_speed=$(echo "${line}" | jq ".ob[1]")
 rapid_wind_wind_direction=$(echo "${line}" | jq ".ob[2]")
 
@@ -262,6 +293,7 @@ then
 echo "rapid_wind,serial_number ${rapid_wind_serial_number}"
 echo "rapid_wind,hub_sn ${rapid_wind_hub_sn}"
 
+echo "rapid_wind,time_epoch ${rapid_wind_time_epoch}"
 echo "rapid_wind,wind_speed ${rapid_wind_wind_speed}"
 echo "rapid_wind,wind_direction ${rapid_wind_wind_direction}"
 
@@ -270,8 +302,9 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_rapid_wind,serial_number=${rapid_wind_serial_number},hub_sn=${rapid_wind_hub_sn} wind_speed=${rapid_wind_wind_speed}
-weatherflow_rapid_wind,serial_number=${rapid_wind_serial_number},hub_sn=${rapid_wind_hub_sn} wind_direction=${rapid_wind_wind_direction}"
+weatherflow_rapid_wind,serial_number=${rapid_wind_serial_number},hub_sn=${rapid_wind_hub_sn},api=${api} time_epoch=${rapid_wind_time_epoch}
+weatherflow_rapid_wind,serial_number=${rapid_wind_serial_number},hub_sn=${rapid_wind_hub_sn},api=${api} wind_speed=${rapid_wind_wind_speed}
+weatherflow_rapid_wind,serial_number=${rapid_wind_serial_number},hub_sn=${rapid_wind_hub_sn},api=${api} wind_direction=${rapid_wind_wind_direction}"
 
 fi
 
@@ -305,9 +338,9 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_strike,serial_number=${evt_strike_serial_number},hub_sn=${evt_strike_hub_sn} time_epoch=${evt_strike_time_epoch}
-weatherflow_evt_strike,serial_number=${evt_strike_serial_number},hub_sn=${evt_strike_hub_sn} distance=${evt_strike_distance}
-weatherflow_evt_strike,serial_number=${evt_strike_serial_number},hub_sn=${evt_strike_hub_sn} energy=${evt_strike_energy}"
+weatherflow_evt_strike,serial_number=${evt_strike_serial_number},hub_sn=${evt_strike_hub_sn},api=${api} time_epoch=${evt_strike_time_epoch}
+weatherflow_evt_strike,serial_number=${evt_strike_serial_number},hub_sn=${evt_strike_hub_sn},api=${api} distance=${evt_strike_distance}
+weatherflow_evt_strike,serial_number=${evt_strike_serial_number},hub_sn=${evt_strike_hub_sn},api=${api} energy=${evt_strike_energy}"
 
 fi
 
@@ -337,7 +370,7 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_precip,serial_number=${evt_precip_serial_number},hub_sn=${evt_precip_hub_sn} time_epoch=${evt_precip_time_epoch}"
+weatherflow_evt_precip,serial_number=${evt_precip_serial_number},hub_sn=${evt_precip_hub_sn},api=${api} time_epoch=${evt_precip_time_epoch}"
 
 fi
 
@@ -376,12 +409,12 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn} uptime=${device_status_uptime}
-weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn} voltage=${device_status_voltage}
-weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn} firmware_revision=${device_status_firmware_revision}
-weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn} rssi=${device_status_rssi}
-weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn} hub_rssi=${device_status_hub_rssi}
-weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn} sensor_status=${device_status_sensor_status}"
+weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn},api=${api} uptime=${device_status_uptime}
+weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn},api=${api} voltage=${device_status_voltage}
+weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn},api=${api} firmware_revision=${device_status_firmware_revision}
+weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn},api=${api} rssi=${device_status_rssi}
+weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn},api=${api} hub_rssi=${device_status_hub_rssi}
+weatherflow_device_status,serial_number=${device_status_serial_number},hub_sn=${device_status_hub_sn},api=${api} sensor_status=${device_status_sensor_status}"
 
 fi
 
@@ -421,14 +454,14 @@ fi
 # Send metrics to InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} uptime=${hub_status_uptime}
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} firmware_revision=${hub_status_firmware_revision}
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} rssi=${hub_status_rssi}
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} radio_stats_version=${hub_status_radio_stats_version}
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} radio_stats_reboot_count=${hub_status_radio_stats_reboot_count}
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} radio_stats_i2c_bus_error_count=${hub_status_radio_stats_i2c_bus_error_count}
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} radio_stats_radio_status=${hub_status_radio_stats_radio_status}
-weatherflow_hub_status,hub_sn=${hub_status_hub_sn} radio_stats_radio_network_id=${hub_status_radio_stats_radio_network_id}"
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} uptime=${hub_status_uptime}
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} firmware_revision=${hub_status_firmware_revision}
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} rssi=${hub_status_rssi}
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} radio_stats_version=${hub_status_radio_stats_version}
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} radio_stats_reboot_count=${hub_status_radio_stats_reboot_count}
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} radio_stats_i2c_bus_error_count=${hub_status_radio_stats_i2c_bus_error_count}
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} radio_stats_radio_status=${hub_status_radio_stats_radio_status}
+weatherflow_hub_status,hub_sn=${hub_status_hub_sn},api=${api} radio_stats_radio_network_id=${hub_status_radio_stats_radio_network_id}"
 
 fi
 
