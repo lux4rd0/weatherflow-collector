@@ -54,6 +54,9 @@ if [[ $line == *"obs_st"* ]]; then
 # Extract Metrics
 
 obs_device_id=$(echo "${line}" | jq -r .device_id)
+obs_hub_sn=$(echo "${line}" | jq -r .hub_sn)
+obs_serial_number=$(echo "${line}" | jq -r .serial_number)
+obs_firmware_revision=$(echo "${line}" | jq -r .firmware_revision)
 
 obs_time_epoch=$(echo "${line}" | jq ".obs[0][0]")
 obs_wind_lull=$(echo "${line}" | jq ".obs[0][1]")
@@ -78,6 +81,60 @@ obs_rain_accumulated_final_rain_check=$(echo "${line}" | jq ".obs[0][19]")
 obs_local_daily_rain_accumulation_final_rain_check=$(echo "${line}" | jq ".obs[0][20]")
 obs_precipitation_analysis_type=$(echo "${line}" | jq ".obs[0][21]")
 
+obs_summary_pressure_trend=$(echo "${line}" | jq -r .summary.pressure_trend)
+obs_summary_strike_count_1h=$(echo "${line}" | jq -r .summary.strike_count_1h)
+obs_summary_strike_count_3h=$(echo "${line}" | jq -r .summary.strike_count_3h)
+obs_summary_precip_total_1h=$(echo "${line}" | jq -r .summary.precip_total_1h)
+obs_summary_strike_last_dist=$(echo "${line}" | jq -r .summary.strike_last_dist)
+obs_summary_strike_last_epoch=$(echo "${line}" | jq -r .summary.strike_last_epoch)
+obs_summary_precip_accum_local_yesterday=$(echo "${line}" | jq -r .summary.precip_accum_local_yesterday)
+obs_summary_precip_accum_local_yesterday_final=$(echo "${line}" | jq -r .summary.precip_accum_local_yesterday_final)
+obs_summary_precip_analysis_type_yesterday=$(echo "${line}" | jq -r .summary.precip_analysis_type_yesterday)
+obs_summary_feels_like=$(echo "${line}" | jq -r .summary.feels_like)
+obs_summary_heat_index=$(echo "${line}" | jq -r .summary.heat_index)
+obs_summary_wind_chill=$(echo "${line}" | jq -r .summary.wind_chill)
+obs_summary_pulse_adj_ob_time=$(echo "${line}" | jq -r .summary.pulse_adj_ob_time)
+obs_summary_pulse_adj_ob_wind_avg=$(echo "${line}" | jq -r .summary.pulse_adj_ob_wind_avg)
+obs_summary_pulse_adj_ob_temp=$(echo "${line}" | jq -r .summary.pulse_adj_ob_temp)
+obs_summary_raining_minutes_00=$(echo "${line}" | jq ".summary.raining_minutes[0]")
+obs_summary_raining_minutes_01=$(echo "${line}" | jq ".summary.raining_minutes[1]")
+obs_summary_raining_minutes_02=$(echo "${line}" | jq ".summary.raining_minutes[2]")
+obs_summary_raining_minutes_03=$(echo "${line}" | jq ".summary.raining_minutes[3]")
+obs_summary_raining_minutes_04=$(echo "${line}" | jq ".summary.raining_minutes[4]")
+obs_summary_raining_minutes_05=$(echo "${line}" | jq ".summary.raining_minutes[5]")
+obs_summary_raining_minutes_06=$(echo "${line}" | jq ".summary.raining_minutes[6]")
+obs_summary_raining_minutes_07=$(echo "${line}" | jq ".summary.raining_minutes[7]")
+obs_summary_raining_minutes_08=$(echo "${line}" | jq ".summary.raining_minutes[8]")
+obs_summary_raining_minutes_09=$(echo "${line}" | jq ".summary.raining_minutes[9]")
+obs_summary_raining_minutes_10=$(echo "${line}" | jq ".summary.raining_minutes[10]")
+obs_summary_raining_minutes_11=$(echo "${line}" | jq ".summary.raining_minutes[11]")
+obs_summary_dew_point=$(echo "${line}" | jq -r .summary.dew_point)
+obs_summary_wet_bulb_temperature=$(echo "${line}" | jq -r .summary.wet_bulb_temperature)
+obs_summary_air_density=$(echo "${line}" | jq -r .summary.air_density)
+obs_summary_delta_t=$(echo "${line}" | jq -r .summary.delta_t)
+obs_summary_precip_minutes_local_day=$(echo "${line}" | jq -r .summary.precip_minutes_local_day)
+obs_summary_precip_minutes_local_yesterday=$(echo "${line}" | jq -r .summary.precip_minutes_local_yesterday)
+
+
+#
+# Pressure Trend
+#
+
+if [ "$obs_summary_pressure_trend" = "falling" ]
+then
+obs_summary_pressure_trend="-1"
+fi
+
+if [ "$obs_summary_pressure_trend" = "steady" ]
+then
+obs_summary_pressure_trend="0"
+fi
+
+if [ "$obs_summary_pressure_trend" = "rising" ]
+then
+obs_summary_pressure_trend="1"
+fi
+
 #
 # Remove Null Entries
 #
@@ -92,6 +149,15 @@ then
 obs_local_daily_rain_accumulation_final_rain_check="0"
 fi
 
+if [ "$obs_summary_strike_last_dist" = "null" ]
+then
+obs_summary_strike_last_dist="0"
+fi
+
+if [ "$obs_summary_strike_last_epoch" = "null" ]
+then
+obs_summary_strike_last_epoch="0"
+fi
 
 
 if [ "$debug" == "true" ]
@@ -102,6 +168,9 @@ then
 #
 
 echo "obs,device_id ${obs_device_id}"
+echo "obs,hub_sn ${obs_hub_sn}"
+echo "obs,serial_number ${obs_serial_number}"
+echo "obs,firmware_revision ${obs_firmware_revision}"
 
 echo "obs,time_epoch ${obs_time_epoch}"
 echo "obs,wind_lull ${obs_wind_lull}"
@@ -126,6 +195,40 @@ echo "obs,rain_accumulated_final_rain_check ${obs_rain_accumulated_final_rain_ch
 echo "obs,local_daily_rain_accumulation_final_rain_check ${obs_local_daily_rain_accumulation_final_rain_check}"
 echo "obs,precipitation_analysis_type ${obs_precipitation_analysis_type}"
 
+echo "obs,summary_pressure_trend ${obs_summary_pressure_trend}"
+echo "obs,summary_strike_count_1h ${obs_summary_strike_count_1h}"
+echo "obs,summary_strike_count_3h ${obs_summary_strike_count_3h}"
+echo "obs,summary_precip_total_1h ${obs_summary_precip_total_1h}"
+echo "obs,summary_strike_last_dist ${obs_summary_strike_last_dist}"
+echo "obs,summary_strike_last_epoch ${obs_summary_strike_last_epoch}"
+echo "obs,summary_precip_accum_local_yesterday ${obs_summary_precip_accum_local_yesterday}"
+echo "obs,summary_precip_accum_local_yesterday_final ${obs_summary_precip_accum_local_yesterday_final}"
+echo "obs,summary_precip_analysis_type_yesterday ${obs_summary_precip_analysis_type_yesterday}"
+echo "obs,summary_feels_like ${obs_summary_feels_like}"
+echo "obs,summary_heat_index ${obs_summary_heat_index}"
+echo "obs,summary_wind_chill ${obs_summary_wind_chill}"
+echo "obs,summary_pulse_adj_ob_time ${obs_summary_pulse_adj_ob_time}"
+echo "obs,summary_pulse_adj_ob_wind_avg ${obs_summary_pulse_adj_ob_wind_avg}"
+echo "obs,summary_pulse_adj_ob_temp ${obs_summary_pulse_adj_ob_temp}"
+echo "obs,summary_raining_minutes_00 ${obs_summary_raining_minutes_00}"
+echo "obs,summary_raining_minutes_01 ${obs_summary_raining_minutes_01}"
+echo "obs,summary_raining_minutes_02 ${obs_summary_raining_minutes_02}"
+echo "obs,summary_raining_minutes_03 ${obs_summary_raining_minutes_03}"
+echo "obs,summary_raining_minutes_04 ${obs_summary_raining_minutes_04}"
+echo "obs,summary_raining_minutes_05 ${obs_summary_raining_minutes_05}"
+echo "obs,summary_raining_minutes_06 ${obs_summary_raining_minutes_06}"
+echo "obs,summary_raining_minutes_07 ${obs_summary_raining_minutes_07}"
+echo "obs,summary_raining_minutes_08 ${obs_summary_raining_minutes_08}"
+echo "obs,summary_raining_minutes_09 ${obs_summary_raining_minutes_09}"
+echo "obs,summary_raining_minutes_10 ${obs_summary_raining_minutes_10}"
+echo "obs,summary_raining_minutes_11 ${obs_summary_raining_minutes_11}"
+echo "obs,summary_dew_point ${obs_summary_dew_point}"
+echo "obs,summary_wet_bulb_temperature ${obs_summary_wet_bulb_temperature}"
+echo "obs,summary_air_density ${obs_summary_air_density}"
+echo "obs,summary_delta_t ${obs_summary_delta_t}"
+echo "obs,summary_precip_minutes_local_day ${obs_summary_precip_minutes_local_day}"
+echo "obs,summary_precip_minutes_local_yesterday ${obs_summary_precip_minutes_local_yesterday}"
+
 fi
 
 #
@@ -133,28 +236,62 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,device_id=${obs_device_id},api=${api} time_epoch=${obs_time_epoch}
-weatherflow_obs,device_id=${obs_device_id},api=${api} wind_lull=${obs_wind_lull}
-weatherflow_obs,device_id=${obs_device_id},api=${api} wind_avg=${obs_wind_avg}
-weatherflow_obs,device_id=${obs_device_id},api=${api} wind_gust=${obs_wind_gust}
-weatherflow_obs,device_id=${obs_device_id},api=${api} wind_direction=${obs_wind_direction}
-weatherflow_obs,device_id=${obs_device_id},api=${api} wind_sample_interval=${obs_wind_sample_interval}
-weatherflow_obs,device_id=${obs_device_id},api=${api} station_pressure=${obs_station_pressure}
-weatherflow_obs,device_id=${obs_device_id},api=${api} air_temperature=${obs_air_temperature}
-weatherflow_obs,device_id=${obs_device_id},api=${api} relative_humidity=${obs_relative_humidity}
-weatherflow_obs,device_id=${obs_device_id},api=${api} illuminance=${obs_illuminance}
-weatherflow_obs,device_id=${obs_device_id},api=${api} uv=${obs_uv}
-weatherflow_obs,device_id=${obs_device_id},api=${api} solar_radiation=${obs_solar_radiation}
-weatherflow_obs,device_id=${obs_device_id},api=${api} precip_accumulated=${obs_precip_accumulated}
-weatherflow_obs,device_id=${obs_device_id},api=${api} precipitation_type=${obs_precipitation_type}
-weatherflow_obs,device_id=${obs_device_id},api=${api} lightning_strike_avg_distance=${obs_lightning_strike_avg_distance}
-weatherflow_obs,device_id=${obs_device_id},api=${api} lightning_strike_count=${obs_lightning_strike_count}
-weatherflow_obs,device_id=${obs_device_id},api=${api} battery=${obs_battery}
-weatherflow_obs,device_id=${obs_device_id},api=${api} report_interval=${obs_report_interval}
-weatherflow_obs,device_id=${obs_device_id},api=${api} local_daily_rain_accumulation=${obs_local_daily_rain_accumulation}
-weatherflow_obs,device_id=${obs_device_id},api=${api} rain_accumulated_final_rain_check=${obs_rain_accumulated_final_rain_check}
-weatherflow_obs,device_id=${obs_device_id},api=${api} local_daily_rain_accumulation_final_rain_check=${obs_local_daily_rain_accumulation_final_rain_check}
-weatherflow_obs,device_id=${obs_device_id},api=${api} precipitation_analysis_type=${obs_precipitation_analysis_type}"
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} time_epoch=${obs_time_epoch}000
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} wind_lull=${obs_wind_lull}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} wind_avg=${obs_wind_avg}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} wind_gust=${obs_wind_gust}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} wind_direction=${obs_wind_direction}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} wind_sample_interval=${obs_wind_sample_interval}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} station_pressure=${obs_station_pressure}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} air_temperature=${obs_air_temperature}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} relative_humidity=${obs_relative_humidity}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} illuminance=${obs_illuminance}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} uv=${obs_uv}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} solar_radiation=${obs_solar_radiation}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precip_accumulated=${obs_precip_accumulated}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precipitation_type=${obs_precipitation_type}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} lightning_strike_avg_distance=${obs_lightning_strike_avg_distance}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} lightning_strike_count=${obs_lightning_strike_count}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} battery=${obs_battery}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} report_interval=${obs_report_interval}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} local_daily_rain_accumulation=${obs_local_daily_rain_accumulation}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} rain_accumulated_final_rain_check=${obs_rain_accumulated_final_rain_check}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} local_daily_rain_accumulation_final_rain_check=${obs_local_daily_rain_accumulation_final_rain_check}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precipitation_analysis_type=${obs_precipitation_analysis_type}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} pressure_trend=${obs_summary_pressure_trend}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} strike_count_1h=${obs_summary_strike_count_1h}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} strike_count_3h=${obs_summary_strike_count_3h}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precip_total_1h=${obs_summary_precip_total_1h}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} strike_last_dist=${obs_summary_strike_last_dist}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} strike_last_epoch=${obs_summary_strike_last_epoch}000
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precip_accum_local_yesterday=${obs_summary_precip_accum_local_yesterday}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precip_accum_local_yesterday_final=${obs_summary_precip_accum_local_yesterday_final}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precip_analysis_type_yesterday=${obs_summary_precip_analysis_type_yesterday}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} feels_like=${obs_summary_feels_like}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} heat_index=${obs_summary_heat_index}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} wind_chill=${obs_summary_wind_chill}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} pulse_adj_ob_time=${obs_summary_pulse_adj_ob_time}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} pulse_adj_ob_wind_avg=${obs_summary_pulse_adj_ob_wind_avg}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} pulse_adj_ob_temp=${obs_summary_pulse_adj_ob_temp}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_00=${obs_summary_raining_minutes_00}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_01=${obs_summary_raining_minutes_01}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_02=${obs_summary_raining_minutes_02}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_03=${obs_summary_raining_minutes_03}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_04=${obs_summary_raining_minutes_04}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_05=${obs_summary_raining_minutes_05}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_06=${obs_summary_raining_minutes_06}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_07=${obs_summary_raining_minutes_07}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_08=${obs_summary_raining_minutes_08}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_09=${obs_summary_raining_minutes_09}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_10=${obs_summary_raining_minutes_10}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} raining_minutes_11=${obs_summary_raining_minutes_11}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} dew_point=${obs_summary_dew_point}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} wet_bulb_temperature=${obs_summary_wet_bulb_temperature}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} air_density=${obs_summary_air_density}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} delta_t=${obs_summary_delta_t}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precip_minutes_local_day=${obs_summary_precip_minutes_local_day}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} precip_minutes_local_yesterday=${obs_summary_precip_minutes_local_yesterday}
+weatherflow_obs,device_id=${obs_device_id},hub_sn=${obs_hub_sn},serial_number=${obs_serial_number},api=${api} firmware_revision=${obs_firmware_revision}"
 
 fi
 
@@ -204,7 +341,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,device_id=${obs_device_id},api=${api} time_epoch${obs_time_epoch}
+weatherflow_obs,device_id=${obs_device_id},api=${api} time_epoch${obs_time_epoch}000
 weatherflow_obs,device_id=${obs_device_id},api=${api} station_pressure=${obs_station_pressure}
 weatherflow_obs,device_id=${obs_device_id},api=${api} air_temperature=${obs_air_temperature}
 weatherflow_obs,device_id=${obs_device_id},api=${api} relative_humidity=${obs_relative_humidity}
@@ -298,7 +435,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,device_id=${obs_device_id},api=${api} time_epoch${obs_time_epoch}
+weatherflow_obs,device_id=${obs_device_id},api=${api} time_epoch${obs_time_epoch}000
 weatherflow_obs,device_id=${obs_device_id},api=${api} illuminance=${obs_illuminance}
 weatherflow_obs,device_id=${obs_device_id},api=${api} uv=${obs_uv}
 weatherflow_obs,device_id=${obs_device_id},api=${api} precip_accumulated=${obs_precip_accumulated}
@@ -352,7 +489,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_rapid_wind,device_id=${rapid_wind_device_id},api=${api} time_epoch=${rapid_wind_time_epoch}
+weatherflow_rapid_wind,device_id=${rapid_wind_device_id},api=${api} time_epoch=${rapid_wind_time_epoch}000
 weatherflow_rapid_wind,device_id=${rapid_wind_device_id},api=${api} wind_speed=${rapid_wind_wind_speed}
 weatherflow_rapid_wind,device_id=${rapid_wind_device_id},api=${api} wind_direction=${rapid_wind_wind_direction}"
 
@@ -394,7 +531,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_strike,device_id=${evt_strike_device_id},api=${api} time_epoch=${evt_strike_time_epoch}
+weatherflow_evt_strike,device_id=${evt_strike_device_id},api=${api} time_epoch=${evt_strike_time_epoch}000
 weatherflow_evt_strike,device_id=${evt_strike_device_id},api=${api} distance=${evt_strike_distance}
 weatherflow_evt_strike,device_id=${evt_strike_device_id},api=${api} energy=${evt_strike_energy}"
 
@@ -428,7 +565,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_precip,device_id=${evt_precip_device_id},api=${api} time_epoch=${time_epoch}"
+weatherflow_evt_precip,device_id=${evt_precip_device_id},api=${api} time_epoch=${time_epoch}000"
 
 fi
 
@@ -460,7 +597,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_ack,id=${ack_id},api=${api} time_epoch=${time_epoch}"
+weatherflow_ack,id=${ack_id},api=${api} time_epoch=${time_epoch}000"
 
 fi
 
@@ -492,7 +629,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_device_online,device_id=${evt_device_online_device_id},api=${api} time_epoch=${time_epoch}"
+weatherflow_evt_device_online,device_id=${evt_device_online_device_id},api=${api} time_epoch=${time_epoch}000"
 
 fi
 
@@ -522,7 +659,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_device_offline,device_id=${evt_device_offline_device_id},api=${api} time_epoch=${time_epoch}"
+weatherflow_evt_device_offline,device_id=${evt_device_offline_device_id},api=${api} time_epoch=${time_epoch}000"
 
 fi
 
@@ -554,7 +691,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_station_online,station_id=${evt_station_online_station_id},api=${api} time_epoch=${time_epoch}"
+weatherflow_evt_station_online,station_id=${evt_station_online_station_id},api=${api} time_epoch=${time_epoch}000"
 
 fi
 
@@ -586,7 +723,7 @@ fi
 #
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_evt_station_offline,station_id=${evt_station_offline_station_id},api=${api} time_epoch=${time_epoch}"
+weatherflow_evt_station_offline,station_id=${evt_station_offline_station_id},api=${api} time_epoch=${time_epoch}000"
 
 fi
 
