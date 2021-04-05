@@ -1,11 +1,11 @@
 #!/bin/bash
 
 debug=$WEATHERFLOW_LISTENER_DEBUG
-api_type=$WEATHERFLOW_LISTENER_API_TYPE
+collector_type=$WEATHERFLOW_LISTENER_COLLECTOR_TYPE
 backend_type=$WEATHERFLOW_LISTENER_BACKEND_TYPE
-rest_device_id=$WEATHERFLOW_LISTENER_REST_DEVICE_ID
-rest_station_id=$WEATHERFLOW_LISTENER_REST_STATION_ID
-rest_token=$WEATHERFLOW_LISTENER_REST_TOKEN
+remote_collector_device_id=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID
+remote_collector_station_id=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID
+remote_collector_token=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN
 loki_client_url=$WEATHERFLOW_LISTENER_LOKI_CLIENT_URL
 
 # Random ID
@@ -14,7 +14,7 @@ random_id=$(od -A n -t d -N 1 /dev/urandom |tr -d ' ')
 
 # Curl Command
 
-if [ "$debug" = "true" ]
+if [ "${debug}" = "true" ]
 then
 
 curl=(  )
@@ -26,7 +26,7 @@ curl=( --silent --show-error --fail)
 fi
 
 
-if [ "$debug" = "true" ]
+if [ "${debug}" = "true" ]
 then
 
 echo ""
@@ -34,11 +34,11 @@ echo "Starting WeatherFlow Listener"
 echo ""
 echo "Debug Environmental Variables"
 echo ""
-echo "api_type=$WEATHERFLOW_LISTENER_API_TYPE"
+echo "collector_type=$WEATHERFLOW_LISTENER_COLLECTOR_TYPE"
 echo "backend_type=$WEATHERFLOW_LISTENER_BACKEND_TYPE"
-echo "rest_device_id=$WEATHERFLOW_LISTENER_REST_DEVICE_ID"
-echo "rest_station_id=$WEATHERFLOW_LISTENER_REST_STATION_ID"
-echo "rest_token=$WEATHERFLOW_LISTENER_REST_TOKEN"
+echo "remote_collector_device_id=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID"
+echo "remote_collector_station_id=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID"
+echo "remote_collector_token=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN"
 echo "loki_client_url=$WEATHERFLOW_LISTENER_LOKI_CLIENT_URL"
 echo ""
 
@@ -50,24 +50,24 @@ echo ""
 
 fi
 
-if [ "$api_type" = "UDP" ]
+if [ "${collector_type}" = "local-udp" ]
 then
 
-echo "api_type=$api_type"
+echo "collector_type=${collector_type}"
 
-if [ "$backend_type" = "loki" ]
+if [ "${backend_type}" = "loki" ]
 then
 
-echo "backend_type=$backend_type"
+echo "backend_type=${backend_type}"
 
-/usr/bin/stdbuf -oL /usr/bin/python /weatherflow-listener/weatherflow-listener.py | /usr/bin/promtail --stdin --client.url "$loki_client_url" --client.external-labels=api=UDP --config.file=/weatherflow-listener/loki-config.yml
+/usr/bin/stdbuf -oL /usr/bin/python /weatherflow-listener/weatherflow-listener.py | /usr/bin/promtail --stdin --client.url "$loki_client_url" --client.external-labels=collector_type=local-udp --config.file=/weatherflow-listener/loki-config.yml
 
-elif  [ "$backend_type" = "influxdb" ]
+elif  [ "${backend_type}" = "influxdb" ]
 then
 
-echo "backend_type=$backend_type"
+echo "backend_type=${backend_type}"
 
-/usr/bin/stdbuf -oL /usr/bin/python /weatherflow-listener/weatherflow-listener.py | /weatherflow-listener/udp-influxdb.sh
+/usr/bin/stdbuf -oL /usr/bin/python /weatherflow-listener/weatherflow-listener.py | /weatherflow-listener/local-udp-influxdb.sh
 
 else
 
@@ -75,28 +75,28 @@ echo "No Backend Configured"
 
 fi
 
-elif [ "$api_type" = "REST" ]
+elif [ "${collector_type}" = "remote-socket" ]
 then
 
-echo "api_type=$api_type"
+echo "collector_type=${collector_type}"
 
-if [ "$backend_type" = "loki" ]
+if [ "${backend_type}" = "loki" ]
 then
 
-echo "backend_type=$backend_type"
+echo "backend_type=${backend_type}"
 
-JSON='\n{"type":"listen_start", "device_id": "'"${rest_device_id}"'", "id":"weatherflow_listener-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${rest_station_id}"'", "id":"weatherflow_listener-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${rest_device_id}"'", "id":"weatherflow_listener-rapid_start_'"${random_id}"'"}\n'
+JSON='\n{"type":"listen_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${remote_collector_station_id}"'", "id":"weatherflow_listener-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-rapid_start_'"${random_id}"'"}\n'
 
-echo -e "$JSON" | /weatherflow-listener/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${rest_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=api=REST --config.file=/weatherflow-listener/loki-config.yml
+echo -e "$JSON" | /weatherflow-listener/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${remote_collector_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-socket --config.file=/weatherflow-listener/loki-config.yml
 
-elif  [ "$backend_type" = "influxdb" ]
+elif  [ "${backend_type}" = "influxdb" ]
 then
 
-echo "backend_type=$backend_type"
+echo "backend_type=${backend_type}"
 
-JSON='\n{"type":"listen_start", "device_id": "'"${rest_device_id}"'", "id":"weatherflow_listener-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${rest_station_id}"'", "id":"weatherflow_listener-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${rest_device_id}"'", "id":"weatherflow_listener-rapid_start_'"${random_id}"'"}\n'
+JSON='\n{"type":"listen_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${remote_collector_station_id}"'", "id":"weatherflow_listener-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-rapid_start_'"${random_id}"'"}\n'
 
-echo -e "$JSON" | /weatherflow-listener/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${rest_token}" | /weatherflow-listener/rest-influxdb.sh
+echo -e "$JSON" | /weatherflow-listener/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${remote_collector_token}" | /weatherflow-listener/remote-socket-influxdb.sh
 
 else
 
@@ -104,32 +104,32 @@ echo "No Backend Configured"
 
 fi
 
-elif [ "$api_type" = "FORECAST" ]
+elif [ "${collector_type}" = "remote-rest" ]
 then
 
-echo "api_type=$api_type"
+echo "collector_type=${collector_type}"
 
-if [ "$backend_type" = "loki" ]
+if [ "${backend_type}" = "loki" ]
 then
 
-echo "backend_type=$backend_type"
+echo "backend_type=${backend_type}"
 
 while ( true ); do
   before=$(date +%s)
-  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${rest_station_id}&token=${rest_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=api=FORECAST --config.file=/weatherflow-listener/loki-config.yml
+  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-rest --config.file=/weatherflow-listener/loki-config.yml
   after=$(date +%s)
   DELAY=$(echo "3600-($after-$before)" | bc)
   sleep "$DELAY"
 done
 
-elif  [ "$backend_type" = "influxdb" ]
+elif  [ "${backend_type}" = "influxdb" ]
 then
 
-echo "backend_type=$backend_type"
+echo "backend_type=${backend_type}"
 
 while ( true ); do
   before=$(date +%s)
-  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${rest_station_id}&token=${rest_token}" | WEATHERFLOW_LISTENER_DEBUG=$WEATHERFLOW_LISTENER_DEBUG WEATHERFLOW_LISTENER_API_TYPE=$WEATHERFLOW_LISTENER_API_TYPE WEATHERFLOW_LISTENER_REST_DEVICE_ID=$WEATHERFLOW_LISTENER_REST_DEVICE_ID WEATHERFLOW_LISTENER_REST_STATION_ID=$WEATHERFLOW_LISTENER_REST_STATION_ID WEATHERFLOW_LISTENER_REST_TOKEN=$WEATHERFLOW_LISTENER_REST_TOKEN WEATHERFLOW_LISTENER_LOKI_CLIENT_URL=$WEATHERFLOW_LISTENER_LOKI_CLIENT_URL /weatherflow-listener/forecast-influxdb.sh
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | WEATHERFLOW_LISTENER_DEBUG=$WEATHERFLOW_LISTENER_DEBUG WEATHERFLOW_LISTENER_COLLECTOR_TYPE=$WEATHERFLOW_LISTENER_COLLECTOR_TYPE WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN=$WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN WEATHERFLOW_LISTENER_LOKI_CLIENT_URL=$WEATHERFLOW_LISTENER_LOKI_CLIENT_URL /weatherflow-listener/remote-rest-influxdb.sh
   after=$(date +%s)
   DELAY=$(echo "3600-($after-$before)" | bc)
   sleep "$DELAY"
@@ -143,6 +143,6 @@ fi
 
 else
 
-echo "No API Configured"
+echo "No Remote Collector Configured"
 
 fi
