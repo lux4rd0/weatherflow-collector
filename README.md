@@ -1,9 +1,6 @@
-
-
-
 ## About The Project
 
-**weatherflow-listener** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. 
+**weatherflow-listener** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
 
 There are several different collector types available once you deploy your  WeatherFlow device:
 
