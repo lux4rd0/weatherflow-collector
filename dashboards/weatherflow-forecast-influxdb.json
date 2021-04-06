@@ -4006,7 +4006,7 @@
     ]
   },
   "time": {
-    "from": "now/d",
+    "from": "now",
     "to": "now+9d"
   },
   "timepicker": {},
