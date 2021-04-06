@@ -1,34 +1,6 @@
 services:
-  weatherflow-listener-savannah_crossing-forecast-influxdb-influxdb01:
-    container_name: weatherflow-listener-savannah_crossing-forecast-influxdb-influxdb01
-    environment:
-      WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
-      WEATHERFLOW_LISTENER_COLLECTOR_TYPE: remote-rest
-      WEATHERFLOW_LISTENER_DEBUG: "false"
-      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: <<PASSWORD>>
-      WEATHERFLOW_LISTENER_INFLUXDB_URL: http://influxdb:8086/write?db=weatherflow
-      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: <<USERNAME>>
-      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID: <<DEVICE_ID>>
-      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID: <<STATION_ID>>
-      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN: <<TOKEN>>
-    image: lux4rd0/weatherflow-listener:2.0.0
-    restart: always
-  weatherflow-listener-savannah_crossing-remote-socket-influxdb-influxdb01:
-    container_name: weatherflow-listener-savannah_crossing-remote-socket-influxdb-influxdb01
-    environment:
-      WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
-      WEATHERFLOW_LISTENER_COLLECTOR_TYPE: remote-socket
-      WEATHERFLOW_LISTENER_DEBUG: "false"
-      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: <<PASSWORD>>
-      WEATHERFLOW_LISTENER_INFLUXDB_URL: http://influxdb:8086/write?db=weatherflow
-      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: <<USERNAME>>
-      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID: <<DEVICE_ID>>
-      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID: <<STATION_ID>>
-      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN: <<TOKEN>>
-    image: lux4rd0/weatherflow-listener:2.0.0
-    restart: always
-  weatherflow-listener-savannah_crossing-local-udp-influxdb-influxdb01:
-    container_name: weatherflow-listener-savannah_crossing-local-udp-influxdb-influxdb01
+  weatherflow-listener-local-udp-influxdb:
+    container_name: weatherflow-listener-local-udp-influxdb
     environment:
       WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
       WEATHERFLOW_LISTENER_COLLECTOR_TYPE: local-udp
@@ -41,5 +13,33 @@ services:
     - protocol: udp
       published: 50222
       target: 50222
+    restart: always
+  weatherflow-listener-remote-rest-influxdb:
+    container_name: weatherflow-listener-remote-rest-influxdb
+    environment:
+      WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
+      WEATHERFLOW_LISTENER_COLLECTOR_TYPE: remote-rest
+      WEATHERFLOW_LISTENER_DEBUG: "false"
+      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: <<PASSWORD>>
+      WEATHERFLOW_LISTENER_INFLUXDB_URL: http://influxdb:8086/write?db=weatherflow
+      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: <<USERNAME>>
+      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID: <<DEVICE_ID>>
+      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID: <<STATION_ID>>
+      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN: <<TOKEN>>
+    image: lux4rd0/weatherflow-listener:2.0.0
+    restart: always
+  weatherflow-listener-remote-socket-influxdb:
+    container_name: weatherflow-listener-remote-socket-influxdb
+    environment:
+      WEATHERFLOW_LISTENER_BACKEND_TYPE: influxdb
+      WEATHERFLOW_LISTENER_COLLECTOR_TYPE: remote-socket
+      WEATHERFLOW_LISTENER_DEBUG: "false"
+      WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD: <<PASSWORD>>
+      WEATHERFLOW_LISTENER_INFLUXDB_URL: http://influxdb:8086/write?db=weatherflow
+      WEATHERFLOW_LISTENER_INFLUXDB_USERNAME: <<USERNAME>>
+      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID: <<DEVICE_ID>>
+      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID: <<STATION_ID>>
+      WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN: <<TOKEN>>
+    image: lux4rd0/weatherflow-listener:2.0.0
     restart: always
 version: '3.8'
