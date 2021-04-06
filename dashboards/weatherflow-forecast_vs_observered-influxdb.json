@@ -121,7 +121,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "fahrenheit"
         },
         "overrides": [
           {
