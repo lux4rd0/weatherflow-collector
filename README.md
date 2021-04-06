@@ -146,7 +146,7 @@ There are different dashboards for **local-udp** and **remote-rest**.
 
 **WeatherFlow - Today So Far**
 
-<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-today_so_far.jpg"></center>
+<center><img src="./images/weatherflow-today_so_far_remote-socket-influxdb.jpg"></center>
 
 Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightening Strike, and Wind Speed since midnight. Rapid Wind Direction and Wind Speed over the last 60 seconds is also updated every 5 seconds (by default).
 
