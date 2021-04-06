@@ -186,14 +186,6 @@ There's also RSSI and Battery Voltage over time defaulted to the last seven days
 
 This dashboard uses the **local-udp** collector.
 
-## Downloading WeatherFlow Grafana Dashboards Individually
-
-The dashboards included in this WeatherFlow Dashboards AIO stack can also be downloaded separately if so desired:
-
-- [WeatherFlow - Overview](https://grafana.com/grafana/dashboards/13938)
-- [WeatherFlow - Today So Far](https://grafana.com/grafana/dashboards/13939)
-- [WeatherFlow - Device Details](https://grafana.com/grafana/dashboards/13940)
-
 ## Roadmap
 
 See the open issues for a list of proposed features (and known issues).
