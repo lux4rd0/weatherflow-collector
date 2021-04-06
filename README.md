@@ -1,6 +1,6 @@
 ## About The Project
 
-**weatherflow-listener** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
+**weatherflow-collector** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
 
 There are several different collector types available once you deploy your  WeatherFlow device:
 
@@ -19,77 +19,77 @@ The project builds a pre-configured Docker container that takes different config
 
 ## Notice
 
-Like all projects - weatherflow-listener is always in a flux state based on trying out new things and seeing what works and what doesn't work. It started as a fun exercise to visualize "what's possible," and I'm experimenting with different collectors and backends. Please expect breaking changes along the way.
+Like all projects - weatherflow-collector is always in a flux state based on trying out new things and seeing what works and what doesn't work. It started as a fun exercise to visualize "what's possible," and I'm experimenting with different collectors and backends. Please expect breaking changes along the way.
 
 ## Using
 
-There's an example [docker-compose.yml](https://github.com/lux4rd0/weatherflow-listener/blob/main/docker-compose-sample.yml) file that you should update the environmental flags for your specific collection and databases.
+There's an example [docker-compose.yml](https://github.com/lux4rd0/weatherflow-collector/blob/main/docker-compose-sample.yml) file that you should update the environmental flags for your specific collection and databases.
 
-Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-listener):
+Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-listener:2.0.0
+    lux4rd0/weatherflow-collector:2.0.0
 
 Environmental flags:
 
-```WEATHERFLOW_LISTENER_BACKEND_TYPE```
+```WEATHERFLOW_COLLECTOR_BACKEND_TYPE```
 
 - influxdb (supports local-udp, remote-rest (forecasts), and remote-socket (observations)
 - loki (supports local-udp and remote-socket (observations)
 
-```WEATHERFLOW_LISTENER_COLLECTOR_TYPE```
+```WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE```
 
 - [remote-socket](https://weatherflow.github.io/Tempest/api/ws.html)
 - [local-udp](https://weatherflow.github.io/Tempest/api/udp.html)
 - [remote-rest](https://weatherflow.github.io/Tempest/api/swagger/)
 
-```WEATHERFLOW_LISTENER_DEBUG```
+```WEATHERFLOW_COLLECTOR_DEBUG```
 
 - true
 - false
 
-```WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD```
+```WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD```
 
 The password for your InfluxDB
 
-```WEATHERFLOW_LISTENER_INFLUXDB_URL```
+```WEATHERFLOW_COLLECTOR_INFLUXDB_URL```
 
 The URL connection string for your InfluxDB. For example: http://influxdb:8086/write?db=weatherflow
 
-```WEATHERFLOW_LISTENER_INFLUXDB_USERNAME```
+```WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME```
 
 The username of your InfluxDB
 
-```WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID```
+```WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID```
 
 The Device ID of your Tempest
 
-```WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID```
+```WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID```
 
 The Station ID of your Tempest
 
-```WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN```
+```WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN```
 
 The WeatherFlow Personal Access Token.
 
-```WEATHERFLOW_LISTENER_LOKI_CLIENT_URL```
+```WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL```
 
 The URL connection string for your Grafana Loki endpoint. For example: http://loki:3100/loki/api/v1/push
 
 If you want to just run a single instance, for example - the forecast collector, a docker command would look like:
 
     docker run -d \
-      --name=weatherflow-listener-remote-rest-influxdb \
+      --name=weatherflow-collector-remote-rest-influxdb \
       --restart always \
-      -e WEATHERFLOW_LISTENER_BACKEND_TYPE=influxdb \
-      -e WEATHERFLOW_LISTENER_COLLECTOR_TYPE=remote-rest \
-      -e WEATHERFLOW_LISTENER_DEBUG=false \
-      -e WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD=PASSWORD \
-      -e WEATHERFLOW_LISTENER_INFLUXDB_URL=http://influxdb:8086/write?db=weatherflow \
-      -e WEATHERFLOW_LISTENER_INFLUXDB_USERNAME=influxdb \
-      -e WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID=DEVICE_ID \
-      -e WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID=STATION_ID \
-      -e WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN=TOKEN \
-      lux4rd0/weatherflow-listener:2.0.0
+      -e WEATHERFLOW_COLLECTOR_BACKEND_TYPE=influxdb \
+      -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-rest \
+      -e WEATHERFLOW_COLLECTOR_DEBUG=false \
+      -e WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD=PASSWORD \
+      -e WEATHERFLOW_COLLECTOR_INFLUXDB_URL=http://influxdb:8086/write?db=weatherflow \
+      -e WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME=influxdb \
+      -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID=DEVICE_ID \
+      -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID=STATION_ID \
+      -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN=TOKEN \
+      lux4rd0/weatherflow-collector:2.0.0
 
 ## Obtaining Your Tempest API Details
 
@@ -131,7 +131,7 @@ This setting populates the WeatherFlow Forecast dashboards. It makes a Web servi
 
 ## Grafana Dashboards
 
-Collecting data is only half the fun. Now it's time to build out some Grafana Dashboards to visualize all of our great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-listener/tree/main/dashboards) that collector and backends split out.
+Collecting data is only half the fun. Now it's time to build out some Grafana Dashboards to visualize all of our great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) that collector and backends split out.
 
 The "**WeatherFlow - Overview**" dashboard is the starting point with a listing of Current observations along with historical details..
 
@@ -190,7 +190,7 @@ See the open issues for a list of proposed features (and known issues).
 ## Contact
 
 Dave Schmid - [@lux4rd0](https://twitter.com/lux4rd0) - dave@pulpfree.org
-Project Link: https://github.com/lux4rd0/weatherflow-listener
+Project Link: https://github.com/lux4rd0/weatherflow-collector
 
 ## Acknowledgements
 
