@@ -1,13 +1,14 @@
 
 
+
 ## About The Project
 
 **weatherflow-listener** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. 
 
 There are several different collector types available once you deploy your  WeatherFlow device:
 
-Local: UDP Collector
-Remote: WeatherFlow API
+ - Local: UDP Collector
+ - Remote: WeatherFlow API
 
 ## Getting Started
 
@@ -201,4 +202,3 @@ Project Link: https://github.com/lux4rd0/weatherflow-listener
 - Grafana Labs - https://grafana.com/
 - Grafana - https://grafana.com/oss/grafana/
 - Grafana Dashboard Community - https://grafana.com/grafana/dashboards
-
