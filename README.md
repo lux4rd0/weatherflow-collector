@@ -34,47 +34,47 @@ Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflo
 
 Environmental flags:
 
-    WEATHERFLOW_LISTENER_BACKEND_TYPE
+```WEATHERFLOW_LISTENER_BACKEND_TYPE```
 
-influxdb (supports local-udp, remote-rest (forecasts), and remote-socket (observations)
-loki (supports local-udp and remote-socket (observations)
+- influxdb (supports local-udp, remote-rest (forecasts), and remote-socket (observations)
+- loki (supports local-udp and remote-socket (observations)
 
-    WEATHERFLOW_LISTENER_COLLECTOR_TYPE
+```WEATHERFLOW_LISTENER_COLLECTOR_TYPE```
 
-[remote-socket](https://weatherflow.github.io/Tempest/api/ws.html)
-[local-udp](https://weatherflow.github.io/Tempest/api/udp.html)
-[remote-rest](https://weatherflow.github.io/Tempest/api/swagger/)
+- [remote-socket](https://weatherflow.github.io/Tempest/api/ws.html)
+- [local-udp](https://weatherflow.github.io/Tempest/api/udp.html)
+- [remote-rest](https://weatherflow.github.io/Tempest/api/swagger/)
 
-    WEATHERFLOW_LISTENER_DEBUG
+```WEATHERFLOW_LISTENER_DEBUG```
 
-true
-false
+- true
+- false
 
-    WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD
+```WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD```
 
 The password for your InfluxDB
 
-    WEATHERFLOW_LISTENER_INFLUXDB_URL
+```WEATHERFLOW_LISTENER_INFLUXDB_URL```
 
 The URL connection string for your InfluxDB. For example: http://influxdb:8086/write?db=weatherflow
 
-    WEATHERFLOW_LISTENER_INFLUXDB_USERNAME
+```WEATHERFLOW_LISTENER_INFLUXDB_USERNAME```
 
 The username of your InfluxDB
 
-    WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID
+```WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_DEVICE_ID```
 
 The Device ID of your Tempest
 
-    WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID
+```WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID```
 
 The Station ID of your Tempest
 
-    WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN
+```WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN```
 
 The WeatherFlow Personal Access Token.
 
-    WEATHERFLOW_LISTENER_LOKI_CLIENT_URL
+```WEATHERFLOW_LISTENER_LOKI_CLIENT_URL```
 
 The URL connection string for your Grafana Loki endpoint. For example: http://loki:3100/loki/api/v1/push
 
@@ -93,11 +93,6 @@ If you want to just run a single instance, for example - the forecast collector,
       -e WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_STATION_ID=STATION_ID \
       -e WEATHERFLOW_LISTENER_REMOTE_COLLECTOR_TOKEN=TOKEN \
       lux4rd0/weatherflow-listener:2.0.0
-
-
-
-
-
 
 ## Obtaining Your Tempest API Details
 
@@ -121,28 +116,19 @@ A quick jq command to find your station_id and device_id would look like:
 
 If you have multiple Tempest devices connected to multiple hubs, use .stations[1], etc., for each station under your account.
 
-
 ## Collector Details
-
 
 #### remote-socket
 
 This setting grabs all of the metrics from your Tempest and all of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html), accomplished with WeatherFlow backend AI systems. The metrics don't have the same metrics resolution as the local-udp collector but supports lightning suppression and sea level pressure adjustments. It also provides for additional events such as online and offline status. This setting works with both Grafana Loki and InfluxDB 1.8.
 
-
 #### local-udp
 
 This setting provides a listener on UDP port 50222 for messages coming from your Tempest hub. It provides all of the raw observation details and details on the Hub and Tempest, such as RSSI Wifi details, uptime, sensor details, and device battery voltage. The observation metrics have a slightly higher resolution of data than what the REST/Socket API calls provide. However, it does not give any of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) available with the REST/Socket API calls. This setting works with both Grafana Loki and InfluxDB 1.8.
 
-
-
 #### remote-rest
 
 This setting populates the WeatherFlow Forecast dashboards. It makes a Web services call to pull the daily and hourly forecasts for your location and stores them in InfluxDB. It runs the forecasting process on startup and every 60 minutes after the start of the container. This setting works only works with InfluxDB 1.8.
-
-
-
-
 
 
 
