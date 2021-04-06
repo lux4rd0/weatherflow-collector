@@ -183,6 +183,10 @@ There's also RSSI and Battery Voltage over time defaulted to the last seven days
 
 This dashboard uses the **local-udp** collector.
 
+## Dashboard Variables ##
+
+A dashboard variable called "station_id" is used on most of the dashboards for putting names to locations. I switched to this because I have multiple Tempest devices, but it requires a manual update of the dashboard before using them. Go into the "Variables" in the Dashboard editor and modify the "station_id" variable. Look under Customer Options to "Values Separated by comma" and change it to reflect your Name/station_id.
+
 ## Roadmap
 
 See the open issues for a list of proposed features (and known issues).
