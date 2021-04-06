@@ -132,39 +132,59 @@ This setting populates the WeatherFlow Forecast dashboards. It makes a Web servi
 
 
 
-
 ## Grafana Dashboards
 
-Once all of the docker containers are started up, point your Web browser to the Grafana page, typically http://hostname:3000/ - with hostname being the name of the server you ran the `docker-compose up -d' command on. The "**WeatherFlow - Overview**" dashboard is defaulted without having to log into Grafana.
+Collecting data is only half the fun. Now it's time to build out some Grafana Dashboards to visualize all of our great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-listener/tree/main/dashboards) that collector and backends split out.
 
-There are two other dashboards that can be viewed by selecting the "WeatherFlow Dashboards" drop down from the top righthand side of the dashboards:
+The "**WeatherFlow - Overview**" dashboard is the starting point with a listing of Current observations along with historical details..
 
-<center><img src="./images/weatherflow-dashboards.jpg"></center>
+Other dashboards can be viewed by selecting the "WeatherFlow" drop-down from the top righthand side of the dashboards:
+
+<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-dashboards.jpg"></center>
+
+There are different dashboards for **local-udp** and **remote-rest**.
 
 **WeatherFlow - Today So Far**
 
-<center><img src="./images/weatherflow-weatherflow-today_so_far.jpg"></center>
+<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-today_so_far.jpg"></center>
 
-The last hour over time for Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightening Strike, and Wind Speed. Rapid Wind Direction and Wind Speed over the last 60 seconds is also updated every 5 seconds (by default). 
+Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightening Strike, and Wind Speed since midnight. Rapid Wind Direction and Wind Speed over the last 60 seconds is also updated every 5 seconds (by default).
+
+There are different dashboards for **local-udp** and **remote-rest** collectors.
+
+
+**WeatherFlow - Forecast**
+
+<center><img src="./images/weatherflow-forecast-influxdb.jpg"></center>
+
+The Forecast dashboard provides both a daily and hourly forecast in table format with charts below them. The default time range includes the current day plus nine coming days. The interval drop-down at the top defaults to 12 hours to provide for highs and lows forecasts.
+
+This dashboard uses the **remote-rest** collector and **InfluxDB** backend.
+
+**WeatherFlow - Forecast vs. Observed**
+
+A comparisons of data that was forecasted overlayed with historic observations.
+
+This dashboard uses the **remote-rest** collectors with the **InfluxDB** backend.
 
 **WeatherFlow - Device Details**
 
-<center><img src="./images/weatherflow-weatherflow-device_details.jpg"></center>
+<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details.jpg"></center>
 
 Provides the current status for both the Tempest and WeatherFlow hub such as Uptime, Radio Status, RSSI, Reboot Count, I2C Bus Count Error, Radio Version, Network ID, Firmware Version, and Voltage.
 
-<center><img src="./images/weatherflow-weatherflow-device_details-device_status.jpg"></center>
+<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-device_status.jpg"></center>
 
 Another panel provides an overview of Sensor Status measurements - either "Sensors OK" or if there were any failures.
 
-<center><img src="./images/weatherflow-weatherflow-device_details-sensor_status.jpg"></center>
+<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-sensor_status.jpg"></center>
 
-There's also RSSI and Battery Voltage over time defaulted to the the last 7 days.
+There's also RSSI and Battery Voltage over time defaulted to the last seven days.
 
-<center><img src="./images/weatherflow-weatherflow-device_details-battery.jpg"></center>
-<center><img src="./images/weatherflow-weatherflow-device_details-rssi.jpg"></center>
+<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-battery.jpg"></center>
+<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-rssi.jpg"></center>
 
-
+This dashboard uses the **local-udp** collector.
 
 ## Downloading WeatherFlow Grafana Dashboards Individually
 
