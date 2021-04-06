@@ -2,30 +2,30 @@
 
 # InfluxDB Endpoint
 
-influxdb_url=$WEATHERFLOW_LISTENER_INFLUXDB_URL
-influxdb_username=$WEATHERFLOW_LISTENER_INFLUXDB_USERNAME
-influxdb_password=$WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD
-collector_type=$WEATHERFLOW_LISTENER_COLLECTOR_TYPE
-debug=$WEATHERFLOW_LISTENER_DEBUG
+influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
+influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
+influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
+collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
+debug=$WEATHERFLOW_COLLECTOR_DEBUG
 
 if [ "$debug" = "true" ]
 then
 
 echo ""
-echo "Starting WeatherFlow Listener"
+echo "Starting WeatherFlow Collector"
 echo ""
 echo "Debug Environmental Variables"
 echo ""
-echo "influxdb_url=$WEATHERFLOW_LISTENER_INFLUXDB_URL"
-echo "influxdb_username=$WEATHERFLOW_LISTENER_INFLUXDB_USERNAME"
-echo "influxdb_password=$WEATHERFLOW_LISTENER_INFLUXDB_PASSWORD"
-echo "collector_type=$WEATHERFLOW_LISTENER_COLLECTOR_TYPE"
+echo "influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL"
+echo "influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME"
+echo "influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD"
+echo "collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
 echo ""
 
 else
 
 echo ""
-echo "Starting WeatherFlow Listener"
+echo "Starting WeatherFlow Collector"
 echo ""
 
 fi
