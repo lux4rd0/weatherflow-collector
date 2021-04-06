@@ -90,6 +90,10 @@ air_temp_high=$(echo "${line}" |jq ".forecast.daily | .[$day].air_temp_high")
 air_temp_low=$(echo "${line}" |jq ".forecast.daily | .[$day].air_temp_low")
 precip_probability=$(echo "${line}" |jq ".forecast.daily | .[$day].precip_probability")
 
+## Add 86399 seconds to provide end of day data points if viewing graphs after midnight
+
+day_start_local=$(($day_start_local + 86399))
+
 if [ "$debug" == "true" ]
 then
 
