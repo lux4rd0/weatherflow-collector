@@ -187,6 +187,10 @@ This dashboard uses the **local-udp** collector.
 
 A dashboard variable called "station_id" is used on most of the dashboards for putting names to locations. I switched to this because I have multiple Tempest devices, but it requires a manual update of the dashboard before using them. Go into the "Variables" in the Dashboard editor and modify the "station_id" variable. Look under Customer Options to "Values Separated by comma" and change it to reflect your Name/station_id.
 
+### Time Zone Variable
+
+There's also a tz variable coded to a specific location to help build some of the 12/24 hour time breaks. It's set to "America/Chicago" - be sure to set it to where your're located.
+
 ## Roadmap
 
 See the open issues for a list of proposed features (and known issues).
