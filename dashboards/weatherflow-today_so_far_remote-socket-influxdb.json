@@ -60,7 +60,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1617679605252,
+  "iteration": 1617770468453,
   "links": [
     {
       "asDropdown": true,
@@ -74,21 +74,6 @@
     }
   ],
   "panels": [
-    {
-      "collapsed": false,
-      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 10,
-      "panels": [],
-      "repeat": "serial_number",
-      "title": "Observations - $serial_number",
-      "type": "row"
-    },
     {
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
       "fieldConfig": {
@@ -245,7 +230,7 @@
         "h": 12,
         "w": 9,
         "x": 0,
-        "y": 1
+        "y": 0
       },
       "id": 2,
       "interval": "$interval",
@@ -721,7 +706,7 @@
         "h": 6,
         "w": 7,
         "x": 9,
-        "y": 1
+        "y": 0
       },
       "id": 3,
       "interval": "$interval",
@@ -897,7 +882,7 @@
         "h": 6,
         "w": 6,
         "x": 16,
-        "y": 1
+        "y": 0
       },
       "id": 4,
       "interval": "$interval",
@@ -1041,7 +1026,7 @@
         "h": 6,
         "w": 2,
         "x": 22,
-        "y": 1
+        "y": 0
       },
       "id": 26,
       "interval": "1m",
@@ -1246,7 +1231,7 @@
         "h": 6,
         "w": 15,
         "x": 9,
-        "y": 7
+        "y": 6
       },
       "id": 22,
       "interval": "$interval",
@@ -1508,7 +1493,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "hideTimeOverride": true,
       "id": 20,
@@ -1631,7 +1616,7 @@
         "h": 6,
         "w": 4,
         "x": 4,
-        "y": 13
+        "y": 12
       },
       "hideTimeOverride": true,
       "id": 14,
@@ -1855,7 +1840,7 @@
         "h": 6,
         "w": 16,
         "x": 8,
-        "y": 13
+        "y": 12
       },
       "id": 5,
       "interval": "$interval",
@@ -2124,7 +2109,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 19
+        "y": 18
       },
       "id": 25,
       "interval": "$interval",
@@ -2277,7 +2262,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 19
+        "y": 18
       },
       "id": 24,
       "interval": "$interval",
@@ -2438,43 +2423,27 @@
       },
       {
         "allValue": null,
-        "current": {
-          "selected": false,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$station_id$/ and \"collector_type\" =~ /^$collector_type$/",
         "description": null,
         "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Location",
-        "multi": true,
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
         "name": "serial_number",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "Location 1",
-            "value": "ST-00000001"
-          },
-          {
-            "selected": false,
-            "text": "Location 2",
-            "value": "ST-00000002"
-          }
-        ],
-        "query": "Location 1 : ST-00000001,Location 2 : ST-00000002",
-        "queryValue": "",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$station_id$/ and \"collector_type\" =~ /^$collector_type$/",
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       },
       {
         "allValue": null,
@@ -2590,6 +2559,30 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "station_id",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "refresh": 1,
+        "regex": "/.*HB*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -2601,5 +2594,5 @@
   "timezone": "",
   "title": "WeatherFlow - Today So Far (remote-socket)",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 1
+  "version": 3
 }

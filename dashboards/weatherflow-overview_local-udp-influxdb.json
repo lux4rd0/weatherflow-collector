@@ -66,7 +66,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1617679493151,
+  "iteration": 1617770435503,
   "links": [
     {
       "asDropdown": true,
@@ -3581,8 +3581,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "4h",
-          "value": "4h"
+          "text": "12h",
+          "value": "12h"
         },
         "description": null,
         "error": null,
@@ -3608,7 +3608,7 @@
             "value": "1d"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "12h",
             "value": "12h"
           },
@@ -3618,7 +3618,7 @@
             "value": "6h"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "4h",
             "value": "4h"
           },
@@ -3699,34 +3699,27 @@
       },
       {
         "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "Location 1",
-          "value": "ST-00000001"
-        },
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$station_id$/ and \"collector_type\" =~ /^$collector_type$/",
         "description": null,
         "error": null,
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
-        "label": "Location",
+        "label": "",
         "multi": false,
         "name": "serial_number",
-        "options": [
-          {
-            "selected": true,
-            "text": "Location 1",
-            "value": "ST-00000001"
-          },
-          {
-            "selected": false,
-            "text": "Location 2",
-            "value": "ST-00000002"
-          }
-        ],
-        "query": "Location 1 : ST-00000001,Location 2 : ST-00000002",
-        "queryValue": "",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$station_id$/ and \"collector_type\" =~ /^$collector_type$/",
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       },
       {
         "description": null,
@@ -3774,6 +3767,30 @@
         "query": "America/Chicago",
         "skipUrlSync": false,
         "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "station_id",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -3798,5 +3815,5 @@
   "timezone": "browser",
   "title": "WeatherFlow - Overview (local-udp)",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 3
+  "version": 4
 }

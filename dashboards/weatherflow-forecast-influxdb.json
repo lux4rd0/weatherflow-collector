@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1617679431573,
+  "iteration": 1617770395682,
   "links": [
     {
       "asDropdown": true,
@@ -64,27 +64,13 @@
         "influxdb"
       ],
       "targetBlank": false,
-      "title": "WeatherFlow",
+      "title": "WeatherFlow Dashboards",
       "tooltip": "",
       "type": "dashboards",
       "url": ""
     }
   ],
   "panels": [
-    {
-      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 119,
-      "panels": [],
-      "repeat": "station_id",
-      "title": "$station_id",
-      "type": "row"
-    },
     {
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
       "fieldConfig": {
@@ -815,7 +801,7 @@
         "h": 12,
         "w": 10,
         "x": 0,
-        "y": 1
+        "y": 0
       },
       "id": 11,
       "interval": "1d",
@@ -2165,7 +2151,7 @@
         "h": 12,
         "w": 14,
         "x": 10,
-        "y": 1
+        "y": 0
       },
       "id": 127,
       "interval": null,
@@ -2792,7 +2778,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "id": 89,
       "interval": "$interval",
@@ -3133,7 +3119,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 13
+        "y": 12
       },
       "id": 90,
       "interval": "$interval",
@@ -3402,7 +3388,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 23
+        "y": 22
       },
       "id": 116,
       "interval": "$interval",
@@ -3635,7 +3621,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 23
+        "y": 22
       },
       "id": 115,
       "interval": "$interval",
@@ -3811,7 +3797,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 23
+        "y": 22
       },
       "id": 117,
       "interval": "$interval",
@@ -3888,43 +3874,27 @@
     "list": [
       {
         "allValue": null,
-        "current": {
-          "selected": false,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"station_id\"",
         "description": null,
         "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Location",
-        "multi": true,
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
         "name": "station_id",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "Location 1",
-            "value": "ST-00000001"
-          },
-          {
-            "selected": false,
-            "text": "Location 2",
-            "value": "ST-00000002"
-          }
-        ],
-        "query": "Location 1 : ST-00000001,Location 2 : ST-00000002",
-        "queryValue": "",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"station_id\"",
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       },
       {
         "allValue": null,
@@ -4007,11 +3977,11 @@
   },
   "time": {
     "from": "now",
-    "to": "now+9d"
+    "to": "now+10d"
   },
   "timepicker": {},
   "timezone": "",
   "title": "WeatherFlow - Forecast",
   "uid": "lux4rd0labs_weatherflow_13",
-  "version": 1
+  "version": 4
 }

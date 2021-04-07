@@ -59,7 +59,7 @@
   "gnetId": 13858,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1617679419157,
+  "iteration": 1617770387859,
   "links": [
     {
       "asDropdown": true,
@@ -68,26 +68,11 @@
         "weatherflow",
         "influxdb"
       ],
-      "title": "WeatherFlow",
+      "title": "WeatherFlow Dashboards",
       "type": "dashboards"
     }
   ],
   "panels": [
-    {
-      "collapsed": false,
-      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 31,
-      "panels": [],
-      "repeat": "station_id",
-      "title": "Device Details - $station_id",
-      "type": "row"
-    },
     {
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
       "fieldConfig": {
@@ -182,7 +167,7 @@
         "h": 13,
         "w": 12,
         "x": 0,
-        "y": 1
+        "y": 0
       },
       "id": 7,
       "options": {
@@ -423,7 +408,7 @@
         "h": 13,
         "w": 12,
         "x": 12,
-        "y": 1
+        "y": 0
       },
       "id": 8,
       "options": {
@@ -718,7 +703,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 13
       },
       "id": 17,
       "options": {
@@ -1423,7 +1408,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 16
       },
       "id": 18,
       "options": {
@@ -1908,7 +1893,7 @@
         "h": 3,
         "w": 5,
         "x": 0,
-        "y": 20
+        "y": 19
       },
       "id": 20,
       "interval": "1s",
@@ -2150,7 +2135,7 @@
         "h": 3,
         "w": 5,
         "x": 5,
-        "y": 20
+        "y": 19
       },
       "id": 21,
       "interval": "1s",
@@ -2392,7 +2377,7 @@
         "h": 3,
         "w": 4,
         "x": 10,
-        "y": 20
+        "y": 19
       },
       "id": 23,
       "interval": "1s",
@@ -2634,7 +2619,7 @@
         "h": 3,
         "w": 5,
         "x": 14,
-        "y": 20
+        "y": 19
       },
       "id": 24,
       "interval": "1s",
@@ -2876,7 +2861,7 @@
         "h": 3,
         "w": 5,
         "x": 19,
-        "y": 20
+        "y": 19
       },
       "id": 25,
       "interval": "1s",
@@ -3118,7 +3103,7 @@
         "h": 3,
         "w": 5,
         "x": 0,
-        "y": 23
+        "y": 22
       },
       "id": 26,
       "interval": "1s",
@@ -3360,7 +3345,7 @@
         "h": 3,
         "w": 5,
         "x": 5,
-        "y": 23
+        "y": 22
       },
       "id": 27,
       "interval": "1s",
@@ -3602,7 +3587,7 @@
         "h": 3,
         "w": 4,
         "x": 10,
-        "y": 23
+        "y": 22
       },
       "id": 22,
       "interval": "1s",
@@ -3843,7 +3828,7 @@
         "h": 3,
         "w": 5,
         "x": 14,
-        "y": 23
+        "y": 22
       },
       "id": 28,
       "interval": "1s",
@@ -4085,7 +4070,7 @@
         "h": 3,
         "w": 5,
         "x": 19,
-        "y": 23
+        "y": 22
       },
       "id": 29,
       "interval": "1s",
@@ -4217,44 +4202,27 @@
     "list": [
       {
         "allValue": null,
-        "current": {
-          "selected": true,
-          "tags": [],
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
         "description": null,
         "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Location",
-        "multi": true,
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
         "name": "station_id",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "Location 1",
-            "value": "ST-00000001"
-          },
-          {
-            "selected": false,
-            "text": "Location 2",
-            "value": "ST-00000002"
-          }
-        ],
-        "query": "Location 1 : ST-00000001,Location 2 : ST-00000002",
-        "queryValue": "",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       },
       {
         "allValue": null,
@@ -4263,10 +4231,10 @@
         "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$station_id$/ and \"collector_type\" =~ /^$collector_type$/",
         "description": null,
         "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Devices",
-        "multi": true,
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
         "name": "serial_number",
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$station_id$/ and \"collector_type\" =~ /^$collector_type$/",
@@ -4339,5 +4307,5 @@
   "timezone": "",
   "title": "WeatherFlow - Device Details",
   "uid": "lux4rd0labs_weatherflow_10",
-  "version": 1
+  "version": 3
 }

@@ -46,6 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
+  "iteration": 1617770412859,
   "links": [
     {
       "asDropdown": true,
@@ -57,7 +58,7 @@
         "influxdb"
       ],
       "targetBlank": false,
-      "title": "WeatherFlow",
+      "title": "WeatherFlow Dashboards",
       "tooltip": "",
       "type": "dashboards",
       "url": ""
@@ -76,15 +77,15 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
               "tooltip": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -108,11 +109,42 @@
           },
           "unit": "ns"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 13,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -128,7 +160,7 @@
           "placement": "bottom"
         },
         "tooltipOptions": {
-          "mode": "single"
+          "mode": "multi"
         }
       },
       "pluginVersion": "7.5.2",
@@ -174,7 +206,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "station_id",
+              "operator": "=~",
+              "value": "/^$station_id$/"
+            }
+          ]
         },
         {
           "alias": "Hourly - $tag_station_id",
@@ -218,7 +256,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "station_id",
+              "operator": "=~",
+              "value": "/^$station_id$/"
+            }
+          ]
         }
       ],
       "title": "Forecast Build Time",
@@ -232,15 +276,40 @@
     "influxdb"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"station_id\"",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "station_id",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"station_id\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "WeatherFlow - Forecast Build Time",
   "uid": "lux4rd0labs_weatherflow_11",
-  "version": 1
+  "version": 2
 }
