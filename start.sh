@@ -30,7 +30,7 @@ if [ "${debug}" = "true" ]
 then
 
 echo ""
-echo "Starting WeatherFlow Listener"
+echo "Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/weatherflow-collector"
 echo ""
 echo "Debug Environmental Variables"
 echo ""
@@ -45,7 +45,7 @@ echo ""
 else
 
 echo ""
-echo "Starting WeatherFlow Listener"
+echo "Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/weatherflow-collector"
 echo ""
 
 fi
@@ -104,6 +104,43 @@ echo "No Backend Configured"
 
 fi
 
+elif [ "${collector_type}" = "remote-forecast" ]
+then
+
+echo "collector_type=${collector_type}"
+
+if [ "${backend_type}" = "loki" ]
+then
+
+echo "backend_type=${backend_type}"
+
+while ( true ); do
+  before=$(date +%s)
+  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-forecast --config.file=/weatherflow-collector/loki-config.yml
+  after=$(date +%s)
+  DELAY=$(echo "3600-($after-$before)" | bc)
+  sleep "$DELAY"
+done
+
+elif  [ "${backend_type}" = "influxdb" ]
+then
+
+echo "backend_type=${backend_type}"
+
+while ( true ); do
+  before=$(date +%s)
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | WEATHERFLOW_COLLECTOR_DEBUG=$WEATHERFLOW_COLLECTOR_DEBUG WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL /weatherflow-collector/remote-forecast-influxdb.sh
+  after=$(date +%s)
+  DELAY=$(echo "3600-($after-$before)" | bc)
+  sleep "$DELAY"
+done
+
+else
+
+echo "No Backend Configured"
+
+fi
+
 elif [ "${collector_type}" = "remote-rest" ]
 then
 
@@ -129,9 +166,9 @@ echo "backend_type=${backend_type}"
 
 while ( true ); do
   before=$(date +%s)
-  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | WEATHERFLOW_COLLECTOR_DEBUG=$WEATHERFLOW_COLLECTOR_DEBUG WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL /weatherflow-collector/remote-rest-influxdb.sh
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}" | WEATHERFLOW_COLLECTOR_DEBUG=$WEATHERFLOW_COLLECTOR_DEBUG WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL /weatherflow-collector/remote-rest-influxdb.sh
   after=$(date +%s)
-  DELAY=$(echo "3600-($after-$before)" | bc)
+  DELAY=$(echo "60-($after-$before)" | bc)
   sleep "$DELAY"
 done
 
@@ -146,3 +183,4 @@ else
 echo "No Remote Collector Configured"
 
 fi
+
