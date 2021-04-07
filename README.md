@@ -128,11 +128,9 @@ This setting provides a listener on UDP port 50222 for messages coming from your
 
 This setting populates the WeatherFlow Forecast dashboards. It makes a Web services call to pull the daily and hourly forecasts for your location and stores them in InfluxDB. It runs the forecasting process on startup and every 60 minutes after the start of the container. This setting works only works with InfluxDB 1.8.
 
-
-
 ## Grafana Dashboards
 
-Collecting data is only half the fun. Now it's time to build out some Grafana Dashboards to visualize all of our great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) that collector and backends split out.
+Collecting data is only half the fun. Now it's time to provision some Grafana Dashboards to visualize all of our great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) with collectors and backends split out.
 
 The "**WeatherFlow - Overview**" dashboard is the starting point with a listing of Current observations along with historical details..
 
@@ -149,7 +147,6 @@ There are different dashboards for **local-udp** and **remote-rest**.
 Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightening Strike, and Wind Speed since midnight. Rapid Wind Direction and Wind Speed over the last 60 seconds is also updated every 5 seconds (by default).
 
 There are different dashboards for **local-udp** and **remote-rest** collectors.
-
 
 **WeatherFlow - Forecast**
 
@@ -184,13 +181,13 @@ There's also RSSI and Battery Voltage over time defaulted to the last seven days
 
 This dashboard uses the **local-udp** collector.
 
-## Dashboard Variables ##
+## Multiple Devices ##
 
-A dashboard variable called "station_id" is used on most of the dashboards for putting names to locations. I switched to this because I have multiple Tempest devices, but it requires a manual update of the dashboard before using them. Go into the "Variables" in the Dashboard editor and modify the "station_id" variable. Look under Customer Options to "Values Separated by comma" and change it to reflect your Name/station_id.
+The data collector supports mulitple devices but these dashboards have been simplified to work with only a single device for simplicity. If you'd like a set of dashboards for mulitple devices, please let me know.
 
 ### Time Zone Variable
 
-There's also a tz variable coded to a specific location to help build some of the 12/24 hour time breaks. It's set to "America/Chicago" - be sure to set it to where your're located.
+There's also a tz variable coded to a specific location to help build some of the 12/24 hour time breaks. It's set to "America/Chicago" - you will need to modify this to your specific time zone.
 
 ## Roadmap
 
