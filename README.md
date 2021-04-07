@@ -41,7 +41,8 @@ Environmental flags:
 
 - [remote-socket](https://weatherflow.github.io/Tempest/api/ws.html)
 - [local-udp](https://weatherflow.github.io/Tempest/api/udp.html)
-- [remote-rest](https://weatherflow.github.io/Tempest/api/swagger/)
+- [remote-rest](https://weatherflow.github.io/Tempest/api/swagger/#/observations/)
+- [remote-forecast](https://weatherflow.github.io/Tempest/api/swagger/#/forecast/)
 
 ```WEATHERFLOW_COLLECTOR_DEBUG```
 
