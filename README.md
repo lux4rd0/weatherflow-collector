@@ -191,6 +191,8 @@ There's also a tz variable coded to a specific location to help build some of th
 
 ## Roadmap
 
+Dashboards that use the Loki backend will be added back into the project shortly.
+
 See the open issues for a list of proposed features (and known issues).
 
 ## Contact
