@@ -120,11 +120,15 @@ If you have multiple Tempest devices connected to multiple hubs, use .stations[1
 
 This setting grabs all of the metrics from your Tempest and all of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html), accomplished with WeatherFlow backend AI systems. The metrics don't have the same metrics resolution as the local-udp collector but supports lightning suppression and sea level pressure adjustments. It also provides for additional events such as online and offline status. This setting works with both Grafana Loki and InfluxDB 1.8.
 
+#### remote-rest
+
+This setting is similiar to the remote-socket for obtaining Weatherflow observations but only pulls data once a minute from a REST call. A few additional metrics are available on this collector such as sea level pressure. Still working out which metrics make sense and the right kind of polling mechanism to put in place - so I'm trying out both!
+
 #### local-udp
 
 This setting provides a listener on UDP port 50222 for messages coming from your Tempest hub. It provides all of the raw observation details and details on the Hub and Tempest, such as RSSI Wifi details, uptime, sensor details, and device battery voltage. The observation metrics have a slightly higher resolution of data than what the REST/Socket API calls provide. However, it does not give any of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) available with the REST/Socket API calls. This setting works with both Grafana Loki and InfluxDB 1.8.
 
-#### remote-rest
+#### remote-forecast
 
 This setting populates the WeatherFlow Forecast dashboards. It makes a Web services call to pull the daily and hourly forecasts for your location and stores them in InfluxDB. It runs the forecasting process on startup and every 60 minutes after the start of the container. This setting works only works with InfluxDB 1.8.
 
@@ -187,7 +191,7 @@ The data collector supports mulitple devices but these dashboards have been simp
 
 ### Time Zone Variable
 
-There's also a tz variable coded to a specific location to help build some of the 12/24 hour time breaks. It's set to "America/Chicago" - you will need to modify this to your specific time zone.
+There's also a tz variable coded to a specific location to help build some of the 12/24 hour time breaks. It's set to "America/Chicago" - you will need to modify this to your specific time zone. I'm looking to define this based on your device settings in a future release.
 
 ## Roadmap
 
