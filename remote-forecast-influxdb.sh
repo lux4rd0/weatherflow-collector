@@ -63,7 +63,16 @@ fi
 
 ## Fetch some meta information about our Tempest
 
-station_details=$(curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
+if [ "$debug" == "true" ]
+then
+
+station_details=$(curl -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
+
+else
+
+station_details=$(curl --silent --show-error --fail -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
+
+fi
 
 elevation=$(echo "${station_details}" | jq -r .elevation)
 latitude=$(echo "${station_details}" | jq -r .latitude)
@@ -90,6 +99,19 @@ station_name=$(echo "${station_name}" | sed 's/,/\\,/g')
 public_name=$(echo "${public_name}" | sed 's/=/\\=/g')
 station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
 
+if [ "$debug" == "true" ]
+then
+
+echo "elevation=${elevation}"
+echo "latitude=${latitude}"
+echo "longitude=${longitude}"
+echo "public_name=${public_name}"
+echo "station_id=${station_id}"
+echo "station_name=${station_name}"
+echo "timezone=${timezone}"
+
+fi
+
 
 while read -r line; do
 
@@ -113,11 +135,6 @@ then
 #
 # Print Metrics
 #
-
-echo "conditions ${conditions}"
-echo "icon ${icon}"
-
-else
 
 echo "conditions ${conditions}"
 echo "icon ${icon}"
@@ -159,7 +176,7 @@ sunset=$(echo "${line}" |jq -r ".forecast.daily | .[$day].sunset")
 
 ## Add 86399 seconds to provide end of day data points if viewing graphs after midnight
 
-day_start_local=$(($day_start_local + 86399))
+day_start_local=$((day_start_local + 86399))
 
 if [ "$debug" == "true" ]
 then
@@ -182,12 +199,6 @@ echo "forecast_daily_month_num ${month_num}"
 echo "forecast_daily_precip_probability ${precip_probability}"
 echo "forecast_daily_sunrise ${sunrise}"
 echo "forecast_daily_sunset ${sunset}"
-
-else
-
-echo ""
-echo "Day Loop: ${day} High: ${air_temp_high} Low: ${air_temp_low}"
-echo ""
 
 fi
 
@@ -298,12 +309,6 @@ echo "forecast_hourly_wind_avg ${wind_avg}"
 echo "forecast_hourly_wind_direction ${wind_direction}"
 echo "forecast_hourly_wind_direction_cardinal ${wind_direction_cardinal}"
 echo "forecast_hourly_wind_gust ${wind_gust}"
-
-else
-
-echo ""
-echo "Hour Loop: ${hour} Time: ${time} Temperature: ${air_temperature}"
-echo ""
 
 fi
 
