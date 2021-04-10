@@ -8,7 +8,7 @@ services:
       WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: <<PASSWORD>>
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb:8086/write?db=weatherflow
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: <<USERNAME>>
-    image: lux4rd0/weatherflow-collector:2.0.0
+    image: lux4rd0/weatherflow-collector:2.1.4
     ports:
     - protocol: udp
       published: 50222
@@ -26,7 +26,7 @@ services:
       WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID: <<DEVICE_ID>>
       WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID: <<STATION_ID>>
       WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN: <<TOKEN>>
-    image: lux4rd0/weatherflow-collector:2.0.0
+    image: lux4rd0/weatherflow-collector:2.1.4
     restart: always
   weatherflow-collector-remote-socket-influxdb:
     container_name: weatherflow-collector-remote-socket-influxdb
@@ -40,6 +40,6 @@ services:
       WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID: <<DEVICE_ID>>
       WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID: <<STATION_ID>>
       WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN: <<TOKEN>>
-    image: lux4rd0/weatherflow-collector:2.0.0
+    image: lux4rd0/weatherflow-collector:2.1.4
     restart: always
 version: '3.8'
