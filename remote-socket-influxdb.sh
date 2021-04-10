@@ -26,7 +26,16 @@ fi
 
 ## Fetch some meta information about our Tempest
 
-station_details=$(curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
+if [ "$debug" == "true" ]
+then
+
+station_details=$(curl -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
+
+else
+
+station_details=$(curl --silent --show-error --fail -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
+
+fi
 
 elevation=$(echo "${station_details}" | jq -r .elevation)
 latitude=$(echo "${station_details}" | jq -r .latitude)
@@ -38,8 +47,33 @@ timezone=$(echo "${station_details}" | jq -r .timezone)
 
 ## Escape Spaces
 
+## Spaces
+
 public_name=$(echo "${public_name}" | sed 's/ /\\ /g')
 station_name=$(echo "${station_name}" | sed 's/ /\\ /g')
+
+## Commas
+
+public_name=$(echo "${public_name}" | sed 's/,/\\,/g')
+station_name=$(echo "${station_name}" | sed 's/,/\\,/g')
+
+## Equal Signs
+
+public_name=$(echo "${public_name}" | sed 's/=/\\=/g')
+station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
+
+if [ "$debug" == "true" ]
+then
+
+echo "elevation=${elevation}"
+echo "latitude=${latitude}"
+echo "longitude=${longitude}"
+echo "public_name=${public_name}"
+echo "station_id=${station_id}"
+echo "station_name=${station_name}"
+echo "timezone=${timezone}"
+
+fi
 
 #
 # Start Reading in STDIN
