@@ -11,6 +11,21 @@ host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 remote_forecast_interval=$WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL
 remote_rest_interval=$WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL
 
+if [ -z "${remote_forecast_interval}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
+
+remote_forecast_interval="60"
+
+fi
+
+if [ -z "${remote_rest_interval}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
+
+remote_rest_interval="60"
+
+fi
 
 # Random ID
 
