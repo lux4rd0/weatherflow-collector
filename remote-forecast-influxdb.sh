@@ -10,9 +10,16 @@ collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
+
+# Remote Collector Details
+
 remote_collector_station_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID
 remote_collector_token=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN
 station_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID
+
+# Run hourly build flag
+
+hourly_time_build_check=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN
 
 if [ "$debug" == "true" ]
 then
@@ -21,28 +28,16 @@ then
 # Print Environmental Variables
 #
 
-echo "$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_BACKEND_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_DEBUG"
-echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD"
-echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_URL"
-echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN"
-
-else
-
-#
-# Print Environmental Variables
-#
-
-echo "$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_BACKEND_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID"
-
-fi
+echo "WEATHERFLOW_COLLECTOR_BACKEND_TYPE: $WEATHERFLOW_COLLECTOR_BACKEND_TYPE"
+echo "WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: $WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
+echo "WEATHERFLOW_COLLECTOR_DEBUG: $WEATHERFLOW_COLLECTOR_DEBUG"
+echo "WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: $WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD"
+echo "WEATHERFLOW_COLLECTOR_INFLUXDB_URL: $WEATHERFLOW_COLLECTOR_INFLUXDB_URL"
+echo "WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: $WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME"
+echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
+echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN"
+echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID"
+echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN"
 
 # Curl Command
 
@@ -176,7 +171,7 @@ sunset=$(echo "${line}" |jq -r ".forecast.daily | .[$day].sunset")
 
 ## Add 86399 seconds to provide end of day data points if viewing graphs after midnight
 
-day_start_local=$((day_start_local + 86399))
+day_start_local_eod=$((day_start_local + 86399))
 
 if [ "$debug" == "true" ]
 then
@@ -205,15 +200,37 @@ fi
 ## Send Data To InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} air_temp_high=${air_temp_high} ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} air_temp_low=${air_temp_low} ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} conditions=\"${conditions}\" ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} day_num=${day_num} ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} icon=\"${icon}\" ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} month_num=${month_num} ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} precip_probability=${precip_probability} ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} sunrise=${sunrise}000 ${day_start_local}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} sunset=${sunset}000 ${day_start_local}000000000"
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} air_temp_high=${air_temp_high} ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} air_temp_low=${air_temp_low} ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} conditions=\"${conditions}\" ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} day_num=${day_num} ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} icon=\"${icon}\" ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} month_num=${month_num} ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} precip_probability=${precip_probability} ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} sunrise=${sunrise}000 ${day_start_local_eod}000000000
+weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} sunset=${sunset}000 ${day_start_local_eod}000000000"
+
+#
+# Set Current Conditions Forecast
+#
+
+if [ "$day" == "0" ]
+
+then
+
+## icon and conditions are pulled from the rest-call
+## timestamp set to the current pull time
+
+curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
+weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} air_temp_high=${air_temp_high}
+weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} air_temp_low=${air_temp_low}
+weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} day_num=${day_num}
+weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} month_num=${month_num}
+weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} precip_probability=${precip_probability}
+weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} sunrise=${sunrise}000
+weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${day_num},forecast_month_num=${month_num} sunset=${sunset}000"
+
+fi
 
 ) &
 
@@ -246,6 +263,12 @@ weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevatio
 
 ## Hourly Forecast
 
+## Only run the hourly forecasts at 0, 15, 30, 45 minutes - check for flag
+
+if [ "${hourly_time_build_check}" == "true" ]
+
+then
+
 ## Start Timer
 
 hourly_start=$(date +%s%N)
@@ -255,7 +278,6 @@ hourly_start=$(date +%s%N)
 #
 
 N=4
-
 
 for hour in {0..240}; do
 
@@ -359,5 +381,8 @@ echo "hourly_duration:${hourly_duration}"
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone} duration=${hourly_duration}"
+
+fi
+
 
 done < /dev/stdin

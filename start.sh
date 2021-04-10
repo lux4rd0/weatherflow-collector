@@ -11,7 +11,9 @@ host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 remote_forecast_interval=$WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL
 remote_rest_interval=$WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL
 
-if [ -z "${remote_forecast_interval}" ]
+## Check for required intervals
+
+if [ -z "${remote_forecast_interval}" ] && [ "$collector_type" == "remote-forecast" ]
   then
     echo "WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
 
@@ -19,7 +21,7 @@ remote_forecast_interval="60"
 
 fi
 
-if [ -z "${remote_rest_interval}" ]
+if [ -z "${remote_rest_interval}" ] && [ "$collector_type" == "remote-rest" ]
   then
     echo "WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
 
@@ -182,12 +184,49 @@ then
 
 echo "backend_type=${backend_type}"
 
+startup_check=0
+
 while ( true ); do
-  before=$(date +%s)
-  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | /weatherflow-collector/remote-forecast-influxdb.sh
-  after=$(date +%s)
-  DELAY=$(echo "${remote_forecast_interval}-($after-$before)" | bc)
-  echo "Sleeping ${DELAY}"
+  before=$(date +%s%N)
+
+## Only run the hourly forecasts at 0, 15, 30, 45 minutes except on startup
+
+hourly_time_build_check_minute=$(date +"%M")
+
+if [ "$hourly_time_build_check_minute" == "0" ] || [ "$hourly_time_build_check_minute" == "15" ] || [ "$hourly_time_build_check_minute" == "30" ] || [ "$hourly_time_build_check_minute" == "45" ]
+
+then
+
+hourly_time_build_check_flag="true"
+
+echo "Running Hourly Forecast - Quarter Hour Time Interval - ${hourly_time_build_check_minute} Minute"
+
+else
+
+hourly_time_build_check_flag="false"
+
+echo "Skipping Hourly Forecast - Quarter Hour Time Interval - ${hourly_time_build_check_minute} Minute"
+
+fi
+
+## Run on startup
+
+if [ "$startup_check" == "0" ]
+
+then
+
+hourly_time_build_check_flag="true"
+
+echo "Running Hourly Forecast - First Time Startup"
+
+fi
+
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN=${hourly_time_build_check_flag} /weatherflow-collector/remote-forecast-influxdb.sh
+  after=$(date +%s%N)
+  DELAY=$(echo "scale=4;(${remote_forecast_interval}-($after-$before) / 1000000000)" | bc)
+  echo "Sleeping: ${DELAY} seconds"
+  ((startup_check=startup_check+1))
+  echo "Loop: ${startup_check}"
   sleep "$DELAY"
 done
 

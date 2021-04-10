@@ -26,19 +26,7 @@ echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD"
 echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_URL"
 echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME"
 echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID"
 echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN"
-
-else
-
-#
-# Print Environmental Variables
-#
-
-echo "$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_BACKEND_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID"
 
 fi
 
@@ -166,12 +154,6 @@ wind_direction=${wind_direction}
 wind_gust=${wind_gust}
 wind_lull=${wind_lull}"
 
-else
-
-echo ""
-echo "collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone}"
-echo ""
-
 fi
 
 ## Escape Spaces
@@ -179,8 +161,13 @@ fi
 public_name=$(echo "${public_name}" | sed 's/ /\\ /g')
 station_name=$(echo "${station_name}" | sed 's/ /\\ /g')
 
+if [ "$debug" == "true" ]
+then
+
 echo "${public_name} - replaced"
 echo "${station_name} - replaced"
+
+fi
 
 #
 # Pressure Trend
