@@ -77,6 +77,14 @@ The WeatherFlow Personal Access Token.
 
 The URL connection string for your Grafana Loki endpoint. For example: http://loki:3100/loki/api/v1/push
 
+```WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL```
+
+Number in seconds that you want to pull the forecast data. (Defaults to 60 seconds)
+
+```WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL```
+
+Number in seconds that you want to pull observability data. (Defaults to 60 seconds)
+
 If you want to just run a single instance, for example - the forecast collector, a docker command would look like:
 
     docker run -d \
