@@ -99,7 +99,8 @@ If you want to just run a single instance, for example - the forecast collector,
       -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID=DEVICE_ID \
       -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID=STATION_ID \
       -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN=TOKEN \
-      lux4rd0/weatherflow-collector:2.0.0
+      -e WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL=60 \
+      lux4rd0/weatherflow-collector:latest
 
 ## Obtaining Your Tempest API Details
 
