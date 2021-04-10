@@ -27,7 +27,7 @@ There's an example [docker-compose.yml](https://github.com/lux4rd0/weatherflow-c
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:2.1.5
+    lux4rd0/weatherflow-collector:2.2.0
     lux4rd0/weatherflow-collector:latest
 
 Environmental flags:
