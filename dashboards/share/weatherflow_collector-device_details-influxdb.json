@@ -1,0 +1,4121 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB_- WEATHERFLOW",
+      "label": "InfluxDB - weatherflow",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.5.3"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "gnetId": 13858,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1618113326888,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "tags": [
+        "weatherflow-collector"
+      ],
+      "title": "WeatherFlow Collector Dashboards",
+      "type": "dashboards"
+    }
+  ],
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 31,
+      "panels": [],
+      "repeat": "hub_sn",
+      "title": "$hub_sn",
+      "type": "row"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 17,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "mappings": [],
+          "max": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "dBm"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 7,
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltipOptions": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "7.4.0",
+      "targets": [
+        {
+          "alias": "$tag_hub_sn -> WiFi",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "hub_sn"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rssi"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_serial_number -> Hub",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "serial_number"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rssi"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "Hub -> $tag_serial_number",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "serial_number"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"hub_rssi\") FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/ AND \"collector_type\" =~ /^$collector_type$/) AND $timeFilter GROUP BY time($__interval), \"serial_number\"",
+          "rawQuery": false,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "hub_rssi"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "title": "RSSI",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-purple",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 2.39
+              },
+              {
+                "color": "dark-green",
+                "value": 2.455
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "7.4.0",
+      "targets": [
+        {
+          "alias": "Voltage",
+          "groupBy": [
+            {
+              "params": [
+                "5m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "voltage"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "title": "Battery Voltage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Uptime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "custom.width",
+                "value": null
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Radio Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Active",
+                    "to": "",
+                    "type": 1,
+                    "value": "3"
+                  },
+                  {
+                    "from": "",
+                    "id": 2,
+                    "text": "Off",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "On",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  }
+                ]
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 1
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 3
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Uptime"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 3600
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 7200
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "I2C Bus Count Error"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RSSI"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "light-red",
+                      "value": -90
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": -80
+                    },
+                    {
+                      "color": "light-orange",
+                      "value": -70
+                    },
+                    {
+                      "color": "yellow",
+                      "value": -60
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": -50
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "dBm"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 17,
+      "options": {
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "Uptime",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "uptime"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ],
+          "tz": ""
+        },
+        {
+          "alias": "Firmware Version",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "firmware_revision"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "Radio Version",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "radio_stats_version"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "Radio Status",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "radio_stats_radio_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "Reboot Count",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "radio_stats_reboot_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "I2C Bus Count Error",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "radio_stats_i2c_bus_error_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "RSSI",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_hub_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rssi"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Status Hub - $hub_sn",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Firmware Revision": 3,
+              "I2C Bus Count Error": 6,
+              "RSSI": 2,
+              "Radio Stats Version": 4,
+              "Radio Status": 1,
+              "Reboot Count": 5,
+              "Uptime": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Uptime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Voltage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "volt"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 2.39
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 2.455
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Hub RSSI"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dBm"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": -90
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": -80
+                    },
+                    {
+                      "color": "light-orange",
+                      "value": -70
+                    },
+                    {
+                      "color": "yellow",
+                      "value": -60
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": -50
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RSSI"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dBm"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": -90
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": -80
+                    },
+                    {
+                      "color": "light-orange",
+                      "value": -70
+                    },
+                    {
+                      "color": "yellow",
+                      "value": -60
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": -50
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Uptime"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-red",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 3600
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 7200
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensor Status"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensor Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 18,
+      "options": {
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "7.5.3",
+      "repeat": "serial_number",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "Firmware Version",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "firmware_revision"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ],
+          "tz": ""
+        },
+        {
+          "alias": "Hub RSSI",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "hub_rssi"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "RSSI",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rssi"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "Sensor Status",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "Uptime",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "uptime"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        },
+        {
+          "alias": "Voltage",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "voltage"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Device Status - $serial_number",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Firmware Revision": 5,
+              "Hub RSSI": 1,
+              "RSSI": 2,
+              "Sensor Status": 4,
+              "Uptime": 0,
+              "Voltage": 3
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 20
+      },
+      "id": 20,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "repeat": "obs_serial_number",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Sensors OK",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": ""
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Sensors OK"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 5,
+        "y": 20
+      },
+      "id": 21,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Lightning Failed",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 1
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Lightning Failed",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 10,
+        "y": 20
+      },
+      "id": 23,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Lightning Noise",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 2
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Lightning Noise",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 14,
+        "y": 20
+      },
+      "id": 24,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Lightning Disturber",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 4
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Lightning Disturber",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 19,
+        "y": 20
+      },
+      "id": 25,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Pressure Failed",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 8
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Lightning Disturber",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 23
+      },
+      "id": 26,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Temperature Failed",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 16
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Temperature Failed",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 5,
+        "y": 23
+      },
+      "id": 27,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "RH Failed",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 32
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "RH Failed",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 10,
+        "y": 23
+      },
+      "id": 22,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Wind Failed",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 64
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Wind Failed"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 14,
+        "y": 23
+      },
+      "id": 28,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Precipitation Failed",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 128
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "RH Failed",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Sensors OK",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Lightning Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Lightning Noise",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Lightning Disturber",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Pressure Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "8"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Temperature Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "16"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "RH Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "32"
+                  },
+                  {
+                    "from": "",
+                    "id": 9,
+                    "text": "Wind Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "64"
+                  },
+                  {
+                    "from": "",
+                    "id": 10,
+                    "text": "Precipitation Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "128"
+                  },
+                  {
+                    "from": "",
+                    "id": 11,
+                    "text": "Light/UV Failed",
+                    "to": "",
+                    "type": 1,
+                    "value": "256"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 19,
+        "y": 23
+      },
+      "id": 29,
+      "interval": "1s",
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_device_status",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(DISTINCT(\"sensor_status\")) FROM \"weatherflow_device_status\" WHERE (\"serial_number\" =~ /^$serial_number$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sensor_status"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "serial_number",
+              "operator": "=~",
+              "value": "/^$serial_number$/"
+            },
+            {
+              "condition": "AND",
+              "key": "hub_sn",
+              "operator": "=~",
+              "value": "/^$hub_sn$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Light/UV Failed",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 256
+                  }
+                },
+                "fieldName": "weatherflow_device_status.distinct"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Count": "Light/UV Failed",
+              "Field": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [
+    "weatherflow-collector",
+    "influxdb"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Hub",
+        "multi": true,
+        "name": "hub_sn",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$hub_sn$/ and \"collector_type\" =~ /^$collector_type$/",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "serial_number",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$hub_sn$/ and \"collector_type\" =~ /^$collector_type$/",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "local-udp",
+          "value": "local-udp"
+        },
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "collector_type",
+        "options": [
+          {
+            "selected": true,
+            "text": "local-udp",
+            "value": "local-udp"
+          }
+        ],
+        "query": "local-udp",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Device Details",
+  "uid": "lux4rd0labs_weatherflow_12",
+  "version": 2
+}
