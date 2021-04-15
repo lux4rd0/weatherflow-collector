@@ -1,31 +1,49 @@
 #!/bin/bash
 
-debug=$WEATHERFLOW_COLLECTOR_DEBUG
-collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
+##
+## WeatherFlow Collector - startup.sh
+##
+
+##
+## Read Environmental Variables
+##
+
 backend_type=$WEATHERFLOW_COLLECTOR_BACKEND_TYPE
-remote_collector_device_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID
-remote_collector_station_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID
-remote_collector_token=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN
-loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
+collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
+debug=$WEATHERFLOW_COLLECTOR_DEBUG
+device_id=$WEATHERFLOW_COLLECTOR_DEVICE_ID
+elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
+forecast_interval=$WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
-remote_forecast_interval=$WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL
-remote_rest_interval=$WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL
+hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
+influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
+influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
+influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
+latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
+longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
+public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
+rest_interval=$WEATHERFLOW_COLLECTOR_REST_INTERVAL
+station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
+station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
+timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
+token=$WEATHERFLOW_COLLECTOR_TOKEN
 
 ## Check for required intervals
 
-if [ -z "${remote_forecast_interval}" ] && [ "$collector_type" == "remote-forecast" ]
+if [ -z "${forecast_interval}" ] && [ "$collector_type" == "remote-forecast" ]
   then
-    echo "WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
+    echo "WEATHERFLOW_COLLECTOR_forecast_interval environmental variable not set. Defaulting to 60 seconds"
 
-remote_forecast_interval="60"
+forecast_interval="60"
 
 fi
 
-if [ -z "${remote_rest_interval}" ] && [ "$collector_type" == "remote-rest" ]
+if [ -z "${rest_interval}" ] && [ "$collector_type" == "remote-rest" ]
   then
-    echo "WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
+    echo "WEATHERFLOW_COLLECTOR_rest_interval environmental variable not set. Defaulting to 60 seconds"
 
-remote_rest_interval="60"
+rest_interval="60"
 
 fi
 
@@ -50,21 +68,33 @@ fi
 if [ "${debug}" = "true" ]
 then
 
-echo ""
-echo "Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/weatherflow-collector"
-echo ""
-echo "Debug Environmental Variables"
-echo ""
-echo "collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
-echo "backend_type=$WEATHERFLOW_COLLECTOR_BACKEND_TYPE"
-echo "remote_collector_device_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
-echo "remote_collector_station_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID"
-echo "remote_collector_token=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN"
-echo "loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL"
-echo "remote_forecast_interval=$WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL"
-echo "remote_rest_interval=$WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL"
+echo "
+Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/weatherflow-collector
 
-echo ""
+Debug Environmental Variables
+
+backend_type=${backend_type}
+collector_type=${collector_type}
+debug=${debug}
+device_id=${device_id}
+elevation=${elevation}
+forecast_interval=${forecast_interval}
+host_hostname=${host_hostname}
+hub_sn=${hub_sn}
+influxdb_password=${influxdb_password}
+influxdb_url=${influxdb_url}
+influxdb_username=${influxdb_username}
+latitude=${latitude}
+loki_client_url=${loki_client_url}
+longitude=${longitude}
+public_name=${public_name}
+rest_interval=${rest_interval}
+station_id=${station_id}
+station_name=${station_name}
+timezone=${timezone}
+token=${token}
+
+"
 
 else
 
@@ -125,9 +155,9 @@ then
 
 echo "backend_type=${backend_type}"
 
-JSON='\n{"type":"listen_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${remote_collector_station_id}"'", "id":"weatherflow_listener-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-rapid_start_'"${random_id}"'"}\n'
+JSON='\n{"type":"listen_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${station_id}"'", "id":"weatherflow-collector-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-rapid_start_'"${random_id}"'"}\n'
 
-echo -e "$JSON" | /weatherflow-collector/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${remote_collector_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-socket,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
+echo -e "$JSON" | /weatherflow-collector/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-socket,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
 
 ##
 ## BACKEND TYPE = INFLUXDB
@@ -138,9 +168,9 @@ then
 
 echo "backend_type=${backend_type}"
 
-JSON='\n{"type":"listen_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${remote_collector_station_id}"'", "id":"weatherflow_listener-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${remote_collector_device_id}"'", "id":"weatherflow_listener-rapid_start_'"${random_id}"'"}\n'
+JSON='\n{"type":"listen_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${station_id}"'", "id":"weatherflow-collector-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-rapid_start_'"${random_id}"'"}\n'
 
-echo -e "$JSON" | /weatherflow-collector/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${remote_collector_token}" | /weatherflow-collector/remote-socket-influxdb.sh
+echo -e "$JSON" | /weatherflow-collector/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${token}" | /weatherflow-collector/remote-socket-influxdb.sh
 
 else
 
@@ -168,9 +198,9 @@ echo "backend_type=${backend_type}"
 
 while ( true ); do
   before=$(date +%s)
-  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-forecast,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
+  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-forecast,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
   after=$(date +%s)
-  DELAY=$(echo "${remote_forecast_interval}-($after-$before)" | bc)
+  DELAY=$(echo "${forecast_interval}-($after-$before)" | bc)
   echo "Sleeping ${DELAY}"
   sleep "$DELAY"
 done
@@ -221,9 +251,9 @@ echo "Running Hourly Forecast - First Time Startup"
 
 fi
 
-  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN=${hourly_time_build_check_flag} /weatherflow-collector/remote-forecast-influxdb.sh
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}" | WEATHERFLOW_COLLECTOR_HOURLY_FORECAST_RUN=${hourly_time_build_check_flag} /weatherflow-collector/remote-forecast-influxdb.sh
   after=$(date +%s%N)
-  DELAY=$(echo "scale=4;(${remote_forecast_interval}-($after-$before) / 1000000000)" | bc)
+  DELAY=$(echo "scale=4;(${forecast_interval}-($after-$before) / 1000000000)" | bc)
   echo "Sleeping: ${DELAY} seconds"
   ((startup_check=startup_check+1))
   echo "Loop: ${startup_check}"
@@ -256,9 +286,9 @@ echo "backend_type=${backend_type}"
 
 while ( true ); do
   before=$(date +%s)
-  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-rest,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
+  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-rest,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
   after=$(date +%s)
-  DELAY=$(echo "${remote_rest_interval}-($after-$before)" | bc)
+  DELAY=$(echo "${rest_interval}-($after-$before)" | bc)
   echo "Sleeping ${DELAY}"
   sleep "$DELAY"
 done
@@ -274,9 +304,9 @@ echo "backend_type=${backend_type}"
 
 while ( true ); do
   before=$(date +%s)
-  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}" | /weatherflow-collector/remote-rest-influxdb.sh
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${station_id}?token=${token}" | /weatherflow-collector/remote-rest-influxdb.sh
   after=$(date +%s)
-  DELAY=$(echo "${remote_rest_interval}-($after-$before)" | bc)
+  DELAY=$(echo "${rest_interval}-($after-$before)" | bc)
   echo "Sleeping ${DELAY}"
   sleep "$DELAY"
 done

@@ -2,33 +2,35 @@
 
 ##
 ## WeatherFlow Collector - docker-compose.yml generator
-##
 
-remote_collector_token=$1
+token=$1
 
-if [ -z "$remote_collector_token" ]
+if [ -z "$token" ]
 
 then
       echo "Missing authentication token. Please provide your token as a command parameter."
 else
 
-url_stations="https://swd.weatherflow.com/swd/rest/stations?token=${remote_collector_token}"
+url_stations="https://swd.weatherflow.com/swd/rest/stations?token=${token}"
 
 #echo "url_stations=${url_stations}"
 
-url_forecasts="https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${remote_collector_station_id}&token=${remote_collector_token}"
+url_forecasts="https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}"
 
 #echo "url_forecasts=${url_forecasts}"
 
-url_observations="https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}"
+url_observations="https://swd.weatherflow.com/swd/rest/observations/station/${station_id}?token=${token}"
 
 #echo "url_observations=${url_observations}"
+
 
 response_url_stations=$(curl -si -w "\n%{size_header},%{size_download}" "${url_stations}")
 
 response_url_forecasts=$(curl -si -w "\n%{size_header},%{size_download}" "${url_forecasts}")
 
 response_url_observations=$(curl -si -w "\n%{size_header},%{size_download}" "${url_observations}")
+
+
 
 # Extract the response header size
 header_size_stations=$(sed -n '$ s/^\([0-9]*\),.*$/\1/ p' <<< "${response_url_stations}")
@@ -63,6 +65,11 @@ for station_number in $(seq 0 $number_of_stations_minus_one) ; do
 
 #echo "Station Number Loop: $station_number"
 
+
+
+
+
+
 timezone[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].timezone)
 latitude[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].latitude)
 longitude[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].longitude)
@@ -75,10 +82,14 @@ station_id[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_
 device_id[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].devices[1].device_id)
 hub_sn[$station_number]=$(echo "${body_station}" |jq -r .stations[$station_number].devices[0].serial_number)
 
+
 done
+
 
 FILE="${PWD}/docker-compose.yml"
 if test -f "$FILE"; then
+
+
 
 existing_file_timestamp=$(date -r "$FILE" "+%Y%m%d-%H%M%S")
 
@@ -88,15 +99,21 @@ mv "$FILE" "$FILE"."${existing_file_timestamp}"
 
 fi
 
+
+
 ##
 ## Print docker-compose.yml file
 ##
 
 ##
-## If you have two hubs on your account, both will be printed.
-## Be sure to remove the one that's not on your local netowkr.
-## Only one listener is needed.
+## Only one UDP per location
 ##
+
+
+
+## Environmental Variables
+
+
 
 
 
@@ -107,13 +124,28 @@ echo "
 services:
 " > docker-compose.yml
 
+
+
+
+
 ## Loop through each device
 
 for station_number in $(seq 0 $number_of_stations_minus_one) ; do
 
-echo "Station Name: ${station_name_dc[$station_number]}"
-echo "Station ID: ${station_id[$station_number]}"
-echo "Device ID: ${device_id[$station_number]}"
+
+echo "
+
+device_id: ${device_id[$station_number]}
+timezone: ${timezone[$station_number]}
+latitude: ${latitude[$station_number]}
+longitude: ${longitude[$station_number]}
+elevation: ${elevation[$station_number]}
+station_name: ${station_name[$station_number]}
+station_id: ${station_id[$station_number]}
+public_name: ${public_name[$station_number]}
+hub_sn: ${hub_sn[$station_number]}
+
+"
 
 echo "
 
@@ -123,16 +155,19 @@ echo "
       WEATHERFLOW_COLLECTOR_BACKEND_TYPE: influxdb
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: local-udp
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
+      WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
+      WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
+      WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
       WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
-      WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
-      WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
-      WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
+      WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
+      WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
       WEATHERFLOW_COLLECTOR_STATION_NAME: ${station_name[$station_number]}
-      WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
+      WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
+      WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
     ports:
     - protocol: udp
@@ -140,19 +175,34 @@ echo "
       target: 50222
     restart: always
 
+
   weatherflow-collector-${station_name_dc[$station_number]}-remote-forecast-influxdb-influxdb01:
     container_name: weatherflow-collector-${station_name_dc[$station_number]}-remote-forecast-influxdb-influxdb01
     environment:
       WEATHERFLOW_COLLECTOR_BACKEND_TYPE: influxdb
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: remote-forecast
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
+      WEATHERFLOW_COLLECTOR_DEVICE_ID: ${device_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
+      WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL: 60
+      WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
+      WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
       WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
-      WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID: ${station_id[$station_number]}
-      WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN: ${remote_collector_token}
-      WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
+      WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
+      WEATHERFLOW_COLLECTOR_REST_INTERVAL: 60
+      WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_STATION_NAME: ${station_name[$station_number]}
+      WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
+      WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
+    logging:
+      driver: loki
+      options:
+        loki-url: http://log01.tylephony.com:3100/loki/api/v1/push
     restart: always
 
   weatherflow-collector-${station_name_dc[$station_number]}-remote-rest-influxdb-influxdb01:
@@ -161,13 +211,25 @@ echo "
       WEATHERFLOW_COLLECTOR_BACKEND_TYPE: influxdb
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: remote-rest
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
+      WEATHERFLOW_COLLECTOR_DEVICE_ID: ${device_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
+      WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
+      WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
       WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
-      WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID: ${station_id[$station_number]}
-      WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN: ${remote_collector_token}
-      WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
+      WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
+      WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_STATION_NAME: ${station_name[$station_number]}
+      WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
+      WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
+    logging:
+      driver: loki
+      options:
+        loki-url: http://log01.tylephony.com:3100/loki/api/v1/push
     restart: always
 
   weatherflow-collector-${station_name_dc[$station_number]}-remote-socket-influxdb-influxdb01:
@@ -176,14 +238,25 @@ echo "
       WEATHERFLOW_COLLECTOR_BACKEND_TYPE: influxdb
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: remote-socket
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
+      WEATHERFLOW_COLLECTOR_DEVICE_ID: ${device_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
+      WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
+      WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
       WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
-      WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID: ${device_id[$station_number]}
-      WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID: ${station_id[$station_number]}
-      WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN: ${remote_collector_token}
-      WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
+      WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
+      WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_STATION_NAME: ${station_name[$station_number]}
+      WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
+      WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
+    logging:
+      driver: loki
+      options:
+        loki-url: http://log01.tylephony.com:3100/loki/api/v1/push
     restart: always
 
 " >> docker-compose.yml

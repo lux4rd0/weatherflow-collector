@@ -1,47 +1,53 @@
 #!/bin/bash
 
-# Debug
+##
+## WeatherFlow Collector - remote-socket.sh
+##
 
+collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
+collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
 debug=$WEATHERFLOW_COLLECTOR_DEBUG
-
-# InfluxDB Endpoint
-
+elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
+host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
+influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
-influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
-station_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID
-collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
-
-if [ "$debug" == "true" ]
-then
-
-#
-# Print Environmental Variables
-#
-
-echo "$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_BACKEND_TYPE"
-echo "$WEATHERFLOW_COLLECTOR_DEBUG"
-echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD"
-echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_URL"
-echo "$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
-echo "$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN"
-
-fi
+latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
+public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
+station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
+station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
+timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 
 # Curl Command
 
 if [ "$debug" == "true" ]
 then
 
-curl=( )
+curl=(  )
 
 else
 
 curl=( --silent --output /dev/null --show-error --fail )
 
 fi
+
+## Escape Names
+
+## Spaces
+
+public_name=$(echo "${public_name}" | sed 's/ /\\ /g')
+station_name=$(echo "${station_name}" | sed 's/ /\\ /g')
+
+## Commas
+
+public_name=$(echo "${public_name}" | sed 's/,/\\,/g')
+station_name=$(echo "${station_name}" | sed 's/,/\\,/g')
+
+## Equal Signs
+
+public_name=$(echo "${public_name}" | sed 's/=/\\=/g')
+station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
 
 #
 # Start Reading in STDIN
@@ -66,13 +72,13 @@ observations_start=$(date +%s%N)
 
 ## Read Observations
 
-elevation=$(echo "${line}" | jq -r .elevation)
-latitude=$(echo "${line}" | jq -r .latitude)
-longitude=$(echo "${line}" | jq -r .longitude)
-public_name=$(echo "${line}" | jq -r .public_name)
-station_id=$(echo "${line}" | jq -r .station_id)
-station_name=$(echo "${line}" | jq -r .station_name)
-timezone=$(echo "${line}" | jq -r .timezone)
+#elevation=$(echo "${line}" | jq -r .elevation)
+#latitude=$(echo "${line}" | jq -r .latitude)
+#longitude=$(echo "${line}" | jq -r .longitude)
+#public_name=$(echo "${line}" | jq -r .public_name)
+#station_id=$(echo "${line}" | jq -r .station_id)
+#station_name=$(echo "${line}" | jq -r .station_name)
+#timezone=$(echo "${line}" | jq -r .timezone)
 
 air_density=$(echo "${line}" | jq -r .obs[].air_density)
 air_temperature=$(echo "${line}" | jq -r .obs[].air_temperature)
@@ -156,18 +162,7 @@ wind_lull=${wind_lull}"
 
 fi
 
-## Escape Spaces
 
-public_name=$(echo "${public_name}" | sed 's/ /\\ /g')
-station_name=$(echo "${station_name}" | sed 's/ /\\ /g')
-
-if [ "$debug" == "true" ]
-then
-
-echo "${public_name} - replaced"
-echo "${station_name} - replaced"
-
-fi
 
 #
 # Pressure Trend

@@ -1,25 +1,32 @@
 #!/bin/bash
 
-# Debug
+##
+## WeatherFlow Collector - remote-forecast.sh
+##
 
-debug=$WEATHERFLOW_COLLECTOR_DEBUG
-
-# InfluxDB Endpoint
-
+backend_type=$WEATHERFLOW_COLLECTOR_BACKEND_TYPE
 collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
+collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
+debug=$WEATHERFLOW_COLLECTOR_DEBUG
+device_id=$WEATHERFLOW_COLLECTOR_DEVICE_ID
+elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
+forecast_interval=$WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL
+host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
+hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
-
-# Remote Collector Details
-
-remote_collector_station_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID
-remote_collector_token=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN
-station_id=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID
+latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
+public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
+station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
+station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
+timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
+token=$WEATHERFLOW_COLLECTOR_TOKEN
 
 # Run hourly build flag
 
-hourly_time_build_check=$WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN
+hourly_time_build_check=$WEATHERFLOW_COLLECTOR_HOURLY_FORECAST_RUN
 
 if [ "$debug" == "true" ]
 then
@@ -28,16 +35,28 @@ then
 # Print Environmental Variables
 #
 
-echo "WEATHERFLOW_COLLECTOR_BACKEND_TYPE: $WEATHERFLOW_COLLECTOR_BACKEND_TYPE"
-echo "WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: $WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE"
-echo "WEATHERFLOW_COLLECTOR_DEBUG: $WEATHERFLOW_COLLECTOR_DEBUG"
-echo "WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: $WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD"
-echo "WEATHERFLOW_COLLECTOR_INFLUXDB_URL: $WEATHERFLOW_COLLECTOR_INFLUXDB_URL"
-echo "WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: $WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME"
-echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID"
-echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_HOURLY_FORECAST_RUN"
-echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID"
-echo "WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN: $WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN"
+echo "
+
+backend_type=${backend_type}
+collector_type=${collector_type}
+debug=${debug}
+device_id=${device_id}
+elevation=${elevation}
+forecast_interval=${forecast_interval}
+host_hostname=${host_hostname}
+hub_sn=${hub_sn}
+influxdb_password=${influxdb_password}
+influxdb_url=${influxdb_url}
+influxdb_username=${influxdb_username}
+latitude=${latitude}
+longitude=${longitude}
+public_name=${public_name}
+station_id=${station_id}
+station_name=${station_name}
+timezone=${timezone}
+token=${token}
+
+"
 
 fi
 
@@ -53,31 +72,6 @@ else
 curl=( --silent --output /dev/null --show-error --fail )
 
 fi
-
-#
-# Start Reading in STDIN
-#
-
-## Fetch some meta information about our Tempest
-
-if [ "$debug" == "true" ]
-then
-
-station_details=$(curl -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
-
-else
-
-station_details=$(curl --silent --show-error --fail -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${remote_collector_station_id}?token=${remote_collector_token}")
-
-fi
-
-elevation=$(echo "${station_details}" | jq -r .elevation)
-latitude=$(echo "${station_details}" | jq -r .latitude)
-longitude=$(echo "${station_details}" | jq -r .longitude)
-public_name=$(echo "${station_details}" | jq -r .public_name)
-station_id=$(echo "${station_details}" | jq -r .station_id)
-station_name=$(echo "${station_details}" | jq -r .station_name)
-timezone=$(echo "${station_details}" | jq -r .timezone)
 
 ## Escape Spaces
 
@@ -96,19 +90,9 @@ station_name=$(echo "${station_name}" | sed 's/,/\\,/g')
 public_name=$(echo "${public_name}" | sed 's/=/\\=/g')
 station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
 
-if [ "$debug" == "true" ]
-then
-
-echo "elevation=${elevation}"
-echo "latitude=${latitude}"
-echo "longitude=${longitude}"
-echo "public_name=${public_name}"
-echo "station_id=${station_id}"
-echo "station_name=${station_name}"
-echo "timezone=${timezone}"
-
-fi
-
+#
+# Start Reading in STDIN
+#
 
 while read -r line; do
 
