@@ -62,6 +62,8 @@ This script will spin up a docker container to import all of the observed metric
 
 Environmental flags:
 
+*(This section has largely been deprecated. I'll be updating shortly)*
+
 ```WEATHERFLOW_COLLECTOR_BACKEND_TYPE```
 
 - influxdb (supports local-udp, remote-rest (forecasts), and remote-socket (observations)
@@ -92,15 +94,15 @@ The URL connection string for your InfluxDB. For example: http://influxdb:8086/w
 
 The username of your InfluxDB
 
-```WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID```
+```WEATHERFLOW_COLLECTOR_DEVICE_ID```
 
 The Device ID of your Tempest
 
-```WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID```
+```WEATHERFLOW_COLLECTOR_STATION_ID```
 
 The Station ID of your Tempest
 
-```WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN```
+```WEATHERFLOW_COLLECTOR_TOKEN```
 
 The WeatherFlow Personal Access Token.
 
