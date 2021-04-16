@@ -2,8 +2,10 @@
 
 ##
 ## WeatherFlow Collector - docker-compose.yml generator
+##
 
-token=$1
+import_days=$1
+token=$2
 
 if [ -z "$token" ]
 
@@ -65,11 +67,6 @@ for station_number in $(seq 0 $number_of_stations_minus_one) ; do
 
 #echo "Station Number Loop: $station_number"
 
-
-
-
-
-
 timezone[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].timezone)
 latitude[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].latitude)
 longitude[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].longitude)
@@ -85,21 +82,16 @@ hub_sn[$station_number]=$(echo "${body_station}" |jq -r .stations[$station_numbe
 
 done
 
+FILE_DC="${PWD}/docker-compose.yml"
+if test -f "${FILE_DC}"; then
 
-FILE="${PWD}/docker-compose.yml"
-if test -f "$FILE"; then
+existing_file_timestamp_dc=$(date -r "${FILE_DC}" "+%Y%m%d-%H%M%S")
 
+echo "Existing ${FILE_DC} with a timestamp of ${existing_file_timestamp_dc} file found. Backup up file to ${FILE_DC}.${existing_file_timestamp_dc}"
 
-
-existing_file_timestamp=$(date -r "$FILE" "+%Y%m%d-%H%M%S")
-
-echo "Existing docker-compose.yml file found. Backup up file to $FILE.${existing_file_timestamp}"
-
-mv "$FILE" "$FILE"."${existing_file_timestamp}"
+mv "${FILE_DC}" "${FILE_DC}"."${existing_file_timestamp_dc}"
 
 fi
-
-
 
 ##
 ## Print docker-compose.yml file
@@ -114,11 +106,6 @@ fi
 ## Environmental Variables
 
 
-
-
-
-
-
 echo "
 
 services:
@@ -131,6 +118,24 @@ services:
 ## Loop through each device
 
 for station_number in $(seq 0 $number_of_stations_minus_one) ; do
+
+##
+## Check import scripts
+##
+
+FILE[$station_number]="${PWD}/remote-import-${station_name_dc[$station_number]}.txt"
+if test -f "${FILE[$station_number]}"; then
+
+existing_file_timestamp[$station_number]=$(date -r "${FILE[$station_number]}" "+%Y%m%d-%H%M%S")
+
+echo "Existing ${FILE[$station_number]} file found. Backup up file to ${FILE[$station_number]}.${existing_file_timestamp[$station_number]}"
+
+mv "${FILE[$station_number]}" "${FILE[$station_number]}"."${existing_file_timestamp[$station_number]}"
+
+fi
+
+
+
 
 
 echo "
@@ -174,7 +179,6 @@ echo "
       published: 50222
       target: 50222
     restart: always
-
 
   weatherflow-collector-${station_name_dc[$station_number]}-remote-forecast-influxdb-influxdb01:
     container_name: weatherflow-collector-${station_name_dc[$station_number]}-remote-forecast-influxdb-influxdb01
@@ -261,11 +265,47 @@ echo "
 
 " >> docker-compose.yml
 
+
+echo "
+
+docker run --rm \
+  --name=weatherflow-collector-${station_name_dc[$station_number]}-remote-import \\
+  -e WEATHERFLOW_COLLECTOR_BACKEND_TYPE=influxdb \\
+  -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-import \\
+  -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
+  -e WEATHERFLOW_COLLECTOR_DEVICE_ID=${device_id[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_ELEVATION=${elevation[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_HOST_HOSTNAME=$(hostname) \\
+  -e WEATHERFLOW_COLLECTOR_HUB_SN=${hub_sn[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD=4L851Jtjet7AJoFoFYR3di5Zniew28 \\
+  -e WEATHERFLOW_COLLECTOR_INFLUXDB_URL=http://influxdb01.tylephony.com:8086/write?db=weatherflow \\
+  -e WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME=influxdb \\
+  -e WEATHERFLOW_COLLECTOR_LATITUDE=${latitude[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_LONGITUDE=${longitude[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_PUBLIC_NAME=\"${public_name[$station_number]}\" \\
+  -e WEATHERFLOW_COLLECTOR_STATION_ID=${station_id[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_STATION_NAME=\"${station_name[$station_number]}\" \\
+  -e WEATHERFLOW_COLLECTOR_TIMEZONE=\"${timezone[$station_number]}\" \\
+  -e WEATHERFLOW_COLLECTOR_TOKEN=${token} \\
+  -e WEATHERFLOW_COLLECTOR_IMPORT_DAYS=${import_days} \\
+  -e TZ=\"${timezone[$station_number]}\" \\
+  lux4rd0/weatherflow-collector:latest
+
+" > "${FILE[$station_number]}"
+
+echo "${FILE[$station_number]} file created"
+
+
+
+
+
 done
 
 echo "
 version: '3.3'" >> docker-compose.yml
 
-echo "${PWD}/docker-compose.yml file created"
+echo "${FILE_DC} file created"
 
 fi
+
+

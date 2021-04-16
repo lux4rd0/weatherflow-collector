@@ -28,6 +28,7 @@ station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
 station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
 timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 token=$WEATHERFLOW_COLLECTOR_TOKEN
+import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 
 ## Check for required intervals
 
@@ -53,7 +54,8 @@ random_id=$(od -A n -t d -N 1 /dev/urandom |tr -d ' ')
 
 # Curl Command
 
-if [ "${debug}" = "true" ]
+if [ "$debug" == "true" ]
+
 then
 
 curl=(  )
@@ -65,7 +67,8 @@ curl=( --silent --show-error --fail)
 fi
 
 
-if [ "${debug}" = "true" ]
+if [ "$debug" == "true" ]
+
 then
 
 echo "
@@ -309,6 +312,61 @@ while ( true ); do
   DELAY=$(echo "${rest_interval}-($after-$before)" | bc)
   echo "Sleeping ${DELAY}"
   sleep "$DELAY"
+done
+
+else
+
+echo "No Backend Configured"
+
+fi
+
+##
+## COLLECTOR TYPE = REMOTE-IMPORT
+##
+
+elif [ "${collector_type}" = "remote-import" ]
+then
+
+echo "collector_type=${collector_type}"
+
+##
+## BACKEND TYPE = LOKI
+##
+
+if [ "${backend_type}" = "influxdb" ]
+then
+
+echo "backend_type=${backend_type}"
+
+# Loop through the days for a full import
+
+for days_loop in $(seq "$import_days" -1 0) ; do
+
+time_start=$(date --date="${days_loop} days ago 00:00" +%s)
+
+time_end=$(("$time_start" + 86340))
+
+# time_end=$(date +%s)
+
+
+#time_start_long=$(date --date="${days} days ago")
+#time_end_long=$(date)
+
+#echo "time_start epoch: ${time_start}"
+#echo "time_end epoch: ${time_end}"
+
+#echo ""
+
+#echo "time_start long: ${time_start_long}"
+#echo "time_end epoch: ${time_end_long}"
+
+
+echo "Day: $days_loop days ago"
+echo "time_start: $time_start"
+echo "time_end: $time_end"
+
+curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "https://swd.weatherflow.com/swd/rest/observations/device/${device_id}?time_start=${time_start}&time_end=${time_end}&token=${token}" | /weatherflow-collector/remote-import-influxdb.sh
+
 done
 
 else
