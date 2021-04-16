@@ -47,7 +47,7 @@ An example would be:
     WEATHERFLOW_COLLECTOR_INFLUXDB_URL="http://influxdb01.com:8086/write?db=weatherflow" \
     WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME="influxdb" \
     WEATHERFLOW_COLLECTOR_TOKEN="a22afsa7-0dcc-4918-9f9a-923dfd339f41c" \
-    ./generate_docker-compose.sh
+    bash ./generate_docker-compose.sh
 
 The following files will be generated for you:
 
