@@ -1,6 +1,6 @@
 ## About The Project
 
-**weatherflow-collector** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
+**weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once collected, a collection of Grafana dashboards are provided to help you get started visualizing that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project. Having access to just the collector may benefit you if you already have familiarity with InfluxDB and Grafana and want to import these dashboards yourself.
 
 There are several different collector types available once you deploy your  WeatherFlow device:
 
@@ -28,7 +28,7 @@ Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflo
     lux4rd0/weatherflow-collector:2.4.0
     lux4rd0/weatherflow-collector:latest
     
-Correct enivronmental varaibles need to be set in order for the container to function. The following script can be used:
+Correct environmental variables need to be set for the container to function. The following script may be used:
 
     generate_docker-compose.sh
 
@@ -53,13 +53,12 @@ The following files will be generated for you:
 
 #### docker-compose.yml
 
-Running `docker-compose up -d` will spin up several containers for each of the types of data available to you. (Listed below) If you have more than one hub on your account - please edit the docker-compose.yml file to only have your the hub local to your network. If you have more than one device, those will also be added and can remain.
+Running `docker-compose up -d' will spin up several containers for each of the types of data available to you. (Listed below) If you have more than one hub on your account - please edit the docker-compose.yml file to only have your hub local to your network. If you have more than one device, those will also be added and can remain.
 
 #### Optional:
 #### remote-import-<<station_name>>.sh
 
-This script will spin up a docker container to import all of the observed metrics in the WeatherFlow cloud. This is useful if you're just starting out with this WeatherFlow Collector or if you've reset your InfluxDB database. It essentially loads in over your local UDP data. If you have more than one device, a separate import file will be generated for each.
-
+This script will spin up a docker container to import all of the observed metrics in the WeatherFlow cloud. Having an import function may be helpful if you're starting with this WeatherFlow Collector or if you've reset your InfluxDB database. It essentially loads in over your local UDP data. If you have more than one device, a separate import file will be generated for each.
 
 Environmental flags:
 
