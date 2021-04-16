@@ -1,3 +1,4 @@
+
 ## About The Project
 
 **weatherflow-collector** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
@@ -21,14 +22,28 @@ The project builds a pre-configured Docker container that takes different config
 
 Like all projects - weatherflow-collector is always in a flux state based on trying out new things and seeing what works and what doesn't work. It started as a fun exercise to visualize "what's possible," and I'm experimenting with different collectors and backends. Please expect breaking changes along the way.
 
-## Using
-
-There's an example [docker-compose.yml](https://github.com/lux4rd0/weatherflow-collector/blob/main/docker-compose-sample.yml) file that you should update the environmental flags for your specific collection and databases.
+## Deploying WeatherFlow Collector
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
     lux4rd0/weatherflow-collector:2.4.0
     lux4rd0/weatherflow-collector:latest
+    
+Correct enivronmental varaibles need to be set in order for the container to funcion. I've provided the following script:
+
+    bash ./generate_docker-compose.sh <<weatherflow_token>> <<import_days>>
+
+The following files will be generated for you:
+
+#### docker-compose.yml
+
+Running `docker-compose up -d` will spin up several containers for each of the types of data available to you. (Listed below) If you have more than one hub on your account - please edit the docker-compose.yml file to only have your the hub local to your network. If you have more than one device, those will also be added and can remain.
+
+#### remote-import-<<station_name>>.sh
+
+#### Optional:
+
+This script will spin up a docker container to import all of the observed metrics in the WeatherFlow cloud. This is useful if you're just starting out with this WeatherFlow Collector or if you've reset your InfluxDB database. It essentially loads in over your local UDP data. If you have more than one device, a separate import file will be generated for each.
 
 Environmental flags:
 
@@ -43,6 +58,7 @@ Environmental flags:
 - [local-udp](https://weatherflow.github.io/Tempest/api/udp.html)
 - [remote-rest](https://weatherflow.github.io/Tempest/api/swagger/#/observations/)
 - [remote-forecast](https://weatherflow.github.io/Tempest/api/swagger/#/forecast/)
+- remote-import
 
 ```WEATHERFLOW_COLLECTOR_DEBUG```
 
@@ -85,44 +101,9 @@ Number in seconds that you want to pull the forecast data. (Defaults to 60 secon
 
 Number in seconds that you want to pull observability data. (Defaults to 60 seconds)
 
-If you want to just run a single instance, for example - the forecast collector, a docker command would look like:
-
-    docker run -d \
-      --name=weatherflow-collector-remote-rest-influxdb \
-      --restart always \
-      -e WEATHERFLOW_COLLECTOR_BACKEND_TYPE=influxdb \
-      -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-rest \
-      -e WEATHERFLOW_COLLECTOR_DEBUG=false \
-      -e WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD=PASSWORD \
-      -e WEATHERFLOW_COLLECTOR_INFLUXDB_URL=http://influxdb:8086/write?db=weatherflow \
-      -e WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME=influxdb \
-      -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_DEVICE_ID=DEVICE_ID \
-      -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_STATION_ID=STATION_ID \
-      -e WEATHERFLOW_COLLECTOR_REMOTE_COLLECTOR_TOKEN=TOKEN \
-      -e WEATHERFLOW_COLLECTOR_REMOTE_FORECAST_INTERVAL=60 \
-      lux4rd0/weatherflow-collector:latest
-
 ## Obtaining Your Tempest API Details
 
  You can obtain this by signing in to the Tempest Web App at tempestwx.com, then go to Settings -> Data Authorizations -> Create Token.
-
-### Get Station Meta Data
-
-Retrieve a list of your stations along with all connected devices.
-
-https://swd.weatherflow.com/swd/rest/stations?token=[your_access_token]
-
-A quick jq command to find your station_id and device_id would look like:
-
-#### STATION_ID
-
-    curl https://swd.weatherflow.com/swd/rest/stations?token=[your_access_token] | jq .stations[0].station_id
-
-#### DEVICE_ID
-
-    curl https://swd.weatherflow.com/swd/rest/stations?token=[your_access_token] | jq .stations[0].devices[1].device_id
-
-If you have multiple Tempest devices connected to multiple hubs, use .stations[1], etc., for each station under your account.
 
 ## Collector Details
 
@@ -141,6 +122,10 @@ This setting provides a listener on UDP port 50222 for messages coming from your
 #### remote-forecast
 
 This setting populates the WeatherFlow Forecast dashboards. It makes a Web services call to pull the daily and hourly forecasts for your location and stores them in InfluxDB. It runs the forecasting process on startup and every 60 minutes after the start of the container. This setting works only works with InfluxDB 1.8.
+
+#### remote-import
+
+This setting populates the WeatherFlow local-udp metrics from the WeatherFlow Cloud. 
 
 ## Grafana Dashboards
 
