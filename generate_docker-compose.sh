@@ -4,14 +4,51 @@
 ## WeatherFlow Collector - docker-compose.yml generator
 ##
 
-token=$1
-import_days=$2
+import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
+influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
+influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
+influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
+token=$WEATHERFLOW_COLLECTOR_TOKEN
+
+echo "
+
+import_days=${import_days}
+influxdb_password=${influxdb_password}
+influxdb_url=${influxdb_url}
+influxdb_username=${influxdb_username}
+token=${token}
+
+"
 
 if [ -z "${import_days}" ]
   then
-    echo "WEATHERFLOW_COLLECTOR_IMPORT_DAYS environmental variable not set. Defaulting to 365 days"
+    echo "WEATHERFLOW_COLLECTOR_IMPORT_DAYS variable not set. Defaulting to 365 days"
 
 import_days="365"
+
+fi
+
+if [ -z "${influxdb_url}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_INFLUXDB_URL was not set. Setting defaults: http://influxdb:8086/write?db=weatherflow"
+
+influxdb_url="http://influxdb:8086/write?db=weatherflow"
+
+fi
+
+if [ -z "${influxdb_username}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME was not set. Setting defaults: influxdb."
+
+influxdb_username="influxdb"
+
+fi
+
+if [ -z "${influxdb_password}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD was not set. Setting defaults: password"
+
+influxdb_password="password"
 
 fi
 
@@ -171,9 +208,9 @@ echo "
       WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
       WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
       WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
-      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
-      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
-      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
+      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: ${influxdb_password}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
@@ -199,9 +236,9 @@ echo "
       WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL: 60
       WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
       WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
-      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
-      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
-      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
+      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: ${influxdb_password}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
@@ -211,10 +248,6 @@ echo "
       WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
       WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
-    logging:
-      driver: loki
-      options:
-        loki-url: http://log01.tylephony.com:3100/loki/api/v1/push
     restart: always
 
   weatherflow-collector-${station_name_dc[$station_number]}-remote-rest-influxdb-influxdb01:
@@ -227,9 +260,9 @@ echo "
       WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
       WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
       WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
-      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
-      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
-      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
+      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: ${influxdb_password}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
@@ -238,10 +271,6 @@ echo "
       WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
       WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
-    logging:
-      driver: loki
-      options:
-        loki-url: http://log01.tylephony.com:3100/loki/api/v1/push
     restart: always
 
   weatherflow-collector-${station_name_dc[$station_number]}-remote-socket-influxdb-influxdb01:
@@ -254,9 +283,9 @@ echo "
       WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
       WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
       WEATHERFLOW_COLLECTOR_HUB_SN: ${hub_sn[$station_number]}
-      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: 4L851Jtjet7AJoFoFYR3di5Zniew28
-      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: http://influxdb01.tylephony.com:8086/write?db=weatherflow
-      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: influxdb
+      WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD: ${influxdb_password}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
+      WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
@@ -265,10 +294,6 @@ echo "
       WEATHERFLOW_COLLECTOR_TIMEZONE: ${timezone[$station_number]}
       WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
-    logging:
-      driver: loki
-      options:
-        loki-url: http://log01.tylephony.com:3100/loki/api/v1/push
     restart: always
 
 " >> docker-compose.yml
@@ -285,9 +310,9 @@ docker run --rm \
   -e WEATHERFLOW_COLLECTOR_ELEVATION=${elevation[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_HOST_HOSTNAME=$(hostname) \\
   -e WEATHERFLOW_COLLECTOR_HUB_SN=${hub_sn[$station_number]} \\
-  -e WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD=4L851Jtjet7AJoFoFYR3di5Zniew28 \\
-  -e WEATHERFLOW_COLLECTOR_INFLUXDB_URL=http://influxdb01.tylephony.com:8086/write?db=weatherflow \\
-  -e WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME=influxdb \\
+  -e WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD=${influxdb_password} \\
+  -e WEATHERFLOW_COLLECTOR_INFLUXDB_URL=${influxdb_url} \\
+  -e WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME=${influxdb_username} \\
   -e WEATHERFLOW_COLLECTOR_LATITUDE=${latitude[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_LONGITUDE=${longitude[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_PUBLIC_NAME=\"${public_name[$station_number]}\" \\
