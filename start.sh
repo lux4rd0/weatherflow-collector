@@ -16,6 +16,7 @@ elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
 forecast_interval=$WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
+import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
@@ -28,13 +29,12 @@ station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
 station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
 timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 token=$WEATHERFLOW_COLLECTOR_TOKEN
-import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 
 ## Check for required intervals
 
 if [ -z "${forecast_interval}" ] && [ "$collector_type" == "remote-forecast" ]
   then
-    echo "WEATHERFLOW_COLLECTOR_forecast_interval environmental variable not set. Defaulting to 60 seconds"
+    echo "WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
 
 forecast_interval="60"
 
@@ -42,9 +42,17 @@ fi
 
 if [ -z "${rest_interval}" ] && [ "$collector_type" == "remote-rest" ]
   then
-    echo "WEATHERFLOW_COLLECTOR_rest_interval environmental variable not set. Defaulting to 60 seconds"
+    echo "WEATHERFLOW_COLLECTOR_REST_INTERVAL environmental variable not set. Defaulting to 60 seconds"
 
 rest_interval="60"
+
+fi
+
+if [ -z "${import_days}" ] && [ "$collector_type" == "remote-import" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_IMPORT_DAYS environmental variable not set. Defaulting to 365 days"
+
+import_days="365"
 
 fi
 

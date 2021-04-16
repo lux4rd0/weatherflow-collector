@@ -4,8 +4,16 @@
 ## WeatherFlow Collector - docker-compose.yml generator
 ##
 
-import_days=$1
-token=$2
+token=$1
+import_days=$2
+
+if [ -z "${import_days}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_IMPORT_DAYS environmental variable not set. Defaulting to 365 days"
+
+import_days="365"
+
+fi
 
 if [ -z "$token" ]
 
@@ -123,7 +131,7 @@ for station_number in $(seq 0 $number_of_stations_minus_one) ; do
 ## Check import scripts
 ##
 
-FILE[$station_number]="${PWD}/remote-import-${station_name_dc[$station_number]}.txt"
+FILE[$station_number]="${PWD}/remote-import-${station_name_dc[$station_number]}.sh"
 if test -f "${FILE[$station_number]}"; then
 
 existing_file_timestamp[$station_number]=$(date -r "${FILE[$station_number]}" "+%Y%m%d-%H%M%S")
@@ -307,5 +315,3 @@ version: '3.3'" >> docker-compose.yml
 echo "${FILE_DC} file created"
 
 fi
-
-
