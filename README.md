@@ -118,7 +118,7 @@ Number in seconds that you want to pull the forecast data. (Defaults to 60 secon
 
 Number in seconds that you want to pull observability data. (Defaults to 60 seconds)
 
-## Obtaining Your Tempest API Details
+## Obtaining Your Tempest Authentication Token
 
  You can obtain this by signing in to the Tempest Web App at tempestwx.com, then go to Settings -> Data Authorizations -> Create Token.
 
