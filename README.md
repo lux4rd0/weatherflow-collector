@@ -1,4 +1,3 @@
-
 ## About The Project
 
 **weatherflow-collector** is a set of scripts that provide different ways of collecting and publishing data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system and visualize that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
@@ -29,9 +28,26 @@ Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflo
     lux4rd0/weatherflow-collector:2.4.0
     lux4rd0/weatherflow-collector:latest
     
-Correct enivronmental varaibles need to be set in order for the container to funcion. I've provided the following script:
+Correct enivronmental varaibles need to be set in order for the container to function. The following script can be used:
 
-    bash ./generate_docker-compose.sh <<weatherflow_token>> <<import_days>>
+    generate_docker-compose.sh
+
+To use it, you will need to provide details about your InfluxDB and your WeatherFlow token also as environmental variables.
+
+    WEATHERFLOW_COLLECTOR_IMPORT_DAYS #optional
+    WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
+    WEATHERFLOW_COLLECTOR_INFLUXDB_URL
+    WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
+    WEATHERFLOW_COLLECTOR_TOKEN
+
+An example would be:
+
+    WEATHERFLOW_COLLECTOR_IMPORT_DAYS="365" \
+    WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD="4L851Jtjaasdset7AJoFasdoFYR3di5Zniew28" \
+    WEATHERFLOW_COLLECTOR_INFLUXDB_URL="http://influxdb01.com:8086/write?db=weatherflow" \
+    WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME="influxdb" \
+    WEATHERFLOW_COLLECTOR_TOKEN="a22afsa7-0dcc-4918-9f9a-923dfd339f41c" \
+    ./generate_docker-compose.sh
 
 The following files will be generated for you:
 
@@ -39,11 +55,11 @@ The following files will be generated for you:
 
 Running `docker-compose up -d` will spin up several containers for each of the types of data available to you. (Listed below) If you have more than one hub on your account - please edit the docker-compose.yml file to only have your the hub local to your network. If you have more than one device, those will also be added and can remain.
 
+#### Optional:
 #### remote-import-<<station_name>>.sh
 
-#### Optional:
-
 This script will spin up a docker container to import all of the observed metrics in the WeatherFlow cloud. This is useful if you're just starting out with this WeatherFlow Collector or if you've reset your InfluxDB database. It essentially loads in over your local UDP data. If you have more than one device, a separate import file will be generated for each.
+
 
 Environmental flags:
 
