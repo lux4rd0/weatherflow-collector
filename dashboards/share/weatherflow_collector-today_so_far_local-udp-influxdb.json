@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618631138582,
+  "iteration": 1618638669990,
   "links": [
     {
       "asDropdown": true,
@@ -892,9 +892,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1093,9 +1093,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1143,9 +1143,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1193,9 +1193,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1356,9 +1356,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1485,9 +1485,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1708,9 +1708,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1764,9 +1764,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1820,9 +1820,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1977,9 +1977,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -2130,9 +2130,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -2180,9 +2180,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -2381,5 +2381,5 @@
   "timezone": "",
   "title": "Today So Far (local-udp)",
   "uid": "lux4rd0labs_weatherflow_18",
-  "version": 1
+  "version": 2
 }
