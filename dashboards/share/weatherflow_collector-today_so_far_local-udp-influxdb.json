@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618639354916,
+  "iteration": 1618641076582,
   "links": [
     {
       "asDropdown": true,
@@ -307,332 +307,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
-        },
-        {
-          "alias": "Feels Like",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
           ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "feels_like"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ]
-        },
-        {
-          "alias": "Heat Index",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "heat_index"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ]
-        },
-        {
-          "alias": "Wind Chill",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"hub_sn\" =~ /^$hub_sn$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_chill"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ]
-        },
-        {
-          "alias": "Dry Bulb",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)",
-          "rawQuery": true,
-          "refId": "E",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "Wet Bulb",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"hub_sn\" =~ /^$hub_sn$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wet_bulb_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ]
-        },
-        {
-          "alias": "Dew Point",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"hub_sn\" =~ /^$hub_sn$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "G",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "dew_point"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ]
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -776,7 +452,8 @@
               "operator": "=",
               "value": "local-udp"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -902,7 +579,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1103,7 +781,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -1153,7 +832,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -1203,7 +883,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1366,7 +1047,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -1495,7 +1177,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -1718,7 +1401,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Average",
@@ -1774,7 +1458,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Lull",
@@ -1830,7 +1515,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1977,9 +1663,9 @@
           ],
           "tags": [
             {
-              "key": "station_name",
+              "key": "hub_sn",
               "operator": "=~",
-              "value": "/^$station_name$/"
+              "value": "/^$hub_sn$/"
             },
             {
               "condition": "AND",
@@ -2130,9 +1816,9 @@
           ],
           "tags": [
             {
-              "key": "station_name",
+              "key": "hub_sn",
               "operator": "=~",
-              "value": "/^$station_name$/"
+              "value": "/^$hub_sn$/"
             },
             {
               "condition": "AND",
@@ -2180,9 +1866,9 @@
           ],
           "tags": [
             {
-              "key": "station_name",
+              "key": "hub_sn",
               "operator": "=~",
-              "value": "/^$station_name$/"
+              "value": "/^$hub_sn$/"
             },
             {
               "condition": "AND",
@@ -2282,8 +1968,32 @@
       },
       {
         "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"timezone\"",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Time Zone",
+        "multi": false,
+        "name": "tz",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"timezone\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "1m",
           "value": "1m"
         },
@@ -2381,5 +2091,5 @@
   "timezone": "",
   "title": "Today So Far (local-udp)",
   "uid": "lux4rd0labs_weatherflow_18",
-  "version": 2
+  "version": 5
 }
