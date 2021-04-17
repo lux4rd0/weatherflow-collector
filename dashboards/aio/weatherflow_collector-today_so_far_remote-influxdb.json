@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 313,
-  "iteration": 1618109761523,
+  "iteration": 1618606322593,
   "links": [
     {
       "asDropdown": true,
@@ -1043,7 +1043,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1527,7 +1527,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1574,8 +1574,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "remote-socket"
             }
           ]
         }
@@ -1710,8 +1710,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "remote-socket"
             }
           ]
         }
@@ -2216,8 +2216,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "remote-socket"
             }
           ]
         }
@@ -2446,7 +2446,7 @@
       },
       "id": 29,
       "panels": [],
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 28,
       "scopedVars": {
         "station_name": {
@@ -2630,7 +2630,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 2,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3116,7 +3116,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3302,7 +3302,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3459,8 +3459,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "repeatIteration": 1618109761523,
+      "pluginVersion": "7.5.4",
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 26,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3671,7 +3671,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3949,8 +3949,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "repeatIteration": 1618109761523,
+      "pluginVersion": "7.5.4",
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3999,8 +3999,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "remote-socket"
             }
           ]
         }
@@ -4077,7 +4077,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4138,8 +4138,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "remote-socket"
             }
           ]
         }
@@ -4310,7 +4310,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 5,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4589,7 +4589,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 25,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4650,8 +4650,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "remote-socket"
             }
           ]
         }
@@ -4752,7 +4752,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618109761523,
+      "repeatIteration": 1618606322593,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4931,12 +4931,12 @@
         "name": "collector_type",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "remote-rest",
             "value": "remote-rest"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "remote-socket",
             "value": "remote-socket"
           }
@@ -5047,5 +5047,5 @@
   "timezone": "",
   "title": "Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 5
+  "version": 6
 }

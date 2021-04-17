@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 307,
-  "iteration": 1618109479144,
+  "iteration": 1618606175177,
   "links": [
     {
       "asDropdown": true,
@@ -81,12 +81,13 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 24,
+        "h": 11,
+        "w": 12,
         "x": 0,
         "y": 0
       },
       "id": 2,
+      "interval": "$interval",
       "options": {
         "graph": {},
         "legend": {
@@ -94,8 +95,8 @@
             "mean",
             "lastNotNull"
           ],
-          "displayMode": "table",
-          "placement": "right"
+          "displayMode": "list",
+          "placement": "bottom"
         },
         "tooltipOptions": {
           "mode": "multi"
@@ -108,7 +109,7 @@
           "groupBy": [
             {
               "params": [
-                "30m"
+                "$__interval"
               ],
               "type": "time"
             },
@@ -150,9 +151,11 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
+      "timeFrom": null,
       "title": "Forecast Build Duration - Daily",
       "type": "timeseries"
     },
@@ -203,12 +206,13 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 8
+        "h": 11,
+        "w": 12,
+        "x": 12,
+        "y": 0
       },
       "id": 5,
+      "interval": "$interval",
       "options": {
         "graph": {},
         "legend": {
@@ -216,8 +220,8 @@
             "mean",
             "lastNotNull"
           ],
-          "displayMode": "table",
-          "placement": "right"
+          "displayMode": "list",
+          "placement": "bottom"
         },
         "tooltipOptions": {
           "mode": "multi"
@@ -230,7 +234,7 @@
           "groupBy": [
             {
               "params": [
-                "30m"
+                "$__interval"
               ],
               "type": "time"
             },
@@ -273,9 +277,11 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
+      "timeFrom": null,
       "title": "Forecast Build Duration - Hourly",
       "type": "timeseries"
     },
@@ -326,12 +332,13 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 24,
+        "h": 10,
+        "w": 12,
         "x": 0,
-        "y": 16
+        "y": 11
       },
       "id": 4,
+      "interval": "$interval",
       "options": {
         "graph": {},
         "legend": {
@@ -339,8 +346,8 @@
             "mean",
             "lastNotNull"
           ],
-          "displayMode": "table",
-          "placement": "right"
+          "displayMode": "list",
+          "placement": "bottom"
         },
         "tooltipOptions": {
           "mode": "multi"
@@ -353,7 +360,7 @@
           "groupBy": [
             {
               "params": [
-                "30m"
+                "$__interval"
               ],
               "type": "time"
             },
@@ -395,12 +402,144 @@
               "operator": "=",
               "value": "remote-rest"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
       "title": "Rest Observations Fetch Duration",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 6,
+      "interval": "$interval",
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltipOptions": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "7.5.2",
+      "targets": [
+        {
+          "alias": "$tag_station_name",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "station_name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "duration"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=",
+              "value": "local-udp"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "timeFrom": null,
+      "title": "Remote Import",
       "type": "timeseries"
     }
   ],
@@ -444,16 +583,135 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "America/Chicago",
+          "value": "America/Chicago"
+        },
+        "datasource": "InfluxDB - weatherflow",
+        "definition": "SHOW TAG VALUES WITH KEY = \"timezone\"",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Time Zone",
+        "multi": false,
+        "name": "tz",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"timezone\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "30m",
+          "value": "30m"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "2d",
+            "value": "2d"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "4h",
+            "value": "4h"
+          },
+          {
+            "selected": false,
+            "text": "2h",
+            "value": "2h"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": true,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "15m",
+            "value": "15m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "2m",
+            "value": "2m"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          }
+        ],
+        "query": "7d,2d,1d,12h,6h,4h,2h,1h,30m,15m,10m,5m,2m,1m",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Collector Duration",
   "uid": "lux4rd0labs_weatherflow_10",
-  "version": 16
+  "version": 22
 }

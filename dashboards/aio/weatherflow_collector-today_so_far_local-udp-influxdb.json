@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 312,
-  "iteration": 1618109743106,
+  "iteration": 1618606301463,
   "links": [
     {
       "asDropdown": true,
@@ -40,15 +40,15 @@
       },
       "id": 27,
       "panels": [],
-      "repeat": "hub_sn",
+      "repeat": "station_name",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
-      "title": "$hub_sn",
+      "title": "$station_name",
       "type": "row"
     },
     {
@@ -224,10 +224,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -281,9 +281,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -337,9 +337,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -393,9 +393,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -451,9 +451,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -476,7 +476,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"hub_sn\" =~ /^$hub_sn$/) AND $timeFilter GROUP BY time($__interval)",
+          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)",
           "rawQuery": true,
           "refId": "E",
           "resultFormat": "time_series",
@@ -548,9 +548,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -606,9 +606,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -707,10 +707,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -751,15 +751,15 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "local-udp"
             }
           ]
         }
@@ -834,10 +834,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -1048,10 +1048,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -1322,12 +1322,12 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -1448,10 +1448,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -1678,10 +1678,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -1954,10 +1954,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -2114,10 +2114,10 @@
       },
       "pluginVersion": "7.4.0",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+        "station_name": {
+          "selected": true,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
         }
       },
       "targets": [
@@ -2241,6 +2241,38 @@
   ],
   "templating": {
     "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "Savannah Crossing"
+          ],
+          "value": [
+            "Savannah Crossing"
+          ]
+        },
+        "datasource": "InfluxDB - weatherflow",
+        "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Station Name",
+        "multi": true,
+        "name": "station_name",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
       {
         "allValue": null,
         "current": {
@@ -2399,5 +2431,5 @@
   "timezone": "",
   "title": "Today So Far (local-udp)",
   "uid": "lux4rd0labs_weatherflow_18",
-  "version": 4
+  "version": 7
 }

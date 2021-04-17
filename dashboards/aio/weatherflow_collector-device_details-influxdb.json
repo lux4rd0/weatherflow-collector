@@ -17,7 +17,7 @@
   "gnetId": 13858,
   "graphTooltip": 0,
   "id": 306,
-  "iteration": 1618109590694,
+  "iteration": 1618606198116,
   "links": [
     {
       "asDropdown": true,
@@ -30,28 +30,6 @@
     }
   ],
   "panels": [
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 31,
-      "panels": [],
-      "repeat": "hub_sn",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
-      "title": "$hub_sn",
-      "type": "row"
-    },
     {
       "datasource": "InfluxDB - weatherflow",
       "fieldConfig": {
@@ -146,7 +124,7 @@
         "h": 13,
         "w": 12,
         "x": 0,
-        "y": 1
+        "y": 0
       },
       "id": 7,
       "options": {
@@ -163,13 +141,6 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
       "targets": [
         {
           "alias": "$tag_hub_sn -> WiFi",
@@ -209,9 +180,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -253,9 +224,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -299,9 +270,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -364,7 +335,7 @@
         "h": 13,
         "w": 12,
         "x": 12,
-        "y": 1
+        "y": 0
       },
       "id": 8,
       "options": {
@@ -380,13 +351,6 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
       "targets": [
         {
           "alias": "Voltage",
@@ -425,9 +389,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -654,7 +618,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 13
       },
       "id": 17,
       "options": {
@@ -662,14 +626,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Uptime",
@@ -702,9 +659,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ],
           "tz": ""
@@ -741,9 +698,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -785,9 +742,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -829,9 +786,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -873,9 +830,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -911,9 +868,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -949,9 +906,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -1324,7 +1281,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 16
       },
       "id": 18,
       "options": {
@@ -1332,15 +1289,10 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "repeat": "serial_number",
       "repeatDirection": "v",
       "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        },
         "serial_number": {
           "selected": true,
           "text": "ST-00028209",
@@ -1385,9 +1337,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ],
           "tz": ""
@@ -1430,9 +1382,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -1480,9 +1432,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -1530,9 +1482,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -1580,9 +1532,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -1624,9 +1576,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -1785,7 +1737,7 @@
         "h": 3,
         "w": 5,
         "x": 0,
-        "y": 20
+        "y": 19
       },
       "id": 20,
       "interval": "1s",
@@ -1805,15 +1757,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "repeat": "obs_serial_number",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
       "targets": [
         {
           "alias": "",
@@ -1854,9 +1799,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -2028,7 +1973,7 @@
         "h": 3,
         "w": 5,
         "x": 5,
-        "y": 20
+        "y": 19
       },
       "id": 21,
       "interval": "1s",
@@ -2048,14 +1993,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -2096,9 +2034,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -2271,7 +2209,7 @@
         "h": 3,
         "w": 4,
         "x": 10,
-        "y": 20
+        "y": 19
       },
       "id": 23,
       "interval": "1s",
@@ -2291,14 +2229,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -2339,9 +2270,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -2514,7 +2445,7 @@
         "h": 3,
         "w": 5,
         "x": 14,
-        "y": 20
+        "y": 19
       },
       "id": 24,
       "interval": "1s",
@@ -2534,14 +2465,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -2582,9 +2506,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -2757,7 +2681,7 @@
         "h": 3,
         "w": 5,
         "x": 19,
-        "y": 20
+        "y": 19
       },
       "id": 25,
       "interval": "1s",
@@ -2777,14 +2701,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -2825,9 +2742,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -3000,7 +2917,7 @@
         "h": 3,
         "w": 5,
         "x": 0,
-        "y": 23
+        "y": 22
       },
       "id": 26,
       "interval": "1s",
@@ -3020,14 +2937,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -3068,9 +2978,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -3243,7 +3153,7 @@
         "h": 3,
         "w": 5,
         "x": 5,
-        "y": 23
+        "y": 22
       },
       "id": 27,
       "interval": "1s",
@@ -3263,14 +3173,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -3311,9 +3214,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -3486,7 +3389,7 @@
         "h": 3,
         "w": 4,
         "x": 10,
-        "y": 23
+        "y": 22
       },
       "id": 22,
       "interval": "1s",
@@ -3506,14 +3409,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -3554,9 +3450,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -3728,7 +3624,7 @@
         "h": 3,
         "w": 5,
         "x": 14,
-        "y": 23
+        "y": 22
       },
       "id": 28,
       "interval": "1s",
@@ -3748,14 +3644,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -3796,9 +3685,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -3971,7 +3860,7 @@
         "h": 3,
         "w": 5,
         "x": 19,
-        "y": 23
+        "y": 22
       },
       "id": 29,
       "interval": "1s",
@@ -3991,14 +3880,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
-      "scopedVars": {
-        "hub_sn": {
-          "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
-        }
-      },
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "",
@@ -4039,9 +3921,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -4107,23 +3989,51 @@
         "current": {
           "selected": true,
           "text": [
-            "All"
+            "Savannah Crossing"
           ],
           "value": [
-            "$__all"
+            "Savannah Crossing"
           ]
         },
         "datasource": "InfluxDB - weatherflow",
-        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
+        "label": "Station Name",
+        "multi": false,
+        "name": "station_name",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "HB-00038302",
+          "value": "HB-00038302"
+        },
+        "datasource": "InfluxDB - weatherflow",
+        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"station_name\" =~ /^$station_name$/",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
         "label": "Hub",
-        "multi": true,
+        "multi": false,
         "name": "hub_sn",
         "options": [],
-        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"collector_type\" =~ /^$collector_type$/",
+        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"station_name\" =~ /^$station_name$/",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -4142,16 +4052,16 @@
           "value": "ST-00028209"
         },
         "datasource": "InfluxDB - weatherflow",
-        "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$hub_sn$/ and \"collector_type\" =~ /^$collector_type$/",
+        "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"station_name\" =~ /^$station_name$/",
         "description": null,
         "error": null,
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
-        "label": "",
+        "label": "Device",
         "multi": false,
         "name": "serial_number",
         "options": [],
-        "query": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"hub_sn\" =~ /^$hub_sn$/ and \"collector_type\" =~ /^$collector_type$/",
+        "query": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"station_name\" =~ /^$station_name$/",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -4197,5 +4107,5 @@
   "timezone": "",
   "title": "Device Details",
   "uid": "lux4rd0labs_weatherflow_12",
-  "version": 4
+  "version": 15
 }
