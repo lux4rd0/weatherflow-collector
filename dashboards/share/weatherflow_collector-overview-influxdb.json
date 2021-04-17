@@ -20,7 +20,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.3"
+      "version": "7.5.4"
     },
     {
       "type": "datasource",
@@ -58,7 +58,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618113377888,
+  "iteration": 1618631130286,
   "links": [
     {
       "asDropdown": false,
@@ -103,7 +103,6 @@
       "id": 2,
       "links": [],
       "options": {
-        "folderId": null,
         "maxItems": 10,
         "query": "",
         "showHeadings": false,
@@ -114,7 +113,7 @@
           "weatherflow-collector"
         ]
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "timeFrom": null,
       "timeShift": null,
       "type": "dashlist"
@@ -137,7 +136,7 @@
         "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/04/weatherflow-collector_header.png\"></center>",
         "mode": "html"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "timeFrom": null,
       "timeShift": null,
       "transparent": true,
@@ -591,7 +590,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Current",
@@ -1098,7 +1097,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Forecast High",
@@ -1607,7 +1606,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Observed High",
@@ -2114,7 +2113,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2623,7 +2622,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Observed Low",
@@ -3187,7 +3186,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -3362,7 +3361,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -3968,7 +3967,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Chance",
@@ -4567,7 +4566,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4691,5 +4690,5 @@
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 2
+  "version": 1
 }

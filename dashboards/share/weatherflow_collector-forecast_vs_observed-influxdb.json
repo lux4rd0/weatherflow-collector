@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.3"
+      "version": "7.5.4"
     },
     {
       "type": "datasource",
@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618113345731,
+  "iteration": 1618631076240,
   "links": [
     {
       "asDropdown": true,
@@ -1201,5 +1201,5 @@
   "timezone": "",
   "title": "Forecast Vs Observed",
   "uid": "lux4rd0labs_weatherflow_13",
-  "version": 2
+  "version": 1
 }

@@ -14,19 +14,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.3"
+      "version": "7.5.4"
     },
     {
       "type": "datasource",
       "id": "influxdb",
       "name": "InfluxDB",
       "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
     },
     {
       "type": "panel",
@@ -59,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618113369361,
+  "iteration": 1618631110772,
   "links": [
     {
       "asDropdown": true,
@@ -99,16 +93,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
               "tooltip": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
+            "lineWidth": 2,
+            "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -161,14 +155,14 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 18,
+        "h": 7,
+        "w": 24,
         "x": 0,
         "y": 1
       },
       "hideTimeOverride": true,
       "id": 2,
-      "interval": "4h",
+      "interval": "$interval",
       "maxDataPoints": null,
       "options": {
         "graph": {},
@@ -273,1544 +267,10 @@
           "tz": "$tz"
         }
       ],
-      "timeFrom": "1d",
-      "timeShift": null,
-      "title": "Air Temperature (Last 24 Hours)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
-              },
-              {
-                "color": "#1C0381",
-                "value": 1
-              },
-              {
-                "color": "#1E0888",
-                "value": 2
-              },
-              {
-                "color": "#1F0D8E",
-                "value": 3
-              },
-              {
-                "color": "#221295",
-                "value": 4
-              },
-              {
-                "color": "#24179B",
-                "value": 5
-              },
-              {
-                "color": "#271DA2",
-                "value": 6
-              },
-              {
-                "color": "#2A23A9",
-                "value": 7
-              },
-              {
-                "color": "#2D2AAF",
-                "value": 8
-              },
-              {
-                "color": "#3131B6",
-                "value": 9
-              },
-              {
-                "color": "#393CBD",
-                "value": 10
-              },
-              {
-                "color": "#4147C3",
-                "value": 11
-              },
-              {
-                "color": "#4953CA",
-                "value": 12
-              },
-              {
-                "color": "#525ED0",
-                "value": 13
-              },
-              {
-                "color": "#5B6AD7",
-                "value": 14
-              },
-              {
-                "color": "#6577DE",
-                "value": 15
-              },
-              {
-                "color": "#6F83E4",
-                "value": 16
-              },
-              {
-                "color": "#798FEB",
-                "value": 17
-              },
-              {
-                "color": "#849CF1",
-                "value": 18
-              },
-              {
-                "color": "#8FA9F8",
-                "value": 19
-              },
-              {
-                "color": "#9BB6FF",
-                "value": 20
-              },
-              {
-                "color": "#92ADFC",
-                "value": 21
-              },
-              {
-                "color": "#8AA5FA",
-                "value": 22
-              },
-              {
-                "color": "#819DF7",
-                "value": 23
-              },
-              {
-                "color": "#7995F5",
-                "value": 24
-              },
-              {
-                "color": "#718DF3",
-                "value": 25
-              },
-              {
-                "color": "#6984F0",
-                "value": 26
-              },
-              {
-                "color": "#627CEE",
-                "value": 27
-              },
-              {
-                "color": "#5A74EB",
-                "value": 28
-              },
-              {
-                "color": "#536BE9",
-                "value": 29
-              },
-              {
-                "color": "#4B63E7",
-                "value": 30
-              },
-              {
-                "color": "#445BE4",
-                "value": 31
-              },
-              {
-                "color": "#3D52E2",
-                "value": 32
-              },
-              {
-                "color": "#364ADF",
-                "value": 33
-              },
-              {
-                "color": "#2F42DD",
-                "value": 34
-              },
-              {
-                "color": "#2939DB",
-                "value": 35
-              },
-              {
-                "color": "#2231D8",
-                "value": 36
-              },
-              {
-                "color": "#1C29D6",
-                "value": 37
-              },
-              {
-                "color": "#1621D3",
-                "value": 38
-              },
-              {
-                "color": "#0F19D1",
-                "value": 39
-              },
-              {
-                "color": "#0911CF",
-                "value": 40
-              },
-              {
-                "color": "#092FD0",
-                "value": 41
-              },
-              {
-                "color": "#094FD2",
-                "value": 42
-              },
-              {
-                "color": "#096FD4",
-                "value": 43
-              },
-              {
-                "color": "#098FD6",
-                "value": 44
-              },
-              {
-                "color": "#09B1D8",
-                "value": 45
-              },
-              {
-                "color": "#09D3DA",
-                "value": 46
-              },
-              {
-                "color": "#09DCC2",
-                "value": 47
-              },
-              {
-                "color": "#09DEA3",
-                "value": 48
-              },
-              {
-                "color": "#09E083",
-                "value": 49
-              },
-              {
-                "color": "#09E263",
-                "value": 50
-              },
-              {
-                "color": "#09E341",
-                "value": 51
-              },
-              {
-                "color": "#08E520",
-                "value": 52
-              },
-              {
-                "color": "#14E708",
-                "value": 53
-              },
-              {
-                "color": "#36E908",
-                "value": 54
-              },
-              {
-                "color": "#5AEB08",
-                "value": 55
-              },
-              {
-                "color": "#7EED08",
-                "value": 56
-              },
-              {
-                "color": "#A3EF08",
-                "value": 57
-              },
-              {
-                "color": "#C8F108",
-                "value": 58
-              },
-              {
-                "color": "#EEF308",
-                "value": 59
-              },
-              {
-                "color": "#F5D408",
-                "value": 60
-              },
-              {
-                "color": "#F4CD07",
-                "value": 61
-              },
-              {
-                "color": "#F4C507",
-                "value": 62
-              },
-              {
-                "color": "#F4BD06",
-                "value": 63
-              },
-              {
-                "color": "#F4B506",
-                "value": 64
-              },
-              {
-                "color": "#F4AD05",
-                "value": 65
-              },
-              {
-                "color": "#F4A505",
-                "value": 66
-              },
-              {
-                "color": "#F49D05",
-                "value": 67
-              },
-              {
-                "color": "#F49504",
-                "value": 68
-              },
-              {
-                "color": "#F48D04",
-                "value": 69
-              },
-              {
-                "color": "#F48403",
-                "value": 70
-              },
-              {
-                "color": "#F37C03",
-                "value": 71
-              },
-              {
-                "color": "#F37403",
-                "value": 72
-              },
-              {
-                "color": "#F36C02",
-                "value": 73
-              },
-              {
-                "color": "#F36402",
-                "value": 74
-              },
-              {
-                "color": "#F35C01",
-                "value": 75
-              },
-              {
-                "color": "#F35401",
-                "value": 76
-              },
-              {
-                "color": "#F34B01",
-                "value": 77
-              },
-              {
-                "color": "#F34300",
-                "value": 78
-              },
-              {
-                "color": "#F33B00",
-                "value": 79
-              },
-              {
-                "color": "#F23300",
-                "value": 80
-              },
-              {
-                "color": "#EC2F00",
-                "value": 81
-              },
-              {
-                "color": "#E62B00",
-                "value": 82
-              },
-              {
-                "color": "#DF2700",
-                "value": 83
-              },
-              {
-                "color": "#D92400",
-                "value": 84
-              },
-              {
-                "color": "#D22100",
-                "value": 85
-              },
-              {
-                "color": "#CC1E00",
-                "value": 86
-              },
-              {
-                "color": "#C51A00",
-                "value": 87
-              },
-              {
-                "color": "#BF1800",
-                "value": 88
-              },
-              {
-                "color": "#B81500",
-                "value": 89
-              },
-              {
-                "color": "#B21200",
-                "value": 90
-              },
-              {
-                "color": "#AC1000",
-                "value": 91
-              },
-              {
-                "color": "#A50D00",
-                "value": 92
-              },
-              {
-                "color": "#9F0B00",
-                "value": 93
-              },
-              {
-                "color": "#980900",
-                "value": 94
-              },
-              {
-                "color": "#920700",
-                "value": 95
-              },
-              {
-                "color": "#8B0500",
-                "value": 96
-              },
-              {
-                "color": "#850400",
-                "value": 97
-              },
-              {
-                "color": "#7E0200",
-                "value": 98
-              },
-              {
-                "color": "#780100",
-                "value": 99
-              },
-              {
-                "color": "#720000",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "fahrenheit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 2,
-        "x": 18,
-        "y": 1
-      },
-      "hideTimeOverride": true,
-      "id": 40,
-      "interval": null,
-      "maxDataPoints": null,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.3",
-      "targets": [
-        {
-          "alias": "Current",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "air_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Current",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {}
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
-              },
-              {
-                "color": "#1C0381",
-                "value": 1
-              },
-              {
-                "color": "#1E0888",
-                "value": 2
-              },
-              {
-                "color": "#1F0D8E",
-                "value": 3
-              },
-              {
-                "color": "#221295",
-                "value": 4
-              },
-              {
-                "color": "#24179B",
-                "value": 5
-              },
-              {
-                "color": "#271DA2",
-                "value": 6
-              },
-              {
-                "color": "#2A23A9",
-                "value": 7
-              },
-              {
-                "color": "#2D2AAF",
-                "value": 8
-              },
-              {
-                "color": "#3131B6",
-                "value": 9
-              },
-              {
-                "color": "#393CBD",
-                "value": 10
-              },
-              {
-                "color": "#4147C3",
-                "value": 11
-              },
-              {
-                "color": "#4953CA",
-                "value": 12
-              },
-              {
-                "color": "#525ED0",
-                "value": 13
-              },
-              {
-                "color": "#5B6AD7",
-                "value": 14
-              },
-              {
-                "color": "#6577DE",
-                "value": 15
-              },
-              {
-                "color": "#6F83E4",
-                "value": 16
-              },
-              {
-                "color": "#798FEB",
-                "value": 17
-              },
-              {
-                "color": "#849CF1",
-                "value": 18
-              },
-              {
-                "color": "#8FA9F8",
-                "value": 19
-              },
-              {
-                "color": "#9BB6FF",
-                "value": 20
-              },
-              {
-                "color": "#92ADFC",
-                "value": 21
-              },
-              {
-                "color": "#8AA5FA",
-                "value": 22
-              },
-              {
-                "color": "#819DF7",
-                "value": 23
-              },
-              {
-                "color": "#7995F5",
-                "value": 24
-              },
-              {
-                "color": "#718DF3",
-                "value": 25
-              },
-              {
-                "color": "#6984F0",
-                "value": 26
-              },
-              {
-                "color": "#627CEE",
-                "value": 27
-              },
-              {
-                "color": "#5A74EB",
-                "value": 28
-              },
-              {
-                "color": "#536BE9",
-                "value": 29
-              },
-              {
-                "color": "#4B63E7",
-                "value": 30
-              },
-              {
-                "color": "#445BE4",
-                "value": 31
-              },
-              {
-                "color": "#3D52E2",
-                "value": 32
-              },
-              {
-                "color": "#364ADF",
-                "value": 33
-              },
-              {
-                "color": "#2F42DD",
-                "value": 34
-              },
-              {
-                "color": "#2939DB",
-                "value": 35
-              },
-              {
-                "color": "#2231D8",
-                "value": 36
-              },
-              {
-                "color": "#1C29D6",
-                "value": 37
-              },
-              {
-                "color": "#1621D3",
-                "value": 38
-              },
-              {
-                "color": "#0F19D1",
-                "value": 39
-              },
-              {
-                "color": "#0911CF",
-                "value": 40
-              },
-              {
-                "color": "#092FD0",
-                "value": 41
-              },
-              {
-                "color": "#094FD2",
-                "value": 42
-              },
-              {
-                "color": "#096FD4",
-                "value": 43
-              },
-              {
-                "color": "#098FD6",
-                "value": 44
-              },
-              {
-                "color": "#09B1D8",
-                "value": 45
-              },
-              {
-                "color": "#09D3DA",
-                "value": 46
-              },
-              {
-                "color": "#09DCC2",
-                "value": 47
-              },
-              {
-                "color": "#09DEA3",
-                "value": 48
-              },
-              {
-                "color": "#09E083",
-                "value": 49
-              },
-              {
-                "color": "#09E263",
-                "value": 50
-              },
-              {
-                "color": "#09E341",
-                "value": 51
-              },
-              {
-                "color": "#08E520",
-                "value": 52
-              },
-              {
-                "color": "#14E708",
-                "value": 53
-              },
-              {
-                "color": "#36E908",
-                "value": 54
-              },
-              {
-                "color": "#5AEB08",
-                "value": 55
-              },
-              {
-                "color": "#7EED08",
-                "value": 56
-              },
-              {
-                "color": "#A3EF08",
-                "value": 57
-              },
-              {
-                "color": "#C8F108",
-                "value": 58
-              },
-              {
-                "color": "#EEF308",
-                "value": 59
-              },
-              {
-                "color": "#F5D408",
-                "value": 60
-              },
-              {
-                "color": "#F4CD07",
-                "value": 61
-              },
-              {
-                "color": "#F4C507",
-                "value": 62
-              },
-              {
-                "color": "#F4BD06",
-                "value": 63
-              },
-              {
-                "color": "#F4B506",
-                "value": 64
-              },
-              {
-                "color": "#F4AD05",
-                "value": 65
-              },
-              {
-                "color": "#F4A505",
-                "value": 66
-              },
-              {
-                "color": "#F49D05",
-                "value": 67
-              },
-              {
-                "color": "#F49504",
-                "value": 68
-              },
-              {
-                "color": "#F48D04",
-                "value": 69
-              },
-              {
-                "color": "#F48403",
-                "value": 70
-              },
-              {
-                "color": "#F37C03",
-                "value": 71
-              },
-              {
-                "color": "#F37403",
-                "value": 72
-              },
-              {
-                "color": "#F36C02",
-                "value": 73
-              },
-              {
-                "color": "#F36402",
-                "value": 74
-              },
-              {
-                "color": "#F35C01",
-                "value": 75
-              },
-              {
-                "color": "#F35401",
-                "value": 76
-              },
-              {
-                "color": "#F34B01",
-                "value": 77
-              },
-              {
-                "color": "#F34300",
-                "value": 78
-              },
-              {
-                "color": "#F33B00",
-                "value": 79
-              },
-              {
-                "color": "#F23300",
-                "value": 80
-              },
-              {
-                "color": "#EC2F00",
-                "value": 81
-              },
-              {
-                "color": "#E62B00",
-                "value": 82
-              },
-              {
-                "color": "#DF2700",
-                "value": 83
-              },
-              {
-                "color": "#D92400",
-                "value": 84
-              },
-              {
-                "color": "#D22100",
-                "value": 85
-              },
-              {
-                "color": "#CC1E00",
-                "value": 86
-              },
-              {
-                "color": "#C51A00",
-                "value": 87
-              },
-              {
-                "color": "#BF1800",
-                "value": 88
-              },
-              {
-                "color": "#B81500",
-                "value": 89
-              },
-              {
-                "color": "#B21200",
-                "value": 90
-              },
-              {
-                "color": "#AC1000",
-                "value": 91
-              },
-              {
-                "color": "#A50D00",
-                "value": 92
-              },
-              {
-                "color": "#9F0B00",
-                "value": 93
-              },
-              {
-                "color": "#980900",
-                "value": 94
-              },
-              {
-                "color": "#920700",
-                "value": 95
-              },
-              {
-                "color": "#8B0500",
-                "value": 96
-              },
-              {
-                "color": "#850400",
-                "value": 97
-              },
-              {
-                "color": "#7E0200",
-                "value": 98
-              },
-              {
-                "color": "#780100",
-                "value": 99
-              },
-              {
-                "color": "#720000",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "fahrenheit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 2,
-        "x": 20,
-        "y": 1
-      },
-      "hideTimeOverride": true,
-      "id": 21,
-      "interval": "1m",
-      "maxDataPoints": null,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "max"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.3",
-      "targets": [
-        {
-          "alias": "High",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "air_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "max"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": "now/d",
-      "timeShift": null,
-      "title": "Today's High",
-      "type": "stat"
-    },
-    {
-      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": -30
-              },
-              {
-                "color": "#1C0381",
-                "value": 1
-              },
-              {
-                "color": "#1E0888",
-                "value": 2
-              },
-              {
-                "color": "#1F0D8E",
-                "value": 3
-              },
-              {
-                "color": "#221295",
-                "value": 4
-              },
-              {
-                "color": "#24179B",
-                "value": 5
-              },
-              {
-                "color": "#271DA2",
-                "value": 6
-              },
-              {
-                "color": "#2A23A9",
-                "value": 7
-              },
-              {
-                "color": "#2D2AAF",
-                "value": 8
-              },
-              {
-                "color": "#3131B6",
-                "value": 9
-              },
-              {
-                "color": "#393CBD",
-                "value": 10
-              },
-              {
-                "color": "#4147C3",
-                "value": 11
-              },
-              {
-                "color": "#4953CA",
-                "value": 12
-              },
-              {
-                "color": "#525ED0",
-                "value": 13
-              },
-              {
-                "color": "#5B6AD7",
-                "value": 14
-              },
-              {
-                "color": "#6577DE",
-                "value": 15
-              },
-              {
-                "color": "#6F83E4",
-                "value": 16
-              },
-              {
-                "color": "#798FEB",
-                "value": 17
-              },
-              {
-                "color": "#849CF1",
-                "value": 18
-              },
-              {
-                "color": "#8FA9F8",
-                "value": 19
-              },
-              {
-                "color": "#9BB6FF",
-                "value": 20
-              },
-              {
-                "color": "#92ADFC",
-                "value": 21
-              },
-              {
-                "color": "#8AA5FA",
-                "value": 22
-              },
-              {
-                "color": "#819DF7",
-                "value": 23
-              },
-              {
-                "color": "#7995F5",
-                "value": 24
-              },
-              {
-                "color": "#718DF3",
-                "value": 25
-              },
-              {
-                "color": "#6984F0",
-                "value": 26
-              },
-              {
-                "color": "#627CEE",
-                "value": 27
-              },
-              {
-                "color": "#5A74EB",
-                "value": 28
-              },
-              {
-                "color": "#536BE9",
-                "value": 29
-              },
-              {
-                "color": "#4B63E7",
-                "value": 30
-              },
-              {
-                "color": "#445BE4",
-                "value": 31
-              },
-              {
-                "color": "#3D52E2",
-                "value": 32
-              },
-              {
-                "color": "#364ADF",
-                "value": 33
-              },
-              {
-                "color": "#2F42DD",
-                "value": 34
-              },
-              {
-                "color": "#2939DB",
-                "value": 35
-              },
-              {
-                "color": "#2231D8",
-                "value": 36
-              },
-              {
-                "color": "#1C29D6",
-                "value": 37
-              },
-              {
-                "color": "#1621D3",
-                "value": 38
-              },
-              {
-                "color": "#0F19D1",
-                "value": 39
-              },
-              {
-                "color": "#0911CF",
-                "value": 40
-              },
-              {
-                "color": "#092FD0",
-                "value": 41
-              },
-              {
-                "color": "#094FD2",
-                "value": 42
-              },
-              {
-                "color": "#096FD4",
-                "value": 43
-              },
-              {
-                "color": "#098FD6",
-                "value": 44
-              },
-              {
-                "color": "#09B1D8",
-                "value": 45
-              },
-              {
-                "color": "#09D3DA",
-                "value": 46
-              },
-              {
-                "color": "#09DCC2",
-                "value": 47
-              },
-              {
-                "color": "#09DEA3",
-                "value": 48
-              },
-              {
-                "color": "#09E083",
-                "value": 49
-              },
-              {
-                "color": "#09E263",
-                "value": 50
-              },
-              {
-                "color": "#09E341",
-                "value": 51
-              },
-              {
-                "color": "#08E520",
-                "value": 52
-              },
-              {
-                "color": "#14E708",
-                "value": 53
-              },
-              {
-                "color": "#36E908",
-                "value": 54
-              },
-              {
-                "color": "#5AEB08",
-                "value": 55
-              },
-              {
-                "color": "#7EED08",
-                "value": 56
-              },
-              {
-                "color": "#A3EF08",
-                "value": 57
-              },
-              {
-                "color": "#C8F108",
-                "value": 58
-              },
-              {
-                "color": "#EEF308",
-                "value": 59
-              },
-              {
-                "color": "#F5D408",
-                "value": 60
-              },
-              {
-                "color": "#F4CD07",
-                "value": 61
-              },
-              {
-                "color": "#F4C507",
-                "value": 62
-              },
-              {
-                "color": "#F4BD06",
-                "value": 63
-              },
-              {
-                "color": "#F4B506",
-                "value": 64
-              },
-              {
-                "color": "#F4AD05",
-                "value": 65
-              },
-              {
-                "color": "#F4A505",
-                "value": 66
-              },
-              {
-                "color": "#F49D05",
-                "value": 67
-              },
-              {
-                "color": "#F49504",
-                "value": 68
-              },
-              {
-                "color": "#F48D04",
-                "value": 69
-              },
-              {
-                "color": "#F48403",
-                "value": 70
-              },
-              {
-                "color": "#F37C03",
-                "value": 71
-              },
-              {
-                "color": "#F37403",
-                "value": 72
-              },
-              {
-                "color": "#F36C02",
-                "value": 73
-              },
-              {
-                "color": "#F36402",
-                "value": 74
-              },
-              {
-                "color": "#F35C01",
-                "value": 75
-              },
-              {
-                "color": "#F35401",
-                "value": 76
-              },
-              {
-                "color": "#F34B01",
-                "value": 77
-              },
-              {
-                "color": "#F34300",
-                "value": 78
-              },
-              {
-                "color": "#F33B00",
-                "value": 79
-              },
-              {
-                "color": "#F23300",
-                "value": 80
-              },
-              {
-                "color": "#EC2F00",
-                "value": 81
-              },
-              {
-                "color": "#E62B00",
-                "value": 82
-              },
-              {
-                "color": "#DF2700",
-                "value": 83
-              },
-              {
-                "color": "#D92400",
-                "value": 84
-              },
-              {
-                "color": "#D22100",
-                "value": 85
-              },
-              {
-                "color": "#CC1E00",
-                "value": 86
-              },
-              {
-                "color": "#C51A00",
-                "value": 87
-              },
-              {
-                "color": "#BF1800",
-                "value": 88
-              },
-              {
-                "color": "#B81500",
-                "value": 89
-              },
-              {
-                "color": "#B21200",
-                "value": 90
-              },
-              {
-                "color": "#AC1000",
-                "value": 91
-              },
-              {
-                "color": "#A50D00",
-                "value": 92
-              },
-              {
-                "color": "#9F0B00",
-                "value": 93
-              },
-              {
-                "color": "#980900",
-                "value": 94
-              },
-              {
-                "color": "#920700",
-                "value": 95
-              },
-              {
-                "color": "#8B0500",
-                "value": 96
-              },
-              {
-                "color": "#850400",
-                "value": 97
-              },
-              {
-                "color": "#7E0200",
-                "value": 98
-              },
-              {
-                "color": "#780100",
-                "value": 99
-              },
-              {
-                "color": "#720000",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "fahrenheit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 2,
-        "x": 22,
-        "y": 1
-      },
-      "hideTimeOverride": true,
-      "id": 22,
-      "interval": "30s",
-      "maxDataPoints": 2880,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "min"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.3",
-      "targets": [
-        {
-          "alias": "Low",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "air_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "min"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": "now/d",
-      "timeShift": null,
-      "title": "Today's Low",
-      "type": "stat"
+      "title": "Air Temperature",
+      "type": "timeseries"
     },
     {
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
@@ -2440,10 +900,10 @@
         ]
       },
       "gridPos": {
-        "h": 10,
+        "h": 6,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 8
       },
       "hideTimeOverride": true,
       "id": 37,
@@ -2459,7 +919,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "H - Air",
@@ -3179,9 +1639,9 @@
           "tz": "$tz"
         }
       ],
-      "timeFrom": "6d/d",
-      "timeShift": "1s",
-      "title": "Temperature (Last 7 Days)",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Temperatures",
       "transformations": [
         {
           "id": "seriesToColumns",
@@ -3208,7 +1668,6 @@
     },
     {
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3219,8 +1678,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
@@ -3228,18 +1687,14 @@
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
-              "dash": [
-                10,
-                10
-              ],
-              "fill": "dash"
+              "fill": "solid"
             },
-            "lineWidth": 6,
+            "lineWidth": 2,
             "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "never",
             "spanNulls": true
           },
           "mappings": [],
@@ -3288,225 +1743,14 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 5,
+        "h": 7,
+        "w": 6,
         "x": 0,
-        "y": 19
-      },
-      "hideTimeOverride": true,
-      "id": 39,
-      "interval": "1d",
-      "maxDataPoints": null,
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "targets": [
-        {
-          "alias": "High",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "air_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "max"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Low",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "air_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "min"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": "6d/d",
-      "timeShift": null,
-      "title": "Air",
-      "transformations": [],
-      "type": "timeseries"
-    },
-    {
-      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineStyle": {
-              "dash": [
-                10,
-                10
-              ],
-              "fill": "dash"
-            },
-            "lineWidth": 6,
-            "pointSize": 20,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "always",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "fahrenheit"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Low"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "High"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 5,
-        "y": 19
+        "y": 14
       },
       "hideTimeOverride": true,
       "id": 44,
-      "interval": "1d",
+      "interval": "$interval",
       "maxDataPoints": null,
       "options": {
         "graph": {},
@@ -3623,7 +1867,7 @@
           "tz": "$tz"
         }
       ],
-      "timeFrom": "6d/d",
+      "timeFrom": null,
       "timeShift": null,
       "title": "Feels Like",
       "transformations": [],
@@ -3641,8 +1885,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
@@ -3650,18 +1894,14 @@
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
-              "dash": [
-                10,
-                10
-              ],
-              "fill": "dash"
+              "fill": "solid"
             },
-            "lineWidth": 6,
+            "lineWidth": 2,
             "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "never",
             "spanNulls": true
           },
           "mappings": [],
@@ -3710,14 +1950,14 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 4,
-        "x": 10,
-        "y": 19
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 14
       },
       "hideTimeOverride": true,
       "id": 45,
-      "interval": "1d",
+      "interval": "$interval",
       "maxDataPoints": null,
       "options": {
         "graph": {},
@@ -3834,7 +2074,7 @@
           "tz": "$tz"
         }
       ],
-      "timeFrom": "6d/d",
+      "timeFrom": null,
       "timeShift": null,
       "title": "Heat Index",
       "transformations": [],
@@ -3852,8 +2092,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
@@ -3861,18 +2101,14 @@
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
-              "dash": [
-                10,
-                10
-              ],
-              "fill": "dash"
+              "fill": "solid"
             },
-            "lineWidth": 6,
+            "lineWidth": 2,
             "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "never",
             "spanNulls": true
           },
           "mappings": [],
@@ -3921,14 +2157,14 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 14,
-        "y": 19
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 14
       },
       "hideTimeOverride": true,
       "id": 46,
-      "interval": "1d",
+      "interval": "$interval",
       "maxDataPoints": null,
       "options": {
         "graph": {},
@@ -4045,7 +2281,7 @@
           "tz": "$tz"
         }
       ],
-      "timeFrom": "6d/d",
+      "timeFrom": null,
       "timeShift": null,
       "title": "Wind Chill",
       "transformations": [],
@@ -4063,8 +2299,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
@@ -4072,18 +2308,14 @@
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
-              "dash": [
-                10,
-                10
-              ],
-              "fill": "dash"
+              "fill": "solid"
             },
-            "lineWidth": 6,
+            "lineWidth": 2,
             "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "never",
             "spanNulls": true
           },
           "mappings": [],
@@ -4132,14 +2364,14 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 19,
-        "y": 19
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 14
       },
       "hideTimeOverride": true,
       "id": 47,
-      "interval": "1d",
+      "interval": "$interval",
       "maxDataPoints": null,
       "options": {
         "graph": {},
@@ -4256,7 +2488,7 @@
           "tz": "$tz"
         }
       ],
-      "timeFrom": "6d/d",
+      "timeFrom": null,
       "timeShift": null,
       "title": "Dew Point",
       "transformations": [],
@@ -4274,16 +2506,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
               "tooltip": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
+            "lineWidth": 2,
+            "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -4339,7 +2571,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 27
+        "y": 21
       },
       "id": 3,
       "interval": "$interval",
@@ -4397,7 +2629,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Low",
@@ -4441,7 +2674,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -4461,16 +2695,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
               "tooltip": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
+            "lineWidth": 2,
+            "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -4526,7 +2760,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 27
+        "y": 21
       },
       "id": 41,
       "interval": "$interval",
@@ -4596,7 +2830,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Low",
@@ -4652,7 +2887,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -4672,16 +2908,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
               "tooltip": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
+            "lineWidth": 2,
+            "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -4738,7 +2974,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 27
+        "y": 21
       },
       "id": 8,
       "interval": "$interval",
@@ -4873,16 +3109,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
               "tooltip": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
+            "lineWidth": 2,
+            "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -4953,7 +3189,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 27
+        "y": 21
       },
       "id": 4,
       "interval": "$interval",
@@ -5138,7 +3374,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
@@ -5147,7 +3383,7 @@
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
-            "pointSize": 5,
+            "pointSize": 20,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -5208,7 +3444,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 34
+        "y": 28
       },
       "id": 43,
       "interval": "$interval",
@@ -5362,7 +3598,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "5m",
+  "refresh": "",
   "schemaVersion": 27,
   "style": "dark",
   "tags": [
@@ -5481,12 +3717,12 @@
             "value": "1d"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "12h",
             "value": "12h"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "6h",
             "value": "6h"
           },
@@ -5549,7 +3785,7 @@
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {
@@ -5569,5 +3805,5 @@
   "timezone": "browser",
   "title": "Historical (remote)",
   "uid": "lux4rd0labs_weatherflow_16",
-  "version": 2
+  "version": 1
 }

@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.3"
+      "version": "7.5.4"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618113390877,
+  "iteration": 1618631138582,
   "links": [
     {
       "asDropdown": true,
@@ -76,8 +76,8 @@
       },
       "id": 27,
       "panels": [],
-      "repeat": "hub_sn",
-      "title": "$hub_sn",
+      "repeat": "station_name",
+      "title": "$station_name",
       "type": "row"
     },
     {
@@ -303,9 +303,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -359,9 +359,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -415,9 +415,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -473,9 +473,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -498,7 +498,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"hub_sn\" =~ /^$hub_sn$/) AND $timeFilter GROUP BY time($__interval)",
+          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)",
           "rawQuery": true,
           "refId": "E",
           "resultFormat": "time_series",
@@ -570,9 +570,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         },
@@ -628,9 +628,9 @@
             },
             {
               "condition": "AND",
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             }
           ]
         }
@@ -766,15 +766,15 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "local-udp"
             }
           ]
         }
@@ -1323,7 +1323,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -2209,6 +2209,30 @@
     "list": [
       {
         "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Station Name",
+        "multi": true,
+        "name": "station_name",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
         "current": {
           "selected": false,
           "text": "local-udp",
@@ -2357,5 +2381,5 @@
   "timezone": "",
   "title": "Today So Far (local-udp)",
   "uid": "lux4rd0labs_weatherflow_18",
-  "version": 2
+  "version": 1
 }
