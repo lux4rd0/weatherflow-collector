@@ -25,7 +25,7 @@ Like all projects - weatherflow-collector is always in a flux state based on try
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:2.4.1
+    lux4rd0/weatherflow-collector:2.5.0
     lux4rd0/weatherflow-collector:latest
     
 Correct environmental variables need to be set for the container to function. The following script may be used:
@@ -38,6 +38,7 @@ To use it, you will need to provide details about your InfluxDB and your Weather
     WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
     WEATHERFLOW_COLLECTOR_INFLUXDB_URL
     WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
+    WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL #optional
     WEATHERFLOW_COLLECTOR_TOKEN
 
 An example would be:
@@ -46,6 +47,7 @@ An example would be:
     WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD="4L851Jtjaasdset7AJoFasdoFYR3di5Zniew28" \
     WEATHERFLOW_COLLECTOR_INFLUXDB_URL="http://influxdb01.com:8086/write?db=weatherflow" \
     WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME="influxdb" \
+    WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL="http://loki:3100/loki/api/v1/push" \
     WEATHERFLOW_COLLECTOR_TOKEN="a22afsa7-0dcc-4918-9f9a-923dfd339f41c" \
     bash ./generate_docker-compose.sh
 
