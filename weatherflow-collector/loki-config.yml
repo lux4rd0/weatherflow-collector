@@ -2,16 +2,18 @@ server:
 
   http_listen_port: 9080
   grpc_listen_port: 0
+  log_level: error
+  disable: true
 
 positions:
   filename: /tmp/positions.yaml
 
 
 scrape_configs:
-- job_name: weatherflow
+- job_name: weatherflow-collector
   static_configs:
   - targets:
       - localhost
     labels:
-      job: weatherflow
-      host: weatherflow
+      app: weatherflow-collector
+      host: weatherflow-collector

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## WeatherFlow Collector - remote-forecast.sh
+## WeatherFlow Collector - REMOTE-FORECAST
 ##
 
 backend_type=$WEATHERFLOW_COLLECTOR_BACKEND_TYPE
@@ -17,6 +17,7 @@ influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
 latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
 public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
@@ -49,6 +50,7 @@ influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
 latitude=${latitude}
+loki_client_url=${loki_client_url}
 longitude=${longitude}
 public_name=${public_name}
 station_id=${station_id}
@@ -73,7 +75,36 @@ curl=( --silent --output /dev/null --show-error --fail )
 
 fi
 
-## Escape Spaces
+#
+# Start Reading in STDIN
+#
+
+while read -r line; do
+
+if [ "$debug" == "true" ]
+then
+
+echo ""
+echo "${line}"
+echo ""
+
+fi
+
+##
+## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
+##
+
+if [ -n "$loki_client_url" ]
+
+then
+
+echo ${line} | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type="${collector_type}",host_hostname="${host_hostname}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}",timezone="${timezone}" --config.file=/weatherflow-collector/loki-config.yml
+
+fi
+
+##
+## Escape names for InfluxDB
+##
 
 ## Spaces
 
@@ -89,21 +120,6 @@ station_name=$(echo "${station_name}" | sed 's/,/\\,/g')
 
 public_name=$(echo "${public_name}" | sed 's/=/\\=/g')
 station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
-
-#
-# Start Reading in STDIN
-#
-
-while read -r line; do
-
-if [ "$debug" == "true" ]
-then
-
-echo ""
-echo "${line}"
-echo ""
-
-fi
 
 ## Current Conditions
 

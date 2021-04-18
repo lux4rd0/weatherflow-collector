@@ -8,20 +8,22 @@
 ## Read Environmental Variables
 ##
 
-debug=$WEATHERFLOW_COLLECTOR_BACKEND_TYPE
 collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
+debug=$WEATHERFLOW_COLLECTOR_BACKEND_TYPE
 debug=$WEATHERFLOW_COLLECTOR_DEBUG
+elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
+host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
+hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
-timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
-elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
-station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
 public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
-hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
+station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
+timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 
 if [ "$debug" == "true" ]
 
@@ -32,18 +34,20 @@ Starting WeatherFlow Collector (local-udp) - https://github.com/lux4rd0/weatherf
 
 Debug Environmental Variables
 
-debug=${debug}
 collector_type=${collector_type}
 debug=${debug}
+debug=${debug}
+elevation=${elevation}
+host_hostname=${host_hostname}
+hub_sn=${hub_sn}
 influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
-timezone=${timezone}
 latitude=${latitude}
+loki_client_url=${loki_client_url}
 longitude=${longitude}
-elevation=${elevation}
 station_name=${station_name}
-hub_sn=${hub_sn}
+timezone=${timezone}
 
 "
 
@@ -69,8 +73,13 @@ curl=( --silent --output /dev/null --show-error --fail )
 fi
 
 ##
-## Escape names for InfluxDB
+## Keep some names unescaped for Loki Tags
 ##
+
+public_name_loki=$public_name
+station_name_loki=$station_name
+
+## Escape Names
 
 ## Spaces
 
@@ -88,7 +97,7 @@ public_name=$(echo "${public_name}" | sed 's/=/\\=/g')
 station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
 
 ##
-## Read STDIN
+## Start Reading in STDIN
 ##
 
 while read -r line; do
@@ -101,6 +110,18 @@ then
 echo ""
 echo "${line}"
 echo ""
+
+fi
+
+##
+## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
+##
+
+if [ -n "$loki_client_url" ]
+
+then
+
+echo ${line} | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type="${collector_type}",host_hostname="${host_hostname}",public_name="${public_name_loki}",station_id="${station_id}",station_name="${station_name_loki}",timezone="${timezone}" --config.file=/weatherflow-collector/loki-config.yml
 
 fi
 

@@ -14,6 +14,7 @@ influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
 latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
 public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
@@ -32,6 +33,14 @@ else
 curl=( --silent --output /dev/null --show-error --fail )
 
 fi
+
+##
+## Keep some names unescaped for Loki Tags
+##
+
+public_name_loki=$public_name
+station_name_loki=$station_name
+
 
 ## Escape Names
 
@@ -70,6 +79,18 @@ then
 echo ""
 echo "${line}"
 echo ""
+
+fi
+
+##
+## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
+##
+
+if [ -n "$loki_client_url" ]
+
+then
+
+echo ${line} | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type="${collector_type}",host_hostname="${host_hostname}",public_name="${public_name_loki}",station_id="${station_id}",station_name="${station_name_loki}",timezone="${timezone}" --config.file=/weatherflow-collector/loki-config.yml
 
 fi
 
