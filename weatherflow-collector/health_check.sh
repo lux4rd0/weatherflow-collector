@@ -8,12 +8,12 @@
 
 health_check_file="/weatherflow-collector/health_check.txt"
 
-if [ $(stat --format=%Y $health_check_file) -le $(( $(date +%s) - 60 )) ]; then 
-    echo "Check is more than 60 seconds old"
-    exit 1
+if [ $(stat --format=%Y $health_check_file) -le $(( $(date +%s) - 65 )) ]; then 
+    echo "Check is more than 65 seconds old"
+    kill 1
 
 else
-    echo "Check is less than 60 seconds old"
+    echo "Check is less than 65 seconds old"
     exit 0
 fi
 
