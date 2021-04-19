@@ -25,7 +25,7 @@ Like all projects - weatherflow-collector is always in a flux state based on try
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:2.5.0
+    lux4rd0/weatherflow-collector:2.5.1
     lux4rd0/weatherflow-collector:latest
     
 Correct environmental variables need to be set for the container to function. The following script may be used:
