@@ -149,44 +149,6 @@ lightning_strike_avg_distance=$(echo "${line}" | jq ".obs[$metric][14]")
 lightning_strike_count=$(echo "${line}" | jq ".obs[$metric][15]")
 battery=$(echo "${line}" | jq ".obs[$metric][16]")
 report_interval=$(echo "${line}" | jq ".obs[$metric][17]")
-local_daily_rain_accumulation=$(echo "${line}" | jq ".obs[$metric][18]")
-rain_accumulated_final_rain_check=$(echo "${line}" | jq ".obs[$metric][19]")
-local_daily_rain_accumulation_final_rain_check=$(echo "${line}" | jq ".obs[$metric][20]")
-precipitation_analysis_type=$(echo "${line}" | jq ".obs[$metric][21]")
-
-#
-# Remove Null Entries
-#
-
-if [ "${rain_accumulated_final_rain_check}" = "null" ]
-then
-rain_accumulated_final_rain_check="0"
-fi
-
-if [ "${local_daily_rain_accumulation_final_rain_check}" = "null" ]
-then
-local_daily_rain_accumulation_final_rain_check="0"
-fi
-
-if [ "${strike_last_dist}" = "null" ]
-then
-strike_last_dist="0"
-fi
-
-if [ "${strike_last_epoch}" = "null" ]
-then
-strike_last_epoch="0"
-fi
-
-if [ "${precip_accum_local_yesterday_final}" = "null" ]
-then
-precip_accum_local_yesterday_final="0"
-fi
-
-if [ "${precip_minutes_local_yesterday}" = "null" ]
-then
-precip_minutes_local_yesterday="0"
-fi
 
 if [ "$debug" == "true" ]
 then
@@ -195,28 +157,28 @@ then
 # Print Metrics
 #
 
-echo "obs,air_temperature ${air_temperature}"
-echo "obs,battery ${battery}"
-echo "obs,illuminance ${illuminance}"
-echo "obs,lightning_strike_avg_distance ${lightning_strike_avg_distance}"
-echo "obs,lightning_strike_count ${lightning_strike_count}"
-echo "obs,local_daily_rain_accumulation ${local_daily_rain_accumulation}"
-echo "obs,local_daily_rain_accumulation_final_rain_check ${local_daily_rain_accumulation_final_rain_check}"
-echo "obs,precip_accumulated ${precip_accumulated}"
-echo "obs,precipitation_analysis_type ${precipitation_analysis_type}"
-echo "obs,precipitation_type ${precipitation_type}"
-echo "obs,rain_accumulated_final_rain_check ${rain_accumulated_final_rain_check}"
-echo "obs,relative_humidity ${relative_humidity}"
-echo "obs,report_interval ${report_interval}"
-echo "obs,solar_radiation ${solar_radiation}"
-echo "obs,station_pressure ${station_pressure}"
-echo "obs,time_epoch ${time_epoch}"
-echo "obs,uv ${uv}"
-echo "obs,wind_avg ${wind_avg}"
-echo "obs,wind_direction ${wind_direction}"
-echo "obs,wind_gust ${wind_gust}"
-echo "obs,wind_lull ${wind_lull}"
-echo "obs,wind_sample_interval ${wind_sample_interval}"
+echo "
+
+time_epoch=${time_epoch}
+wind_lull=${wind_lull}
+wind_avg=${wind_avg}
+wind_gust=${wind_gust}
+wind_direction=${wind_direction}
+wind_sample_interval=${wind_sample_interval}
+station_pressure=${station_pressure}
+air_temperature=${air_temperature}
+relative_humidity=${relative_humidity}
+illuminance=${illuminance}
+uv=${uv}
+solar_radiation=${solar_radiation}
+precip_accumulated=${precip_accumulated}
+precipitation_type=${precipitation_type}
+lightning_strike_avg_distance=${lightning_strike_avg_distance}
+lightning_strike_count=${lightning_strike_count}
+battery=${battery}
+report_interval=${report_interval}
+
+"
 
 fi
 
@@ -230,12 +192,8 @@ weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=$
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} illuminance=${illuminance} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} lightning_strike_avg_distance=${lightning_strike_avg_distance} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} lightning_strike_count=${lightning_strike_count} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} local_daily_rain_accumulation=${local_daily_rain_accumulation} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} local_daily_rain_accumulation_final_rain_check=${local_daily_rain_accumulation_final_rain_check} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} precip_accumulated=${precip_accumulated} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} precipitation_analysis_type=${precipitation_analysis_type} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} precipitation_type=${precipitation_type} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} rain_accumulated_final_rain_check=${rain_accumulated_final_rain_check} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} relative_humidity=${relative_humidity} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} report_interval=${report_interval} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} solar_radiation=${solar_radiation} ${time_epoch}000000000
