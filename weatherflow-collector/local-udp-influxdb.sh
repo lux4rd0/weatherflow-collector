@@ -102,6 +102,13 @@ station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
 
 while read -r line; do
 
+##
+## Health Check
+##
+
+health_check_file="/weatherflow-collector/health_check.txt"
+touch ${health_check_file}
+
 if [ "$debug" == "true" ]
 then
 

@@ -79,6 +79,13 @@ fi
 # Start Reading in STDIN
 #
 
+##
+## Health Check
+##
+
+health_check_file="/weatherflow-collector/health_check.txt"
+touch ${health_check_file}
+
 while read -r line; do
 
 if [ "$debug" == "true" ]

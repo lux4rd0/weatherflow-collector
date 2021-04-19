@@ -33,13 +33,18 @@ curl=( --silent --output /dev/null --show-error --fail )
 
 fi
 
-
-
 #
 # Start Reading in STDIN
 #
 
 while read -r line; do
+
+##
+## Health Check
+##
+
+health_check_file="/weatherflow-collector/health_check.txt"
+touch ${health_check_file}
 
 if [ "$debug" == "true" ]
 then

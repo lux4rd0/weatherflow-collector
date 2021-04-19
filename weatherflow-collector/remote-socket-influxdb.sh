@@ -65,7 +65,16 @@ station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
 
 while read -r line; do
 
-# Set seconds since Epoch for metric entries without it
+##
+## Health Check
+##
+
+health_check_file="/weatherflow-collector/health_check.txt"
+touch ${health_check_file}
+
+##
+## Set seconds since Epoch for metric entries without it
+##
 
 time_epoch=$(date +%s)
 
