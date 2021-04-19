@@ -230,11 +230,11 @@ startup_check=0
 while ( true ); do
   before=$(date +%s%N)
 
-## Only run the hourly forecasts at 0, 15, 30, 45 minutes except on startup
+## Only run the hourly forecasts at 00, 15, 30, 45 minutes except on startup
 
 hourly_time_build_check_minute=$(date +"%M")
 
-if [ "$hourly_time_build_check_minute" == "0" ] || [ "$hourly_time_build_check_minute" == "15" ] || [ "$hourly_time_build_check_minute" == "30" ] || [ "$hourly_time_build_check_minute" == "45" ]
+if [ "$hourly_time_build_check_minute" == "00" ] || [ "$hourly_time_build_check_minute" == "15" ] || [ "$hourly_time_build_check_minute" == "30" ] || [ "$hourly_time_build_check_minute" == "45" ]
 
 then
 
