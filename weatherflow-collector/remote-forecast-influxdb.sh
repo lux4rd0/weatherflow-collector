@@ -105,7 +105,7 @@ if [ -n "$loki_client_url" ]
 
 then
 
-echo ${line} | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type="${collector_type}",host_hostname="${host_hostname}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}",timezone="${timezone}" --config.file=/weatherflow-collector/loki-config.yml
+echo "${line}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type="${collector_type}",host_hostname="${host_hostname}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}",timezone="${timezone}" --config.file=/weatherflow-collector/loki-config.yml
 
 fi
 
@@ -163,7 +163,18 @@ daily_start=$(date +%s%N)
 
 N=4
 
-for day in {0..9}; do
+num_of_days=$(echo "${line}" |jq -r ".forecast.daily | length")
+
+if [ "$debug" == "true" ]
+then
+
+echo "Number of forecast days: ${num_of_days}"
+
+fi
+
+num_of_days_minus_one=$((num_of_days-1))
+
+for day in $(seq 0 $num_of_days_minus_one) ; do
 
 (
 
@@ -288,7 +299,18 @@ hourly_start=$(date +%s%N)
 
 N=4
 
-for hour in {0..240}; do
+num_of_hours=$(echo "${line}" |jq -r ".forecast.hourly | length")
+
+if [ "$debug" == "true" ]
+then
+
+echo "Number of forecast hours: ${num_of_hours}"
+
+fi
+
+num_of_hours_minus_one=$((num_of_hours-1))
+
+for hour in $(seq 0 $num_of_hours_minus_one) ; do
 
 (
 
@@ -343,24 +365,40 @@ echo "forecast_hourly_wind_gust ${wind_gust}"
 
 fi
 
+##
 ## Send Data To InfluxDB
+##
+
+##
+## Pad the $local_day variable and turn it into a string in order for Grafana to sort dashboard variables correctly
+##
+
+printf -v padded_local_day "%02d" "${local_day}"
+
+if [ "$debug" == "true" ]
+then
+
+echo "local_day: ${local_day}
+padded_local_day: ${padded_local_day}"
+
+fi
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} air_temperature=${air_temperature} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} conditions=\"${conditions}\" ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} feels_like=${feels_like} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} icon=\"${icon}\" ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} local_day=${local_day} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} local_hour=${local_hour} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} precip=${precip} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} precip_probability=${precip_probability} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} relative_humidity=${relative_humidity} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} sea_level_pressure=${sea_level_pressure} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} uv=${uv} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} wind_avg=${wind_avg} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} wind_direction=${wind_direction} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} wind_direction_cardinal=\"${wind_direction_cardinal}\" ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${local_day},forecast_hour_num=${local_hour} wind_gust=${wind_gust} ${time}000000000"
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} air_temperature=${air_temperature} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} conditions=\"${conditions}\" ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} feels_like=${feels_like} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} icon=\"${icon}\" ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} local_day=\"${padded_local_day}\" ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} local_hour=${local_hour} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} precip=${precip} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} precip_probability=${precip_probability} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} relative_humidity=${relative_humidity} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} sea_level_pressure=${sea_level_pressure} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} uv=${uv} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} wind_avg=${wind_avg} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} wind_direction=${wind_direction} ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} wind_direction_cardinal=\"${wind_direction_cardinal}\" ${time}000000000
+weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name},station_id=${station_id},station_name=${station_name},timezone=${timezone},forecast_day_num=${padded_local_day},forecast_hour_num=${local_hour} wind_gust=${wind_gust} ${time}000000000"
 
 ) &
 
