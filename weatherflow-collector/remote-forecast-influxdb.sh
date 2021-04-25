@@ -79,12 +79,13 @@ fi
 # Start Reading in STDIN
 #
 
-##
-## Health Check
-##
+if [ "$healthcheck" == "true" ]
+then
 
 health_check_file="/weatherflow-collector/health_check.txt"
 touch ${health_check_file}
+
+fi
 
 while read -r line; do
 

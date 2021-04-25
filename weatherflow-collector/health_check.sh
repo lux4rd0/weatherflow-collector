@@ -6,9 +6,14 @@
 
 ## HEALTHCHECK --interval=60s --timeout=3s CMD /weatherflow-collector/health_check.sh
 
+healthcheck=$WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED
+
+if [ "$healthcheck" == "true" ]
+then
+
 health_check_file="/weatherflow-collector/health_check.txt"
 
-if [ $(stat --format=%Y $health_check_file) -le $(( $(date +%s) - 65 )) ]; then 
+if [ $(stat --format=%Y $health_check_file) -le $(( $(date +%s) - 65 )) ]; then
     echo "Check is more than 65 seconds old"
     kill 1
 
@@ -17,8 +22,8 @@ else
     exit 0
 fi
 
+else
 
+exit 0
 
-
-
-
+fi

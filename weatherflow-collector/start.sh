@@ -14,6 +14,7 @@ debug=$WEATHERFLOW_COLLECTOR_DEBUG
 device_id=$WEATHERFLOW_COLLECTOR_DEVICE_ID
 elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
 forecast_interval=$WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL
+function=$WEATHERFLOW_COLLECTOR_FUNCTION
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
 import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
@@ -21,12 +22,14 @@ influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
 latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+logcli_host_url=$WEATHERFLOW_COLLECTOR_LOGCLI_URL
 loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
 public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
 rest_interval=$WEATHERFLOW_COLLECTOR_REST_INTERVAL
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
 station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
+threads=$WEATHERFLOW_COLLECTOR_THREADS
 timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
@@ -74,6 +77,21 @@ curl=( --silent --show-error --fail)
 
 fi
 
+##
+## Set Threads
+##
+
+if [ -z "$threads" ]
+
+then
+
+N=1
+
+else
+
+N=${threads}
+
+fi
 
 if [ "$debug" == "true" ]
 
@@ -90,12 +108,14 @@ debug=${debug}
 device_id=${device_id}
 elevation=${elevation}
 forecast_interval=${forecast_interval}
+function=${function}
 host_hostname=${host_hostname}
 hub_sn=${hub_sn}
 influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
 latitude=${latitude}
+logcli_host_url=${logcli_host_url}
 loki_client_url=${loki_client_url}
 longitude=${longitude}
 public_name=${public_name}
@@ -115,115 +135,301 @@ echo ""
 
 fi
 
+## Escape Names
+
+## Spaces
+
+public_name_escaped=$(echo "${public_name}" | sed 's/ /\\ /g')
+station_name_escaped=$(echo "${station_name}" | sed 's/ /\\ /g')
+
+## Commas
+
+public_name_escaped=$(echo "${public_name_escaped}" | sed 's/,/\\,/g')
+station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
+
+## Equal Signs
+
+public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
+station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
+
+
 ##
-## COLLECTOR TYPE = LOCAL-UDP
+## Send Startup Timestamp to InfluxDB
 ##
 
-if [ "${collector_type}" = "local-udp" ]
+current_time=$(date +%s)
+
+echo "time_epoch: ${current_time}"
+
+curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
+weatherflow_collector,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone},function=${function} time_epoch=${current_time}000"
+
+
+
+##
+## ProgressBar - https://github.com/fearside/ProgressBar/
+##
+
+function ProgressBar {
+# Process data
+    let _progress=(${1}*100/${2}*100)/100
+    let _done=(${_progress}*4)/10
+    let _left=40-$_done
+# Build progressbar string lengths
+    _fill=$(printf "%${_done}s")
+    _empty=$(printf "%${_left}s")
+
+# 1.2 Build progressbar strings and print the ProgressBar line
+# 1.2.1 Output example:                           
+# 1.2.1.1 Progress : [########################################] 100%
+printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
+
+}
+
+
+
+
+
+
+################################
+##                            ##
+## COLLECTOR TYPE = LOCAL-UDP ##
+##                            ##
+################################
+
+if [ "${collector_type}" == "local-udp" ]  &&  [ "${function}" == "import" ]
+
 then
 
-echo "collector_type=${collector_type}"
+echo "
+collector_type=${collector_type}
+function=${function}
+"
+
+hours=$(("$import_days" * 24))
+
+for hours_loop in $(seq "$hours" -1 0) ; do
+
+hours_start=$(date --date="${hours_loop} hours ago 00:00" +%s)
+
+hours_end=$(("$hours_start" + 3599))
+
+date_start=$(date -d @"${hours_start}" --rfc-3339=seconds | sed 's/ /T/')
+date_end=$(date -d @${hours_end} --rfc-3339=seconds | sed 's/ /T/')
+
+echo "Hour Slices Remaining: $hours_loop"
+echo "date_start: $date_start"
+echo "date_end: $date_end"
+
+## Start Timer
+
+import_start=$(date +%s%N)
 
 ##
-## BACKEND TYPE = LOKI
+## Start "threading"
 ##
 
-if [ "${backend_type}" = "loki" ]
-then
+logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
 
-echo "backend_type=${backend_type}"
+num_of_logs=$(echo "${logs}" |jq -r ". | length")
 
-/usr/bin/stdbuf -oL /usr/bin/python /weatherflow-collector/weatherflow-listener.py | /usr/bin/promtail --stdin --client.url "$loki_client_url" --client.external-labels=collector_type=local-udp,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
+echo "Number of logs: ${num_of_logs}"
 
-##
-## BACKEND TYPE = INFLUXDB
-##
+num_of_logs_minus_one=$((num_of_logs-1))
 
-elif  [ "${backend_type}" = "influxdb" ]
-then
+for log in $(seq 0 ${num_of_logs_minus_one})
 
-echo "backend_type=${backend_type}"
+do
 
-/usr/bin/stdbuf -oL /usr/bin/python /weatherflow-collector/weatherflow-listener.py | /weatherflow-collector/local-udp-influxdb.sh
+(
 
-else
+echo "${logs}" | jq -r .["${log}"].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./local-udp-influxdb.sh
 
-echo "No Backend Configured"
+) &
 
-fi
+    if [[ $(jobs -r -p | wc -l) -ge $N ]]; then
+        wait -n
 
-##
-## COLLECTOR TYPE = REMOTE-SOCKET
-##
+    ProgressBar "${log}" ${num_of_logs_minus_one}
 
-elif [ "${collector_type}" = "remote-socket" ]
-then
+    fi
 
-echo "collector_type=${collector_type}"
-
-if [ "${backend_type}" = "loki" ]
-then
-
-echo "backend_type=${backend_type}"
-
-JSON='\n{"type":"listen_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${station_id}"'", "id":"weatherflow-collector-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-rapid_start_'"${random_id}"'"}\n'
-
-echo -e "$JSON" | /weatherflow-collector/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-socket,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
-
-##
-## BACKEND TYPE = INFLUXDB
-##
-
-elif  [ "${backend_type}" = "influxdb" ]
-then
-
-echo "backend_type=${backend_type}"
-
-JSON='\n{"type":"listen_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${station_id}"'", "id":"weatherflow-collector-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-rapid_start_'"${random_id}"'"}\n'
-
-echo -e "$JSON" | /weatherflow-collector/websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${token}" | /weatherflow-collector/remote-socket-influxdb.sh
-
-else
-
-echo "No Backend Configured"
-
-fi
-
-##
-## COLLECTOR TYPE = REMOTE-FORECAST
-##
-
-elif [ "${collector_type}" = "remote-forecast" ]
-then
-
-echo "collector_type=${collector_type}"
-
-##
-## BACKEND TYPE = LOKI
-##
-
-if [ "${backend_type}" = "loki" ]
-then
-
-echo "backend_type=${backend_type}"
-
-while ( true ); do
-  before=$(date +%s)
-  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-forecast,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
-  after=$(date +%s)
-  DELAY=$(echo "${forecast_interval}-($after-$before)" | bc)
-  echo "Sleeping ${DELAY}"
-  sleep "$DELAY"
 done
 
-##
-## BACKEND TYPE = INFLUXDB
-##
+wait
 
-elif  [ "${backend_type}" = "influxdb" ]
+printf '\nFinished!\n'
+
+#
+# End "threading"
+#
+
+## End Timer
+
+import_end=$(date +%s%N)
+import_duration=$((import_end-import_start))
+
+echo "import_duration:${import_duration}"
+
+## Send Timer Metrics To InfluxDB
+
+curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=import,station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
+
+done
+
+fi
+
+
+if [ "${collector_type}" == "local-udp" ]  &&  [ "${function}" == "collector" ]
+
 then
 
-echo "backend_type=${backend_type}"
+echo "
+collector_type=${collector_type}
+function=${function}
+"
+
+/usr/bin/stdbuf -oL /usr/bin/python ./weatherflow-listener.py | ./local-udp-influxdb.sh
+
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################
+##                                ##
+## COLLECTOR TYPE = REMOTE-SOCKET ##
+##                                ##
+####################################
+
+if [ "${collector_type}" == "remote-socket" ]  &&  [ "${function}" == "import" ]
+
+then
+
+echo "
+collector_type=${collector_type}
+function=${function}
+"
+
+hours=$(("$import_days" * 24))
+
+for hours_loop in $(seq "$hours" -1 0) ; do
+
+hours_start=$(date --date="${hours_loop} hours ago 00:00" +%s)
+
+hours_end=$(("$hours_start" + 3599))
+
+date_start=$(date -d @"${hours_start}" --rfc-3339=seconds | sed 's/ /T/')
+date_end=$(date -d @${hours_end} --rfc-3339=seconds | sed 's/ /T/')
+
+echo "Hour Slices Remaining: $hours_loop"
+echo "date_start: $date_start"
+echo "date_end: $date_end"
+
+## Start Timer
+
+import_start=$(date +%s%N)
+
+##
+## Start "threading"
+##
+
+logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
+
+num_of_logs=$(echo "${logs}" |jq -r ". | length")
+
+
+
+echo "Number of logs: ${num_of_logs}"
+
+
+num_of_logs_minus_one=$((num_of_logs-1))
+
+for log in $(seq 0 ${num_of_logs_minus_one})
+
+do
+
+(
+
+echo "${logs}" | jq -r .["${log}"].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./remote-socket-influxdb.sh
+
+) &
+
+    if [[ $(jobs -r -p | wc -l) -ge $N ]]; then
+        wait -n
+
+    ProgressBar "${log}" ${num_of_logs_minus_one}
+
+    fi
+
+done
+
+wait
+
+printf '\nFinished!\n'
+
+#
+# End "threading"
+#
+
+## End Timer
+
+import_end=$(date +%s%N)
+import_duration=$((import_end-import_start))
+
+echo "import_duration:${import_duration}"
+
+## Send Timer Metrics To InfluxDB
+
+curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=import,station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
+
+done
+
+fi
+
+if [ "${collector_type}" == "remote-socket" ]  &&  [ "${function}" == "collector" ]
+
+then
+
+echo "
+collector_type=${collector_type}
+function=${function}
+"
+
+JSON='\n{"type":"listen_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${station_id}"'", "id":"weatherflow-collector-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-rapid_start_'"${random_id}"'"}\n'
+
+echo -e "$JSON" | ./websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${token}" | ./remote-socket-influxdb.sh
+
+
+fi
+
+
+
+
+
+######################################
+##                                  ##
+## COLLECTOR TYPE = REMOTE-FORECAST ##
+##                                  ##
+######################################
+
+if [ "${collector_type}" == "remote-forecast" ]  &&  [ "${function}" == "collector" ]
+then
+
+echo "collector_type=${collector_type}"
 
 startup_check=0
 
@@ -262,7 +468,7 @@ echo "Running Hourly Forecast - First Time Startup"
 
 fi
 
-  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}" | WEATHERFLOW_COLLECTOR_HOURLY_FORECAST_RUN=${hourly_time_build_check_flag} /weatherflow-collector/remote-forecast-influxdb.sh
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}" | WEATHERFLOW_COLLECTOR_HOURLY_FORECAST_RUN=${hourly_time_build_check_flag} ./remote-forecast-influxdb.sh
   after=$(date +%s%N)
   DELAY=$(echo "scale=4;(${forecast_interval}-($after-$before) / 1000000000)" | bc)
   echo "Sleeping: ${DELAY} seconds"
@@ -271,80 +477,156 @@ fi
   sleep "$DELAY"
 done
 
-else
 
-echo "No Backend Configured"
 
 fi
 
-##
-## COLLECTOR TYPE = REMOTE-REST
-##
 
-elif [ "${collector_type}" = "remote-rest" ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+##################################
+##                              ##
+## COLLECTOR TYPE = REMOTE-REST ##
+##                              ##
+##################################
+
+if [ "${collector_type}" == "remote-rest" ]  &&  [ "${function}" == "import" ]
+
 then
 
-echo "collector_type=${collector_type}"
+echo "
+collector_type=${collector_type}
+function=${function}
+"
+
+hours=$(("$import_days" * 24))
+
+for hours_loop in $(seq "$hours" -1 0) ; do
+
+hours_start=$(date --date="${hours_loop} hours ago 00:00" +%s)
+
+hours_end=$(("$hours_start" + 3599))
+
+date_start=$(date -d @"${hours_start}" --rfc-3339=seconds | sed 's/ /T/')
+date_end=$(date -d @${hours_end} --rfc-3339=seconds | sed 's/ /T/')
+
+echo "Hour Slices Remaining: $hours_loop"
+echo "date_start: $date_start"
+echo "date_end: $date_end"
+
+## Start Timer
+
+import_start=$(date +%s%N)
 
 ##
-## BACKEND TYPE = LOKI
+## Start "threading"
 ##
 
-if [ "${backend_type}" = "loki" ]
+logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
+
+num_of_logs=$(echo "${logs}" |jq -r ". | length")
+
+
+
+echo "Number of logs: ${num_of_logs}"
+
+
+num_of_logs_minus_one=$((num_of_logs-1))
+
+for log in $(seq 0 ${num_of_logs_minus_one})
+
+do
+
+(
+
+echo "${logs}" | jq -r .["${log}"].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./remote-rest-influxdb.sh
+
+) &
+
+    if [[ $(jobs -r -p | wc -l) -ge $N ]]; then
+        wait -n
+
+    ProgressBar "${log}" ${num_of_logs_minus_one}
+
+    fi
+
+done
+
+wait
+
+printf '\nFinished!\n'
+
+#
+# End "threading"
+#
+
+## End Timer
+
+import_end=$(date +%s%N)
+import_duration=$((import_end-import_start))
+
+echo "import_duration:${import_duration}"
+
+## Send Timer Metrics To InfluxDB
+
+curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=import,station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
+
+done
+
+fi
+
+if [ "${collector_type}" == "remote-rest" ]  &&  [ "${function}" == "collector" ]
+
 then
-
-echo "backend_type=${backend_type}"
 
 while ( true ); do
   before=$(date +%s)
-  curl "${curl[@]}" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/better_forecast?station_id=${station_id}&token=${token}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type=remote-rest,host_hostname="${host_hostname}" --config.file=/weatherflow-collector/loki-config.yml
+  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${station_id}?token=${token}" | ./remote-rest-influxdb.sh
   after=$(date +%s)
   DELAY=$(echo "${rest_interval}-($after-$before)" | bc)
   echo "Sleeping ${DELAY}"
   sleep "$DELAY"
 done
 
-##
-## BACKEND TYPE = INFLUXDB
-##
-
-elif  [ "${backend_type}" = "influxdb" ]
-then
-
-echo "backend_type=${backend_type}"
-
-while ( true ); do
-  before=$(date +%s)
-  curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${station_id}?token=${token}" | /weatherflow-collector/remote-rest-influxdb.sh
-  after=$(date +%s)
-  DELAY=$(echo "${rest_interval}-($after-$before)" | bc)
-  echo "Sleeping ${DELAY}"
-  sleep "$DELAY"
-done
-
-else
-
-echo "No Backend Configured"
 
 fi
 
-##
-## COLLECTOR TYPE = REMOTE-IMPORT
-##
 
-elif [ "${collector_type}" = "remote-import" ]
+
+
+
+
+
+
+
+
+
+
+
+
+####################################
+##                                ##
+## COLLECTOR TYPE = REMOTE-IMPORT ##
+##                                ##
+####################################
+
+if [ "${collector_type}" == "remote-import" ]  &&  [ "${function}" == "import" ]
+
 then
 
 echo "collector_type=${collector_type}"
-
-##
-## BACKEND TYPE = LOKI
-##
-
-if [ "${backend_type}" = "influxdb" ]
-then
-
-echo "backend_type=${backend_type}"
 
 # Loop through the days for a full import
 
@@ -354,37 +636,47 @@ time_start=$(date --date="${days_loop} days ago 00:00" +%s)
 
 time_end=$(("$time_start" + 86340))
 
-# time_end=$(date +%s)
-
-
-#time_start_long=$(date --date="${days} days ago")
-#time_end_long=$(date)
-
-#echo "time_start epoch: ${time_start}"
-#echo "time_end epoch: ${time_end}"
-
-#echo ""
-
-#echo "time_start long: ${time_start_long}"
-#echo "time_end epoch: ${time_end_long}"
-
-
 echo "Day: $days_loop days ago"
 echo "time_start: $time_start"
 echo "time_end: $time_end"
 
-curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "https://swd.weatherflow.com/swd/rest/observations/device/${device_id}?time_start=${time_start}&time_end=${time_end}&token=${token}" | /weatherflow-collector/remote-import-influxdb.sh
+curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "https://swd.weatherflow.com/swd/rest/observations/device/${device_id}?time_start=${time_start}&time_end=${time_end}&token=${token}" | ./remote-import-influxdb.sh
 
 done
 
-else
 
-echo "No Backend Configured"
 
 fi
 
-else
+
 
 echo "No Remote Collector Configured"
 
-fi
+echo ""
+
+echo "Please check configurations:
+
+backend_type=${backend_type}
+collector_type=${collector_type}
+debug=${debug}
+device_id=${device_id}
+elevation=${elevation}
+forecast_interval=${forecast_interval}
+function=${function}
+host_hostname=${host_hostname}
+hub_sn=${hub_sn}
+influxdb_password=${influxdb_password}
+influxdb_url=${influxdb_url}
+influxdb_username=${influxdb_username}
+latitude=${latitude}
+logcli_host_url=${logcli_host_url}
+loki_client_url=${loki_client_url}
+longitude=${longitude}
+public_name=${public_name}
+rest_interval=${rest_interval}
+station_id=${station_id}
+station_name=${station_name}
+timezone=${timezone}
+token=${token}
+
+"

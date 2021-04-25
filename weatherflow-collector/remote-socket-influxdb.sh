@@ -8,6 +8,7 @@ collector_type=$WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE
 debug=$WEATHERFLOW_COLLECTOR_DEBUG
 device_id=$WEATHERFLOW_COLLECTOR_DEVICE_ID
 elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
+healthcheck=$WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
@@ -69,8 +70,13 @@ while read -r line; do
 ## Health Check
 ##
 
+if [ "$healthcheck" == "true" ]
+then
+
 health_check_file="/weatherflow-collector/health_check.txt"
 touch ${health_check_file}
+
+fi
 
 ##
 ## Set seconds since Epoch for metric entries without it

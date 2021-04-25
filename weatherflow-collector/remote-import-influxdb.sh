@@ -48,6 +48,22 @@ curl=( --silent --output /dev/null --show-error --fail )
 
 fi
 
+##
+## Set Threads
+##
+
+if [ -z "$threads" ]
+
+then
+
+N=1
+
+else
+
+N=${threads}
+
+fi
+
 echo "Station Name: ${station_name}"
 
 echo "Device ID: ${device_id}"
@@ -98,6 +114,26 @@ token=${token}
 "
 
 fi
+
+##
+## ProgressBar - https://github.com/fearside/ProgressBar/
+##
+
+function ProgressBar {
+# Process data
+    let _progress=(${1}*100/${2}*100)/100
+    let _done=(${_progress}*4)/10
+    let _left=40-$_done
+# Build progressbar string lengths
+    _fill=$(printf "%${_done}s")
+    _empty=$(printf "%${_left}s")
+
+# 1.2 Build progressbar strings and print the ProgressBar line
+# 1.2.1 Output example:
+# 1.2.1.1 Progress : [########################################] 100%
+printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
+
+}
 
 #
 # Start Reading in STDIN
@@ -210,14 +246,17 @@ weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=$
 
     # allow to execute up to $N jobs in parallel
     if [[ $(jobs -r -p | wc -l) -ge $N ]]; then
-        # now there are $N jobs already running, so wait here for any job
-        # to be finished so there is a place to start next one.
         wait -n
+
+    ProgressBar "${metric}" ${num_of_metrics_minus_one}
+
     fi
 
 done
 
 wait
+
+printf '\nFinished!\n'
 
 #
 # End "threading"
