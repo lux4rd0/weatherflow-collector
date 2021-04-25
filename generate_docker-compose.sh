@@ -300,6 +300,7 @@ echo "
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL: ${loki_client_url}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
       WEATHERFLOW_COLLECTOR_REST_INTERVAL: 60
@@ -327,6 +328,7 @@ echo "
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL: ${loki_client_url}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
       WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
@@ -353,6 +355,7 @@ echo "
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL: ${loki_client_url}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
       WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
