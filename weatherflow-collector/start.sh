@@ -15,6 +15,7 @@ device_id=$WEATHERFLOW_COLLECTOR_DEVICE_ID
 elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
 forecast_interval=$WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL
 function=$WEATHERFLOW_COLLECTOR_FUNCTION
+healthcheck=$WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
 import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
@@ -33,7 +34,9 @@ threads=$WEATHERFLOW_COLLECTOR_THREADS
 timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
+##
 ## Check for required intervals
+##
 
 if [ -z "${forecast_interval}" ] && [ "$collector_type" == "remote-forecast" ]
   then
@@ -59,11 +62,15 @@ import_days="365"
 
 fi
 
-# Random ID
+##
+## Random ID
+##
 
 random_id=$(od -A n -t d -N 1 /dev/urandom |tr -d ' ')
 
-# Curl Command
+##
+## Curl Command
+##
 
 if [ "$debug" == "true" ]
 
@@ -97,8 +104,7 @@ if [ "$debug" == "true" ]
 
 then
 
-echo "
-Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/weatherflow-collector
+echo "Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/weatherflow-collector
 
 Debug Environmental Variables
 
@@ -109,8 +115,10 @@ device_id=${device_id}
 elevation=${elevation}
 forecast_interval=${forecast_interval}
 function=${function}
+healthcheck=${healthcheck}
 host_hostname=${host_hostname}
 hub_sn=${hub_sn}
+import_days=${import_days}
 influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
@@ -122,16 +130,13 @@ public_name=${public_name}
 rest_interval=${rest_interval}
 station_id=${station_id}
 station_name=${station_name}
+threads=${threads}
 timezone=${timezone}
-token=${token}
-
-"
+token=${token}"
 
 else
 
-echo ""
 echo "Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/weatherflow-collector"
-echo ""
 
 fi
 
@@ -152,7 +157,6 @@ station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
 public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
 station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
 
-
 ##
 ## Send Startup Timestamp to InfluxDB
 ##
@@ -162,9 +166,7 @@ current_time=$(date +%s)
 echo "time_epoch: ${current_time}"
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_collector,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone},function=${function} time_epoch=${current_time}000"
-
-
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone},source=${function} docker_start=${current_time}000"
 
 ##
 ## ProgressBar - https://github.com/fearside/ProgressBar/
@@ -186,11 +188,6 @@ printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
 
 }
 
-
-
-
-
-
 ################################
 ##                            ##
 ## COLLECTOR TYPE = LOCAL-UDP ##
@@ -201,10 +198,8 @@ if [ "${collector_type}" == "local-udp" ]  &&  [ "${function}" == "import" ]
 
 then
 
-echo "
-collector_type=${collector_type}
-function=${function}
-"
+echo "collector_type=${collector_type}
+function=${function}"
 
 hours=$(("$import_days" * 24))
 
@@ -221,7 +216,9 @@ echo "Hour Slices Remaining: $hours_loop"
 echo "date_start: $date_start"
 echo "date_end: $date_end"
 
+##
 ## Start Timer
+##
 
 import_start=$(date +%s%N)
 
@@ -260,26 +257,29 @@ wait
 
 printf '\nFinished!\n'
 
-#
-# End "threading"
-#
+##
+## End "threading"
+##
 
+##
 ## End Timer
+##
 
 import_end=$(date +%s%N)
 import_duration=$((import_end-import_start))
 
 echo "import_duration:${import_duration}"
 
+##
 ## Send Timer Metrics To InfluxDB
+##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=import,station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
 
 done
 
 fi
-
 
 if [ "${collector_type}" == "local-udp" ]  &&  [ "${function}" == "collector" ]
 
@@ -287,26 +287,11 @@ then
 
 echo "
 collector_type=${collector_type}
-function=${function}
-"
+function=${function}"
 
 /usr/bin/stdbuf -oL /usr/bin/python ./weatherflow-listener.py | ./local-udp-influxdb.sh
 
 fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ####################################
 ##                                ##
@@ -318,10 +303,8 @@ if [ "${collector_type}" == "remote-socket" ]  &&  [ "${function}" == "import" ]
 
 then
 
-echo "
-collector_type=${collector_type}
-function=${function}
-"
+echo "collector_type=${collector_type}
+function=${function}"
 
 hours=$(("$import_days" * 24))
 
@@ -338,7 +321,9 @@ echo "Hour Slices Remaining: $hours_loop"
 echo "date_start: $date_start"
 echo "date_end: $date_end"
 
+##
 ## Start Timer
+##
 
 import_start=$(date +%s%N)
 
@@ -350,10 +335,7 @@ logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 
 
 num_of_logs=$(echo "${logs}" |jq -r ". | length")
 
-
-
 echo "Number of logs: ${num_of_logs}"
-
 
 num_of_logs_minus_one=$((num_of_logs-1))
 
@@ -380,21 +362,25 @@ wait
 
 printf '\nFinished!\n'
 
-#
-# End "threading"
-#
+##
+## End "threading"
+##
 
+##
 ## End Timer
+##
 
 import_end=$(date +%s%N)
 import_duration=$((import_end-import_start))
 
 echo "import_duration:${import_duration}"
 
+##
 ## Send Timer Metrics To InfluxDB
+##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=import,station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
 
 done
 
@@ -404,21 +390,14 @@ if [ "${collector_type}" == "remote-socket" ]  &&  [ "${function}" == "collector
 
 then
 
-echo "
-collector_type=${collector_type}
-function=${function}
-"
+echo "collector_type=${collector_type}
+function=${function}"
 
 JSON='\n{"type":"listen_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-start_'"${random_id}"'"}\n{"type":"listen_start_events", "station_id": "'"${station_id}"'", "id":"weatherflow-collector-start_events_'"${random_id}"'"}\n{"type":"listen_rapid_start", "device_id": "'"${device_id}"'", "id":"weatherflow-collector-rapid_start_'"${random_id}"'"}\n'
 
 echo -e "$JSON" | ./websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${token}" | ./remote-socket-influxdb.sh
 
-
 fi
-
-
-
-
 
 ######################################
 ##                                  ##
@@ -436,7 +415,9 @@ startup_check=0
 while ( true ); do
   before=$(date +%s%N)
 
-## Only run the hourly forecasts at 00, 15, 30, 45 minutes except on startup
+##
+## Run the hourly forecasts at 00, 15, 30, 45 minutes except on startup
+##
 
 hourly_time_build_check_minute=$(date +"%M")
 
@@ -456,7 +437,9 @@ echo "Skipping Hourly Forecast - Quarter Hour Time Interval - ${hourly_time_buil
 
 fi
 
+##
 ## Run on startup
+##
 
 if [ "$startup_check" == "0" ]
 
@@ -477,23 +460,7 @@ fi
   sleep "$DELAY"
 done
 
-
-
 fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ##################################
 ##                              ##
@@ -505,10 +472,8 @@ if [ "${collector_type}" == "remote-rest" ]  &&  [ "${function}" == "import" ]
 
 then
 
-echo "
-collector_type=${collector_type}
-function=${function}
-"
+echo "collector_type=${collector_type}
+function=${function}"
 
 hours=$(("$import_days" * 24))
 
@@ -525,7 +490,9 @@ echo "Hour Slices Remaining: $hours_loop"
 echo "date_start: $date_start"
 echo "date_end: $date_end"
 
+##
 ## Start Timer
+##
 
 import_start=$(date +%s%N)
 
@@ -537,10 +504,7 @@ logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 
 
 num_of_logs=$(echo "${logs}" |jq -r ". | length")
 
-
-
 echo "Number of logs: ${num_of_logs}"
-
 
 num_of_logs_minus_one=$((num_of_logs-1))
 
@@ -567,21 +531,25 @@ wait
 
 printf '\nFinished!\n'
 
-#
-# End "threading"
-#
+##
+## End "threading"
+##
 
+##
 ## End Timer
+##
 
 import_end=$(date +%s%N)
 import_duration=$((import_end-import_start))
 
 echo "import_duration:${import_duration}"
 
+##
 ## Send Timer Metrics To InfluxDB
+##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=import,station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
 
 done
 
@@ -600,21 +568,7 @@ while ( true ); do
   sleep "$DELAY"
 done
 
-
 fi
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ####################################
 ##                                ##
@@ -628,7 +582,9 @@ then
 
 echo "collector_type=${collector_type}"
 
-# Loop through the days for a full import
+##
+## Loop through the days for a full import
+##
 
 for days_loop in $(seq "$import_days" -1 0) ; do
 
@@ -644,17 +600,11 @@ curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "https://sw
 
 done
 
-
-
 fi
 
+echo "No Remote Collector Configured
 
-
-echo "No Remote Collector Configured"
-
-echo ""
-
-echo "Please check configurations:
+Please check configurations:
 
 backend_type=${backend_type}
 collector_type=${collector_type}
@@ -677,6 +627,4 @@ rest_interval=${rest_interval}
 station_id=${station_id}
 station_name=${station_name}
 timezone=${timezone}
-token=${token}
-
-"
+token=${token}"

@@ -14,18 +14,23 @@ debug=$WEATHERFLOW_COLLECTOR_DEBUG
 device_id=$WEATHERFLOW_COLLECTOR_DEVICE_ID
 elevation=$WEATHERFLOW_COLLECTOR_ELEVATION
 forecast_interval=$WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL
+function=$WEATHERFLOW_COLLECTOR_FUNCTION
+healthcheck=$WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 hub_sn=$WEATHERFLOW_COLLECTOR_HUB_SN
+import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
 latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
+logcli_host_url=$WEATHERFLOW_COLLECTOR_LOGCLI_URL
 loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
 public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
 rest_interval=$WEATHERFLOW_COLLECTOR_REST_INTERVAL
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
 station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
+threads=$WEATHERFLOW_COLLECTOR_THREADS
 timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
@@ -35,7 +40,9 @@ token=$WEATHERFLOW_COLLECTOR_TOKEN
 
 collector_type="local-udp"
 
-# Curl Command
+##
+## Curl Command
+##
 
 if [ "$debug" == "true" ]
 then
@@ -65,30 +72,34 @@ N=${threads}
 fi
 
 echo "Station Name: ${station_name}"
-
 echo "Device ID: ${device_id}"
 
-## Escape
+##
+## Escape Names
+##
 
 ## Spaces
 
-public_name=$(echo "${public_name}" | sed 's/ /\\ /g')
-station_name=$(echo "${station_name}" | sed 's/ /\\ /g')
+public_name_escaped=$(echo "${public_name}" | sed 's/ /\\ /g')
+station_name_escaped=$(echo "${station_name}" | sed 's/ /\\ /g')
 
 ## Commas
 
-public_name=$(echo "${public_name}" | sed 's/,/\\,/g')
-station_name=$(echo "${station_name}" | sed 's/,/\\,/g')
+public_name_escaped=$(echo "${public_name_escaped}" | sed 's/,/\\,/g')
+station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
 
 ## Equal Signs
 
-public_name=$(echo "${public_name}" | sed 's/=/\\=/g')
-station_name=$(echo "${station_name}" | sed 's/=/\\=/g')
+public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
+station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
 
 if [ "$debug" == "true" ]
+
 then
 
-echo "
+echo "Starting WeatherFlow Collector (remote-import-influxdb.sh) - https://github.com/lux4rd0/weatherflow-collector
+
+Debug Environmental Variables
 
 backend_type=${backend_type}
 collector_type=${collector_type}
@@ -96,22 +107,25 @@ debug=${debug}
 device_id=${device_id}
 elevation=${elevation}
 forecast_interval=${forecast_interval}
+function=${function}
+healthcheck=${healthcheck}
 host_hostname=${host_hostname}
 hub_sn=${hub_sn}
+import_days=${import_days}
 influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
 latitude=${latitude}
+logcli_host_url=${logcli_host_url}
 loki_client_url=${loki_client_url}
 longitude=${longitude}
 public_name=${public_name}
 rest_interval=${rest_interval}
 station_id=${station_id}
 station_name=${station_name}
+threads=${threads}
 timezone=${timezone}
-token=${token}
-
-"
+token=${token}"
 
 fi
 
@@ -135,9 +149,9 @@ printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
 
 }
 
-#
-# Start Reading in STDIN
-#
+##
+## Start Reading in STDIN
+##
 
 while read -r line; do
 
@@ -149,13 +163,15 @@ num_of_metrics_minus_one=$((num_of_metrics-1))
 
 #echo "num_of_metrics_minus_one=${num_of_metrics_minus_one}"
 
+##
 ## Start Timer
+##
 
 import_start=$(date +%s%N)
 
-#
-# Start "threading"
-#
+##
+## Start "threading"
+##
 
 N=4
 
@@ -163,9 +179,9 @@ for metric in $(seq 0 $num_of_metrics_minus_one) ; do
 
 (
 
-#
-# Observation (Tempest)
-#
+##
+## Observation (Tempest)
+##
 
 time_epoch=$(echo "${line}" | jq ".obs[$metric][0]")
 wind_lull=$(echo "${line}" | jq ".obs[$metric][1]")
@@ -189,13 +205,11 @@ report_interval=$(echo "${line}" | jq ".obs[$metric][17]")
 if [ "$debug" == "true" ]
 then
 
-#
-# Print Metrics
-#
+##
+## Print Metrics
+##
 
-echo "
-
-time_epoch=${time_epoch}
+echo "time_epoch=${time_epoch}
 wind_lull=${wind_lull}
 wind_avg=${wind_avg}
 wind_gust=${wind_gust}
@@ -212,35 +226,33 @@ precipitation_type=${precipitation_type}
 lightning_strike_avg_distance=${lightning_strike_avg_distance}
 lightning_strike_count=${lightning_strike_count}
 battery=${battery}
-report_interval=${report_interval}
-
-"
+report_interval=${report_interval}"
 
 fi
 
-#
-# Send metrics to InfluxDB
-#
+##
+## Send metrics to InfluxDB
+##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} air_temperature=${air_temperature} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} battery=${battery} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} illuminance=${illuminance} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} lightning_strike_avg_distance=${lightning_strike_avg_distance} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} lightning_strike_count=${lightning_strike_count} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} precip_accumulated=${precip_accumulated} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} precipitation_type=${precipitation_type} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} relative_humidity=${relative_humidity} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} report_interval=${report_interval} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} solar_radiation=${solar_radiation} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} station_pressure=${station_pressure} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} time_epoch=${time_epoch}000 ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} uv=${uv} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} wind_avg=${wind_avg} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} wind_direction=${wind_direction} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} wind_gust=${wind_gust} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} wind_lull=${wind_lull} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} wind_sample_interval=${wind_sample_interval} ${time_epoch}000000000"
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} air_temperature=${air_temperature} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} battery=${battery} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} illuminance=${illuminance} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} lightning_strike_avg_distance=${lightning_strike_avg_distance} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} lightning_strike_count=${lightning_strike_count} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} precip_accumulated=${precip_accumulated} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} precipitation_type=${precipitation_type} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} relative_humidity=${relative_humidity} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} report_interval=${report_interval} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} solar_radiation=${solar_radiation} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} station_pressure=${station_pressure} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} time_epoch=${time_epoch}000 ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} uv=${uv} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_avg=${wind_avg} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_direction=${wind_direction} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_gust=${wind_gust} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_lull=${wind_lull} ${time_epoch}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_sample_interval=${wind_sample_interval} ${time_epoch}000000000"
 
 ) &
 
@@ -258,9 +270,9 @@ wait
 
 printf '\nFinished!\n'
 
-#
-# End "threading"
-#
+##
+## End "threading"
+##
 
 ## End Timer
 
@@ -269,9 +281,11 @@ import_duration=$((import_end-import_start))
 
 echo "import_duration:${import_duration}"
 
+##
 ## Send Timer Metrics To InfluxDB
+##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},source=import,station_id=${station_id},station_name=${station_name},timezone=${timezone} duration=${import_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${import_duration}"
 
 done < /dev/stdin
