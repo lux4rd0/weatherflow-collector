@@ -9,6 +9,7 @@ influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
 logcli_host_url=$WEATHERFLOW_COLLECTOR_LOGCLI_URL
+loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 threads=$WEATHERFLOW_COLLECTOR_THREADS
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
@@ -19,6 +20,7 @@ influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
 logcli_host_url=${logcli_host_url}
+loki_client_url=${loki_client_url}
 threads=${threads}
 token=${token}
 
@@ -257,6 +259,7 @@ echo "
       WEATHERFLOW_COLLECTOR_BACKEND_TYPE: influxdb
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: local-udp
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
+      WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED: \"true\"
       WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
       WEATHERFLOW_COLLECTOR_FUNCTION: collector
       WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
@@ -265,6 +268,7 @@ echo "
       WEATHERFLOW_COLLECTOR_INFLUXDB_URL: ${influxdb_url}
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL: ${loki_client_url}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
       WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
@@ -286,6 +290,7 @@ echo "
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: remote-forecast
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
       WEATHERFLOW_COLLECTOR_DEVICE_ID: ${device_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED: \"true\"
       WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
       WEATHERFLOW_COLLECTOR_FUNCTION: collector
       WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL: 60
@@ -313,6 +318,7 @@ echo "
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: remote-rest
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
       WEATHERFLOW_COLLECTOR_DEVICE_ID: ${device_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED: \"true\"
       WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
       WEATHERFLOW_COLLECTOR_FUNCTION: collector
       WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
@@ -338,6 +344,7 @@ echo "
       WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE: remote-socket
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
       WEATHERFLOW_COLLECTOR_DEVICE_ID: ${device_id[$station_number]}
+      WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED: \"true\"
       WEATHERFLOW_COLLECTOR_ELEVATION: ${elevation[$station_number]}
       WEATHERFLOW_COLLECTOR_FUNCTION: collector
       WEATHERFLOW_COLLECTOR_HOST_HOSTNAME: $(hostname)
@@ -364,11 +371,12 @@ echo "
 
 echo "
 
-docker run --rm \
+docker run --rm \\
   --name=weatherflow-collector-${station_name_dc[$station_number]}-remote-import \\
   -e WEATHERFLOW_COLLECTOR_BACKEND_TYPE=influxdb \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-import \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
+  -e WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED=false \\
   -e WEATHERFLOW_COLLECTOR_DEVICE_ID=${device_id[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_ELEVATION=${elevation[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_FUNCTION=import \\
@@ -407,6 +415,7 @@ docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-rest \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEVICE_ID=${device_id[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED=false \\
   -e WEATHERFLOW_COLLECTOR_ELEVATION=${elevation[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_FUNCTION=import \\
   -e WEATHERFLOW_COLLECTOR_HOST_HOSTNAME=$(hostname) \\
@@ -443,6 +452,7 @@ docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-socket \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEVICE_ID=${device_id[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED=false \\
   -e WEATHERFLOW_COLLECTOR_ELEVATION=${elevation[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_FUNCTION=import \\
   -e WEATHERFLOW_COLLECTOR_HOST_HOSTNAME=$(hostname) \\
@@ -479,6 +489,7 @@ docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=local-udp \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEVICE_ID=${device_id[$station_number]} \\
+  -e WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED=false \\
   -e WEATHERFLOW_COLLECTOR_ELEVATION=${elevation[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_FUNCTION=import \\
   -e WEATHERFLOW_COLLECTOR_HOST_HOSTNAME=$(hostname) \\
