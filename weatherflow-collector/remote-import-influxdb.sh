@@ -173,8 +173,6 @@ import_start=$(date +%s%N)
 ## Start "threading"
 ##
 
-N=4
-
 for metric in $(seq 0 $num_of_metrics_minus_one) ; do
 
 (
