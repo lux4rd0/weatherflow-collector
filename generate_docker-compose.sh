@@ -14,7 +14,6 @@ threads=$WEATHERFLOW_COLLECTOR_THREADS
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
 echo "
-
 import_days=${import_days}
 influxdb_password=${influxdb_password}
 influxdb_url=${influxdb_url}
@@ -23,7 +22,6 @@ logcli_host_url=${logcli_host_url}
 loki_client_url=${loki_client_url}
 threads=${threads}
 token=${token}
-
 "
 
 if [ -z "${import_days}" ]
@@ -76,14 +74,9 @@ url_observations="https://swd.weatherflow.com/swd/rest/observations/station/${st
 
 #echo "url_observations=${url_observations}"
 
-
 response_url_stations=$(curl -si -w "\n%{size_header},%{size_download}" "${url_stations}")
-
 response_url_forecasts=$(curl -si -w "\n%{size_header},%{size_download}" "${url_forecasts}")
-
 response_url_observations=$(curl -si -w "\n%{size_header},%{size_download}" "${url_observations}")
-
-
 
 # Extract the response header size
 header_size_stations=$(sed -n '$ s/^\([0-9]*\),.*$/\1/ p' <<< "${response_url_stations}")
@@ -124,12 +117,10 @@ longitude[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_n
 elevation[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].station_meta.elevation)
 public_name[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].public_name)
 station_name[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].name)
-
 station_name_dc[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].name | sed 's/ /\_/g' | sed 's/.*/\L&/' | sed 's|[<>,]||g')
 station_id[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].station_id)
 device_id[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].devices[1].device_id)
 hub_sn[$station_number]=$(echo "${body_station}" |jq -r .stations[$station_number].devices[0].serial_number)
-
 
 done
 
@@ -152,21 +143,16 @@ fi
 ## Only one UDP per location
 ##
 
-
-
 ## Environmental Variables
-
 
 echo "
 
 services:
 " > docker-compose.yml
 
-
-
-
-
+##
 ## Loop through each device
+##
 
 for station_number in $(seq 0 $number_of_stations_minus_one) ; do
 
@@ -184,7 +170,6 @@ echo "Existing ${FILE_import_remote[$station_number]} file found. Backup up file
 mv "${FILE_import_remote[$station_number]}" "${FILE_import_remote[$station_number]}"."${existing_file_timestamp[$station_number]}"
 
 fi
-
 
 ##
 ## Loki import - remote-rest
@@ -230,12 +215,6 @@ echo "Existing ${FILE_import_loki_local_udp[$station_number]} file found. Backup
 mv "${FILE_import_loki_local_udp[$station_number]}" "${FILE_import_loki_local_udp[$station_number]}"."${existing_file_timestamp[$station_number]}"
 
 fi
-
-
-
-
-
-
 
 echo "
 
@@ -516,9 +495,6 @@ docker run --rm \\
 " > "${FILE_import_loki_local_udp[$station_number]}"
 
 echo "${FILE_import_loki_local_udp[$station_number]} file created"
-
-
-
 
 done
 
