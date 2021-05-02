@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 313,
-  "iteration": 1619970496939,
+  "id": 43,
+  "iteration": 1619976829485,
   "links": [
     {
       "asDropdown": false,
@@ -26,9 +26,9 @@
       "tags": [],
       "targetBlank": true,
       "title": "WeatherFlow Collector Web Site",
-      "tooltip": "",
+      "tooltip": "Visit Web Site",
       "type": "link",
-      "url": "https://labs.lux4rd0.com/"
+      "url": "https://labs.lux4rd0.com/weatherflow-collector/"
     },
     {
       "asDropdown": true,
@@ -4789,7 +4789,7 @@
       },
       "id": 29,
       "panels": [],
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 28,
       "scopedVars": {
         "station_name": {
@@ -5250,7 +5250,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -5767,7 +5767,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6286,7 +6286,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 21,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6803,7 +6803,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 16,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7322,7 +7322,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7898,7 +7898,7 @@
       "pluginVersion": "7.5.4",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 8,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8081,7 +8081,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 10,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8697,7 +8697,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 18,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9308,7 +9308,7 @@
       "pluginVersion": "7.5.4",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1619970496939,
+      "repeatIteration": 1619976829485,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9447,5 +9447,5 @@
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 37
+  "version": 7
 }
