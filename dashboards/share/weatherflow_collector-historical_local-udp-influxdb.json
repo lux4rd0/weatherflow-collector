@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1618631095499,
+  "iteration": 1619972877100,
   "links": [
     {
       "asDropdown": true,
@@ -2012,5 +2012,5 @@
   "timezone": "browser",
   "title": "Historical (local-udp)",
   "uid": "lux4rd0labs_weatherflow_15",
-  "version": 1
+  "version": 4
 }

@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618631147461,
+  "iteration": 1619972994084,
   "links": [
     {
       "asDropdown": true,
@@ -1298,8 +1298,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         },
@@ -1348,8 +1348,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         },
@@ -1398,8 +1398,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         }
@@ -2561,5 +2561,5 @@
   "timezone": "",
   "title": "Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 1
+  "version": 4
 }

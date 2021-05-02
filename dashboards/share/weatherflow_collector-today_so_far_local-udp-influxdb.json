@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618641076582,
+  "iteration": 1619973001808,
   "links": [
     {
       "asDropdown": true,
@@ -1993,7 +1993,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1m",
           "value": "1m"
         },

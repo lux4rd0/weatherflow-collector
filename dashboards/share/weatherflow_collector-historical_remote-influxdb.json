@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618631110772,
+  "iteration": 1619972887737,
   "links": [
     {
       "asDropdown": true,
@@ -283,7 +283,7 @@
             "align": "center",
             "filterable": false
           },
-          "decimals": 1,
+          "decimals": 0,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -756,48 +756,48 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Heat Index"
+              "options": "H - Heat Idx"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 120
+                "value": 90
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Heat Index"
+              "options": "L - Heat Idx"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 120
+                "value": 90
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Feels Like"
+              "options": "H - Feels"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 110
+                "value": 80
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Feels Like"
+              "options": "L - Feels"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 105
+                "value": 80
               }
             ]
           },
@@ -809,7 +809,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 110
+                "value": 90
               }
             ]
           },
@@ -821,7 +821,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 110
+                "value": 90
               }
             ]
           },
@@ -833,7 +833,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 110
+                "value": 90
               }
             ]
           },
@@ -845,63 +845,63 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 110
+                "value": 90
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Dew Point"
+              "options": "H - Dew"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 120
+                "value": 80
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Dew Point"
+              "options": "L - Dew"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 120
+                "value": 80
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Wind Chill"
+              "options": "H - W Chill"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 130
+                "value": 108
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Wind Chill"
+              "options": "L - W Chill"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 130
+                "value": 100
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
-        "w": 24,
+        "h": 8,
+        "w": 19,
         "x": 0,
         "y": 8
       },
@@ -915,7 +915,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Time"
+            "displayName": "Date"
           }
         ]
       },
@@ -1023,7 +1023,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Feels Like",
+          "alias": "H - Feels",
           "groupBy": [
             {
               "params": [
@@ -1074,7 +1074,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Feels Like",
+          "alias": "L - Feels",
           "groupBy": [
             {
               "params": [
@@ -1125,7 +1125,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Heat Index",
+          "alias": "H - Heat Idx",
           "groupBy": [
             {
               "params": [
@@ -1176,7 +1176,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Heat Index",
+          "alias": "L - Heat Idx",
           "groupBy": [
             {
               "params": [
@@ -1227,7 +1227,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Wind Chill",
+          "alias": "H - W Chill",
           "groupBy": [
             {
               "params": [
@@ -1278,7 +1278,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Wind Chill",
+          "alias": "L - W Chill",
           "groupBy": [
             {
               "params": [
@@ -1537,7 +1537,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Dew Point",
+          "alias": "H - Dew",
           "groupBy": [
             {
               "params": [
@@ -1588,7 +1588,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Dew Point",
+          "alias": "L - Dew",
           "groupBy": [
             {
               "params": [
@@ -1661,6 +1661,173 @@
             ],
             "match": "any",
             "type": "include"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "Date"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "gradient-gauge",
+            "filterable": false
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "in"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode"
+              },
+              {
+                "id": "unit",
+                "value": "time:dddd, MMMM Do"
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 19,
+        "y": 8
+      },
+      "id": 65,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Date"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.4",
+      "targets": [
+        {
+          "alias": "Accumulation",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "station_name"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accum_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              },
+              {
+                "params": [
+                  "/ 25.4"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "America/Chicago"
+        }
+      ],
+      "title": "Precipitation",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {}
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNotNull",
+                  "options": {}
+                },
+                "fieldName": "Accumulation"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "Date"
+            }
           }
         }
       ],
@@ -1746,7 +1913,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 14
+        "y": 16
       },
       "hideTimeOverride": true,
       "id": 44,
@@ -1953,7 +2120,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 14
+        "y": 16
       },
       "hideTimeOverride": true,
       "id": 45,
@@ -2160,7 +2327,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 14
+        "y": 16
       },
       "hideTimeOverride": true,
       "id": 46,
@@ -2367,7 +2534,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 14
+        "y": 16
       },
       "hideTimeOverride": true,
       "id": 47,
@@ -2571,7 +2738,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 21
+        "y": 23
       },
       "id": 3,
       "interval": "$interval",
@@ -2760,7 +2927,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 21
+        "y": 23
       },
       "id": 41,
       "interval": "$interval",
@@ -2974,7 +3141,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 21
+        "y": 23
       },
       "id": 8,
       "interval": "$interval",
@@ -3189,7 +3356,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 21
+        "y": 23
       },
       "id": 4,
       "interval": "$interval",
@@ -3444,7 +3611,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 28
+        "y": 30
       },
       "id": 43,
       "interval": "$interval",
@@ -3717,12 +3884,12 @@
             "value": "1d"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "12h",
             "value": "12h"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "6h",
             "value": "6h"
           },
@@ -3805,5 +3972,5 @@
   "timezone": "browser",
   "title": "Historical (remote)",
   "uid": "lux4rd0labs_weatherflow_16",
-  "version": 1
+  "version": 4
 }

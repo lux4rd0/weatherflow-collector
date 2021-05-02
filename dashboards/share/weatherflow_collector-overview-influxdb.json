@@ -23,6 +23,12 @@
       "version": "7.5.4"
     },
     {
+      "type": "panel",
+      "id": "grafana-worldmap-panel",
+      "name": "Worldmap Panel",
+      "version": "0.3.2"
+    },
+    {
       "type": "datasource",
       "id": "influxdb",
       "name": "InfluxDB",
@@ -58,7 +64,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618631130286,
+  "iteration": 1619972894715,
   "links": [
     {
       "asDropdown": false,
@@ -95,7 +101,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 14,
+        "h": 8,
         "w": 4,
         "x": 0,
         "y": 0
@@ -103,6 +109,7 @@
       "id": 2,
       "links": [],
       "options": {
+        "folderId": null,
         "maxItems": 10,
         "query": "",
         "showHeadings": false,
@@ -126,14 +133,14 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 20,
+        "h": 8,
+        "w": 12,
         "x": 4,
         "y": 0
       },
       "id": 12,
       "options": {
-        "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/04/weatherflow-collector_header.png\"></center>",
+        "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png\"></center>",
         "mode": "html"
       },
       "pluginVersion": "7.5.4",
@@ -141,6 +148,134 @@
       "timeShift": null,
       "transparent": true,
       "type": "text"
+    },
+    {
+      "circleMaxSize": "40",
+      "circleMinSize": 2,
+      "colors": [
+        "#470834",
+        "#640d36",
+        "#7f1a32",
+        "#952e2a",
+        "#a5471e",
+        "#ad6207",
+        "#ad7f00",
+        "#a49c00",
+        "#91b910"
+      ],
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "decimals": 1,
+      "esMetric": "Count",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "hideEmpty": false,
+      "hideZero": false,
+      "id": 26,
+      "initialZoom": "7",
+      "interval": null,
+      "locationData": "table",
+      "mapCenter": "custom",
+      "mapCenterLatitude": "38.3",
+      "mapCenterLongitude": "-92.4",
+      "maxDataPoints": null,
+      "mouseWheelZoom": true,
+      "pluginVersion": "7.5.4",
+      "showLegend": true,
+      "stickyLabels": false,
+      "tableQueryOptions": {
+        "geohashField": "geohash",
+        "labelField": "station_name",
+        "latitudeField": "latitude",
+        "longitudeField": "longitude",
+        "metricField": "last",
+        "queryType": "coordinates"
+      },
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "longitude"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "latitude"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "station_name"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "weatherflow_rapid_wind",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "wind_speed"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  " * 2.236936"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "1,2,3,4,5,6,7,8",
+      "timeFrom": null,
+      "title": "Wind Speed",
+      "type": "grafana-worldmap-panel",
+      "unitPlural": "",
+      "unitSingle": "",
+      "unitSingular": "mph",
+      "valueName": "current"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 28,
+      "panels": [],
+      "repeat": "station_name",
+      "title": "$station_name",
+      "type": "row"
     },
     {
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
@@ -566,10 +701,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 4,
-        "y": 4
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 9
       },
       "hideTimeOverride": true,
       "id": 4,
@@ -1073,10 +1208,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 8,
-        "y": 4
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 9
       },
       "hideTimeOverride": true,
       "id": 14,
@@ -1582,10 +1717,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
-        "x": 12,
-        "y": 4
+        "x": 10,
+        "y": 9
       },
       "hideTimeOverride": true,
       "id": 21,
@@ -2089,10 +2224,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 16,
-        "y": 4
+        "h": 4,
+        "w": 5,
+        "x": 14,
+        "y": 9
       },
       "hideTimeOverride": true,
       "id": 16,
@@ -2598,10 +2733,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 20,
-        "y": 4
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 9
       },
       "hideTimeOverride": true,
       "id": 22,
@@ -3120,39 +3255,39 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#000000",
+                      "color": "#470834",
                       "value": null
                     },
                     {
-                      "color": "#00202f",
+                      "color": "#640d36",
                       "value": 1
                     },
                     {
-                      "color": "#002d3e",
+                      "color": "#7f1a32",
                       "value": 2
                     },
                     {
-                      "color": "#003d4e",
+                      "color": "#952e2a",
                       "value": 3
                     },
                     {
-                      "color": "#004d5f",
+                      "color": "#a5471e",
                       "value": 4
                     },
                     {
-                      "color": "#005e70",
+                      "color": "#ad6207",
                       "value": 5
                     },
                     {
-                      "color": "#007082",
+                      "color": "#ad7f00",
                       "value": 6
                     },
                     {
-                      "color": "#008294",
+                      "color": "#a49c00",
                       "value": 7
                     },
                     {
-                      "color": "#0794a7",
+                      "color": "#91b910",
                       "value": 8
                     }
                   ]
@@ -3163,10 +3298,10 @@
         ]
       },
       "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 4,
-        "y": 9
+        "h": 4,
+        "w": 10,
+        "x": 0,
+        "y": 13
       },
       "id": 8,
       "interval": null,
@@ -3336,10 +3471,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
-        "x": 12,
-        "y": 9
+        "x": 10,
+        "y": 13
       },
       "hideTimeOverride": true,
       "id": 10,
@@ -3944,10 +4079,10 @@
         ]
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 16,
-        "y": 9
+        "h": 4,
+        "w": 5,
+        "x": 14,
+        "y": 13
       },
       "id": 18,
       "interval": null,
@@ -4543,10 +4678,10 @@
         ]
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 20,
-        "y": 9
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 13
       },
       "id": 20,
       "interval": null,
@@ -4640,9 +4775,9 @@
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Station Name",
-        "multi": false,
+        "multi": true,
         "name": "station_name",
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -4690,5 +4825,5 @@
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 1
+  "version": 5
 }

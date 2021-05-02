@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618631204253,
+  "iteration": 1619972835843,
   "links": [
     {
       "asDropdown": true,
@@ -583,7 +583,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Current",
+      "title": "Current Observed",
       "transformations": [],
       "type": "stat"
     },
@@ -1519,7 +1519,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
+        "w": 5,
         "x": 10,
         "y": 1
       },
@@ -1599,7 +1599,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "High",
+      "title": "Forecast High",
       "transformations": [],
       "type": "stat"
     },
@@ -2029,7 +2029,7 @@
       "gridPos": {
         "h": 3,
         "w": 5,
-        "x": 14,
+        "x": 15,
         "y": 1
       },
       "hideTimeOverride": true,
@@ -2108,7 +2108,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Low",
+      "title": "Forecast Low",
       "transformations": [],
       "type": "stat"
     },
@@ -2644,8 +2644,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 19,
+        "w": 4,
+        "x": 20,
         "y": 1
       },
       "id": 124,
@@ -3955,7 +3955,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
+        "w": 5,
         "x": 10,
         "y": 4
       },
@@ -4472,40 +4472,40 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#000000",
+                      "color": "#ff7500",
                       "value": null
                     },
                     {
-                      "color": "#00202f",
+                      "color": "#f77438",
+                      "value": 1
+                    },
+                    {
+                      "color": "#ee7257",
+                      "value": 2
+                    },
+                    {
+                      "color": "#e47273",
+                      "value": 3
+                    },
+                    {
+                      "color": "#d7718e",
+                      "value": 4
+                    },
+                    {
+                      "color": "#c871a9",
                       "value": 5
                     },
                     {
-                      "color": "#002d3e",
-                      "value": 10
+                      "color": "#b571c4",
+                      "value": 6
                     },
                     {
-                      "color": "#003d4e",
-                      "value": 15
+                      "color": "#9c72df",
+                      "value": 7
                     },
                     {
-                      "color": "#004d5f",
-                      "value": 20
-                    },
-                    {
-                      "color": "#005e70",
-                      "value": 25
-                    },
-                    {
-                      "color": "#007082",
-                      "value": 30
-                    },
-                    {
-                      "color": "#008294",
-                      "value": 35
-                    },
-                    {
-                      "color": "#0794a7",
-                      "value": 40
+                      "color": "#7873fb",
+                      "value": 8
                     }
                   ]
                 }
@@ -4517,7 +4517,7 @@
       "gridPos": {
         "h": 3,
         "w": 5,
-        "x": 14,
+        "x": 15,
         "y": 4
       },
       "id": 130,
@@ -4689,8 +4689,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 19,
+        "w": 4,
+        "x": 20,
         "y": 4
       },
       "hideTimeOverride": true,
@@ -5247,7 +5247,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "5m"
               ],
               "type": "time"
             }
@@ -5292,7 +5292,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "5m"
               ],
               "type": "time"
             }
@@ -5361,7 +5361,8 @@
             "renameByName": {
               "Conditions": "",
               "Icon": "Sky",
-              "Time": "Date"
+              "Time": "Date",
+              "☀️": ""
             }
           }
         },
@@ -5821,6 +5822,10 @@
               {
                 "id": "custom.displayMode",
                 "value": "color-background"
+              },
+              {
+                "id": "decimals",
+                "value": 0
               }
             ]
           },
@@ -5837,6 +5842,10 @@
               {
                 "id": "custom.displayMode",
                 "value": "color-background"
+              },
+              {
+                "id": "decimals",
+                "value": 0
               }
             ]
           },
@@ -5853,6 +5862,10 @@
               {
                 "id": "custom.displayMode",
                 "value": "color-background"
+              },
+              {
+                "id": "decimals",
+                "value": 0
               }
             ]
           },
@@ -5869,6 +5882,10 @@
               {
                 "id": "custom.displayMode",
                 "value": "color-background"
+              },
+              {
+                "id": "decimals",
+                "value": 0
               }
             ]
           },
@@ -5965,22 +5982,10 @@
               {
                 "id": "custom.displayMode",
                 "value": "color-background"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Delta-T"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "fahrenheit"
               },
               {
                 "id": "decimals",
-                "value": 1
+                "value": 0
               }
             ]
           }
@@ -5994,7 +5999,7 @@
       },
       "id": 92,
       "interval": null,
-      "maxDataPoints": null,
+      "maxDataPoints": 1,
       "options": {
         "frameIndex": 0,
         "showHeader": true,
@@ -7406,7 +7411,7 @@
       },
       "id": 93,
       "interval": null,
-      "maxDataPoints": null,
+      "maxDataPoints": 1,
       "options": {
         "frameIndex": 0,
         "showHeader": true,
@@ -7888,7 +7893,7 @@
     ]
   },
   "time": {
-    "from": "now-1m",
+    "from": "now-2m",
     "to": "now+1h"
   },
   "timepicker": {
@@ -7908,5 +7913,5 @@
   "timezone": "browser",
   "title": "Current Conditions",
   "uid": "lux4rd0labs_weatherflow_11",
-  "version": 1
+  "version": 5
 }

@@ -59,7 +59,7 @@
   "gnetId": 13858,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1618631057540,
+  "iteration": 1619972847888,
   "links": [
     {
       "asDropdown": true,
@@ -4126,5 +4126,5 @@
   "timezone": "",
   "title": "Device Details",
   "uid": "lux4rd0labs_weatherflow_12",
-  "version": 1
+  "version": 7
 }
