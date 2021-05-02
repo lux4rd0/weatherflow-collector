@@ -152,54 +152,99 @@ This setting populates the WeatherFlow local-udp metrics from the WeatherFlow Cl
 
 Collecting data is only half the fun. Now it's time to provision some Grafana Dashboards to visualize all of our great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) with collectors and backends split out.
 
-The "**WeatherFlow - Overview**" dashboard is the starting point with a listing of Current observations along with historical details..
+### Alerts
 
-Other dashboards can be viewed by selecting the "WeatherFlow" drop-down from the top righthand side of the dashboards:
+<center><img src="./images/weatherflow_collector-alerts.jpg"></center>
 
-<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-dashboards.jpg"></center>
+Coming soon - a set of Grafana alerts to let you know of deviations in expected collector performance or weather metrics change.
 
-There are different dashboards for **local-udp** and **remote-rest**.
+### Current Conditions
 
-**WeatherFlow - Today So Far**
+<center><img src="./images/weatherflow_collector-current_conditions.jpg"></center>
 
-<center><img src="./images/weatherflow-today_so_far_remote-socket-influxdb.jpg"></center>
+This dashboard provides a comprehensive overview of your station location, combining all "at-a-glance" metrics from your WeatherFlow device. The current conditions dashboard is divided up into:
 
-Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightening Strike, and Wind Speed since midnight. Rapid Wind Direction and Wind Speed over the last 60 seconds is also updated every 5 seconds (by default).
+- **Temperature & Wind**: observed, feels like, forecast high and low, the chance of precipitation, humidity, sea level pressure, UV, wind speed, and direction.)
 
-There are different dashboards for **local-udp** and **remote-rest** collectors.
+- **Sunrise & Sunset and Sky Conditions**
 
-**WeatherFlow - Forecast**
+- **Temperature & Brightness**: Heat index, wind chill, dry bulb, wet bulb, dew point, station pressure, brightness, solar radiation, and air density.
 
-<center><img src="./images/weatherflow-forecast-influxdb.jpg"></center>
+- **Rain & Lightning**: Rain accumulation (today and yesterday), rain duration (today and yesterday), lightning last detected, last distance, and the number of lightning detections during the previous 3 hours.
 
-The Forecast dashboard provides both a daily and hourly forecast in table format with charts below them. The default time range includes the current day plus nine coming days. The interval drop-down at the top defaults to 12 hours to provide for highs and lows forecasts.
+### Device Details
 
-This dashboard uses the **remote-rest** collector and **InfluxDB** backend.
+<center><img src="./images/weatherflow_collector-device_details.jpg"></center>
 
-**WeatherFlow - Forecast vs. Observed**
+This dashboard provides the current status for both the Tempest and your WeatherFlow hub, such as Uptime, Radio Status, RSSI, Reboot Count, I2C Bus Count Error, Radio Version, Network ID, Firmware Version, and Voltage.
 
-A comparisons of data that was forecasted overlayed with historic observations.
+RSSI and Battery Voltage over time defaulted to the last seven days are shown at the top of the dashboard, while current device details are shown below.
 
-This dashboard uses the **remote-rest** collectors with the **InfluxDB** backend.
+Sensor Status measurements are shown with a number related to each per minute collection from the device. Either "Sensors OK" is down or any failures, which sensor had the error. Note that if you have the Lightning Disturber enabled, you may see a high number of failures as electromagnetic interference is being suppressed.
 
-**WeatherFlow - Device Details**
+### Forecast
 
-<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details.jpg"></center>
+<center><img src="./images/weatherflow_collector-forecast.jpg"></center>
 
-Provides the current status for both the Tempest and WeatherFlow hub such as Uptime, Radio Status, RSSI, Reboot Count, I2C Bus Count Error, Radio Version, Network ID, Firmware Version, and Voltage.
+Provides both a daily and hourly forecast in table format with charts below them. The default time range includes the current day plus the next nine upcoming days. The interval drop-down at the top defaults to 12 hours to provide for highs and lows forecasts. Clicking on any of the dates in the "Forecast - Daily" table will refresh the Forecast hourly table to that day's hourly forecasts. This can also be done from the top "Forecast Day" drop-down menu.
 
-<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-device_status.jpg"></center>
+### Forecast Vs. Observed
 
-Another panel provides an overview of Sensor Status measurements - either "Sensors OK" or if there were any failures.
+<center><img src="./images/weatherflow_collector-forecast_vs_observed.jpg"></center>
 
-<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-sensor_status.jpg"></center>
+As forecast data is collected, this dashboard may be used to compare what was forecasted (by how many days out) versus the observed metric from your WeatherFlow device. Temperature, Humidity, Wind, and UV measurements are covered here. By default, "All" available forecast days are overlayed over the observed metric. You can choose different "Days Out" from the top drop-down menu to compare individual forecasts.
 
-There's also RSSI and Battery Voltage over time defaulted to the last seven days.
+### Historical (local-udp)
 
-<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-battery.jpg"></center>
-<center><img src="https://github.com/lux4rd0/weatherflow-dashboards-aio/raw/main/images/weatherflow-weatherflow-device_details-rssi.jpg"></center>
+<center><img src="./images/weatherflow_collector-historical_local-udp.jpg"></center>
 
-This dashboard uses the **local-udp** collector.
+Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each of the Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Precipitation Accumulation is displayed for any days that precipitation is detected.
+
+### Historical (remote)
+
+<center><img src="./images/weatherflow_collector-historical_remote.jpg"></center>
+
+Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each of the Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Includes [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html)  as well such as Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point. Precipitation Accumulation is displayed for any days that precipitation is detected.
+
+### Overview
+
+<center><img src="./images/weatherflow_collector-overview.jpg"></center>
+
+Overview is the default landing page for the WeatherFlow Collector AIO. It provides an overview of current weather metrics and live updates for Wind and direction. From here, you can choose other dashboards from the top right-hand dashboard panel or the top left-hand side drop-downs under "WeatherFlow Collector Dashboards".
+
+### Rain and Lightning
+
+<center><img src="./images/weatherflow_collector-rain_and_lightning.jpg"></center>
+
+A historical view (defaulted to seven days) shows both the precipitation rate alongside the daily accumulation. As you zoom into the specific precipitation events, change the Interval drop-down to smaller increments (up to 1-minute collections) for finer rates.
+
+For Lightning, Strikes and Distance show on a heatmap visualization. Time is across the x-axis while the number of detected lightning strikes is bucketed by color (dark blue to yellow). The Y-axis shows the bucketed distances (up to 40 miles away). Hover over each of the squares to see a histogram of each strike/distance count.
+
+<center><img src="./images/weatherflow_collector-rain_and_lightning_histogram.jpg"></center>
+
+### System Stats
+
+<center><img src="./images/weatherflow_collector-system_stats.jpg"></center>
+
+Provides for two different system metrics to understand the health of your weatherflow-collector. At the top shows which container is running and each of the times that it last started. A default Docker health check is enabled for each container that requires some data to be received and persisted every 60 seconds, or the container is marked unhealthy. This check happens every 5 seconds and will restart the container after three failed checks.
+
+The second section shows how long it's taking to receive and persist forecasts and observations.
+
+ - Forecast Build Duration - Daily - between 1 and 2 seconds
+ Forecast Build Duration - Hourly - between 30 and 45 seconds (note - if this takes longer than 60 seconds, the Docker Health Check will currently recycle the container. A future update will change this to take a longer build duration into account. For now - set the "WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED" environmental variable to "false".
+ - Rest Observations - between 1 and 2 seconds
+
+### Today So Far (local-udp)
+
+<center><img src="./images/weatherflow_collector-today_so_far_local-udp.jpg"></center>
+
+The dashboard provides for Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the direct measurements from the local-udp collector (or imported from WeatherFlow).
+
+### Today So Far (remote)
+
+<center><img src="./images/weatherflow_collector-today_so_far_remote.jpg"></center>
+
+This dashboard provides for the Temperature (Air, Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point), Relative Humidity, Air Density, Station Pressure (with Trending), Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the WeatherFlow measurements from data sent to WeatherFlow and include [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) in the response.
 
 ## Multiple Devices ##
 
