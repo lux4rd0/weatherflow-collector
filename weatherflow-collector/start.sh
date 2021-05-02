@@ -228,7 +228,7 @@ import_start=$(date +%s%N)
 
 logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
 
-num_of_logs=$(echo "${logs}" |jq -r ". | length")
+num_of_logs=$(echo "${logs}" | jq -r ". | length")
 
 echo "Number of logs: ${num_of_logs}"
 
@@ -333,7 +333,7 @@ import_start=$(date +%s%N)
 
 logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
 
-num_of_logs=$(echo "${logs}" |jq -r ". | length")
+num_of_logs=$(echo "${logs}" | jq -r ". | length")
 
 echo "Number of logs: ${num_of_logs}"
 
@@ -404,6 +404,36 @@ fi
 ## COLLECTOR TYPE = REMOTE-FORECAST ##
 ##                                  ##
 ######################################
+
+if [ "${collector_type}" == "remote-forecast" ]  &&  [ "${function}" == "import" ]
+
+then
+
+echo "collector_type=${collector_type}
+function=${function}"
+
+for days_loop in $(seq "$import_days" -1 0) ; do
+
+##
+## Choose noon local as the collect log time to pull in the forecast
+##
+
+days_start=$(date --date="${days_loop} days ago 12:00" +%s)
+
+days_end=$(("$days_start" + 1800))
+
+date_start=$(date -d @"${days_start}" --rfc-3339=seconds | sed 's/ /T/')
+date_end=$(date -d @${days_end} --rfc-3339=seconds | sed 's/ /T/')
+
+echo "Days Remaining: $days_loop"
+echo "date_start: $date_start"
+echo "date_end: $date_end"
+
+./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp | jq -r .[0].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./import-forecast-influxdb.sh
+
+done
+
+fi
 
 if [ "${collector_type}" == "remote-forecast" ]  &&  [ "${function}" == "collector" ]
 then
@@ -502,7 +532,7 @@ import_start=$(date +%s%N)
 
 logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
 
-num_of_logs=$(echo "${logs}" |jq -r ". | length")
+num_of_logs=$(echo "${logs}" | jq -r ". | length")
 
 echo "Number of logs: ${num_of_logs}"
 

@@ -155,7 +155,7 @@ printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
 
 while read -r line; do
 
-num_of_metrics=$(echo "${line}" |jq '.obs | length')
+num_of_metrics=$(echo "${line}" | jq '.obs | length')
 
 echo "Number of time slices: ${num_of_metrics}"
 

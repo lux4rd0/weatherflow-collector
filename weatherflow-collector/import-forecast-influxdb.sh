@@ -30,10 +30,6 @@ threads=$WEATHERFLOW_COLLECTOR_THREADS
 timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
-# Run hourly build flag
-
-hourly_time_build_check=$WEATHERFLOW_COLLECTOR_HOURLY_FORECAST_RUN
-
 if [ "$debug" == "true" ]
 
 then
@@ -115,27 +111,6 @@ fi
 
 while read -r line; do
 
-if [ "$debug" == "true" ]
-then
-
-echo ""
-echo "${line}"
-echo ""
-
-fi
-
-##
-## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
-##
-
-if [ -n "$loki_client_url" ]
-
-then
-
-echo "${line}" | /usr/bin/promtail --stdin --client.url "${loki_client_url}" --client.external-labels=collector_type="${collector_type}",host_hostname="${host_hostname}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}",timezone="${timezone}" --config.file=/weatherflow-collector/loki-config.yml
-
-fi
-
 ##
 ## Escape Names
 ##
@@ -155,180 +130,9 @@ station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
 public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
 station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
 
-## Current Conditions
-
-conditions=$(echo "${line}" | jq -r ".current_conditions.conditions")
-icon=$(echo "${line}" | jq -r ".current_conditions.icon")
-
-if [ "$debug" == "true" ]
-then
-
-##
-## Print Metrics
-##
-
-echo "conditions ${conditions}"
-echo "icon ${icon}"
-
-fi
-
-##
-## Send Data To InfluxDB
-##
-
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} conditions=\"${conditions}\"
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} icon=\"${icon}\""
-
-## Daily Forecast
-
-## Start Timer
-
-daily_start=$(date +%s%N)
-
-##
-## Start "threading"
-##
-
-num_of_days=$(echo "${line}" | jq -r ".forecast.daily | length")
-
-if [ "$debug" == "true" ]
-then
-
-echo "Number of forecast days: ${num_of_days}"
-
-fi
-
-num_of_days_minus_one=$((num_of_days-1))
-
-for day in $(seq 0 $num_of_days_minus_one) ; do
-
-(
-
-air_temp_high=$(echo "${line}" | jq -r ".forecast.daily | .[$day].air_temp_high")
-air_temp_low=$(echo "${line}" | jq -r ".forecast.daily | .[$day].air_temp_low")
-conditions=$(echo "${line}" | jq -r ".forecast.daily | .[$day].conditions")
-day_num=$(echo "${line}" | jq -r ".forecast.daily | .[$day].day_num")
-day_start_local=$(echo "${line}" | jq -r ".forecast.daily | .[$day].day_start_local")
-icon=$(echo "${line}" | jq -r ".forecast.daily | .[$day].icon")
-month_num=$(echo "${line}" | jq -r ".forecast.daily | .[$day].month_num")
-precip_probability=$(echo "${line}" | jq -r ".forecast.daily | .[$day].precip_probability")
-sunrise=$(echo "${line}" | jq -r ".forecast.daily | .[$day].sunrise")
-sunset=$(echo "${line}" | jq -r ".forecast.daily | .[$day].sunset")
-
-## Add 86399 seconds to provide end of day data points if viewing graphs after midnight
-
-day_start_local_eod=$((day_start_local + 86399))
-
-if [ "$debug" == "true" ]
-then
-
-#
-# Print Metrics
-#
-
-echo "${day}"
-
-echo "forecast_daily_air_temp_high ${air_temp_high}"
-echo "forecast_daily_air_temp_low ${air_temp_low}"
-echo "forecast_daily_conditions ${conditions}"
-echo "forecast_daily_day_num ${day_num}"
-echo "forecast_daily_day_start_local ${day_start_local}"
-echo "forecast_daily_icon ${icon}"
-echo "forecast_daily_month_num ${month_num}"
-echo "forecast_daily_precip_probability ${precip_probability}"
-echo "forecast_daily_sunrise ${sunrise}"
-echo "forecast_daily_sunset ${sunset}"
-
-fi
-
-##
-## Send Data To InfluxDB
-##
-
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} air_temp_high=${air_temp_high} ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} air_temp_low=${air_temp_low} ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} conditions=\"${conditions}\" ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} day_num=${day_num} ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} day_start_local=${day_start_local}000 ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} icon=\"${icon}\" ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} month_num=${month_num} ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} precip_probability=${precip_probability} ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} sunrise=${sunrise}000 ${day_start_local_eod}000000000
-weatherflow_forecast_daily,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} sunset=${sunset}000 ${day_start_local_eod}000000000"
-
-##
-## Set Current Conditions Forecast
-##
-
-if [ "$day" == "0" ]
-
-then
-
-## icon and conditions are pulled from the rest-call
-## timestamp set to the current pull time (no set InfluxDB timestamp)
-
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} air_temp_high=${air_temp_high}
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} air_temp_low=${air_temp_low}
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} day_num=${day_num}
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} month_num=${month_num}
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} precip_probability=${precip_probability}
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} sunrise=${sunrise}000
-weatherflow_forecast_current,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${day_num},forecast_month_num=${month_num},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} sunset=${sunset}000"
-
-fi
-
-) &
-
-    # allow to execute up to $N jobs in parallel
-    if [[ $(jobs -r -p | wc -l) -ge $N ]]; then
-        # now there are $N jobs already running, so wait here for any job
-        # to be finished so there is a place to start next one.
-        wait -n
-    fi
-
-done
-
-wait
-
-##
-## End "threading"
-##
-
-##
-## End Timer
-##
-
-daily_end=$(date +%s%N)
-daily_duration=$((daily_end-daily_start))
-
-if [ "$debug" == "true" ]
-then
-
-echo "daily_duration:${daily_duration}"
-
-fi
-
-##
-## Send Timer Metrics To InfluxDB
-##
-
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} forecast_daily_build_duration=${daily_duration}"
-
 ##
 ## Hourly Forecast
 ##
-
-##
-## Only run the hourly forecasts at 0, 15, 30, 45 minutes - check for flag
-##
-
-if [ "${hourly_time_build_check}" == "true" ]
-
-then
 
 ##
 ## Start Timer
@@ -377,6 +181,7 @@ wind_gust=$(echo "${line}" | jq -r ".forecast.hourly | .[$hour].wind_gust")
 ##
 ## Calculate Number of Days out for the Forecast
 ##
+
 
 if [[ $hour -ge "0" ]] && [[ $hour -le "23" ]]
 then
@@ -427,6 +232,7 @@ if [[ $hour -ge "216" ]] && [[ $hour -le "240" ]]
 then
 forecast_hourly_days_out="9"
 fi
+
 
 if [ "$debug" == "true" ]
 then
@@ -491,7 +297,6 @@ weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevati
 weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${local_day},forecast_day_num_padded=${local_day_padded},forecast_hour_num=${local_hour},forecast_hourly_days_out=${forecast_hourly_days_out},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} relative_humidity=${relative_humidity} ${time}000000000
 weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${local_day},forecast_day_num_padded=${local_day_padded},forecast_hour_num=${local_hour},forecast_hourly_days_out=${forecast_hourly_days_out},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} sea_level_pressure=${sea_level_pressure} ${time}000000000
 weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${local_day},forecast_day_num_padded=${local_day_padded},forecast_hour_num=${local_hour},forecast_hourly_days_out=${forecast_hourly_days_out},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} uv=${uv} ${time}000000000
-weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${local_day},forecast_day_num_padded=${local_day_padded},forecast_hour_num=${local_hour},forecast_hourly_days_out=${forecast_hourly_days_out},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} time=${time}000 ${time}000000000
 weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${local_day},forecast_day_num_padded=${local_day_padded},forecast_hour_num=${local_hour},forecast_hourly_days_out=${forecast_hourly_days_out},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_avg=${wind_avg} ${time}000000000
 weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${local_day},forecast_day_num_padded=${local_day_padded},forecast_hour_num=${local_hour},forecast_hourly_days_out=${forecast_hourly_days_out},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_direction=${wind_direction} ${time}000000000
 weatherflow_forecast_hourly,collector_type=${collector_type},elevation=${elevation},forecast_day_num=${local_day},forecast_day_num_padded=${local_day_padded},forecast_hour_num=${local_hour},forecast_hourly_days_out=${forecast_hourly_days_out},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} wind_direction_cardinal=\"${wind_direction_cardinal}\" ${time}000000000
@@ -523,8 +328,6 @@ if [ "$debug" == "true" ]
 then
 
 echo "hourly_duration:${hourly_duration}"
-
-fi
 
 ## Send Timer Metrics To InfluxDB
 
