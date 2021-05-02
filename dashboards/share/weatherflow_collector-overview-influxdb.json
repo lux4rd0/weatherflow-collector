@@ -64,7 +64,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619972894715,
+  "iteration": 1619976829486,
   "links": [
     {
       "asDropdown": false,
@@ -74,9 +74,9 @@
       "tags": [],
       "targetBlank": true,
       "title": "WeatherFlow Collector Web Site",
-      "tooltip": "",
+      "tooltip": "Visit Web Site",
       "type": "link",
-      "url": "https://labs.lux4rd0.com/"
+      "url": "https://labs.lux4rd0.com/weatherflow-collector/"
     },
     {
       "asDropdown": true,
@@ -4825,5 +4825,5 @@
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 5
+  "version": 7
 }
