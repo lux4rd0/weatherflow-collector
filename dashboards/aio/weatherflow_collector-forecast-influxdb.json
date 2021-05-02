@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 309,
-  "iteration": 1618606017930,
+  "id": 333,
+  "iteration": 1619970450208,
   "links": [
     {
       "asDropdown": true,
@@ -569,7 +569,7 @@
                     "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
                     "to": "",
                     "type": 1,
-                    "value": "possibly-sleet"
+                    "value": "possibly-sleet-day"
                   },
                   {
                     "from": "",
@@ -642,6 +642,14 @@
                     "to": "",
                     "type": 1,
                     "value": "windy"
+                  },
+                  {
+                    "from": "",
+                    "id": 19,
+                    "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
+                    "to": "",
+                    "type": 1,
+                    "value": "possible-sleet-night"
                   }
                 ]
               }
@@ -660,6 +668,15 @@
               {
                 "id": "custom.align",
                 "value": "left"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
+                  }
+                ]
               }
             ]
           },
@@ -822,6 +839,43 @@
                 "value": 125
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "day_num"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Show Hourly Forecast",
+                    "url": "/d/${__dashboard.uid}﻿/?var-forecast_day_num=${__data.fields[\"day_num\"]}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sun_rise"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:dddd, MMMM Do"
+              },
+              {
+                "id": "custom.width",
+                "value": 1
+              }
+            ]
           }
         ]
       },
@@ -837,12 +891,7 @@
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Time"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "7.5.4",
       "scopedVars": {
@@ -1058,6 +1107,84 @@
             }
           ],
           "tz": "$tz"
+        },
+        {
+          "alias": "day_num",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_daily",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "day_num"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "sun_rise",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_daily",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sunrise"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1073,7 +1200,8 @@
           "id": "organize",
           "options": {
             "excludeByName": {
-              "Icon": false
+              "Icon": false,
+              "day_num": false
             },
             "indexByName": {
               "Conditions": 2,
@@ -1111,6 +1239,7 @@
     },
     {
       "datasource": "InfluxDB - weatherflow",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1623,7 +1752,7 @@
                     "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
                     "to": "",
                     "type": 1,
-                    "value": "possibly-sleet"
+                    "value": "possibly-sleet-day"
                   },
                   {
                     "from": "",
@@ -1696,6 +1825,14 @@
                     "to": "",
                     "type": 1,
                     "value": "windy"
+                  },
+                  {
+                    "from": "",
+                    "id": 19,
+                    "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
+                    "to": "",
+                    "type": 1,
+                    "value": "possibly-sleet-night"
                   }
                 ]
               }
@@ -1757,7 +1894,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 81
+                "value": 80
               },
               {
                 "id": "thresholds",
@@ -1985,36 +2122,44 @@
                       "value": null
                     },
                     {
-                      "color": "#00202f",
-                      "value": 5
+                      "color": "#030904",
+                      "value": 3
                     },
                     {
-                      "color": "#002d3e",
-                      "value": 10
+                      "color": "#051107",
+                      "value": 6
                     },
                     {
-                      "color": "#003d4e",
+                      "color": "#071a0b",
+                      "value": 9
+                    },
+                    {
+                      "color": "#0a220e",
+                      "value": 12
+                    },
+                    {
+                      "color": "#0c2b12",
                       "value": 15
                     },
                     {
-                      "color": "#004d5f",
-                      "value": 20
+                      "color": "#0f3415",
+                      "value": 18
                     },
                     {
-                      "color": "#005e70",
-                      "value": 25
+                      "color": "#113c19",
+                      "value": 21
                     },
                     {
-                      "color": "#007082",
+                      "color": "#14451c",
+                      "value": 24
+                    },
+                    {
+                      "color": "#164d20",
+                      "value": 27
+                    },
+                    {
+                      "color": "#195623",
                       "value": 30
-                    },
-                    {
-                      "color": "#008294",
-                      "value": 35
-                    },
-                    {
-                      "color": "#0794a7",
-                      "value": 40
                     }
                   ]
                 }
@@ -2122,6 +2267,58 @@
               {
                 "id": "custom.width",
                 "value": 80
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#000000",
+                      "value": null
+                    },
+                    {
+                      "color": "#0f151b",
+                      "value": 0.01
+                    },
+                    {
+                      "color": "#15222e",
+                      "value": 0.02
+                    },
+                    {
+                      "color": "#1a3043",
+                      "value": 0.03
+                    },
+                    {
+                      "color": "#1e3e59",
+                      "value": 0.04
+                    },
+                    {
+                      "color": "#204e70",
+                      "value": 0.05
+                    },
+                    {
+                      "color": "#225d88",
+                      "value": 0.06
+                    },
+                    {
+                      "color": "#216da1",
+                      "value": 0.07
+                    },
+                    {
+                      "color": "#1f7ebb",
+                      "value": 0.08
+                    },
+                    {
+                      "color": "#198fd5",
+                      "value": 0.09
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
               }
             ]
           },
@@ -2219,12 +2416,7 @@
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Time"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "7.5.4",
       "scopedVars": {
@@ -2711,7 +2903,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Forecast - Hourly",
+      "title": "Forecast - $display_date - Hourly",
       "transformations": [
         {
           "id": "seriesToColumns",
@@ -3996,7 +4188,7 @@
       },
       "id": 130,
       "panels": [],
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 129,
       "scopedVars": {
         "station_name": {
@@ -4522,7 +4714,7 @@
                     "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
                     "to": "",
                     "type": 1,
-                    "value": "possibly-sleet"
+                    "value": "possibly-sleet-day"
                   },
                   {
                     "from": "",
@@ -4595,6 +4787,14 @@
                     "to": "",
                     "type": 1,
                     "value": "windy"
+                  },
+                  {
+                    "from": "",
+                    "id": 19,
+                    "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
+                    "to": "",
+                    "type": 1,
+                    "value": "possible-sleet-night"
                   }
                 ]
               }
@@ -4613,6 +4813,15 @@
               {
                 "id": "custom.align",
                 "value": "left"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
+                  }
+                ]
               }
             ]
           },
@@ -4775,6 +4984,43 @@
                 "value": 125
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "day_num"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Show Hourly Forecast",
+                    "url": "/d/${__dashboard.uid}﻿/?var-forecast_day_num=${__data.fields[\"day_num\"]}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sun_rise"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:dddd, MMMM Do"
+              },
+              {
+                "id": "custom.width",
+                "value": 1
+              }
+            ]
           }
         ]
       },
@@ -4790,15 +5036,10 @@
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Time"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 11,
       "repeatedByRow": true,
       "scopedVars": {
@@ -5014,6 +5255,84 @@
             }
           ],
           "tz": "$tz"
+        },
+        {
+          "alias": "day_num",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_daily",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "day_num"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "sun_rise",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_daily",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sunrise"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -5029,7 +5348,8 @@
           "id": "organize",
           "options": {
             "excludeByName": {
-              "Icon": false
+              "Icon": false,
+              "day_num": false
             },
             "indexByName": {
               "Conditions": 2,
@@ -5067,6 +5387,7 @@
     },
     {
       "datasource": "InfluxDB - weatherflow",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -5579,7 +5900,7 @@
                     "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
                     "to": "",
                     "type": 1,
-                    "value": "possibly-sleet"
+                    "value": "possibly-sleet-day"
                   },
                   {
                     "from": "",
@@ -5652,6 +5973,14 @@
                     "to": "",
                     "type": 1,
                     "value": "windy"
+                  },
+                  {
+                    "from": "",
+                    "id": 19,
+                    "text": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0Ni40IDQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0Ni40IDQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzVFQjdFNzt9Cgkuc3Qxe2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qye2ZpbGw6IzgwODA4MDt9Cjwvc3R5bGU+CjxnIGlkPSJMYWFnXzIiPgoJPGcgaWQ9IkxheWVyXzFfMV8iPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03LjksMzQuOWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4yLDAuMS0wLjUsMC4xLTAuN2w0LjEtOC41YzAuNC0wLjgsMS4zLTEuMSwyLjEtMC43czEuMSwxLjMsMC43LDIuMQoJCQlsMCwwbC00LDguNUM5LjEsMzQuNSw4LjUsMzQuOSw3LjksMzQuOXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTMsNDFjLTAuOSwwLTEuNi0wLjctMS42LTEuNmMwLTAuMiwwLjEtMC41LDAuMS0wLjdsNC4xLTguNWMwLjQtMC44LDEuNC0xLjEsMi4xLTAuN3MxLDEuMywwLjcsMkwxNC4zLDQwCgkJCUMxNC4yLDQwLjcsMTMuNiw0MSwxMyw0MXoiLz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjEuNCwzOC42Yy0wLjksMC0xLjYtMC43LTEuNi0xLjZjMC0wLjIsMC4xLTAuNSwwLjItMC43bDQuMS04LjVjMC40LTAuOCwxLjMtMS4xLDIuMS0wLjcKCQkJYzAuOCwwLjQsMS4xLDEuMywwLjcsMi4xbDAsMGwtNC4xLDguNUMyMi42LDM4LjIsMjIsMzguNiwyMS40LDM4LjZ6Ii8+CgkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTQyLjUsMjguNmMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC40LDAuMi0wLjgsMC41LTEuMWMyLjUtMi40LDIuNS02LjQsMC04LjljLTEuMi0xLjItMi44LTEuOC00LjQtMS45aC0xCgkJCWMtMC45LDAtMS42LTAuNy0xLjYtMS42YzAtMC4xLDAtMC4yLDAtMC4zYzAuOS00LjYtMi4yLTktNi44LTkuOXMtOSwyLjItOS45LDYuOGMtMC4xLDAuNC0wLjEsMC44LTAuMSwxLjNjMCwwLjktMC44LDEuNi0xLjYsMS41CgkJCWMtMC4zLDAtMC41LTAuMS0wLjctMC4yYy0zLjctMi40LTguNy0xLjQtMTEuMSwyLjNDMiwxOC4zLDIuNiwyMi42LDUuNCwyNS4zQzYsMjYsNS45LDI3LDUuMiwyNy41Yy0wLjYsMC41LTEuNSwwLjUtMi4xLDAKCQkJQy0xLjIsMjMuMS0xLjEsMTYsMy4zLDExLjZjMy0zLDcuNC00LDExLjUtMi42YzEuNS02LjMsNy43LTEwLjIsMTQtOC43YzUuMywxLjIsOSw1LjksOSwxMS4zYzAsMC4xLDAsMC4yLDAsMC40CgkJCWM1LjIsMC40LDkuMSw0LjksOC43LDEwLjFjLTAuMiwyLjMtMS4yLDQuNC0yLjgsNkM0My4zLDI4LjQsNDIuOSwyOC42LDQyLjUsMjguNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjMzLjgsMjkuOSAzNS43LDI4LjggMzYuMywzMC45IDM4LjQsMzEuNSAzNy4zLDMzLjQgMzguNCwzNS4yIDM2LjMsMzUuOCAzNS43LDM3LjkgMzMuOCwzNi44IAoJCQkzMiwzNy45IDMxLjQsMzUuOCAyOS4zLDM1LjIgMzAuNCwzMy40IDI5LjMsMzEuNSAzMS40LDMwLjkgMzIsMjguOCAJCSIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=",
+                    "to": "",
+                    "type": 1,
+                    "value": "possibly-sleet-night"
                   }
                 ]
               }
@@ -5713,7 +6042,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 81
+                "value": 80
               },
               {
                 "id": "thresholds",
@@ -5941,36 +6270,44 @@
                       "value": null
                     },
                     {
-                      "color": "#00202f",
-                      "value": 5
+                      "color": "#030904",
+                      "value": 3
                     },
                     {
-                      "color": "#002d3e",
-                      "value": 10
+                      "color": "#051107",
+                      "value": 6
                     },
                     {
-                      "color": "#003d4e",
+                      "color": "#071a0b",
+                      "value": 9
+                    },
+                    {
+                      "color": "#0a220e",
+                      "value": 12
+                    },
+                    {
+                      "color": "#0c2b12",
                       "value": 15
                     },
                     {
-                      "color": "#004d5f",
-                      "value": 20
+                      "color": "#0f3415",
+                      "value": 18
                     },
                     {
-                      "color": "#005e70",
-                      "value": 25
+                      "color": "#113c19",
+                      "value": 21
                     },
                     {
-                      "color": "#007082",
+                      "color": "#14451c",
+                      "value": 24
+                    },
+                    {
+                      "color": "#164d20",
+                      "value": 27
+                    },
+                    {
+                      "color": "#195623",
                       "value": 30
-                    },
-                    {
-                      "color": "#008294",
-                      "value": 35
-                    },
-                    {
-                      "color": "#0794a7",
-                      "value": 40
                     }
                   ]
                 }
@@ -6078,6 +6415,58 @@
               {
                 "id": "custom.width",
                 "value": 80
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#000000",
+                      "value": null
+                    },
+                    {
+                      "color": "#0f151b",
+                      "value": 0.01
+                    },
+                    {
+                      "color": "#15222e",
+                      "value": 0.02
+                    },
+                    {
+                      "color": "#1a3043",
+                      "value": 0.03
+                    },
+                    {
+                      "color": "#1e3e59",
+                      "value": 0.04
+                    },
+                    {
+                      "color": "#204e70",
+                      "value": 0.05
+                    },
+                    {
+                      "color": "#225d88",
+                      "value": 0.06
+                    },
+                    {
+                      "color": "#216da1",
+                      "value": 0.07
+                    },
+                    {
+                      "color": "#1f7ebb",
+                      "value": 0.08
+                    },
+                    {
+                      "color": "#198fd5",
+                      "value": 0.09
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
               }
             ]
           },
@@ -6175,15 +6564,10 @@
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Time"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 127,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6670,7 +7054,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Forecast - Hourly",
+      "title": "Forecast - $display_date - Hourly",
       "transformations": [
         {
           "id": "seriesToColumns",
@@ -6886,7 +7270,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 89,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7237,7 +7621,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 90,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7472,7 +7856,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 116,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7715,7 +8099,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 115,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7901,7 +8285,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1618606017930,
+      "repeatIteration": 1619970450208,
       "repeatPanelId": 117,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7973,13 +8357,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -8085,8 +8465,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "",
-          "value": ""
+          "text": "2",
+          "value": "2"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "select DISTINCT(\"local_day\") from (select \"local_day\",\"value\" from \"weatherflow_forecast_hourly\" WHERE $timeFilter)",
@@ -8108,6 +8488,28 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "display_date",
+        "options": [
+          {
+            "selected": false,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
       }
     ]
   },
@@ -8119,5 +8521,5 @@
   "timezone": "",
   "title": "Forecast",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 30
+  "version": 35
 }

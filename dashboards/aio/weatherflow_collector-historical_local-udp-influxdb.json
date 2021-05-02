@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 13857,
   "graphTooltip": 1,
-  "id": 319,
-  "iteration": 1618606220338,
+  "id": 334,
+  "iteration": 1619970478784,
   "links": [
     {
       "asDropdown": true,
@@ -1833,7 +1833,7 @@
       },
       "id": 46,
       "panels": [],
-      "repeatIteration": 1618606220338,
+      "repeatIteration": 1619970478784,
       "repeatPanelId": 45,
       "scopedVars": {
         "station_name": {
@@ -1944,7 +1944,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606220338,
+      "repeatIteration": 1619970478784,
       "repeatPanelId": 39,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2567,7 +2567,7 @@
         ]
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1618606220338,
+      "repeatIteration": 1619970478784,
       "repeatPanelId": 37,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2800,7 +2800,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606220338,
+      "repeatIteration": 1619970478784,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2998,7 +2998,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606220338,
+      "repeatIteration": 1619970478784,
       "repeatPanelId": 8,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3215,7 +3215,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606220338,
+      "repeatIteration": 1619970478784,
       "repeatPanelId": 43,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3470,7 +3470,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606220338,
+      "repeatIteration": 1619970478784,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3648,13 +3648,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -3849,5 +3845,5 @@
   "timezone": "browser",
   "title": "Historical (local-udp)",
   "uid": "lux4rd0labs_weatherflow_15",
-  "version": 18
+  "version": 2
 }

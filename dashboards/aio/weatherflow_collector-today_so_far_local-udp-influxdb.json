@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 335,
-  "iteration": 1618640666476,
+  "iteration": 1619970552090,
   "links": [
     {
       "asDropdown": true,
@@ -1927,7 +1927,7 @@
       },
       "id": 28,
       "panels": [],
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 27,
       "scopedVars": {
         "station_name": {
@@ -2111,7 +2111,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 2,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2273,7 +2273,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2404,7 +2404,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2622,7 +2622,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2904,7 +2904,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3032,7 +3032,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3266,7 +3266,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 5,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3548,7 +3548,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 25,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3711,7 +3711,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618640666476,
+      "repeatIteration": 1619970552090,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3846,12 +3846,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -3903,12 +3899,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\" WHERE \"collector_type\" =~ /^$collector_type$/",
@@ -3962,7 +3954,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1m",
           "value": "1m"
         },

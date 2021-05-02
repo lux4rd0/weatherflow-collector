@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 313,
-  "iteration": 1618606322593,
+  "id": 336,
+  "iteration": 1619970560690,
   "links": [
     {
       "asDropdown": true,
@@ -1304,8 +1304,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         },
@@ -1354,8 +1354,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         },
@@ -1404,8 +1404,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         }
@@ -2446,7 +2446,7 @@
       },
       "id": 29,
       "panels": [],
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 28,
       "scopedVars": {
         "station_name": {
@@ -2630,7 +2630,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 2,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3116,7 +3116,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3302,7 +3302,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3460,7 +3460,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 26,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3671,7 +3671,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3726,8 +3726,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         },
@@ -3776,8 +3776,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         },
@@ -3826,8 +3826,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ]
         }
@@ -3950,7 +3950,7 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4077,7 +4077,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4310,7 +4310,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 5,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4589,7 +4589,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 25,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4752,7 +4752,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1618606322593,
+      "repeatIteration": 1619970560690,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4886,13 +4886,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -5047,5 +5043,5 @@
   "timezone": "",
   "title": "Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 6
+  "version": 2
 }

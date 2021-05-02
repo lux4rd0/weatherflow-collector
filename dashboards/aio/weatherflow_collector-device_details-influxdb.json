@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 13858,
   "graphTooltip": 0,
-  "id": 306,
-  "iteration": 1618606198116,
+  "id": 308,
+  "iteration": 1619970435526,
   "links": [
     {
       "asDropdown": true,
@@ -1295,8 +1295,8 @@
       "scopedVars": {
         "serial_number": {
           "selected": true,
-          "text": "ST-00028209",
-          "value": "ST-00028209"
+          "text": "ST-00031267",
+          "value": "ST-00031267"
         }
       },
       "targets": [
@@ -3987,13 +3987,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "Savannah Crossing"
-          ],
-          "value": [
-            "Savannah Crossing"
-          ]
+          "selected": false,
+          "text": "Buzzard Bend",
+          "value": "Buzzard Bend"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -4020,8 +4016,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "HB-00038302",
-          "value": "HB-00038302"
+          "text": "HB-00031245",
+          "value": "HB-00031245"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\"  WHERE \"station_name\" =~ /^$station_name$/",
@@ -4048,8 +4044,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "ST-00028209",
-          "value": "ST-00028209"
+          "text": "ST-00031267",
+          "value": "ST-00031267"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"station_name\" =~ /^$station_name$/",
@@ -4107,5 +4103,5 @@
   "timezone": "",
   "title": "Device Details",
   "uid": "lux4rd0labs_weatherflow_12",
-  "version": 15
+  "version": 6
 }
