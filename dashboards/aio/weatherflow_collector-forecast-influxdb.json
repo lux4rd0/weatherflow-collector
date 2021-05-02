@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 333,
-  "iteration": 1619970450208,
+  "id": 40,
+  "iteration": 1619975622748,
   "links": [
     {
       "asDropdown": true,
@@ -673,7 +673,7 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "",
+                    "title": "View Hourly Forecast For ${__data.fields.sun_rise}",
                     "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
                   }
                 ]
@@ -4188,7 +4188,7 @@
       },
       "id": 130,
       "panels": [],
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 129,
       "scopedVars": {
         "station_name": {
@@ -4818,7 +4818,7 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "",
+                    "title": "View Hourly Forecast For ${__data.fields.sun_rise}",
                     "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
                   }
                 ]
@@ -5039,7 +5039,7 @@
         "sortBy": []
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 11,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6567,7 +6567,7 @@
         "sortBy": []
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 127,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7270,7 +7270,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 89,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7621,7 +7621,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 90,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7856,7 +7856,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 116,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8099,7 +8099,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 115,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8285,7 +8285,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619970450208,
+      "repeatIteration": 1619975622748,
       "repeatPanelId": 117,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8465,8 +8465,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "2",
-          "value": "2"
+          "text": "11",
+          "value": "11"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "select DISTINCT(\"local_day\") from (select \"local_day\",\"value\" from \"weatherflow_forecast_hourly\" WHERE $timeFilter)",
@@ -8492,8 +8492,8 @@
       {
         "current": {
           "selected": false,
-          "text": "",
-          "value": ""
+          "text": "Tuesday, May 11th",
+          "value": "Tuesday, May 11th"
         },
         "description": null,
         "error": null,
@@ -8507,7 +8507,7 @@
             "value": ""
           }
         ],
-        "query": "",
+        "query": "Tuesday, May 11th",
         "skipUrlSync": false,
         "type": "textbox"
       }
@@ -8521,5 +8521,5 @@
   "timezone": "",
   "title": "Forecast",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 35
+  "version": 14
 }
