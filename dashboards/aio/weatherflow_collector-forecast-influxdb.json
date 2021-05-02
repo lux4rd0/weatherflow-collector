@@ -8491,9 +8491,7 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "Tuesday, May 11th",
-          "value": "Tuesday, May 11th"
+          "selected": false
         },
         "description": null,
         "error": null,
@@ -8507,7 +8505,7 @@
             "value": ""
           }
         ],
-        "query": "Tuesday, May 11th",
+        "query": "",
         "skipUrlSync": false,
         "type": "textbox"
       }
