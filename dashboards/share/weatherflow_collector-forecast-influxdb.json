@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619972856295,
+  "iteration": 1619975622749,
   "links": [
     {
       "asDropdown": true,
@@ -702,7 +702,7 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "",
+                    "title": "View Hourly Forecast For ${__data.fields.sun_rise}",
                     "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
                   }
                 ]
@@ -4294,8 +4294,8 @@
       {
         "current": {
           "selected": false,
-          "text": "",
-          "value": ""
+          "text": "Tuesday, May 11th",
+          "value": "Tuesday, May 11th"
         },
         "description": null,
         "error": null,
@@ -4309,7 +4309,7 @@
             "value": ""
           }
         ],
-        "query": "",
+        "query": "Tuesday, May 11th",
         "skipUrlSync": false,
         "type": "textbox"
       }
@@ -4323,5 +4323,5 @@
   "timezone": "",
   "title": "Forecast",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 11
+  "version": 14
 }
