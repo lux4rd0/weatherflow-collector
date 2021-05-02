@@ -1,3 +1,4 @@
+
 ## About The Project
 
 **weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once collected, a collection of Grafana dashboards are provided to help you get started visualizing that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project. Having access to just the collector may benefit you if you already have familiarity with InfluxDB and Grafana and want to import these dashboards yourself.
@@ -21,18 +22,18 @@ The project builds a pre-configured Docker container that takes different config
 
 Like all projects - weatherflow-collector is always in a flux state based on trying out new things and seeing what works and what doesn't work. It started as a fun exercise to visualize "what's possible," and I'm experimenting with different collectors and backends. Please expect breaking changes along the way.
 
-## Deploying WeatherFlow Collector
+## Deploying the WeatherFlow Collector
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:2.8.1
+    lux4rd0/weatherflow-collector:2.8.2
     lux4rd0/weatherflow-collector:latest
     
 Correct environmental variables need to be set for the container to function. The following script may be used:
 
     generate_docker-compose.sh
 
-To use it, you will need to provide details about your InfluxDB and your WeatherFlow token also as environmental variables.
+To use it, provide the following details about your InfluxDB and your WeatherFlow token as environmental variables.
 
     WEATHERFLOW_COLLECTOR_IMPORT_DAYS #optional
     WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
@@ -64,9 +65,7 @@ Running `docker-compose up -d' will spin up several containers for each of the t
 
 This script will spin up a docker container to import all of the observed metrics in the WeatherFlow cloud. Having an import function may be helpful if you're starting with this WeatherFlow Collector or if you've reset your InfluxDB database. It essentially loads in over your local UDP data. If you have more than one device, a separate import file will be generated for each.
 
-Environmental flags:
-
-*(This section has largely been deprecated. I'll be updating shortly)*
+## Environmental flags:
 
 ```WEATHERFLOW_COLLECTOR_BACKEND_TYPE```
 
@@ -121,6 +120,8 @@ Number in seconds that you want to pull the forecast data. (Defaults to 60 secon
 ```WEATHERFLOW_COLLECTOR_REMOTE_REST_INTERVAL```
 
 Number in seconds that you want to pull observability data. (Defaults to 60 seconds)
+
+#### *Note - If a change is made to the location details of your WeatherFlow device (such as station name, public name, longitude, latitude, etc.) - please rerun the generate_docker-compose.sh script or manually update the environmental variables to match.*
 
 ## Obtaining Your Tempest Authentication Token
 
@@ -246,17 +247,17 @@ The dashboard provides for Temperature, Relative Humidity, Station Pressure, Acc
 
 This dashboard provides for the Temperature (Air, Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point), Relative Humidity, Air Density, Station Pressure (with Trending), Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the WeatherFlow measurements from data sent to WeatherFlow and include [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) in the response.
 
-## Multiple Devices ##
+## Multiple Devices
 
-The data collector supports mulitple devices but these dashboards have been simplified to work with only a single device for simplicity. If you'd like a set of dashboards for mulitple devices, please let me know.
+The data collector supports mulitple devices and the dashboards have been designed to accomidate such.
 
 ### Time Zone Variable
 
-There's also a tz variable coded to a specific location to help build some of the 12/24 hour time breaks. It's set to "America/Chicago" - you will need to modify this to your specific time zone. I'm looking to define this based on your device settings in a future release.
+A TZ variable is required when running the docker-compose.yml file. (It's populated automatically from the generate_docker-compose.sh scripts) 
+
+TZ is specific to each of the device locations and is required as part of the InluxDB query to identify day breaks and other 12/24 hour interval groups. For dashboards with multiple devices in different time zones, you may need to switch the time zones from the top drop-down to correctly group midnight/noon periods.
 
 ## Roadmap
-
-Dashboards that use the Loki backend will be added back into the project shortly.
 
 See the open issues for a list of proposed features (and known issues).
 
