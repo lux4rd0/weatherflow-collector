@@ -1,12 +1,11 @@
 
 ## About The Project
 
-**weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once collected, a collection of Grafana dashboards are provided to help you get started visualizing that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project. Having access to just the collector may benefit you if you already have familiarity with InfluxDB and Grafana and want to import these dashboards yourself.
 
-There are several different collector types available once you deploy your  WeatherFlow device:
+**weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once deployed, a collection of Grafana dashboards help get you started visualizing that data with Grafana dashboards. This collector is part of my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project. Having access to just the collector may benefit you if you already have familiarity with InfluxDB and Grafana and want to import these dashboards yourself.
 
- - Local: UDP Collector
- - Remote: WeatherFlow API
+A live [set of dashboards](https://labs.lux4rd0.com/weatherflow-collector/) using this collector are available for you to try out.
+
 
 ## Getting Started
 
