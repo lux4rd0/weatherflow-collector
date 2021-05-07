@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 43,
-  "iteration": 1619976829485,
+  "id": 313,
+  "iteration": 1620404030682,
   "links": [
     {
       "asDropdown": false,
@@ -72,7 +72,7 @@
           "weatherflow-collector"
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "timeFrom": null,
       "timeShift": null,
       "type": "dashlist"
@@ -95,7 +95,7 @@
         "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png\"></center>",
         "mode": "html"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "timeFrom": null,
       "timeShift": null,
       "transparent": true,
@@ -684,7 +684,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -701,6 +701,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -1198,7 +1204,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1714,7 +1720,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1731,6 +1737,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -2228,7 +2240,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2744,7 +2756,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2761,6 +2773,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -3315,7 +3333,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "scopedVars": {
@@ -3497,7 +3515,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -4110,7 +4128,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -4716,7 +4734,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "scopedVars": {
@@ -4735,6 +4753,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "hide": false,
@@ -4789,7 +4813,7 @@
       },
       "id": 29,
       "panels": [],
-      "repeatIteration": 1619976829485,
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 28,
       "scopedVars": {
         "station_name": {
@@ -5249,8 +5273,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619976829485,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -5269,6 +5293,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -5766,8 +5796,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619976829485,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6285,8 +6315,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619976829485,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 21,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6305,6 +6335,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -6802,8 +6838,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619976829485,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 16,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7321,8 +7357,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619976829485,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7341,6 +7377,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -7895,10 +7937,10 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1619976829485,
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 8,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8080,8 +8122,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619976829485,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 10,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8696,8 +8738,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619976829485,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 18,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9305,10 +9347,10 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1619976829485,
+      "repeatIteration": 1620404030682,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9327,6 +9369,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "hide": false,
@@ -9440,12 +9488,12 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now/d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 7
+  "version": 42
 }

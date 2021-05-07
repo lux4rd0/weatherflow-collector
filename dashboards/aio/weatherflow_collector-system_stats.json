@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 306,
-  "iteration": 1619970535098,
+  "iteration": 1620404063129,
   "links": [
     {
       "asDropdown": true,
@@ -96,7 +96,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": "station_name",
       "scopedVars": {
         "station_name": {
@@ -208,8 +208,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970535098,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404063129,
       "repeatPanelId": 9,
       "scopedVars": {
         "station_name": {
@@ -332,7 +332,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": "station_name",
       "scopedVars": {
         "station_name": {
@@ -470,8 +470,8 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970535098,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404063129,
       "repeatPanelId": 8,
       "scopedVars": {
         "station_name": {
@@ -1283,6 +1283,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -1315,6 +1316,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -1399,7 +1401,7 @@
             "value": "1h"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "30m",
             "value": "30m"
           },
@@ -1409,7 +1411,7 @@
             "value": "15m"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "10m",
             "value": "10m"
           },
@@ -1444,5 +1446,5 @@
   "timezone": "",
   "title": "System Stats",
   "uid": "lux4rd0labs_weatherflow_10",
-  "version": 81
+  "version": 82
 }

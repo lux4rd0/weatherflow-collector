@@ -17,7 +17,7 @@
   "gnetId": 13857,
   "graphTooltip": 1,
   "id": 334,
-  "iteration": 1619970478784,
+  "iteration": 1620403181878,
   "links": [
     {
       "asDropdown": true,
@@ -130,7 +130,7 @@
       },
       "gridPos": {
         "h": 13,
-        "w": 20,
+        "w": 16,
         "x": 0,
         "y": 1
       },
@@ -275,6 +275,7 @@
           },
           "custom": {
             "align": "center",
+            "displayMode": "auto",
             "filterable": false
           },
           "decimals": 0,
@@ -709,29 +710,13 @@
           },
           {
             "matcher": {
-              "id": "byType",
-              "options": "time"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "time:ddd, MMM Do"
-              },
-              {
-                "id": "custom.align",
-                "value": "left"
-              }
-            ]
-          },
-          {
-            "matcher": {
               "id": "byName",
               "options": "High"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 85
               }
             ]
           },
@@ -743,7 +728,23 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 85
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:ddd, MMM Do"
+              },
+              {
+                "id": "custom.align",
+                "value": null
               }
             ]
           }
@@ -752,7 +753,7 @@
       "gridPos": {
         "h": 13,
         "w": 4,
-        "x": 20,
+        "x": 16,
         "y": 1
       },
       "hideTimeOverride": true,
@@ -765,11 +766,11 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Time"
+            "displayName": "Date"
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -903,6 +904,203 @@
             "match": "any",
             "type": "include"
           }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "Date"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "displayMode": "auto",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:ddd, MMM Do"
+              },
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Accumulation"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "gradient-gauge"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-BlPu"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "in"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 54,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Date"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.5",
+      "scopedVars": {
+        "station_name": {
+          "selected": false,
+          "text": "Buzzard Bend",
+          "value": "Buzzard Bend"
+        }
+      },
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accumulated"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              },
+              {
+                "params": [
+                  "/ 25.4"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "America/Chicago"
+        }
+      ],
+      "title": "Precipitation",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "weatherflow_obs.sum"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "Date",
+              "weatherflow_obs.sum": "Accumulation"
+            }
+          }
         }
       ],
       "type": "table"
@@ -982,7 +1180,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 14
       },
@@ -1177,8 +1375,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
-        "x": 13,
+        "w": 12,
+        "x": 12,
         "y": 14
       },
       "id": 8,
@@ -1391,7 +1589,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 21
       },
@@ -1643,8 +1841,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
-        "x": 13,
+        "w": 12,
+        "x": 12,
         "y": 21
       },
       "id": 4,
@@ -1831,9 +2029,9 @@
         "x": 0,
         "y": 28
       },
-      "id": 46,
+      "id": 55,
       "panels": [],
-      "repeatIteration": 1619970478784,
+      "repeatIteration": 1620403181878,
       "repeatPanelId": 45,
       "scopedVars": {
         "station_name": {
@@ -1924,12 +2122,12 @@
       },
       "gridPos": {
         "h": 13,
-        "w": 20,
+        "w": 16,
         "x": 0,
         "y": 29
       },
       "hideTimeOverride": true,
-      "id": 47,
+      "id": 56,
       "interval": "$interval",
       "maxDataPoints": null,
       "options": {
@@ -1944,7 +2142,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970478784,
+      "repeatIteration": 1620403181878,
       "repeatPanelId": 39,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2072,6 +2270,7 @@
           },
           "custom": {
             "align": "center",
+            "displayMode": "auto",
             "filterable": false
           },
           "decimals": 0,
@@ -2506,29 +2705,13 @@
           },
           {
             "matcher": {
-              "id": "byType",
-              "options": "time"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "time:ddd, MMM Do"
-              },
-              {
-                "id": "custom.align",
-                "value": "left"
-              }
-            ]
-          },
-          {
-            "matcher": {
               "id": "byName",
               "options": "High"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 85
               }
             ]
           },
@@ -2540,7 +2723,23 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 85
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:ddd, MMM Do"
+              },
+              {
+                "id": "custom.align",
+                "value": null
               }
             ]
           }
@@ -2549,11 +2748,11 @@
       "gridPos": {
         "h": 13,
         "w": 4,
-        "x": 20,
+        "x": 16,
         "y": 29
       },
       "hideTimeOverride": true,
-      "id": 48,
+      "id": 57,
       "interval": "1d",
       "maxDataPoints": null,
       "options": {
@@ -2562,12 +2761,12 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Time"
+            "displayName": "Date"
           }
         ]
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970478784,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403181878,
       "repeatPanelId": 37,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2703,6 +2902,206 @@
             "match": "any",
             "type": "include"
           }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "Date"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "displayMode": "auto",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:ddd, MMM Do"
+              },
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Accumulation"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "gradient-gauge"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-BlPu"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "in"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 4,
+        "x": 20,
+        "y": 29
+      },
+      "id": 58,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Date"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403181878,
+      "repeatPanelId": 54,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "station_name": {
+          "selected": false,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
+        }
+      },
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accumulated"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              },
+              {
+                "params": [
+                  "/ 25.4"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "America/Chicago"
+        }
+      ],
+      "title": "Precipitation",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "weatherflow_obs.sum"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "Date",
+              "weatherflow_obs.sum": "Accumulation"
+            }
+          }
         }
       ],
       "type": "table"
@@ -2782,11 +3181,11 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 42
       },
-      "id": 49,
+      "id": 59,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -2800,7 +3199,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970478784,
+      "repeatIteration": 1620403181878,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2980,11 +3379,11 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
-        "x": 13,
+        "w": 12,
+        "x": 12,
         "y": 42
       },
-      "id": 50,
+      "id": 60,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -2998,7 +3397,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970478784,
+      "repeatIteration": 1620403181878,
       "repeatPanelId": 8,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3197,11 +3596,11 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 49
       },
-      "id": 51,
+      "id": 61,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -3215,7 +3614,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970478784,
+      "repeatIteration": 1620403181878,
       "repeatPanelId": 43,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3452,11 +3851,11 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
-        "x": 13,
+        "w": 12,
+        "x": 12,
         "y": 49
       },
-      "id": 52,
+      "id": 62,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -3470,7 +3869,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970478784,
+      "repeatIteration": 1620403181878,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3636,7 +4035,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 27,
   "style": "dark",
   "tags": [
@@ -3845,5 +4244,5 @@
   "timezone": "browser",
   "title": "Historical (local-udp)",
   "uid": "lux4rd0labs_weatherflow_15",
-  "version": 2
+  "version": 11
 }

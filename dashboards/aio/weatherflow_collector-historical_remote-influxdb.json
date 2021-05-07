@@ -17,7 +17,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": 312,
-  "iteration": 1619970488340,
+  "iteration": 1620403992051,
   "links": [
     {
       "asDropdown": true,
@@ -699,7 +699,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:dddd, MMMM Do"
+                "value": "time:ddd, MMM Do"
               },
               {
                 "id": "custom.align",
@@ -734,24 +734,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Heat Idx"
+              "options": "H - Heat Index"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 90
+                "value": 110
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Heat Idx"
+              "options": "L - Heat Index"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 90
+                "value": 110
               }
             ]
           },
@@ -763,7 +763,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 90
               }
             ]
           },
@@ -830,24 +830,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Dew"
+              "options": "H - Dew Point"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 100
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Dew"
+              "options": "L - Dew Point"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 100
               }
             ]
           },
@@ -879,7 +879,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 20,
         "x": 0,
         "y": 8
       },
@@ -897,7 +897,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1110,7 +1110,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Heat Idx",
+          "alias": "H - Heat Index",
           "groupBy": [
             {
               "params": [
@@ -1161,7 +1161,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Heat Idx",
+          "alias": "L - Heat Index",
           "groupBy": [
             {
               "params": [
@@ -1522,7 +1522,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Dew",
+          "alias": "H - Dew Point",
           "groupBy": [
             {
               "params": [
@@ -1573,7 +1573,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Dew",
+          "alias": "L - Dew Point",
           "groupBy": [
             {
               "params": [
@@ -1666,14 +1666,13 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "mode": "thresholds"
           },
           "custom": {
             "align": "center",
-            "displayMode": "gradient-gauge",
+            "displayMode": "auto",
             "filterable": false
           },
-          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1694,15 +1693,60 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode"
-              },
-              {
                 "id": "unit",
-                "value": "time:dddd, MMMM Do"
+                "value": "time:ddd, MMM Do"
               },
               {
                 "id": "custom.align",
                 "value": null
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Accum"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "in"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              },
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minutes"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              },
+              {
+                "id": "custom.width",
+                "value": 85
               }
             ]
           }
@@ -1710,8 +1754,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
-        "x": 19,
+        "w": 4,
+        "x": 20,
         "y": 8
       },
       "id": 65,
@@ -1724,7 +1768,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1733,6 +1777,114 @@
         }
       },
       "targets": [
+        {
+          "alias": "Accum",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "station_name"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accum_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              },
+              {
+                "params": [
+                  "/ 25.4"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "America/Chicago"
+        },
+        {
+          "alias": "Minutes",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "station_name"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_minutes_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "America/Chicago"
+        },
         {
           "alias": "Accumulation",
           "groupBy": [
@@ -1749,16 +1901,17 @@
               "type": "tag"
             }
           ],
+          "hide": false,
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "A",
+          "refId": "C",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "precip_accum_local_day"
+                  "precip_accumulated"
                 ],
                 "type": "field"
               },
@@ -1802,10 +1955,12 @@
             "filters": [
               {
                 "config": {
-                  "id": "isNotNull",
-                  "options": {}
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
                 },
-                "fieldName": "Accumulation"
+                "fieldName": "Accum"
               }
             ],
             "match": "any",
@@ -1816,7 +1971,11 @@
           "id": "organize",
           "options": {
             "excludeByName": {},
-            "indexByName": {},
+            "indexByName": {
+              "Accum": 1,
+              "Minutes": 2,
+              "Time": 0
+            },
             "renameByName": {
               "Time": "Date"
             }
@@ -3830,7 +3989,7 @@
       },
       "id": 66,
       "panels": [],
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 51,
       "scopedVars": {
         "station_name": {
@@ -3937,7 +4096,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 2,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4492,7 +4651,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:dddd, MMMM Do"
+                "value": "time:ddd, MMM Do"
               },
               {
                 "id": "custom.align",
@@ -4527,24 +4686,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Heat Idx"
+              "options": "H - Heat Index"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 90
+                "value": 110
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Heat Idx"
+              "options": "L - Heat Index"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 90
+                "value": 110
               }
             ]
           },
@@ -4556,7 +4715,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 90
               }
             ]
           },
@@ -4623,24 +4782,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "H - Dew"
+              "options": "H - Dew Point"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 100
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "L - Dew"
+              "options": "L - Dew Point"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 100
               }
             ]
           },
@@ -4672,7 +4831,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 20,
         "x": 0,
         "y": 45
       },
@@ -4690,8 +4849,8 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970488340,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 37,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4906,7 +5065,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Heat Idx",
+          "alias": "H - Heat Index",
           "groupBy": [
             {
               "params": [
@@ -4957,7 +5116,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Heat Idx",
+          "alias": "L - Heat Index",
           "groupBy": [
             {
               "params": [
@@ -5318,7 +5477,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "H - Dew",
+          "alias": "H - Dew Point",
           "groupBy": [
             {
               "params": [
@@ -5369,7 +5528,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "L - Dew",
+          "alias": "L - Dew Point",
           "groupBy": [
             {
               "params": [
@@ -5462,14 +5621,13 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "mode": "thresholds"
           },
           "custom": {
             "align": "center",
-            "displayMode": "gradient-gauge",
+            "displayMode": "auto",
             "filterable": false
           },
-          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -5490,15 +5648,60 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode"
-              },
-              {
                 "id": "unit",
-                "value": "time:dddd, MMMM Do"
+                "value": "time:ddd, MMM Do"
               },
               {
                 "id": "custom.align",
                 "value": null
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Accum"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "in"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              },
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minutes"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              },
+              {
+                "id": "custom.width",
+                "value": 85
               }
             ]
           }
@@ -5506,8 +5709,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
-        "x": 19,
+        "w": 4,
+        "x": 20,
         "y": 45
       },
       "id": 69,
@@ -5520,8 +5723,8 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970488340,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 65,
       "repeatedByRow": true,
       "scopedVars": {
@@ -5532,6 +5735,114 @@
         }
       },
       "targets": [
+        {
+          "alias": "Accum",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "station_name"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accum_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              },
+              {
+                "params": [
+                  "/ 25.4"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "America/Chicago"
+        },
+        {
+          "alias": "Minutes",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "station_name"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_minutes_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "America/Chicago"
+        },
         {
           "alias": "Accumulation",
           "groupBy": [
@@ -5548,16 +5859,17 @@
               "type": "tag"
             }
           ],
+          "hide": false,
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "A",
+          "refId": "C",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "precip_accum_local_day"
+                  "precip_accumulated"
                 ],
                 "type": "field"
               },
@@ -5601,10 +5913,12 @@
             "filters": [
               {
                 "config": {
-                  "id": "isNotNull",
-                  "options": {}
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
                 },
-                "fieldName": "Accumulation"
+                "fieldName": "Accum"
               }
             ],
             "match": "any",
@@ -5615,7 +5929,11 @@
           "id": "organize",
           "options": {
             "excludeByName": {},
-            "indexByName": {},
+            "indexByName": {
+              "Accum": 1,
+              "Minutes": 2,
+              "Time": 0
+            },
             "renameByName": {
               "Time": "Date"
             }
@@ -5722,7 +6040,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 44,
       "repeatedByRow": true,
       "scopedVars": {
@@ -5939,7 +6257,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 45,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6156,7 +6474,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 46,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6373,7 +6691,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 47,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6585,7 +6903,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6784,7 +7102,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 41,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7008,7 +7326,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 8,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7233,7 +7551,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7498,7 +7816,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970488340,
+      "repeatIteration": 1620403992051,
       "repeatPanelId": 43,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7658,9 +7976,13 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -7714,7 +8036,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "remote-rest",
           "value": "remote-rest"
         },
@@ -7861,5 +8183,5 @@
   "timezone": "browser",
   "title": "Historical (remote)",
   "uid": "lux4rd0labs_weatherflow_16",
-  "version": 16
+  "version": 32
 }

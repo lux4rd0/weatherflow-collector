@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 13857,
   "graphTooltip": 0,
-  "id": 49,
-  "iteration": 1619973772988,
+  "id": 338,
+  "iteration": 1620404041684,
   "links": [
     {
       "asDropdown": true,
@@ -589,7 +589,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -822,7 +822,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1192,7 +1192,7 @@
       },
       "id": 82,
       "panels": [],
-      "repeatIteration": 1619973772988,
+      "repeatIteration": 1620404041684,
       "repeatPanelId": 51,
       "scopedVars": {
         "station_name": {
@@ -1366,7 +1366,7 @@
         }
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619973772988,
+      "repeatIteration": 1620404041684,
       "repeatPanelId": 81,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1744,8 +1744,8 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619973772988,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404041684,
       "repeatPanelId": 68,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1980,8 +1980,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619973772988,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404041684,
       "repeatPanelId": 69,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2091,7 +2091,7 @@
         "show": true
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1619973772988,
+      "repeatIteration": 1620404041684,
       "repeatPanelId": 74,
       "repeatedByRow": true,
       "reverseYBuckets": false,
@@ -2561,5 +2561,5 @@
   "timezone": "browser",
   "title": "Rain and Lightning",
   "uid": "lux4rd0labs_weatherflow_20",
-  "version": 6
+  "version": 73
 }

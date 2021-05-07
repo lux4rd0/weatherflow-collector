@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 40,
-  "iteration": 1619975622748,
+  "id": 333,
+  "iteration": 1620403139836,
   "links": [
     {
       "asDropdown": true,
@@ -673,10 +673,14 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "View Hourly Forecast For ${__data.fields.sun_rise}",
+                    "title": "",
                     "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
                   }
                 ]
+              },
+              {
+                "id": "displayName",
+                "value": "Date"
               }
             ]
           },
@@ -893,7 +897,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2418,7 +2422,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -4188,7 +4192,7 @@
       },
       "id": 130,
       "panels": [],
-      "repeatIteration": 1619975622748,
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 129,
       "scopedVars": {
         "station_name": {
@@ -4818,10 +4822,14 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "View Hourly Forecast For ${__data.fields.sun_rise}",
+                    "title": "",
                     "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
                   }
                 ]
+              },
+              {
+                "id": "displayName",
+                "value": "Date"
               }
             ]
           },
@@ -5038,8 +5046,8 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619975622748,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 11,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6566,8 +6574,8 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619975622748,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 127,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7270,7 +7278,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619975622748,
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 89,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7621,7 +7629,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619975622748,
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 90,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7856,7 +7864,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619975622748,
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 116,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8099,7 +8107,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619975622748,
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 115,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8285,7 +8293,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1619975622748,
+      "repeatIteration": 1620403139836,
       "repeatPanelId": 117,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8465,8 +8473,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "11",
-          "value": "11"
+          "text": "7",
+          "value": "7"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "select DISTINCT(\"local_day\") from (select \"local_day\",\"value\" from \"weatherflow_forecast_hourly\" WHERE $timeFilter)",
@@ -8491,7 +8499,9 @@
       },
       {
         "current": {
-          "selected": false
+          "selected": false,
+          "text": "",
+          "value": ""
         },
         "description": null,
         "error": null,
@@ -8519,5 +8529,5 @@
   "timezone": "",
   "title": "Forecast",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 14
+  "version": 36
 }

@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 336,
-  "iteration": 1619970560690,
+  "iteration": 1620404124477,
   "links": [
     {
       "asDropdown": true,
@@ -285,7 +285,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Feels Like",
@@ -341,7 +342,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Heat Index",
@@ -397,7 +399,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Wind Chill",
@@ -455,7 +458,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Dry Bulb",
@@ -476,7 +480,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)",
+          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)  tz('$tz')",
           "rawQuery": true,
           "refId": "E",
           "resultFormat": "time_series",
@@ -552,7 +556,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Dew Point",
@@ -610,7 +615,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -761,7 +767,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Air Density",
@@ -817,7 +824,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -950,7 +958,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1043,7 +1052,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1093,7 +1102,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1307,7 +1317,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -1357,7 +1368,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -1407,7 +1419,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1527,7 +1540,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1577,7 +1590,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -1713,7 +1727,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -1943,7 +1958,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Average",
@@ -1999,7 +2015,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Lull",
@@ -2055,7 +2072,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2219,7 +2237,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2379,7 +2398,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Strike Count",
@@ -2429,7 +2449,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2446,7 +2467,7 @@
       },
       "id": 29,
       "panels": [],
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 28,
       "scopedVars": {
         "station_name": {
@@ -2630,7 +2651,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 2,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2695,7 +2716,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Feels Like",
@@ -2751,7 +2773,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Heat Index",
@@ -2807,7 +2830,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Wind Chill",
@@ -2865,7 +2889,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Dry Bulb",
@@ -2886,7 +2911,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)",
+          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)  tz('$tz')",
           "rawQuery": true,
           "refId": "E",
           "resultFormat": "time_series",
@@ -2962,7 +2987,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Dew Point",
@@ -3020,7 +3046,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -3116,7 +3143,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3174,7 +3201,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Air Density",
@@ -3230,7 +3258,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -3302,7 +3331,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3366,7 +3395,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -3459,8 +3489,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970560690,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 26,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3512,7 +3542,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -3671,7 +3702,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3729,7 +3760,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -3779,7 +3811,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -3829,7 +3862,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -3949,8 +3983,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970560690,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4002,7 +4036,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -4077,7 +4112,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4141,7 +4176,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -4310,7 +4346,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 5,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4374,7 +4410,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Average",
@@ -4430,7 +4467,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Lull",
@@ -4486,7 +4524,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -4589,7 +4628,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 25,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4653,7 +4692,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -4752,7 +4792,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1619970560690,
+      "repeatIteration": 1620404124477,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4816,7 +4856,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Strike Count",
@@ -4866,7 +4907,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -4901,6 +4943,34 @@
         "name": "station_name",
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "America/Chicago",
+          "value": "America/Chicago"
+        },
+        "datasource": "InfluxDB - weatherflow",
+        "definition": "SHOW TAG VALUES WITH KEY = \"timezone\"",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Time Zone",
+        "multi": false,
+        "name": "tz",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"timezone\"",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -5043,5 +5113,5 @@
   "timezone": "",
   "title": "Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 2
+  "version": 5
 }

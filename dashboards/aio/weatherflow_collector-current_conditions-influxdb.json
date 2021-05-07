@@ -17,7 +17,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": 307,
-  "iteration": 1619970422590,
+  "iteration": 1620403110614,
   "links": [
     {
       "asDropdown": true,
@@ -499,7 +499,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1013,7 +1013,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1527,7 +1527,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2043,7 +2043,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2665,7 +2665,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -3271,7 +3271,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "scopedVars": {
@@ -3424,7 +3424,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -3485,7 +3485,7 @@
         }
       ],
       "timeFrom": null,
-      "title": "Pressure",
+      "title": "Sea Level Pressure",
       "type": "stat"
     },
     {
@@ -3997,7 +3997,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "scopedVars": {
@@ -4565,7 +4565,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "scopedVars": {
@@ -4747,7 +4747,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -5281,7 +5281,7 @@
       "options": {
         "showHeader": true
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -6053,7 +6053,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -6407,7 +6407,7 @@
             [
               {
                 "params": [
-                  "sea_level_pressure"
+                  "station_pressure"
                 ],
                 "type": "field"
               },
@@ -7224,7 +7224,7 @@
       },
       "id": 87,
       "interval": null,
-      "maxDataPoints": null,
+      "maxDataPoints": 1,
       "options": {
         "frameIndex": 1,
         "showHeader": true,
@@ -7235,7 +7235,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -7479,7 +7479,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -7911,7 +7911,7 @@
       },
       "id": 149,
       "panels": [],
-      "repeatIteration": 1619970422590,
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 132,
       "scopedVars": {
         "station_name": {
@@ -8371,8 +8371,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 40,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8888,8 +8888,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 68,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9405,8 +9405,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 85,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9924,8 +9924,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 148,
       "repeatedByRow": true,
       "scopedVars": {
@@ -10549,8 +10549,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 124,
       "repeatedByRow": true,
       "scopedVars": {
@@ -11158,10 +11158,10 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1619970422590,
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 126,
       "repeatedByRow": true,
       "scopedVars": {
@@ -11314,8 +11314,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 71,
       "repeatedByRow": true,
       "scopedVars": {
@@ -11378,7 +11378,7 @@
         }
       ],
       "timeFrom": null,
-      "title": "Pressure",
+      "title": "Sea Level Pressure",
       "type": "stat"
     },
     {
@@ -11890,10 +11890,10 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1619970422590,
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 128,
       "repeatedByRow": true,
       "scopedVars": {
@@ -12461,10 +12461,10 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1619970422590,
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 130,
       "repeatedByRow": true,
       "scopedVars": {
@@ -12646,8 +12646,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 76,
       "repeatedByRow": true,
       "scopedVars": {
@@ -13183,8 +13183,8 @@
       "options": {
         "showHeader": true
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 88,
       "repeatedByRow": true,
       "scopedVars": {
@@ -13958,8 +13958,8 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 92,
       "repeatedByRow": true,
       "scopedVars": {
@@ -14315,7 +14315,7 @@
             [
               {
                 "params": [
-                  "sea_level_pressure"
+                  "station_pressure"
                 ],
                 "type": "field"
               },
@@ -15132,7 +15132,7 @@
       },
       "id": 162,
       "interval": null,
-      "maxDataPoints": null,
+      "maxDataPoints": 1,
       "options": {
         "frameIndex": 1,
         "showHeader": true,
@@ -15143,8 +15143,8 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 87,
       "repeatedByRow": true,
       "scopedVars": {
@@ -15390,8 +15390,8 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
-      "repeatIteration": 1619970422590,
+      "pluginVersion": "7.5.5",
+      "repeatIteration": 1620403110614,
       "repeatPanelId": 93,
       "repeatedByRow": true,
       "scopedVars": {
@@ -15904,5 +15904,5 @@
   "timezone": "browser",
   "title": "Current Conditions",
   "uid": "lux4rd0labs_weatherflow_11",
-  "version": 31
+  "version": 36
 }
