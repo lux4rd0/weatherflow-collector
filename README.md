@@ -1,4 +1,5 @@
 
+
 ## About The Project
 
 <center><img src="https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png"></center>
@@ -17,6 +18,7 @@ The project builds a pre-configured Docker container that takes different config
 - [Docker](https://docs.docker.com/install)
 - [Docker Compose](https://docs.docker.com/compose/install)
 - [InfluxDB 1.8](https://docs.influxdata.com/influxdb/v1.8/) or [Grafana Loki 2.2](https://grafana.com/oss/loki/)
+- [Grafana 7.5.5](https://grafana.com/oss/grafana/)
 
 ## Notice
 
@@ -125,7 +127,7 @@ Number in seconds that you want to pull observability data. (Defaults to 60 seco
 
 ## Obtaining Your Tempest Authentication Token
 
- You can obtain this by signing in to the Tempest Web App at tempestwx.com, then go to Settings -> Data Authorizations -> Create Token.
+ You can obtain this by signing in to the Tempest Web App at [tempestwx.com](https://tempestwx.com/), then go to Settings -> Data Authorizations -> Create Token.
 
 ## Collector Details
 
@@ -159,7 +161,7 @@ Collecting data is only half the fun. Now it's time to provision some Grafana Da
 
 Coming soon - a set of Grafana alerts to let you know of deviations in expected collector performance or weather metrics change.
 
-### Current Conditions
+### Current Conditions - [14376](https://grafana.com/grafana/dashboards/14376)
 
 <center><img src="./images/weatherflow_collector-current_conditions.jpg"></center>
 
@@ -173,7 +175,7 @@ This dashboard provides a comprehensive overview of your station location, combi
 
 - **Rain & Lightning**: Rain accumulation (today and yesterday), rain duration (today and yesterday), lightning last detected, last distance, and the number of lightning detections during the previous 3 hours.
 
-### Device Details
+### Device Details - [14378](https://grafana.com/grafana/dashboards/14378)
 
 <center><img src="./images/weatherflow_collector-device_details.jpg"></center>
 
@@ -183,37 +185,37 @@ RSSI and Battery Voltage over time defaulted to the last seven days are shown at
 
 Sensor Status measurements are shown with a number related to each per minute collection from the device. Either "Sensors OK" is down or any failures, which sensor had the error. Note that if you have the Lightning Disturber enabled, you may see a high number of failures as electromagnetic interference is being suppressed.
 
-### Forecast
+### Forecast - [14380](https://grafana.com/grafana/dashboards/14380)
 
 <center><img src="./images/weatherflow_collector-forecast.jpg"></center>
 
 Provides both a daily and hourly forecast in table format with charts below them. The default time range includes the current day plus the next nine upcoming days. The interval drop-down at the top defaults to 12 hours to provide for highs and lows forecasts. Clicking on any of the dates in the "Forecast - Daily" table will refresh the Forecast hourly table to that day's hourly forecasts. This can also be done from the top "Forecast Day" drop-down menu.
 
-### Forecast Vs. Observed
+### Forecast Vs. Observed - [14379](https://grafana.com/grafana/dashboards/14379)
 
 <center><img src="./images/weatherflow_collector-forecast_vs_observed.jpg"></center>
 
 As forecast data is collected, this dashboard may be used to compare what was forecasted (by how many days out) versus the observed metric from your WeatherFlow device. Temperature, Humidity, Wind, and UV measurements are covered here. By default, "All" available forecast days are overlayed over the observed metric. You can choose different "Days Out" from the top drop-down menu to compare individual forecasts.
 
-### Historical (local-udp)
+### Historical (local-udp) - [14381](https://grafana.com/grafana/dashboards/14381)
 
 <center><img src="./images/weatherflow_collector-historical_local-udp.jpg"></center>
 
 Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each of the Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Precipitation Accumulation is displayed for any days that precipitation is detected.
 
-### Historical (remote)
+### Historical (remote) - [14382](https://grafana.com/grafana/dashboards/14382)
 
 <center><img src="./images/weatherflow_collector-historical_remote.jpg"></center>
 
 Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each of the Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Includes [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html)  as well such as Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point. Precipitation Accumulation is displayed for any days that precipitation is detected.
 
-### Overview
+### Overview - [14383](https://grafana.com/grafana/dashboards/14383)
 
 <center><img src="./images/weatherflow_collector-overview.jpg"></center>
 
 Overview is the default landing page for the WeatherFlow Collector AIO. It provides an overview of current weather metrics and live updates for Wind and direction. From here, you can choose other dashboards from the top right-hand dashboard panel or the top left-hand side drop-downs under "WeatherFlow Collector Dashboards".
 
-### Rain and Lightning
+### Rain and Lightning - [14384](https://grafana.com/grafana/dashboards/14384)
 
 <center><img src="./images/weatherflow_collector-rain_and_lightning.jpg"></center>
 
@@ -223,7 +225,7 @@ For Lightning, Strikes and Distance show on a heatmap visualization. Time is acr
 
 <center><img src="./images/weatherflow_collector-rain_and_lightning_histogram.jpg"></center>
 
-### System Stats
+### System Stats - [14385](https://grafana.com/grafana/dashboards/14385)
 
 <center><img src="./images/weatherflow_collector-system_stats.jpg"></center>
 
@@ -231,17 +233,17 @@ Provides for two different system metrics to understand the health of your weath
 
 The second section shows how long it's taking to receive and persist forecasts and observations.
 
- - Forecast Build Duration - Daily - between 1 and 2 seconds
- Forecast Build Duration - Hourly - between 30 and 45 seconds (note - if this takes longer than 60 seconds, the Docker Health Check will currently recycle the container. A future update will change this to take a longer build duration into account. For now - set the "WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED" environmental variable to "false".
- - Rest Observations - between 1 and 2 seconds
+ - **Forecast Build Duration** - Daily - between 1 and 2 seconds
+ - **Forecast Build Duration** - Hourly - between 30 and 45 seconds (note - if this takes longer than 60 seconds, the Docker Health Check will currently recycle the container. A future update will change this to take a longer build duration into account. For now - set the "WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED" environmental variable to "false".
+ - **Rest Observations** - between 1 and 2 seconds
 
-### Today So Far (local-udp)
+### Today So Far (local-udp) - [14386](https://grafana.com/grafana/dashboards/14386)
 
 <center><img src="./images/weatherflow_collector-today_so_far_local-udp.jpg"></center>
 
 The dashboard provides for Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the direct measurements from the local-udp collector (or imported from WeatherFlow).
 
-### Today So Far (remote)
+### Today So Far (remote) - [14387](https://grafana.com/grafana/dashboards/14387)
 
 <center><img src="./images/weatherflow_collector-today_so_far_remote.jpg"></center>
 
@@ -268,6 +270,6 @@ Project Link: https://github.com/lux4rd0/weatherflow-collector
 
 ## Acknowledgements
 
-- Grafana Labs - https://grafana.com/
-- Grafana - https://grafana.com/oss/grafana/
-- Grafana Dashboard Community - https://grafana.com/grafana/dashboards
+- Grafana Labs - [https://grafana.com/](https://grafana.com/)
+- Grafana - [https://grafana.com/oss/grafana/](https://grafana.com/oss/grafana/)
+- Grafana Dashboard Community - [https://grafana.com/grafana/dashboards/](https://grafana.com/grafana/dashboards/)
