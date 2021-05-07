@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.4"
+      "version": "7.5.5"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619973001808,
+  "iteration": 1620407146247,
   "links": [
     {
       "asDropdown": true,
@@ -1004,7 +1004,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -2091,5 +2091,5 @@
   "timezone": "",
   "title": "Today So Far (local-udp)",
   "uid": "lux4rd0labs_weatherflow_18",
-  "version": 5
+  "version": 1
 }

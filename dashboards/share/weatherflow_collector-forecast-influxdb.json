@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.4"
+      "version": "7.5.5"
     },
     {
       "type": "datasource",
@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619975622749,
+  "iteration": 1620407061194,
   "links": [
     {
       "asDropdown": true,
@@ -702,10 +702,14 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "View Hourly Forecast For ${__data.fields.sun_rise}",
+                    "title": "",
                     "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
                   }
                 ]
+              },
+              {
+                "id": "displayName",
+                "value": "Date"
               }
             ]
           },
@@ -922,7 +926,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Sky",
@@ -2440,7 +2444,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Sky",
@@ -4293,7 +4297,9 @@
       },
       {
         "current": {
-          "selected": false
+          "selected": false,
+          "text": "",
+          "value": ""
         },
         "description": null,
         "error": null,
@@ -4321,5 +4327,5 @@
   "timezone": "",
   "title": "Forecast",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 14
+  "version": 1
 }

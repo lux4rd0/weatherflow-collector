@@ -20,7 +20,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.4"
+      "version": "7.5.5"
     },
     {
       "type": "panel",
@@ -64,7 +64,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619976829486,
+  "iteration": 1620407105077,
   "links": [
     {
       "asDropdown": false,
@@ -120,7 +120,7 @@
           "weatherflow-collector"
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "timeFrom": null,
       "timeShift": null,
       "type": "dashlist"
@@ -143,7 +143,7 @@
         "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png\"></center>",
         "mode": "html"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "timeFrom": null,
       "timeShift": null,
       "transparent": true,
@@ -725,7 +725,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Current",
@@ -735,6 +735,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -1232,7 +1238,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Forecast High",
@@ -1741,7 +1747,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Observed High",
@@ -1751,6 +1757,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -2248,7 +2260,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2757,7 +2769,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Observed Low",
@@ -2767,6 +2779,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "weatherflow_obs",
@@ -3321,7 +3339,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -3496,7 +3514,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -4102,7 +4120,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Chance",
@@ -4701,7 +4719,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4713,6 +4731,12 @@
                 "5m"
               ],
               "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
             }
           ],
           "hide": false,
@@ -4818,12 +4842,12 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now/d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 7
+  "version": 1
 }

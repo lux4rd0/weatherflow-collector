@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.4"
+      "version": "7.5.5"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619972994084,
+  "iteration": 1620407154570,
   "links": [
     {
       "asDropdown": true,
@@ -307,7 +307,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Feels Like",
@@ -363,7 +364,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Heat Index",
@@ -419,7 +421,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Wind Chill",
@@ -477,7 +480,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Dry Bulb",
@@ -498,7 +502,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)",
+          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)  tz('$tz')",
           "rawQuery": true,
           "refId": "E",
           "resultFormat": "time_series",
@@ -574,7 +578,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Dew Point",
@@ -632,7 +637,8 @@
               "operator": "=~",
               "value": "/^$station_name$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -776,7 +782,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Air Density",
@@ -832,7 +839,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -958,7 +966,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1051,7 +1060,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Trending",
@@ -1094,7 +1103,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1301,7 +1311,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -1351,7 +1362,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -1401,7 +1413,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1521,7 +1534,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -1564,7 +1577,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -1693,7 +1707,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": "60s",
@@ -1916,7 +1931,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Average",
@@ -1972,7 +1988,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Lull",
@@ -2028,7 +2045,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2185,7 +2203,8 @@
               "operator": "=",
               "value": "remote-socket"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2338,7 +2357,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Strike Count",
@@ -2388,7 +2408,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2419,6 +2440,30 @@
         "name": "station_name",
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+        "definition": "SHOW TAG VALUES WITH KEY = \"timezone\"",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Time Zone",
+        "multi": false,
+        "name": "tz",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"timezone\"",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2561,5 +2606,5 @@
   "timezone": "",
   "title": "Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 4
+  "version": 1
 }

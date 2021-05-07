@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.4"
+      "version": "7.5.5"
     },
     {
       "type": "datasource",
@@ -58,7 +58,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619972984356,
+  "iteration": 1620407134007,
   "links": [
     {
       "asDropdown": true,
@@ -117,7 +117,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 1
       },
@@ -138,7 +138,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": "station_name",
       "targets": [
         {
@@ -240,7 +240,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 4
       },
@@ -254,7 +254,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": "station_name",
       "targets": [
         {
@@ -1147,7 +1147,7 @@
             "value": "1h"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "30m",
             "value": "30m"
           },
@@ -1157,7 +1157,7 @@
             "value": "15m"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "10m",
             "value": "10m"
           },
@@ -1192,5 +1192,5 @@
   "timezone": "",
   "title": "System Stats",
   "uid": "lux4rd0labs_weatherflow_10",
-  "version": 6
+  "version": 1
 }

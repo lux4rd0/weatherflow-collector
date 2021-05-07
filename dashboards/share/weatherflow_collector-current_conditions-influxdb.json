@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.4"
+      "version": "7.5.5"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619972835843,
+  "iteration": 1620407042674,
   "links": [
     {
       "asDropdown": true,
@@ -528,7 +528,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Current",
@@ -1035,7 +1035,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Feels Like",
@@ -1542,7 +1542,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2051,7 +2051,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2666,7 +2666,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Chance",
@@ -3265,7 +3265,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -3411,7 +3411,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Sea Level Pressure",
@@ -3465,7 +3465,7 @@
         }
       ],
       "timeFrom": null,
-      "title": "Pressure",
+      "title": "Sea Level Pressure",
       "type": "stat"
     },
     {
@@ -3977,7 +3977,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4538,7 +4538,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4713,7 +4713,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -5240,7 +5240,7 @@
       "options": {
         "showHeader": true
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "☀️",
@@ -6005,7 +6005,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Heat Index",
@@ -6352,7 +6352,7 @@
             [
               {
                 "params": [
-                  "sea_level_pressure"
+                  "station_pressure"
                 ],
                 "type": "field"
               },
@@ -7169,7 +7169,7 @@
       },
       "id": 87,
       "interval": null,
-      "maxDataPoints": null,
+      "maxDataPoints": 1,
       "options": {
         "frameIndex": 1,
         "showHeader": true,
@@ -7180,7 +7180,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Sky",
@@ -7417,7 +7417,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Rain Accumulation (Today)",
@@ -7913,5 +7913,5 @@
   "timezone": "browser",
   "title": "Current Conditions",
   "uid": "lux4rd0labs_weatherflow_11",
-  "version": 5
+  "version": 1
 }

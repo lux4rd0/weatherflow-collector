@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.4"
+      "version": "7.5.5"
     },
     {
       "type": "panel",
@@ -65,7 +65,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1619973643521,
+  "iteration": 1620407114690,
   "links": [
     {
       "asDropdown": true,
@@ -623,7 +623,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "Date",
@@ -849,7 +849,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.5",
       "targets": [
         {
           "alias": "",
@@ -1402,5 +1402,5 @@
   "timezone": "browser",
   "title": "Rain and Lightning",
   "uid": "lux4rd0labs_weatherflow_20",
-  "version": 5
+  "version": 1
 }
