@@ -69,12 +69,12 @@ This script will spin up a docker container to import all of the observed metric
 
 ## Environmental flags:
 
-"`WEATHERFLOW_COLLECTOR_BACKEND_TYPE` "
+````WEATHERFLOW_COLLECTOR_BACKEND_TYPE````
 
 - influxdb (supports local-udp, remote-rest (forecasts), and remote-socket (observations)
 - loki (supports local-udp and remote-socket (observations) *(Currently disabled)*
 
-"`WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE` "
+````WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE````
 
 - [local-udp](https://weatherflow.github.io/Tempest/api/udp.html)
 - [remote-forecast](https://weatherflow.github.io/Tempest/api/swagger/#/forecast/)
@@ -82,96 +82,96 @@ This script will spin up a docker container to import all of the observed metric
 - [remote-socket](https://weatherflow.github.io/Tempest/api/ws.html)
 - remote-import
 
-"`WEATHERFLOW_COLLECTOR_DEBUG` "
+````WEATHERFLOW_COLLECTOR_DEBUG````
 
 - false
 - true
 
-"`WEATHERFLOW_COLLECTOR_DEVICE_ID` "
+````WEATHERFLOW_COLLECTOR_DEVICE_ID````
 
 The Device ID of your Tempest
 
-"`WEATHERFLOW_COLLECTOR_ELEVATION` "
+````WEATHERFLOW_COLLECTOR_ELEVATION````
 
 The Elevation of your Tempest
 
-"`WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL` "
+````WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL````
 
 How often (in seconds) forecast data is collected from WeatherFlow. Defaults to 60 seconds if not set.
 
-"`WEATHERFLOW_COLLECTOR_FUNCTION` "
+````WEATHERFLOW_COLLECTOR_FUNCTION````
 
 - collector
 - import
 
-"`WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED` "
+````WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED````
 
 - false
 - true
 
 A Docker health check function that runs every 60 seconds. If no data has been collected or persisted to InfluxDB and this parameter is set to true, the docker container will be marked as Unhealthy and terminate. Setting this to false will always return a healthy response to the Docker health check. The health check is included because there may be times where the local UDP listener or remote-socket connection goes silent, and recycling of the container is the only way to get it listening again. You may also find the remote-forecast container takes longer than 60 seconds to complete its hourly forecast transformation. A future update will change the 60 seconds to be a multiple of the interval rate rather than a fixed 60 seconds.
 
-"`WEATHERFLOW_COLLECTOR_HOST_HOSTNAME` "
+````WEATHERFLOW_COLLECTOR_HOST_HOSTNAME````
 
 This value represents the hostname that is running the Docker containers. Docker creates a unique hostname each time a docker container is recycled. This entry is used in the management dashboards to know where your collectors are running. It's also helpful if you run the collector across multiple hosts. This value is populated when the `generate_docker-compose.sh` script generates the `docker-compose.yml` file.
 
-"`WEATHERFLOW_COLLECTOR_HUB_SN` "
+````WEATHERFLOW_COLLECTOR_HUB_SN````
 
 The WeatherFlow Hub serial number.
 
-"`WEATHERFLOW_COLLECTOR_IMPORT_DAYS` "
+````WEATHERFLOW_COLLECTOR_IMPORT_DAYS````
 
 The number of days you want to import from either the WeatherFlow cloud or Grafana Loki.
 
-"`WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD` "
+````WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD````
 
 The password for your InfluxDB
 
-"`WEATHERFLOW_COLLECTOR_INFLUXDB_URL` "
+````WEATHERFLOW_COLLECTOR_INFLUXDB_URL````
 
 The URL connection string for your InfluxDB. For example: http://influxdb:8086/write?db=weatherflow
 
-"`WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME` "
+````WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME````
 
 The username of your InfluxDB
 
-"`WEATHERFLOW_COLLECTOR_LATITUDE` "
+````WEATHERFLOW_COLLECTOR_LATITUDE````
 
 The latitude of your WeatherFlow device.
 
-"`WEATHERFLOW_COLLECTOR_LOGCLI_URL` "
+````WEATHERFLOW_COLLECTOR_LOGCLI_URL````
 
 The URL for your Grafana Loki instance. This parameter is used for importing back from Loki. For example: http://loki.3100/
 
-"`WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL` "
+````WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL````
 
 The URL connection string for your Grafana Loki endpoint. For example: http://loki:3100/loki/api/v1/push
 
-"`WEATHERFLOW_COLLECTOR_LONGITUDE` "
+````WEATHERFLOW_COLLECTOR_LONGITUDE````
 
 The longitude of your WeatherFlow device.
 
-"`WEATHERFLOW_COLLECTOR_PUBLIC_NAME` "
+````WEATHERFLOW_COLLECTOR_PUBLIC_NAME````
 
 The Public Name of your WeatherFlow device.
 
-"`WEATHERFLOW_COLLECTOR_REST_INTERVAL` "
+````WEATHERFLOW_COLLECTOR_REST_INTERVAL````
 
 How often (in seconds) observation data is collected from WeatherFlow. Defaults to 60 seconds if not set.
 
-"`WEATHERFLOW_COLLECTOR_STATION_ID` "
+````WEATHERFLOW_COLLECTOR_STATION_ID````
 
 The Station ID of your Tempest
 
-"`WEATHERFLOW_COLLECTOR_STATION_NAME` "
+````WEATHERFLOW_COLLECTOR_STATION_NAME````
 
 The Station Name of your WeatherFlow device.
 
-"`WEATHERFLOW_COLLECTOR_THREADS` "
+````WEATHERFLOW_COLLECTOR_THREADS````
 
 The number of threads used when populating the Forecast Hourly details or importing WeatherFlow Cloud or Grafana Loki logs. Defaults to 4 threads if not set. This likely should align with the number of CPUs that you have.
 
-"`WEATHERFLOW_COLLECTOR_TOKEN` "
+````WEATHERFLOW_COLLECTOR_TOKEN````
 
 The WeatherFlow Personal Access Token.
 
