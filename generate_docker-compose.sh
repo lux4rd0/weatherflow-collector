@@ -56,6 +56,14 @@ influxdb_password="password"
 
 fi
 
+if [ -z "${threads}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_THREADS was not set. Setting defaults: 4"
+
+threads="4"
+
+fi
+
 if [ -z "$token" ]
 
 then
@@ -504,3 +512,4 @@ version: '3.3'" >> docker-compose.yml
 echo "${FILE_DC} file created"
 
 fi
+
