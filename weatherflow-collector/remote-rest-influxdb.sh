@@ -175,6 +175,7 @@ wind_lull=$(echo "${line}" | jq -r .obs[].wind_lull)
 solar_radiation=$(echo "${line}" | jq -r .obs[].solar_radiation)
 uv=$(echo "${line}" | jq -r .obs[].uv)
 brightness=$(echo "${line}" | jq -r .obs[].brightness)
+illuminance=$(echo "${line}" | jq -r .obs[].brightness)
 lightning_strike_last_epoch=$(echo "${line}" | jq -r .obs[].lightning_strike_last_epoch)
 lightning_strike_last_distance=$(echo "${line}" | jq -r .obs[].lightning_strike_last_distance)
 lightning_strike_count=$(echo "${line}" | jq -r .obs[].lightning_strike_count)
@@ -220,6 +221,7 @@ wind_lull=${wind_lull}
 solar_radiation=${solar_radiation}
 uv=${uv}
 brightness=${brightness}
+illuminance=${illuminance}
 lightning_strike_last_epoch=${lightning_strike_last_epoch}
 lightning_strike_last_distance=${lightning_strike_last_distance}
 lightning_strike_count=${lightning_strike_count}
@@ -313,6 +315,7 @@ weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} air_temperature=${air_temperature} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} barometric_pressure=${barometric_pressure} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} brightness=${brightness} ${timestamp}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} illuminance=${illuminance} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} delta_t=${delta_t} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} dew_point=${dew_point} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} feels_like=${feels_like} ${timestamp}000000000
