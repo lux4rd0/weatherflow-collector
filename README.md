@@ -317,7 +317,8 @@ See the open issues for a list of proposed features (and known issues).
 
 ## Contact
 
-Dave Schmid - [@lux4rd0](https://twitter.com/lux4rd0) - dave@pulpfree.org
+Dave Schmid: [@lux4rd0](https://twitter.com/lux4rd0) - dave@pulpfree.org
+
 Project Link: https://github.com/lux4rd0/weatherflow-collector
 
 ## Acknowledgements
