@@ -195,6 +195,8 @@ rain_accumulated_final_rain_check=$(echo "${obs[19]}")
 local_daily_rain_accumulation_final_rain_check=$(echo "${obs[20]}")
 precipitation_analysis_type=$(echo "${obs[21]}")
 
+eval "$(echo "${line}" | jq -r '.summary | to_entries | .[] | .key + "=" + "\"" + ( .value|tostring ) + "\""')"
+
 ##
 ## Pressure Trend
 ##
@@ -218,36 +220,35 @@ fi
 ## Remove Null Entries
 ##
 
-if [ "${rain_accumulated_final_rain_check}" = "null" ]
+if [ "${rain_accumulated_final_rain_check}" = "null" ] || [ -z "${rain_accumulated_final_rain_check}" ]
 then
 rain_accumulated_final_rain_check="0"
 fi
 
-if [ "${local_daily_rain_accumulation_final_rain_check}" = "null" ]
+if [ "${local_daily_rain_accumulation_final_rain_check}" = "null" ] || [ -z "${local_daily_rain_accumulation_final_rain_check}" ]
 then
 local_daily_rain_accumulation_final_rain_check="0"
 fi
 
-if [ "${strike_last_dist}" = "null" ]
+if [ "${strike_last_dist}" = "null" ] || [ -z "${strike_last_dist}" ]
 then
 strike_last_dist="0"
 fi
 
-if [ "${strike_last_epoch}" = "null" ]
+if [ "${strike_last_epoch}" = "null" ] || [ -z "${strike_last_epoch}" ]
 then
 strike_last_epoch="0"
 fi
 
-if [ "${precip_accum_local_yesterday_final}" = "null" ]
+if [ "${precip_accum_local_yesterday_final}" = "null" ] || [ -z "${precip_accum_local_yesterday_final}" ]
 then
 precip_accum_local_yesterday_final="0"
 fi
 
-if [ "${precip_minutes_local_yesterday}" = "null" ]
+if [ "${precip_minutes_local_yesterday}" = "null" ] || [ -z "${precip_minutes_local_yesterday}" ]
 then
 precip_minutes_local_yesterday="0"
 fi
-
 
 if [ "$debug" == "true" ]
 then
@@ -282,41 +283,29 @@ report_interval=${report_interval}
 local_daily_rain_accumulation=${local_daily_rain_accumulation}
 rain_accumulated_final_rain_check=${rain_accumulated_final_rain_check}
 local_daily_rain_accumulation_final_rain_check=${local_daily_rain_accumulation_final_rain_check}
-precipitation_analysis_type=${precipitation_analysis_type}"
+precipitation_analysis_type=${precipitation_analysis_type}
 
-echo "obs,air_density ${air_density}"
-echo "obs,delta_t ${delta_t}"
-echo "obs,dew_point ${dew_point}"
-echo "obs,feels_like ${feels_like}"
-echo "obs,heat_index ${heat_index}"
-echo "obs,precip_accum_local_yesterday ${precip_accum_local_yesterday}"
-echo "obs,precip_accum_local_yesterday_final ${precip_accum_local_yesterday_final}"
-echo "obs,precip_analysis_type_yesterday ${precip_analysis_type_yesterday}"
-echo "obs,precip_minutes_local_day ${precip_minutes_local_day}"
-echo "obs,precip_minutes_local_yesterday ${precip_minutes_local_yesterday}"
-echo "obs,precip_total_1h ${precip_total_1h}"
-echo "obs,pressure_trend ${pressure_trend}"
-echo "obs,pulse_adj_ob_temp ${pulse_adj_ob_temp}"
-echo "obs,pulse_adj_ob_time ${pulse_adj_ob_time}"
-echo "obs,pulse_adj_ob_wind_avg ${pulse_adj_ob_wind_avg}"
-echo "obs,raining_minutes_00 ${raining_minutes_00}"
-echo "obs,raining_minutes_01 ${raining_minutes_01}"
-echo "obs,raining_minutes_02 ${raining_minutes_02}"
-echo "obs,raining_minutes_03 ${raining_minutes_03}"
-echo "obs,raining_minutes_04 ${raining_minutes_04}"
-echo "obs,raining_minutes_05 ${raining_minutes_05}"
-echo "obs,raining_minutes_06 ${raining_minutes_06}"
-echo "obs,raining_minutes_07 ${raining_minutes_07}"
-echo "obs,raining_minutes_08 ${raining_minutes_08}"
-echo "obs,raining_minutes_09 ${raining_minutes_09}"
-echo "obs,raining_minutes_10 ${raining_minutes_10}"
-echo "obs,raining_minutes_11 ${raining_minutes_11}"
-echo "obs,strike_count_1h ${strike_count_1h}"
-echo "obs,strike_count_3h ${strike_count_3h}"
-echo "obs,strike_last_dist ${strike_last_dist}"
-echo "obs,strike_last_epoch ${strike_last_epoch}"
-echo "obs,wet_bulb_temperature ${wet_bulb_temperature}"
-echo "obs,wind_chill ${wind_chill}"
+air_density=${air_density}
+delta_t=${delta_t}
+dew_point=${dew_point}
+feels_like=${feels_like}
+heat_index=${heat_index}
+precip_accum_local_yesterday=${precip_accum_local_yesterday}
+precip_accum_local_yesterday_final=${precip_accum_local_yesterday_final}
+precip_analysis_type_yesterday=${precip_analysis_type_yesterday}
+precip_minutes_local_day=${precip_minutes_local_day}
+precip_minutes_local_yesterday=${precip_minutes_local_yesterday}
+precip_total_1h=${precip_total_1h}
+pressure_trend=${pressure_trend}
+pulse_adj_ob_temp=${pulse_adj_ob_temp}
+pulse_adj_ob_time=${pulse_adj_ob_time}
+pulse_adj_ob_wind_avg=${pulse_adj_ob_wind_avg}
+strike_count_1h=${strike_count_1h}
+strike_count_3h=${strike_count_3h}
+strike_last_dist=${strike_last_dist}
+strike_last_epoch=${strike_last_epoch}
+wet_bulb_temperature=${wet_bulb_temperature}
+wind_chill=${wind_chill}"
 
 fi
 
@@ -359,18 +348,6 @@ weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevatio
 weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} pulse_adj_ob_time=${pulse_adj_ob_time} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} pulse_adj_ob_wind_avg=${pulse_adj_ob_wind_avg} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} rain_accumulated_final_rain_check=${rain_accumulated_final_rain_check} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_00=${raining_minutes_00} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_01=${raining_minutes_01} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_02=${raining_minutes_02} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_03=${raining_minutes_03} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_04=${raining_minutes_04} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_05=${raining_minutes_05} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_06=${raining_minutes_06} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_07=${raining_minutes_07} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_08=${raining_minutes_08} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_09=${raining_minutes_09} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_10=${raining_minutes_10} ${time_epoch}000000000
-weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} raining_minutes_11=${raining_minutes_11} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} relative_humidity=${relative_humidity} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} report_interval=${report_interval} ${time_epoch}000000000
 weatherflow_obs,collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name},serial_number=${serial_number},station_id=${station_id},station_name=${station_name},timezone=${timezone} solar_radiation=${solar_radiation} ${time_epoch}000000000
