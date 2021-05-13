@@ -85,20 +85,26 @@ fi
 ## Escape Names
 ##
 
+##
 ## Spaces
+##
 
-public_name_escaped=$(echo "${public_name}" | sed 's/ /\\ /g')
-station_name_escaped=$(echo "${station_name}" | sed 's/ /\\ /g')
+public_name_escaped="${public_name// /\\ }"
+station_name_escaped="${station_name// /\\ }"
 
+##
 ## Commas
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/,/\\,/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
+public_name_escaped="${public_name_escaped//,/\\,}"
+station_name_escaped="${station_name_escaped//,/\\,}"
 
+##
 ## Equal Signs
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
+public_name_escaped="${public_name_escaped//=/\\=}"
+station_name_escaped="${station_name_escaped//=/\\=}"
 
 ##
 ## Start Reading in STDIN
@@ -155,24 +161,26 @@ serial_number=$(echo "${line}" | jq -r .serial_number)
 hub_sn=$(echo "${line}" | jq -r .hub_sn)
 firmware_revision=$(echo "${line}" | jq -r .firmware_revision)
 
-time_epoch=$(echo "${line}" | jq ".obs[0][0]")
-wind_lull=$(echo "${line}" | jq ".obs[0][1]")
-wind_avg=$(echo "${line}" | jq ".obs[0][2]")
-wind_gust=$(echo "${line}" | jq ".obs[0][3]")
-wind_direction=$(echo "${line}" | jq ".obs[0][4]")
-wind_sample_interval=$(echo "${line}" | jq ".obs[0][5]")
-station_pressure=$(echo "${line}" | jq ".obs[0][6]")
-air_temperature=$(echo "${line}" | jq ".obs[0][7]")
-relative_humidity=$(echo "${line}" | jq ".obs[0][8]")
-illuminance=$(echo "${line}" | jq ".obs[0][9]")
-uv=$(echo "${line}" | jq ".obs[0][10]")
-solar_radiation=$(echo "${line}" | jq ".obs[0][11]")
-precip_accumulated=$(echo "${line}" | jq ".obs[0][12]")
-precipitation_type=$(echo "${line}" | jq ".obs[0][13]")
-lightning_strike_avg_distance=$(echo "${line}" | jq ".obs[0][14]")
-lightning_strike_count=$(echo "${line}" | jq ".obs[0][15]")
-battery=$(echo "${line}" | jq ".obs[0][16]")
-report_interval=$(echo "${line}" | jq ".obs[0][17]")
+obs=($(echo "${line}" | jq -r '.obs[] | @sh') )
+
+time_epoch=$(echo "${obs[0]}")
+wind_lull=$(echo "${obs[1]}")
+wind_avg=$(echo "${obs[2]}")
+wind_gust=$(echo "${obs[3]}")
+wind_direction=$(echo "${obs[4]}")
+wind_sample_interval=$(echo "${obs[5]}")
+station_pressure=$(echo "${obs[6]}")
+air_temperature=$(echo "${obs[7]}")
+relative_humidity=$(echo "${obs[8]}")
+illuminance=$(echo "${obs[9]}")
+uv=$(echo "${obs[10]}")
+solar_radiation=$(echo "${obs[11]}")
+precip_accumulated=$(echo "${obs[12]}")
+precipitation_type=$(echo "${obs[13]}")
+lightning_strike_avg_distance=$(echo "${obs[14]}")
+lightning_strike_count=$(echo "${obs[15]}")
+battery=$(echo "${obs[16]}")
+report_interval=$(echo "${obs[17]}")
 
 if [ "$debug" == "true" ]
 then
@@ -519,15 +527,7 @@ if [[ $line == *"device_status"* ]]; then
 ## Extract Metrics
 ##
 
-serial_number=$(echo "${line}" | jq -r .serial_number)
-hub_sn=$(echo "${line}" | jq -r .hub_sn)
-timestamp=$(echo "${line}" | jq -r .timestamp)
-uptime=$(echo "${line}" | jq -r .uptime)
-voltage=$(echo "${line}" | jq -r .voltage)
-firmware_revision=$(echo "${line}" | jq -r .firmware_revision)
-rssi=$(echo "${line}" | jq -r .rssi)
-hub_rssi=$(echo "${line}" | jq -r .hub_rssi)
-sensor_status=$(echo "${line}" | jq -r .sensor_status)
+eval "$(echo "${line}" | jq -r '. | to_entries | .[] | .key + "=" + "\"" + ( .value|tostring ) + "\""')"
 
 if [ "$debug" == "true" ]
 then
@@ -536,16 +536,16 @@ then
 ## Print Metrics
 ##
 
-echo "device_status,serial_number ${serial_number}"
-echo "device_status,hub_sn ${hub_sn}"
-
-echo "device_status,timestamp ${timestamp}"
-echo "device_status,uptime ${uptime}"
-echo "device_status,voltage ${voltage}"
-echo "device_status,firmware_revision ${firmware_revision}"
-echo "device_status,rssi ${rssi}"
-echo "device_status,hub_rssi ${hub_rssi}"
-echo "device_status,sensor_status ${sensor_status}"
+echo "
+serial_number:${serial_number}
+hub_sn:${hub_sn}
+timestamp:${timestamp}
+uptime:${uptime}
+voltage:${voltage}
+firmware_revision:${firmware_revision}
+rssi:${rssi}
+hub_rssi:${hub_rssi}
+sensor_status:${sensor_status}"
 
 fi
 
@@ -574,11 +574,10 @@ if [[ $line == *"hub_status"* ]]; then
 ## Extract Metrics
 ##
 
+eval "$(echo "${line}" | jq -r '. | to_entries | .[] | .key + "=" + "\"" + ( .value|tostring ) + "\""')"
+
 hub_sn=$(echo "${line}" | jq -r .serial_number)
-uptime=$(echo "${line}" | jq -r .uptime)
-firmware_revision=$(echo "${line}" | jq -r .firmware_revision)
-rssi=$(echo "${line}" | jq -r .rssi)
-timestamp=$(echo "${line}" | jq -r .timestamp)
+
 radio_stats_version=$(echo "${line}" | jq ".radio_stats[0]")
 radio_stats_reboot_count=$(echo "${line}" | jq ".radio_stats[1]")
 radio_stats_i2c_bus_error_count=$(echo "${line}" | jq ".radio_stats[2]")

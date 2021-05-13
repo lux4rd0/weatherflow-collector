@@ -140,22 +140,30 @@ echo "Starting WeatherFlow Collector (startup.sh) - https://github.com/lux4rd0/w
 
 fi
 
+##
 ## Escape Names
+##
 
+##
 ## Spaces
+##
 
-public_name_escaped=$(echo "${public_name}" | sed 's/ /\\ /g')
-station_name_escaped=$(echo "${station_name}" | sed 's/ /\\ /g')
+public_name_escaped="${public_name// /\\ }"
+station_name_escaped="${station_name// /\\ }"
 
+##
 ## Commas
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/,/\\,/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
+public_name_escaped="${public_name_escaped//,/\\,}"
+station_name_escaped="${station_name_escaped//,/\\,}"
 
+##
 ## Equal Signs
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
+public_name_escaped="${public_name_escaped//=/\\=}"
+station_name_escaped="${station_name_escaped//=/\\=}"
 
 ##
 ## Send Startup Timestamp to InfluxDB
@@ -191,6 +199,12 @@ printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
 ################################
 ##                            ##
 ## COLLECTOR TYPE = LOCAL-UDP ##
+##                            ##
+################################
+
+################################
+##                            ##
+##          IMPORT            ##
 ##                            ##
 ################################
 
@@ -279,7 +293,15 @@ weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation}
 
 done
 
+exit 1
+
 fi
+
+################################
+##                            ##
+##         COLLECTOR          ##
+##                            ##
+################################
 
 if [ "${collector_type}" == "local-udp" ]  &&  [ "${function}" == "collector" ]
 
@@ -296,6 +318,12 @@ fi
 ####################################
 ##                                ##
 ## COLLECTOR TYPE = REMOTE-SOCKET ##
+##                                ##
+####################################
+
+####################################
+##                                ##
+##            IMPORT              ##
 ##                                ##
 ####################################
 
@@ -384,7 +412,15 @@ weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation}
 
 done
 
+exit 1
+
 fi
+
+####################################
+##                                ##
+##           COLLECTOR            ##
+##                                ##
+####################################
 
 if [ "${collector_type}" == "remote-socket" ]  &&  [ "${function}" == "collector" ]
 
@@ -402,6 +438,12 @@ fi
 ######################################
 ##                                  ##
 ## COLLECTOR TYPE = REMOTE-FORECAST ##
+##                                  ##
+######################################
+
+######################################
+##                                  ##
+##              IMPORT              ##
 ##                                  ##
 ######################################
 
@@ -429,11 +471,19 @@ echo "Days Remaining: $days_loop"
 echo "date_start: $date_start"
 echo "date_end: $date_end"
 
-./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp | jq -r .[0].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./import-forecast-influxdb.sh
+./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp | jq -r .[0].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./remote-forecast-influxdb.sh
 
 done
 
+exit 1
+
 fi
+
+######################################
+##                                  ##
+##            COLLECTOR             ##
+##                                  ##
+######################################
 
 if [ "${collector_type}" == "remote-forecast" ]  &&  [ "${function}" == "collector" ]
 then
@@ -495,6 +545,12 @@ fi
 ##################################
 ##                              ##
 ## COLLECTOR TYPE = REMOTE-REST ##
+##                              ##
+##################################
+
+##################################
+##                              ##
+##            IMPORT            ##
 ##                              ##
 ##################################
 
@@ -583,7 +639,17 @@ weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation}
 
 done
 
+exit 1
+
 fi
+
+##################################
+##                              ##
+##          COLLECTOR           ##
+##                              ##
+##################################
+
+
 
 if [ "${collector_type}" == "remote-rest" ]  &&  [ "${function}" == "collector" ]
 
@@ -603,6 +669,12 @@ fi
 ####################################
 ##                                ##
 ## COLLECTOR TYPE = REMOTE-IMPORT ##
+##                                ##
+####################################
+
+####################################
+##                                ##
+##            IMPORT              ##
 ##                                ##
 ####################################
 
@@ -628,6 +700,31 @@ echo "time_end: $time_end"
 
 curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "https://swd.weatherflow.com/swd/rest/observations/device/${device_id}?time_start=${time_start}&time_end=${time_end}&token=${token}" | ./remote-import-influxdb.sh
 
+done
+
+exit 1
+
+fi
+
+#######################################
+##                                   ##
+## COLLECTOR TYPE = HOST-PERFORMANCE ##
+##                                   ##
+#######################################
+
+if [ "${collector_type}" == "host-performance" ]  &&  [ "${function}" == "collector" ]
+
+then
+
+echo "collector_type=${collector_type}"
+
+while ( true ); do
+  before=$(date +%s%N)
+  ./host-performance-influxdb.sh
+  after=$(date +%s%N)
+  DELAY=$(echo "scale=4;(${forecast_interval}-($after-$before) / 1000000000)" | bc)
+  echo "Sleeping ${DELAY}"
+  sleep "$DELAY"
 done
 
 fi

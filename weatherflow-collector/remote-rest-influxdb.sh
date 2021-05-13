@@ -124,20 +124,26 @@ fi
 ## Escape Names
 ##
 
+##
 ## Spaces
+##
 
-public_name_escaped=$(echo "${public_name}" | sed 's/ /\\ /g')
-station_name_escaped=$(echo "${station_name}" | sed 's/ /\\ /g')
+public_name_escaped="${public_name// /\\ }"
+station_name_escaped="${station_name// /\\ }"
 
+##
 ## Commas
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/,/\\,/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
+public_name_escaped="${public_name_escaped//,/\\,}"
+station_name_escaped="${station_name_escaped//,/\\,}"
 
+##
 ## Equal Signs
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
+public_name_escaped="${public_name_escaped//=/\\=}"
+station_name_escaped="${station_name_escaped//=/\\=}"
 
 ##
 ## Observations
@@ -153,42 +159,7 @@ observations_start=$(date +%s%N)
 ## Read Observations
 ##
 
-timestamp=$(echo "${line}" | jq -r .obs[].timestamp)
-air_temperature=$(echo "${line}" | jq -r .obs[].air_temperature)
-barometric_pressure=$(echo "${line}" | jq -r .obs[].barometric_pressure)
-station_pressure=$(echo "${line}" | jq -r .obs[].station_pressure)
-sea_level_pressure=$(echo "${line}" | jq -r .obs[].sea_level_pressure)
-relative_humidity=$(echo "${line}" | jq -r .obs[].relative_humidity)
-precip=$(echo "${line}" | jq -r .obs[].precip)
-precip_accum_last_1hr=$(echo "${line}" | jq -r .obs[].precip_accum_last_1hr)
-precip_accum_local_day=$(echo "${line}" | jq -r .obs[].precip_accum_local_day)
-precip_accum_local_yesterday=$(echo "${line}" | jq -r .obs[].precip_accum_local_yesterday)
-precip_accum_local_yesterday_final=$(echo "${line}" | jq -r .obs[].precip_accum_local_yesterday_final)
-precip_minutes_local_day=$(echo "${line}" | jq -r .obs[].precip_minutes_local_day)
-precip_minutes_local_yesterday=$(echo "${line}" | jq -r .obs[].precip_minutes_local_yesterday)
-precip_minutes_local_yesterday_final=$(echo "${line}" | jq -r .obs[].precip_minutes_local_yesterday_final)
-precip_analysis_type_yesterday=$(echo "${line}" | jq -r .obs[].precip_analysis_type_yesterday)
-wind_avg=$(echo "${line}" | jq -r .obs[].wind_avg)
-wind_direction=$(echo "${line}" | jq -r .obs[].wind_direction)
-wind_gust=$(echo "${line}" | jq -r .obs[].wind_gust)
-wind_lull=$(echo "${line}" | jq -r .obs[].wind_lull)
-solar_radiation=$(echo "${line}" | jq -r .obs[].solar_radiation)
-uv=$(echo "${line}" | jq -r .obs[].uv)
-brightness=$(echo "${line}" | jq -r .obs[].brightness)
-illuminance=$(echo "${line}" | jq -r .obs[].brightness)
-lightning_strike_last_epoch=$(echo "${line}" | jq -r .obs[].lightning_strike_last_epoch)
-lightning_strike_last_distance=$(echo "${line}" | jq -r .obs[].lightning_strike_last_distance)
-lightning_strike_count=$(echo "${line}" | jq -r .obs[].lightning_strike_count)
-lightning_strike_count_last_1hr=$(echo "${line}" | jq -r .obs[].lightning_strike_count_last_1hr)
-lightning_strike_count_last_3hr=$(echo "${line}" | jq -r .obs[].lightning_strike_count_last_3hr)
-feels_like=$(echo "${line}" | jq -r .obs[].feels_like)
-heat_index=$(echo "${line}" | jq -r .obs[].heat_index)
-wind_chill=$(echo "${line}" | jq -r .obs[].wind_chill)
-dew_point=$(echo "${line}" | jq -r .obs[].dew_point)
-wet_bulb_temperature=$(echo "${line}" | jq -r .obs[].wet_bulb_temperature)
-delta_t=$(echo "${line}" | jq -r .obs[].delta_t)
-air_density=$(echo "${line}" | jq -r .obs[].air_density)
-pressure_trend=$(echo "${line}" | jq -r .obs[].pressure_trend)
+eval "$(echo "${line}" | jq -r '.obs[] | to_entries | .[] | .key + "=" + "\"" + ( .value|tostring ) + "\""')"
 
 if [ "$debug" == "true" ]
 then

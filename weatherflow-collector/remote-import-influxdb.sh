@@ -78,20 +78,26 @@ echo "Device ID: ${device_id}"
 ## Escape Names
 ##
 
+##
 ## Spaces
+##
 
-public_name_escaped=$(echo "${public_name}" | sed 's/ /\\ /g')
-station_name_escaped=$(echo "${station_name}" | sed 's/ /\\ /g')
+public_name_escaped="${public_name// /\\ }"
+station_name_escaped="${station_name// /\\ }"
 
+##
 ## Commas
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/,/\\,/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/,/\\,/g')
+public_name_escaped="${public_name_escaped//,/\\,}"
+station_name_escaped="${station_name_escaped//,/\\,}"
 
+##
 ## Equal Signs
+##
 
-public_name_escaped=$(echo "${public_name_escaped}" | sed 's/=/\\=/g')
-station_name_escaped=$(echo "${station_name_escaped}" | sed 's/=/\\=/g')
+public_name_escaped="${public_name_escaped//=/\\=}"
+station_name_escaped="${station_name_escaped//=/\\=}"
 
 if [ "$debug" == "true" ]
 
@@ -181,24 +187,26 @@ for metric in $(seq 0 $num_of_metrics_minus_one) ; do
 ## Observation (Tempest)
 ##
 
-time_epoch=$(echo "${line}" | jq ".obs[$metric][0]")
-wind_lull=$(echo "${line}" | jq ".obs[$metric][1]")
-wind_avg=$(echo "${line}" | jq ".obs[$metric][2]")
-wind_gust=$(echo "${line}" | jq ".obs[$metric][3]")
-wind_direction=$(echo "${line}" | jq ".obs[$metric][4]")
-wind_sample_interval=$(echo "${line}" | jq ".obs[$metric][5]")
-station_pressure=$(echo "${line}" | jq ".obs[$metric][6]")
-air_temperature=$(echo "${line}" | jq ".obs[$metric][7]")
-relative_humidity=$(echo "${line}" | jq ".obs[$metric][8]")
-illuminance=$(echo "${line}" | jq ".obs[$metric][9]")
-uv=$(echo "${line}" | jq ".obs[$metric][10]")
-solar_radiation=$(echo "${line}" | jq ".obs[$metric][11]")
-precip_accumulated=$(echo "${line}" | jq ".obs[$metric][12]")
-precipitation_type=$(echo "${line}" | jq ".obs[$metric][13]")
-lightning_strike_avg_distance=$(echo "${line}" | jq ".obs[$metric][14]")
-lightning_strike_count=$(echo "${line}" | jq ".obs[$metric][15]")
-battery=$(echo "${line}" | jq ".obs[$metric][16]")
-report_interval=$(echo "${line}" | jq ".obs[$metric][17]")
+obs=($(echo "${line}" | jq -r '.obs['$metric'] | @sh') )
+
+time_epoch=$(echo "${obs[0]}")
+wind_lull=$(echo "${obs[1]}")
+wind_avg=$(echo "${obs[2]}")
+wind_gust=$(echo "${obs[3]}")
+wind_direction=$(echo "${obs[4]}")
+wind_sample_interval=$(echo "${obs[5]}")
+station_pressure=$(echo "${obs[6]}")
+air_temperature=$(echo "${obs[7]}")
+relative_humidity=$(echo "${obs[8]}")
+illuminance=$(echo "${obs[9]}")
+uv=$(echo "${obs[10]}")
+solar_radiation=$(echo "${obs[11]}")
+precip_accumulated=$(echo "${obs[12]}")
+precipitation_type=$(echo "${obs[13]}")
+lightning_strike_avg_distance=$(echo "${obs[14]}")
+lightning_strike_count=$(echo "${obs[15]}")
+battery=$(echo "${obs[16]}")
+report_interval=$(echo "${obs[17]}")
 
 if [ "$debug" == "true" ]
 then
