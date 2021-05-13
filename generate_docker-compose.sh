@@ -21,7 +21,7 @@ influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
 logcli_host_url=${logcli_host_url}
 loki_client_url=${loki_client_url}
-perf_interval=${perf_interval}}
+perf_interval=${perf_interval}
 threads=${threads}
 token=${token}
 "
