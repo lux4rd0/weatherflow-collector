@@ -26,6 +26,7 @@ latitude=$WEATHERFLOW_COLLECTOR_LATITUDE
 logcli_host_url=$WEATHERFLOW_COLLECTOR_LOGCLI_URL
 loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 longitude=$WEATHERFLOW_COLLECTOR_LONGITUDE
+perf_interval=$WEATHERFLOW_COLLECTOR_PERF_INTERVAL
 public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
 rest_interval=$WEATHERFLOW_COLLECTOR_REST_INTERVAL
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
@@ -59,6 +60,14 @@ if [ -z "${import_days}" ] && [ "$collector_type" == "remote-import" ]
     echo "WEATHERFLOW_COLLECTOR_IMPORT_DAYS environmental variable not set. Defaulting to 365 days"
 
 import_days="365"
+
+fi
+
+if [ -z "${perf_interval}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_PERF_INTERVAL environmental variable not set. Defaulting to 60 seconds"
+
+perf_interval="60"
 
 fi
 
@@ -656,10 +665,10 @@ if [ "${collector_type}" == "remote-rest" ]  &&  [ "${function}" == "collector" 
 then
 
 while ( true ); do
-  before=$(date +%s)
+  before=$(date +%s%N)
   curl "${curl[@]}" -w "\n" -X GET --header "Accept: application/json" "https://swd.weatherflow.com/swd/rest/observations/station/${station_id}?token=${token}" | ./remote-rest-influxdb.sh
-  after=$(date +%s)
-  DELAY=$(echo "${rest_interval}-($after-$before)" | bc)
+  after=$(date +%s%N)
+  DELAY=$(echo "scale=4;(${rest_interval}-($after-$before) / 1000000000)" | bc)
   echo "Sleeping ${DELAY}"
   sleep "$DELAY"
 done
@@ -722,7 +731,7 @@ while ( true ); do
   before=$(date +%s%N)
   ./host-performance-influxdb.sh
   after=$(date +%s%N)
-  DELAY=$(echo "scale=4;(${forecast_interval}-($after-$before) / 1000000000)" | bc)
+  DELAY=$(echo "scale=4;(${perf_interval}-($after-$before) / 1000000000)" | bc)
   echo "Sleeping ${DELAY}"
   sleep "$DELAY"
 done

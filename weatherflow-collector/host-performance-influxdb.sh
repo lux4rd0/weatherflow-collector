@@ -189,19 +189,19 @@ cpu_idle=${cpu_idle}"
 
 fi
 
-uptime=($(cat /proc/loadavg))
+loadavg=($(cat /proc/loadavg))
 
-uptime_one=${uptime[0]}
-uptime_five=${uptime[1]}
-uptime_fifteen=${uptime[2]}
+loadavg_one=${loadavg[0]}
+loadavg_five=${loadavg[1]}
+loadavg_fifteen=${loadavg[2]}
 
 if [ "$debug" == "true" ]
 then
 
 echo "
-uptime_one=${uptime_one}
-uptime_five=${uptime_five}
-uptime_fifteen=${uptime_fifteen}"
+loadavg_one=${loadavg_one}
+loadavg_five=${loadavg_five}
+loadavg_fifteen=${loadavg_fifteen}"
 
 fi
 
@@ -210,29 +210,29 @@ fi
 ##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_gnice=${cpu_gnice}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_guest=${cpu_guest}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_idle=${cpu_idle}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_iowait=${cpu_iowait}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_irq=${cpu_irq}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_nice=${cpu_nice}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_soft=${cpu_soft}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_steal=${cpu_steal}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_sys=${cpu_sys}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_usr=${cpu_usr}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_available=${mem_available}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_buffers=${mem_buffers}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_cache=${mem_cache}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_free=${mem_free}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_shared=${mem_shared}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_total=${mem_total}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_used=${mem_used}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} swap_free=${swap_free}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} swap_total=${swap_total}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} swap_used=${swap_used}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} uptime_fifteen=${uptime_fifteen}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} uptime_five=${uptime_five}
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} uptime_one=${uptime_one}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_gnice=${cpu_gnice}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_guest=${cpu_guest}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_idle=${cpu_idle}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_iowait=${cpu_iowait}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_irq=${cpu_irq}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_nice=${cpu_nice}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_soft=${cpu_soft}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_steal=${cpu_steal}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_sys=${cpu_sys}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} cpu_usr=${cpu_usr}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_available=${mem_available}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_buffers=${mem_buffers}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_cache=${mem_cache}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_free=${mem_free}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_shared=${mem_shared}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_total=${mem_total}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} mem_used=${mem_used}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} swap_free=${swap_free}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} swap_total=${swap_total}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} swap_used=${swap_used}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} loadavg_fifteen=${loadavg_fifteen}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} loadavg_five=${loadavg_five}
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} loadavg_one=${loadavg_one}"
 
 ## End Timer
 
@@ -246,4 +246,4 @@ echo "host_performance_duration:${host_performance_duration}"
 ##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${host_performance_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${host_performance_duration}"
