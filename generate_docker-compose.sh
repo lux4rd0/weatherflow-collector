@@ -72,6 +72,7 @@ if [ -z "${perf_interval}" ]
 
 perf_interval="60"
 
+fi
 
 if [ -z "$token" ]
 
