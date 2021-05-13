@@ -10,6 +10,7 @@ influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
 logcli_host_url=$WEATHERFLOW_COLLECTOR_LOGCLI_URL
 loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
+perf_interval=$WEATHERFLOW_COLLECTOR_PERF_INTERVAL
 threads=$WEATHERFLOW_COLLECTOR_THREADS
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
@@ -20,6 +21,7 @@ influxdb_url=${influxdb_url}
 influxdb_username=${influxdb_username}
 logcli_host_url=${logcli_host_url}
 loki_client_url=${loki_client_url}
+perf_interval=${perf_interval}}
 threads=${threads}
 token=${token}
 "
@@ -63,6 +65,13 @@ if [ -z "${threads}" ]
 threads="4"
 
 fi
+
+if [ -z "${perf_interval}" ]
+  then
+    echo "WEATHERFLOW_COLLECTOR_PERF_INTERVAL environmental variable not set. Defaulting to 60 seconds"
+
+perf_interval="60"
+
 
 if [ -z "$token" ]
 
@@ -277,6 +286,7 @@ echo "
       WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME: ${influxdb_username}
       WEATHERFLOW_COLLECTOR_LATITUDE: ${latitude[$station_number]}
       WEATHERFLOW_COLLECTOR_LONGITUDE: ${longitude[$station_number]}
+      WEATHERFLOW_COLLECTOR_PERF_INTERVAL: ${perf_interval}
       WEATHERFLOW_COLLECTOR_PUBLIC_NAME: ${public_name[$station_number]}
       WEATHERFLOW_COLLECTOR_STATION_ID: ${station_id[$station_number]}
       WEATHERFLOW_COLLECTOR_STATION_NAME: ${station_name[$station_number]}
