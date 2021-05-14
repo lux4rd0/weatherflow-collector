@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.5"
+      "version": "7.5.6"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1620407090859,
+  "iteration": 1620962527902,
   "links": [
     {
       "asDropdown": true,
@@ -792,7 +792,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "High",
@@ -1021,7 +1021,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "groupBy": [
@@ -2203,5 +2203,5 @@
   "timezone": "browser",
   "title": "Historical (local-udp)",
   "uid": "lux4rd0labs_weatherflow_15",
-  "version": 1
+  "version": 9
 }

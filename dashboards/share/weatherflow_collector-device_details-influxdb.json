@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.5"
+      "version": "7.5.6"
     },
     {
       "type": "datasource",
@@ -59,7 +59,7 @@
   "gnetId": 13858,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1620407050493,
+  "iteration": 1620962501724,
   "links": [
     {
       "asDropdown": true,
@@ -389,7 +389,7 @@
           "placement": "bottom"
         },
         "tooltipOptions": {
-          "mode": "single"
+          "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
@@ -668,7 +668,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Uptime",
@@ -1331,7 +1331,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": "serial_number",
       "repeatDirection": "v",
       "targets": [
@@ -1792,7 +1792,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": "obs_serial_number",
       "targets": [
         {
@@ -2028,7 +2028,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -2264,7 +2264,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -2500,7 +2500,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -2736,7 +2736,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -2972,7 +2972,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -3208,7 +3208,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -3444,7 +3444,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -3679,7 +3679,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -3915,7 +3915,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "",
@@ -4126,5 +4126,5 @@
   "timezone": "",
   "title": "Device Details",
   "uid": "lux4rd0labs_weatherflow_12",
-  "version": 1
+  "version": 12
 }

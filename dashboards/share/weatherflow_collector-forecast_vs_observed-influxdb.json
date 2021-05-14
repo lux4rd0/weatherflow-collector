@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.5"
+      "version": "7.5.6"
     },
     {
       "type": "datasource",
@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1620407082483,
+  "iteration": 1620962519256,
   "links": [
     {
       "asDropdown": true,
@@ -550,7 +550,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#d2a00b",
+                  "fixedColor": "#ff8400",
                   "mode": "fixed"
                 }
               }
@@ -565,7 +565,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#bb961e",
+                  "fixedColor": "#e3751c",
                   "mode": "fixed"
                 }
               }
@@ -580,7 +580,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#a38b31",
+                  "fixedColor": "#c66739",
                   "mode": "fixed"
                 }
               }
@@ -595,7 +595,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#8c8144",
+                  "fixedColor": "#aa5855",
                   "mode": "fixed"
                 }
               }
@@ -610,7 +610,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#757657",
+                  "fixedColor": "#8e4971",
                   "mode": "fixed"
                 }
               }
@@ -625,7 +625,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#5d6c6a",
+                  "fixedColor": "#713b8e",
                   "mode": "fixed"
                 }
               }
@@ -640,7 +640,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#46617d",
+                  "fixedColor": "#552caa",
                   "mode": "fixed"
                 }
               }
@@ -655,7 +655,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#2f5790",
+                  "fixedColor": "#391dc6",
                   "mode": "fixed"
                 }
               }
@@ -670,7 +670,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#174ca3",
+                  "fixedColor": "#1c0fe3",
                   "mode": "fixed"
                 }
               }
@@ -685,7 +685,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#0042b6",
+                  "fixedColor": "#0000ff",
                   "mode": "fixed"
                 }
               }
@@ -1061,8 +1061,8 @@
         ]
       },
       "gridPos": {
-        "h": 13,
-        "w": 12,
+        "h": 14,
+        "w": 8,
         "x": 0,
         "y": 15
       },
@@ -1202,6 +1202,369 @@
         }
       ],
       "title": "Wind",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 10,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pressurehg"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Observed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgb(255, 255, 255)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 4
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 3
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "none"
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    30,
+                    3,
+                    3
+                  ],
+                  "fill": "dash"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "0 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#00c9ff",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#1ccfe3",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#39d5c6",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "3 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#55dbaa",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "4 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#71e18e",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "5 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#8ee771",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "6 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#aaed55",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "7 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#c6f339",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "8 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e3f91c",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "9 Days Out"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#ffff00",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 8,
+        "x": 8,
+        "y": 15
+      },
+      "id": 125,
+      "interval": "$interval",
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltipOptions": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "7.5.2",
+      "targets": [
+        {
+          "alias": "$tag_forecast_hourly_days_out Days Out",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "forecast_hourly_days_out"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_forecast_hourly",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=~",
+              "value": "/^$forecast_hourly_days_out$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Observed",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=",
+              "value": "remote-rest"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "title": "Pressure",
       "type": "timeseries"
     },
     {
@@ -1440,9 +1803,9 @@
         ]
       },
       "gridPos": {
-        "h": 13,
-        "w": 12,
-        "x": 12,
+        "h": 14,
+        "w": 8,
+        "x": 16,
         "y": 15
       },
       "id": 117,
@@ -1744,5 +2107,5 @@
   "timezone": "",
   "title": "Forecast Vs Observed",
   "uid": "lux4rd0labs_weatherflow_13",
-  "version": 1
+  "version": 7
 }

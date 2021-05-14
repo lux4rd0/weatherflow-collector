@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.5"
+      "version": "7.5.6"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1620407042674,
+  "iteration": 1620962493227,
   "links": [
     {
       "asDropdown": true,
@@ -528,7 +528,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Current",
@@ -1035,7 +1035,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Feels Like",
@@ -1542,7 +1542,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2051,7 +2051,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2666,7 +2666,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Chance",
@@ -2734,410 +2734,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
-              },
-              {
-                "color": "#1C0381",
-                "value": 1
-              },
-              {
-                "color": "#1E0888",
-                "value": 2
-              },
-              {
-                "color": "#1F0D8E",
-                "value": 3
-              },
-              {
-                "color": "#221295",
-                "value": 4
-              },
-              {
-                "color": "#24179B",
-                "value": 5
-              },
-              {
-                "color": "#271DA2",
-                "value": 6
-              },
-              {
-                "color": "#2A23A9",
-                "value": 7
-              },
-              {
-                "color": "#2D2AAF",
-                "value": 8
-              },
-              {
-                "color": "#3131B6",
-                "value": 9
-              },
-              {
-                "color": "#393CBD",
-                "value": 10
-              },
-              {
-                "color": "#4147C3",
-                "value": 11
-              },
-              {
-                "color": "#4953CA",
-                "value": 12
-              },
-              {
-                "color": "#525ED0",
-                "value": 13
-              },
-              {
-                "color": "#5B6AD7",
-                "value": 14
-              },
-              {
-                "color": "#6577DE",
-                "value": 15
-              },
-              {
-                "color": "#6F83E4",
-                "value": 16
-              },
-              {
-                "color": "#798FEB",
-                "value": 17
-              },
-              {
-                "color": "#849CF1",
-                "value": 18
-              },
-              {
-                "color": "#8FA9F8",
-                "value": 19
-              },
-              {
-                "color": "#9BB6FF",
-                "value": 20
-              },
-              {
-                "color": "#92ADFC",
-                "value": 21
-              },
-              {
-                "color": "#8AA5FA",
-                "value": 22
-              },
-              {
-                "color": "#819DF7",
-                "value": 23
-              },
-              {
-                "color": "#7995F5",
-                "value": 24
-              },
-              {
-                "color": "#718DF3",
-                "value": 25
-              },
-              {
-                "color": "#6984F0",
-                "value": 26
-              },
-              {
-                "color": "#627CEE",
-                "value": 27
-              },
-              {
-                "color": "#5A74EB",
-                "value": 28
-              },
-              {
-                "color": "#536BE9",
-                "value": 29
-              },
-              {
-                "color": "#4B63E7",
-                "value": 30
-              },
-              {
-                "color": "#445BE4",
-                "value": 31
-              },
-              {
-                "color": "#3D52E2",
-                "value": 32
-              },
-              {
-                "color": "#364ADF",
-                "value": 33
-              },
-              {
-                "color": "#2F42DD",
-                "value": 34
-              },
-              {
-                "color": "#2939DB",
-                "value": 35
-              },
-              {
-                "color": "#2231D8",
-                "value": 36
-              },
-              {
-                "color": "#1C29D6",
-                "value": 37
-              },
-              {
-                "color": "#1621D3",
-                "value": 38
-              },
-              {
-                "color": "#0F19D1",
-                "value": 39
-              },
-              {
-                "color": "#0911CF",
-                "value": 40
-              },
-              {
-                "color": "#092FD0",
-                "value": 41
-              },
-              {
-                "color": "#094FD2",
-                "value": 42
-              },
-              {
-                "color": "#096FD4",
-                "value": 43
-              },
-              {
-                "color": "#098FD6",
-                "value": 44
-              },
-              {
-                "color": "#09B1D8",
-                "value": 45
-              },
-              {
-                "color": "#09D3DA",
-                "value": 46
-              },
-              {
-                "color": "#09DCC2",
-                "value": 47
-              },
-              {
-                "color": "#09DEA3",
-                "value": 48
-              },
-              {
-                "color": "#09E083",
-                "value": 49
-              },
-              {
-                "color": "#09E263",
-                "value": 50
-              },
-              {
-                "color": "#09E341",
-                "value": 51
-              },
-              {
-                "color": "#08E520",
-                "value": 52
-              },
-              {
-                "color": "#14E708",
-                "value": 53
-              },
-              {
-                "color": "#36E908",
-                "value": 54
-              },
-              {
-                "color": "#5AEB08",
-                "value": 55
-              },
-              {
-                "color": "#7EED08",
-                "value": 56
-              },
-              {
-                "color": "#A3EF08",
-                "value": 57
-              },
-              {
-                "color": "#C8F108",
-                "value": 58
-              },
-              {
-                "color": "#EEF308",
-                "value": 59
-              },
-              {
-                "color": "#F5D408",
-                "value": 60
-              },
-              {
-                "color": "#F4CD07",
-                "value": 61
-              },
-              {
-                "color": "#F4C507",
-                "value": 62
-              },
-              {
-                "color": "#F4BD06",
-                "value": 63
-              },
-              {
-                "color": "#F4B506",
-                "value": 64
-              },
-              {
-                "color": "#F4AD05",
-                "value": 65
-              },
-              {
-                "color": "#F4A505",
-                "value": 66
-              },
-              {
-                "color": "#F49D05",
-                "value": 67
-              },
-              {
-                "color": "#F49504",
-                "value": 68
-              },
-              {
-                "color": "#F48D04",
-                "value": 69
-              },
-              {
-                "color": "#F48403",
-                "value": 70
-              },
-              {
-                "color": "#F37C03",
-                "value": 71
-              },
-              {
-                "color": "#F37403",
-                "value": 72
-              },
-              {
-                "color": "#F36C02",
-                "value": 73
-              },
-              {
-                "color": "#F36402",
-                "value": 74
-              },
-              {
-                "color": "#F35C01",
-                "value": 75
-              },
-              {
-                "color": "#F35401",
-                "value": 76
-              },
-              {
-                "color": "#F34B01",
-                "value": 77
-              },
-              {
-                "color": "#F34300",
-                "value": 78
-              },
-              {
-                "color": "#F33B00",
-                "value": 79
-              },
-              {
-                "color": "#F23300",
-                "value": 80
-              },
-              {
-                "color": "#EC2F00",
-                "value": 81
-              },
-              {
-                "color": "#E62B00",
-                "value": 82
-              },
-              {
-                "color": "#DF2700",
-                "value": 83
-              },
-              {
-                "color": "#D92400",
-                "value": 84
-              },
-              {
-                "color": "#D22100",
-                "value": 85
-              },
-              {
-                "color": "#CC1E00",
-                "value": 86
-              },
-              {
-                "color": "#C51A00",
-                "value": 87
-              },
-              {
-                "color": "#BF1800",
-                "value": 88
-              },
-              {
-                "color": "#B81500",
-                "value": 89
-              },
-              {
-                "color": "#B21200",
-                "value": 90
-              },
-              {
-                "color": "#AC1000",
-                "value": 91
-              },
-              {
-                "color": "#A50D00",
-                "value": 92
-              },
-              {
-                "color": "#9F0B00",
-                "value": 93
-              },
-              {
-                "color": "#980900",
-                "value": 94
-              },
-              {
-                "color": "#920700",
-                "value": 95
-              },
-              {
-                "color": "#8B0500",
-                "value": 96
-              },
-              {
-                "color": "#850400",
-                "value": 97
-              },
-              {
-                "color": "#7E0200",
-                "value": 98
-              },
-              {
-                "color": "#780100",
-                "value": 99
-              },
-              {
-                "color": "#720000",
-                "value": 100
               }
             ]
           }
@@ -3159,79 +2755,79 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#404040",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#404047",
+                      "color": "#030803",
                       "value": 5
                     },
                     {
-                      "color": "#3f3f4e",
+                      "color": "#060f05",
                       "value": 10
                     },
                     {
-                      "color": "#3e3e56",
+                      "color": "#091708",
                       "value": 15
                     },
                     {
-                      "color": "#3d3d5e",
+                      "color": "#0c1e0a",
                       "value": 20
                     },
                     {
-                      "color": "#3b3b66",
+                      "color": "#0f260d",
                       "value": 25
                     },
                     {
-                      "color": "#3a3a6f",
+                      "color": "#122d0f",
                       "value": 30
                     },
                     {
-                      "color": "#373778",
+                      "color": "#153512",
                       "value": 35
                     },
                     {
-                      "color": "#353581",
+                      "color": "#183c14",
                       "value": 40
                     },
                     {
-                      "color": "#32328b",
+                      "color": "#1c4417",
                       "value": 45
                     },
                     {
-                      "color": "#2e2e95",
+                      "color": "#1f4b19",
                       "value": 50
                     },
                     {
-                      "color": "#2a2a9f",
+                      "color": "#22531c",
                       "value": 55
                     },
                     {
-                      "color": "#2626aa",
+                      "color": "#255a1e",
                       "value": 60
                     },
                     {
-                      "color": "#2222b5",
+                      "color": "#286221",
                       "value": 65
                     },
                     {
-                      "color": "#1d1dc0",
+                      "color": "#2b6923",
                       "value": 70
                     },
                     {
-                      "color": "#1818cc",
+                      "color": "#2e7126",
                       "value": 85
                     },
                     {
-                      "color": "#1313d8",
+                      "color": "#317828",
                       "value": 90
                     },
                     {
-                      "color": "#0d0de5",
+                      "color": "#34802b",
                       "value": 95
                     },
                     {
-                      "color": "#0707f2",
+                      "color": "#37872d",
                       "value": 100
                     }
                   ]
@@ -3265,7 +2861,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -3295,7 +2891,7 @@
               },
               {
                 "params": [],
-                "type": "last"
+                "type": "mean"
               }
             ]
           ],
@@ -3354,31 +2950,31 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#4af7e6",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#00dfea",
+                      "color": "#180a1f",
                       "value": 28.939498
                     },
                     {
-                      "color": "#00c5ec",
+                      "color": "#30143d",
                       "value": 29.234799
                     },
                     {
-                      "color": "#00abeb",
+                      "color": "#471d5c",
                       "value": 29.5301
                     },
                     {
-                      "color": "#008fe3",
+                      "color": "#5f277b",
                       "value": 29.825401
                     },
                     {
-                      "color": "#0072d2",
+                      "color": "#773199",
                       "value": 30.416003
                     },
                     {
-                      "color": "#2052b8",
+                      "color": "#8f3bb8",
                       "value": 30.711304
                     }
                   ]
@@ -3411,7 +3007,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Sea Level Pressure",
@@ -3482,410 +3078,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
-              },
-              {
-                "color": "#1C0381",
-                "value": 1
-              },
-              {
-                "color": "#1E0888",
-                "value": 2
-              },
-              {
-                "color": "#1F0D8E",
-                "value": 3
-              },
-              {
-                "color": "#221295",
-                "value": 4
-              },
-              {
-                "color": "#24179B",
-                "value": 5
-              },
-              {
-                "color": "#271DA2",
-                "value": 6
-              },
-              {
-                "color": "#2A23A9",
-                "value": 7
-              },
-              {
-                "color": "#2D2AAF",
-                "value": 8
-              },
-              {
-                "color": "#3131B6",
-                "value": 9
-              },
-              {
-                "color": "#393CBD",
-                "value": 10
-              },
-              {
-                "color": "#4147C3",
-                "value": 11
-              },
-              {
-                "color": "#4953CA",
-                "value": 12
-              },
-              {
-                "color": "#525ED0",
-                "value": 13
-              },
-              {
-                "color": "#5B6AD7",
-                "value": 14
-              },
-              {
-                "color": "#6577DE",
-                "value": 15
-              },
-              {
-                "color": "#6F83E4",
-                "value": 16
-              },
-              {
-                "color": "#798FEB",
-                "value": 17
-              },
-              {
-                "color": "#849CF1",
-                "value": 18
-              },
-              {
-                "color": "#8FA9F8",
-                "value": 19
-              },
-              {
-                "color": "#9BB6FF",
-                "value": 20
-              },
-              {
-                "color": "#92ADFC",
-                "value": 21
-              },
-              {
-                "color": "#8AA5FA",
-                "value": 22
-              },
-              {
-                "color": "#819DF7",
-                "value": 23
-              },
-              {
-                "color": "#7995F5",
-                "value": 24
-              },
-              {
-                "color": "#718DF3",
-                "value": 25
-              },
-              {
-                "color": "#6984F0",
-                "value": 26
-              },
-              {
-                "color": "#627CEE",
-                "value": 27
-              },
-              {
-                "color": "#5A74EB",
-                "value": 28
-              },
-              {
-                "color": "#536BE9",
-                "value": 29
-              },
-              {
-                "color": "#4B63E7",
-                "value": 30
-              },
-              {
-                "color": "#445BE4",
-                "value": 31
-              },
-              {
-                "color": "#3D52E2",
-                "value": 32
-              },
-              {
-                "color": "#364ADF",
-                "value": 33
-              },
-              {
-                "color": "#2F42DD",
-                "value": 34
-              },
-              {
-                "color": "#2939DB",
-                "value": 35
-              },
-              {
-                "color": "#2231D8",
-                "value": 36
-              },
-              {
-                "color": "#1C29D6",
-                "value": 37
-              },
-              {
-                "color": "#1621D3",
-                "value": 38
-              },
-              {
-                "color": "#0F19D1",
-                "value": 39
-              },
-              {
-                "color": "#0911CF",
-                "value": 40
-              },
-              {
-                "color": "#092FD0",
-                "value": 41
-              },
-              {
-                "color": "#094FD2",
-                "value": 42
-              },
-              {
-                "color": "#096FD4",
-                "value": 43
-              },
-              {
-                "color": "#098FD6",
-                "value": 44
-              },
-              {
-                "color": "#09B1D8",
-                "value": 45
-              },
-              {
-                "color": "#09D3DA",
-                "value": 46
-              },
-              {
-                "color": "#09DCC2",
-                "value": 47
-              },
-              {
-                "color": "#09DEA3",
-                "value": 48
-              },
-              {
-                "color": "#09E083",
-                "value": 49
-              },
-              {
-                "color": "#09E263",
-                "value": 50
-              },
-              {
-                "color": "#09E341",
-                "value": 51
-              },
-              {
-                "color": "#08E520",
-                "value": 52
-              },
-              {
-                "color": "#14E708",
-                "value": 53
-              },
-              {
-                "color": "#36E908",
-                "value": 54
-              },
-              {
-                "color": "#5AEB08",
-                "value": 55
-              },
-              {
-                "color": "#7EED08",
-                "value": 56
-              },
-              {
-                "color": "#A3EF08",
-                "value": 57
-              },
-              {
-                "color": "#C8F108",
-                "value": 58
-              },
-              {
-                "color": "#EEF308",
-                "value": 59
-              },
-              {
-                "color": "#F5D408",
-                "value": 60
-              },
-              {
-                "color": "#F4CD07",
-                "value": 61
-              },
-              {
-                "color": "#F4C507",
-                "value": 62
-              },
-              {
-                "color": "#F4BD06",
-                "value": 63
-              },
-              {
-                "color": "#F4B506",
-                "value": 64
-              },
-              {
-                "color": "#F4AD05",
-                "value": 65
-              },
-              {
-                "color": "#F4A505",
-                "value": 66
-              },
-              {
-                "color": "#F49D05",
-                "value": 67
-              },
-              {
-                "color": "#F49504",
-                "value": 68
-              },
-              {
-                "color": "#F48D04",
-                "value": 69
-              },
-              {
-                "color": "#F48403",
-                "value": 70
-              },
-              {
-                "color": "#F37C03",
-                "value": 71
-              },
-              {
-                "color": "#F37403",
-                "value": 72
-              },
-              {
-                "color": "#F36C02",
-                "value": 73
-              },
-              {
-                "color": "#F36402",
-                "value": 74
-              },
-              {
-                "color": "#F35C01",
-                "value": 75
-              },
-              {
-                "color": "#F35401",
-                "value": 76
-              },
-              {
-                "color": "#F34B01",
-                "value": 77
-              },
-              {
-                "color": "#F34300",
-                "value": 78
-              },
-              {
-                "color": "#F33B00",
-                "value": 79
-              },
-              {
-                "color": "#F23300",
-                "value": 80
-              },
-              {
-                "color": "#EC2F00",
-                "value": 81
-              },
-              {
-                "color": "#E62B00",
-                "value": 82
-              },
-              {
-                "color": "#DF2700",
-                "value": 83
-              },
-              {
-                "color": "#D92400",
-                "value": 84
-              },
-              {
-                "color": "#D22100",
-                "value": 85
-              },
-              {
-                "color": "#CC1E00",
-                "value": 86
-              },
-              {
-                "color": "#C51A00",
-                "value": 87
-              },
-              {
-                "color": "#BF1800",
-                "value": 88
-              },
-              {
-                "color": "#B81500",
-                "value": 89
-              },
-              {
-                "color": "#B21200",
-                "value": 90
-              },
-              {
-                "color": "#AC1000",
-                "value": 91
-              },
-              {
-                "color": "#A50D00",
-                "value": 92
-              },
-              {
-                "color": "#9F0B00",
-                "value": 93
-              },
-              {
-                "color": "#980900",
-                "value": 94
-              },
-              {
-                "color": "#920700",
-                "value": 95
-              },
-              {
-                "color": "#8B0500",
-                "value": 96
-              },
-              {
-                "color": "#850400",
-                "value": 97
-              },
-              {
-                "color": "#7E0200",
-                "value": 98
-              },
-              {
-                "color": "#780100",
-                "value": 99
-              },
-              {
-                "color": "#720000",
-                "value": 100
               }
             ]
           }
@@ -3977,7 +3169,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4022,6 +3214,12 @@
               "key": "collector_type",
               "operator": "=",
               "value": "remote-forecast"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -4047,410 +3245,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
-              },
-              {
-                "color": "#1C0381",
-                "value": 1
-              },
-              {
-                "color": "#1E0888",
-                "value": 2
-              },
-              {
-                "color": "#1F0D8E",
-                "value": 3
-              },
-              {
-                "color": "#221295",
-                "value": 4
-              },
-              {
-                "color": "#24179B",
-                "value": 5
-              },
-              {
-                "color": "#271DA2",
-                "value": 6
-              },
-              {
-                "color": "#2A23A9",
-                "value": 7
-              },
-              {
-                "color": "#2D2AAF",
-                "value": 8
-              },
-              {
-                "color": "#3131B6",
-                "value": 9
-              },
-              {
-                "color": "#393CBD",
-                "value": 10
-              },
-              {
-                "color": "#4147C3",
-                "value": 11
-              },
-              {
-                "color": "#4953CA",
-                "value": 12
-              },
-              {
-                "color": "#525ED0",
-                "value": 13
-              },
-              {
-                "color": "#5B6AD7",
-                "value": 14
-              },
-              {
-                "color": "#6577DE",
-                "value": 15
-              },
-              {
-                "color": "#6F83E4",
-                "value": 16
-              },
-              {
-                "color": "#798FEB",
-                "value": 17
-              },
-              {
-                "color": "#849CF1",
-                "value": 18
-              },
-              {
-                "color": "#8FA9F8",
-                "value": 19
-              },
-              {
-                "color": "#9BB6FF",
-                "value": 20
-              },
-              {
-                "color": "#92ADFC",
-                "value": 21
-              },
-              {
-                "color": "#8AA5FA",
-                "value": 22
-              },
-              {
-                "color": "#819DF7",
-                "value": 23
-              },
-              {
-                "color": "#7995F5",
-                "value": 24
-              },
-              {
-                "color": "#718DF3",
-                "value": 25
-              },
-              {
-                "color": "#6984F0",
-                "value": 26
-              },
-              {
-                "color": "#627CEE",
-                "value": 27
-              },
-              {
-                "color": "#5A74EB",
-                "value": 28
-              },
-              {
-                "color": "#536BE9",
-                "value": 29
-              },
-              {
-                "color": "#4B63E7",
-                "value": 30
-              },
-              {
-                "color": "#445BE4",
-                "value": 31
-              },
-              {
-                "color": "#3D52E2",
-                "value": 32
-              },
-              {
-                "color": "#364ADF",
-                "value": 33
-              },
-              {
-                "color": "#2F42DD",
-                "value": 34
-              },
-              {
-                "color": "#2939DB",
-                "value": 35
-              },
-              {
-                "color": "#2231D8",
-                "value": 36
-              },
-              {
-                "color": "#1C29D6",
-                "value": 37
-              },
-              {
-                "color": "#1621D3",
-                "value": 38
-              },
-              {
-                "color": "#0F19D1",
-                "value": 39
-              },
-              {
-                "color": "#0911CF",
-                "value": 40
-              },
-              {
-                "color": "#092FD0",
-                "value": 41
-              },
-              {
-                "color": "#094FD2",
-                "value": 42
-              },
-              {
-                "color": "#096FD4",
-                "value": 43
-              },
-              {
-                "color": "#098FD6",
-                "value": 44
-              },
-              {
-                "color": "#09B1D8",
-                "value": 45
-              },
-              {
-                "color": "#09D3DA",
-                "value": 46
-              },
-              {
-                "color": "#09DCC2",
-                "value": 47
-              },
-              {
-                "color": "#09DEA3",
-                "value": 48
-              },
-              {
-                "color": "#09E083",
-                "value": 49
-              },
-              {
-                "color": "#09E263",
-                "value": 50
-              },
-              {
-                "color": "#09E341",
-                "value": 51
-              },
-              {
-                "color": "#08E520",
-                "value": 52
-              },
-              {
-                "color": "#14E708",
-                "value": 53
-              },
-              {
-                "color": "#36E908",
-                "value": 54
-              },
-              {
-                "color": "#5AEB08",
-                "value": 55
-              },
-              {
-                "color": "#7EED08",
-                "value": 56
-              },
-              {
-                "color": "#A3EF08",
-                "value": 57
-              },
-              {
-                "color": "#C8F108",
-                "value": 58
-              },
-              {
-                "color": "#EEF308",
-                "value": 59
-              },
-              {
-                "color": "#F5D408",
-                "value": 60
-              },
-              {
-                "color": "#F4CD07",
-                "value": 61
-              },
-              {
-                "color": "#F4C507",
-                "value": 62
-              },
-              {
-                "color": "#F4BD06",
-                "value": 63
-              },
-              {
-                "color": "#F4B506",
-                "value": 64
-              },
-              {
-                "color": "#F4AD05",
-                "value": 65
-              },
-              {
-                "color": "#F4A505",
-                "value": 66
-              },
-              {
-                "color": "#F49D05",
-                "value": 67
-              },
-              {
-                "color": "#F49504",
-                "value": 68
-              },
-              {
-                "color": "#F48D04",
-                "value": 69
-              },
-              {
-                "color": "#F48403",
-                "value": 70
-              },
-              {
-                "color": "#F37C03",
-                "value": 71
-              },
-              {
-                "color": "#F37403",
-                "value": 72
-              },
-              {
-                "color": "#F36C02",
-                "value": 73
-              },
-              {
-                "color": "#F36402",
-                "value": 74
-              },
-              {
-                "color": "#F35C01",
-                "value": 75
-              },
-              {
-                "color": "#F35401",
-                "value": 76
-              },
-              {
-                "color": "#F34B01",
-                "value": 77
-              },
-              {
-                "color": "#F34300",
-                "value": 78
-              },
-              {
-                "color": "#F33B00",
-                "value": 79
-              },
-              {
-                "color": "#F23300",
-                "value": 80
-              },
-              {
-                "color": "#EC2F00",
-                "value": 81
-              },
-              {
-                "color": "#E62B00",
-                "value": 82
-              },
-              {
-                "color": "#DF2700",
-                "value": 83
-              },
-              {
-                "color": "#D92400",
-                "value": 84
-              },
-              {
-                "color": "#D22100",
-                "value": 85
-              },
-              {
-                "color": "#CC1E00",
-                "value": 86
-              },
-              {
-                "color": "#C51A00",
-                "value": 87
-              },
-              {
-                "color": "#BF1800",
-                "value": 88
-              },
-              {
-                "color": "#B81500",
-                "value": 89
-              },
-              {
-                "color": "#B21200",
-                "value": 90
-              },
-              {
-                "color": "#AC1000",
-                "value": 91
-              },
-              {
-                "color": "#A50D00",
-                "value": 92
-              },
-              {
-                "color": "#9F0B00",
-                "value": 93
-              },
-              {
-                "color": "#980900",
-                "value": 94
-              },
-              {
-                "color": "#920700",
-                "value": 95
-              },
-              {
-                "color": "#8B0500",
-                "value": 96
-              },
-              {
-                "color": "#850400",
-                "value": 97
-              },
-              {
-                "color": "#7E0200",
-                "value": 98
-              },
-              {
-                "color": "#780100",
-                "value": 99
-              },
-              {
-                "color": "#720000",
-                "value": 100
               }
             ]
           }
@@ -4472,40 +3266,48 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#ff7500",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#f77438",
+                      "color": "#1b0c00",
                       "value": 1
                     },
                     {
-                      "color": "#ee7257",
+                      "color": "#351800",
                       "value": 2
                     },
                     {
-                      "color": "#e47273",
+                      "color": "#502400",
                       "value": 3
                     },
                     {
-                      "color": "#d7718e",
+                      "color": "#6a3000",
                       "value": 4
                     },
                     {
-                      "color": "#c871a9",
+                      "color": "#853b00",
                       "value": 5
                     },
                     {
-                      "color": "#b571c4",
+                      "color": "#9f4700",
                       "value": 6
                     },
                     {
-                      "color": "#9c72df",
+                      "color": "#ba5300",
                       "value": 7
                     },
                     {
-                      "color": "#7873fb",
+                      "color": "#d45f00",
                       "value": 8
+                    },
+                    {
+                      "color": "#ef6b00",
+                      "value": 9
+                    },
+                    {
+                      "color": "#ff780a",
+                      "value": 10
                     }
                   ]
                 }
@@ -4538,7 +3340,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4713,7 +3515,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -5240,7 +4042,7 @@
       "options": {
         "showHeader": true
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "☀️",
@@ -5909,31 +4711,31 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#4af7e6",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#00dfea",
+                      "color": "#180a1f",
                       "value": 28.939498
                     },
                     {
-                      "color": "#00c5ec",
+                      "color": "#30143d",
                       "value": 29.234799
                     },
                     {
-                      "color": "#00abeb",
+                      "color": "#471d5c",
                       "value": 29.5301
                     },
                     {
-                      "color": "#008fe3",
+                      "color": "#5f277b",
                       "value": 29.825401
                     },
                     {
-                      "color": "#0072d2",
+                      "color": "#773199",
                       "value": 30.416003
                     },
                     {
-                      "color": "#2052b8",
+                      "color": "#8f3bb8",
                       "value": 30.711304
                     }
                   ]
@@ -5948,7 +4750,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Brightness"
+              "options": "Illuminance"
             },
             "properties": [
               {
@@ -6005,7 +4807,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Heat Index",
@@ -6383,7 +5185,7 @@
           ]
         },
         {
-          "alias": "Brightness",
+          "alias": "Illuminance",
           "groupBy": [
             {
               "params": [
@@ -6408,7 +5210,7 @@
             [
               {
                 "params": [
-                  "brightness"
+                  "illuminance"
                 ],
                 "type": "field"
               },
@@ -7180,7 +5982,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Sky",
@@ -7417,7 +6219,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "alias": "Rain Accumulation (Today)",
@@ -7913,5 +6715,5 @@
   "timezone": "browser",
   "title": "Current Conditions",
   "uid": "lux4rd0labs_weatherflow_11",
-  "version": 1
+  "version": 10
 }
