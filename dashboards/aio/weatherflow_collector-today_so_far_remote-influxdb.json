@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 336,
-  "iteration": 1620404124477,
+  "iteration": 1620955940592,
   "links": [
     {
       "asDropdown": true,
@@ -1052,7 +1052,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1540,7 +1540,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2467,7 +2467,7 @@
       },
       "id": 29,
       "panels": [],
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 28,
       "scopedVars": {
         "station_name": {
@@ -2651,7 +2651,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 2,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3143,7 +3143,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 3,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3331,7 +3331,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3489,8 +3489,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404124477,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 26,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3702,7 +3702,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -3983,8 +3983,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404124477,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4112,7 +4112,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4346,7 +4346,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 5,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4628,7 +4628,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 25,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4792,7 +4792,7 @@
         }
       },
       "pluginVersion": "7.4.0",
-      "repeatIteration": 1620404124477,
+      "repeatIteration": 1620955940592,
       "repeatPanelId": 24,
       "repeatedByRow": true,
       "scopedVars": {
@@ -4985,8 +4985,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "remote-socket",
-          "value": "remote-socket"
+          "text": "remote-rest",
+          "value": "remote-rest"
         },
         "description": null,
         "error": null,
@@ -5113,5 +5113,5 @@
   "timezone": "",
   "title": "Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 5
+  "version": 6
 }

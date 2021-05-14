@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 333,
-  "iteration": 1620403139836,
+  "iteration": 1620955857453,
   "links": [
     {
       "asDropdown": true,
@@ -35,6 +35,7 @@
   ],
   "panels": [
     {
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -71,12 +72,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "#1a007b",
                 "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
               },
               {
                 "color": "#1C0381",
@@ -673,8 +670,8 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "",
-                    "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
+                    "title": "Show Hourly Forecast for ${__data.fields.day_start_local}",
+                    "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.day_start_local}"
                   }
                 ]
               },
@@ -851,15 +848,6 @@
             },
             "properties": [
               {
-                "id": "links",
-                "value": [
-                  {
-                    "title": "Show Hourly Forecast",
-                    "url": "/d/${__dashboard.uid}﻿/?var-forecast_day_num=${__data.fields[\"day_num\"]}"
-                  }
-                ]
-              },
-              {
                 "id": "custom.width",
                 "value": 1
               }
@@ -868,7 +856,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "sun_rise"
+              "options": "day_start_local"
             },
             "properties": [
               {
@@ -895,9 +883,14 @@
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Date"
+          }
+        ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1152,7 +1145,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "sun_rise",
+          "alias": "day_start_local",
           "groupBy": [
             {
               "params": [
@@ -1171,7 +1164,7 @@
             [
               {
                 "params": [
-                  "sunrise"
+                  "day_start_local"
                 ],
                 "type": "field"
               },
@@ -1258,12 +1251,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "#1a007b",
                 "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
               },
               {
                 "color": "#1C0381",
@@ -1849,12 +1838,16 @@
             },
             "properties": [
               {
-                "id": "unit",
-                "value": "time:h A"
-              },
-              {
                 "id": "custom.align",
                 "value": "right"
+              },
+              {
+                "id": "custom.width",
+                "value": 63
+              },
+              {
+                "id": "unit",
+                "value": "time:h A"
               }
             ]
           },
@@ -1906,79 +1899,79 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#404040",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#404047",
+                      "color": "#030803",
                       "value": 5
                     },
                     {
-                      "color": "#3f3f4e",
+                      "color": "#060f05",
                       "value": 10
                     },
                     {
-                      "color": "#3e3e56",
+                      "color": "#091708",
                       "value": 15
                     },
                     {
-                      "color": "#3d3d5e",
+                      "color": "#0c1e0a",
                       "value": 20
                     },
                     {
-                      "color": "#3b3b66",
+                      "color": "#0f260d",
                       "value": 25
                     },
                     {
-                      "color": "#3a3a6f",
+                      "color": "#122d0f",
                       "value": 30
                     },
                     {
-                      "color": "#373778",
+                      "color": "#153512",
                       "value": 35
                     },
                     {
-                      "color": "#353581",
+                      "color": "#183c14",
                       "value": 40
                     },
                     {
-                      "color": "#32328b",
+                      "color": "#1c4417",
                       "value": 45
                     },
                     {
-                      "color": "#2e2e95",
+                      "color": "#1f4b19",
                       "value": 50
                     },
                     {
-                      "color": "#2a2a9f",
+                      "color": "#22531c",
                       "value": 55
                     },
                     {
-                      "color": "#2626aa",
+                      "color": "#255a1e",
                       "value": 60
                     },
                     {
-                      "color": "#2222b5",
+                      "color": "#286221",
                       "value": 65
                     },
                     {
-                      "color": "#1d1dc0",
+                      "color": "#2b6923",
                       "value": 70
                     },
                     {
-                      "color": "#1818cc",
+                      "color": "#2e7126",
                       "value": 85
                     },
                     {
-                      "color": "#1313d8",
+                      "color": "#317828",
                       "value": 90
                     },
                     {
-                      "color": "#0d0de5",
+                      "color": "#34802b",
                       "value": 95
                     },
                     {
-                      "color": "#0707f2",
+                      "color": "#37872d",
                       "value": 100
                     }
                   ]
@@ -2110,7 +2103,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 88
+                "value": 90
               },
               {
                 "id": "custom.displayMode",
@@ -2126,43 +2119,43 @@
                       "value": null
                     },
                     {
-                      "color": "#030904",
+                      "color": "#1b0c00",
                       "value": 3
                     },
                     {
-                      "color": "#051107",
+                      "color": "#351800",
                       "value": 6
                     },
                     {
-                      "color": "#071a0b",
+                      "color": "#502400",
                       "value": 9
                     },
                     {
-                      "color": "#0a220e",
+                      "color": "#6a3000",
                       "value": 12
                     },
                     {
-                      "color": "#0c2b12",
+                      "color": "#853b00",
                       "value": 15
                     },
                     {
-                      "color": "#0f3415",
+                      "color": "#9f4700",
                       "value": 18
                     },
                     {
-                      "color": "#113c19",
+                      "color": "#ba5300",
                       "value": 21
                     },
                     {
-                      "color": "#14451c",
+                      "color": "#d45f00",
                       "value": 24
                     },
                     {
-                      "color": "#164d20",
+                      "color": "#ef6b00",
                       "value": 27
                     },
                     {
-                      "color": "#195623",
+                      "color": "#ff780a",
                       "value": 30
                     }
                   ]
@@ -2250,7 +2243,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 79
+                "value": 80
               }
             ]
           },
@@ -2390,7 +2383,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 62
+                "value": 60
               }
             ]
           },
@@ -2402,7 +2395,67 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 72
+                "value": 70
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pressure"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "unit",
+                "value": "pressurehg"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#000000",
+                      "value": null
+                    },
+                    {
+                      "color": "#180a1f",
+                      "value": 28.939498
+                    },
+                    {
+                      "color": "#30143d",
+                      "value": 29.234799
+                    },
+                    {
+                      "color": "#471d5c",
+                      "value": 29.5301
+                    },
+                    {
+                      "color": "#5f277b",
+                      "value": 29.825401
+                    },
+                    {
+                      "color": "#773199",
+                      "value": 30.416103
+                    },
+                    {
+                      "color": "#8f3bb8",
+                      "value": 30.711304
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
               }
             ]
           }
@@ -2420,9 +2473,14 @@
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Time"
+          }
+        ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2471,6 +2529,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2522,6 +2586,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2573,6 +2643,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2618,6 +2694,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2663,6 +2745,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2697,7 +2785,7 @@
               },
               {
                 "params": [
-                  "* 0.039370"
+                  "/ 25.4"
                 ],
                 "type": "math"
               }
@@ -2714,6 +2802,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2759,6 +2853,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2810,6 +2910,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2855,6 +2961,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2900,6 +3012,69 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Pressure",
+          "groupBy": [
+            {
+              "params": [
+                "1h"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_hourly",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_day_num",
+              "operator": "=~",
+              "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -2925,13 +3100,14 @@
               "Amount": 5,
               "Chance": 4,
               "Conditions": 3,
-              "Direction": 8,
-              "Gust": 7,
+              "Direction": 9,
+              "Gust": 8,
               "Humidity": 6,
+              "Pressure": 7,
               "Sky": 2,
               "Temp": 1,
               "Time": 0,
-              "UV": 9
+              "UV": 10
             },
             "renameByName": {
               "Icon": " ",
@@ -3105,7 +3281,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 13
       },
@@ -3177,6 +3353,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -3228,6 +3410,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -3279,6 +3467,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -3330,6 +3524,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -3390,7 +3590,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Percent"
+              "options": "Percent Chance"
             },
             "properties": [
               {
@@ -3430,7 +3630,7 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 10
+                "value": 30
               },
               {
                 "id": "custom.lineWidth",
@@ -3446,6 +3646,10 @@
               {
                 "id": "decimals",
                 "value": 2
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "opacity"
               }
             ]
           }
@@ -3453,8 +3657,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 13
       },
       "id": 90,
@@ -3480,7 +3684,7 @@
       },
       "targets": [
         {
-          "alias": "Percent",
+          "alias": "Percent Chance",
           "groupBy": [
             {
               "params": [
@@ -3519,6 +3723,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -3570,12 +3780,238 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
         }
       ],
       "title": "Precipitation",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pressurehg"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "High"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Low"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 13
+      },
+      "id": 138,
+      "interval": "$interval",
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltipOptions": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "7.5.2",
+      "scopedVars": {
+        "station_name": {
+          "selected": false,
+          "text": "Buzzard Bend",
+          "value": "Buzzard Bend"
+        }
+      },
+      "targets": [
+        {
+          "alias": "High",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_forecast_hourly",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Low",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_hourly",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "title": "Sea Level Pressure",
       "type": "timeseries"
     },
     {
@@ -3746,7 +4182,7 @@
               },
               {
                 "params": [
-                  " * 2.236936"
+                  "* 2.236936"
                 ],
                 "type": "math"
               }
@@ -3757,6 +4193,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -3797,7 +4239,7 @@
               },
               {
                 "params": [
-                  " * 2.236936"
+                  "* 2.236936"
                 ],
                 "type": "math"
               }
@@ -3808,6 +4250,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -3991,6 +4439,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -4036,6 +4490,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -4174,6 +4634,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -4183,6 +4649,7 @@
       "type": "timeseries"
     },
     {
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -4190,9 +4657,9 @@
         "x": 0,
         "y": 28
       },
-      "id": 130,
+      "id": 139,
       "panels": [],
-      "repeatIteration": 1620403139836,
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 129,
       "scopedVars": {
         "station_name": {
@@ -4220,12 +4687,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "#1a007b",
                 "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
               },
               {
                 "color": "#1C0381",
@@ -4822,8 +5285,8 @@
                 "id": "links",
                 "value": [
                   {
-                    "title": "",
-                    "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.sun_rise}"
+                    "title": "Show Hourly Forecast for ${__data.fields.day_start_local}",
+                    "url": "/d/${__dashboard.uid}﻿﻿/?var-forecast_day_num=﻿${__data.fields[\"day_num\"]}﻿&var-display_date=${__data.fields.day_start_local}"
                   }
                 ]
               },
@@ -5000,15 +5463,6 @@
             },
             "properties": [
               {
-                "id": "links",
-                "value": [
-                  {
-                    "title": "Show Hourly Forecast",
-                    "url": "/d/${__dashboard.uid}﻿/?var-forecast_day_num=${__data.fields[\"day_num\"]}"
-                  }
-                ]
-              },
-              {
                 "id": "custom.width",
                 "value": 1
               }
@@ -5017,7 +5471,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "sun_rise"
+              "options": "day_start_local"
             },
             "properties": [
               {
@@ -5038,16 +5492,21 @@
         "x": 0,
         "y": 29
       },
-      "id": 131,
+      "id": 140,
       "interval": "1d",
       "maxDataPoints": null,
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Date"
+          }
+        ]
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620403139836,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 11,
       "repeatedByRow": true,
       "scopedVars": {
@@ -5304,7 +5763,7 @@
           "tz": "$tz"
         },
         {
-          "alias": "sun_rise",
+          "alias": "day_start_local",
           "groupBy": [
             {
               "params": [
@@ -5323,7 +5782,7 @@
             [
               {
                 "params": [
-                  "sunrise"
+                  "day_start_local"
                 ],
                 "type": "field"
               },
@@ -5410,12 +5869,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "#1a007b",
                 "value": null
-              },
-              {
-                "color": "#1A007B",
-                "value": 0
               },
               {
                 "color": "#1C0381",
@@ -6001,12 +6456,16 @@
             },
             "properties": [
               {
-                "id": "unit",
-                "value": "time:h A"
-              },
-              {
                 "id": "custom.align",
                 "value": "right"
+              },
+              {
+                "id": "custom.width",
+                "value": 63
+              },
+              {
+                "id": "unit",
+                "value": "time:h A"
               }
             ]
           },
@@ -6058,79 +6517,79 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#404040",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#404047",
+                      "color": "#030803",
                       "value": 5
                     },
                     {
-                      "color": "#3f3f4e",
+                      "color": "#060f05",
                       "value": 10
                     },
                     {
-                      "color": "#3e3e56",
+                      "color": "#091708",
                       "value": 15
                     },
                     {
-                      "color": "#3d3d5e",
+                      "color": "#0c1e0a",
                       "value": 20
                     },
                     {
-                      "color": "#3b3b66",
+                      "color": "#0f260d",
                       "value": 25
                     },
                     {
-                      "color": "#3a3a6f",
+                      "color": "#122d0f",
                       "value": 30
                     },
                     {
-                      "color": "#373778",
+                      "color": "#153512",
                       "value": 35
                     },
                     {
-                      "color": "#353581",
+                      "color": "#183c14",
                       "value": 40
                     },
                     {
-                      "color": "#32328b",
+                      "color": "#1c4417",
                       "value": 45
                     },
                     {
-                      "color": "#2e2e95",
+                      "color": "#1f4b19",
                       "value": 50
                     },
                     {
-                      "color": "#2a2a9f",
+                      "color": "#22531c",
                       "value": 55
                     },
                     {
-                      "color": "#2626aa",
+                      "color": "#255a1e",
                       "value": 60
                     },
                     {
-                      "color": "#2222b5",
+                      "color": "#286221",
                       "value": 65
                     },
                     {
-                      "color": "#1d1dc0",
+                      "color": "#2b6923",
                       "value": 70
                     },
                     {
-                      "color": "#1818cc",
+                      "color": "#2e7126",
                       "value": 85
                     },
                     {
-                      "color": "#1313d8",
+                      "color": "#317828",
                       "value": 90
                     },
                     {
-                      "color": "#0d0de5",
+                      "color": "#34802b",
                       "value": 95
                     },
                     {
-                      "color": "#0707f2",
+                      "color": "#37872d",
                       "value": 100
                     }
                   ]
@@ -6262,7 +6721,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 88
+                "value": 90
               },
               {
                 "id": "custom.displayMode",
@@ -6278,43 +6737,43 @@
                       "value": null
                     },
                     {
-                      "color": "#030904",
+                      "color": "#1b0c00",
                       "value": 3
                     },
                     {
-                      "color": "#051107",
+                      "color": "#351800",
                       "value": 6
                     },
                     {
-                      "color": "#071a0b",
+                      "color": "#502400",
                       "value": 9
                     },
                     {
-                      "color": "#0a220e",
+                      "color": "#6a3000",
                       "value": 12
                     },
                     {
-                      "color": "#0c2b12",
+                      "color": "#853b00",
                       "value": 15
                     },
                     {
-                      "color": "#0f3415",
+                      "color": "#9f4700",
                       "value": 18
                     },
                     {
-                      "color": "#113c19",
+                      "color": "#ba5300",
                       "value": 21
                     },
                     {
-                      "color": "#14451c",
+                      "color": "#d45f00",
                       "value": 24
                     },
                     {
-                      "color": "#164d20",
+                      "color": "#ef6b00",
                       "value": 27
                     },
                     {
-                      "color": "#195623",
+                      "color": "#ff780a",
                       "value": 30
                     }
                   ]
@@ -6402,7 +6861,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 79
+                "value": 80
               }
             ]
           },
@@ -6542,7 +7001,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 62
+                "value": 60
               }
             ]
           },
@@ -6554,7 +7013,67 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 72
+                "value": 70
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pressure"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "unit",
+                "value": "pressurehg"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#000000",
+                      "value": null
+                    },
+                    {
+                      "color": "#180a1f",
+                      "value": 28.939498
+                    },
+                    {
+                      "color": "#30143d",
+                      "value": 29.234799
+                    },
+                    {
+                      "color": "#471d5c",
+                      "value": 29.5301
+                    },
+                    {
+                      "color": "#5f277b",
+                      "value": 29.825401
+                    },
+                    {
+                      "color": "#773199",
+                      "value": 30.416103
+                    },
+                    {
+                      "color": "#8f3bb8",
+                      "value": 30.711304
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
               }
             ]
           }
@@ -6566,16 +7085,21 @@
         "x": 12,
         "y": 29
       },
-      "id": 132,
+      "id": 141,
       "interval": null,
       "maxDataPoints": null,
       "options": {
         "frameIndex": 1,
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Time"
+          }
+        ]
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620403139836,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 127,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6626,6 +7150,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -6677,6 +7207,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -6728,6 +7264,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -6773,6 +7315,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -6818,6 +7366,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -6852,7 +7406,7 @@
               },
               {
                 "params": [
-                  "* 0.039370"
+                  "/ 25.4"
                 ],
                 "type": "math"
               }
@@ -6869,6 +7423,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -6914,6 +7474,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -6965,6 +7531,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7010,6 +7582,12 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7055,6 +7633,69 @@
               "key": "forecast_day_num",
               "operator": "=~",
               "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Pressure",
+          "groupBy": [
+            {
+              "params": [
+                "1h"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_hourly",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_day_num",
+              "operator": "=~",
+              "value": "/^$forecast_day_num$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7080,13 +7721,14 @@
               "Amount": 5,
               "Chance": 4,
               "Conditions": 3,
-              "Direction": 8,
-              "Gust": 7,
+              "Direction": 9,
+              "Gust": 8,
               "Humidity": 6,
+              "Pressure": 7,
               "Sky": 2,
               "Temp": 1,
               "Time": 0,
-              "UV": 9
+              "UV": 10
             },
             "renameByName": {
               "Icon": " ",
@@ -7260,11 +7902,11 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 41
       },
-      "id": 133,
+      "id": 142,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -7278,7 +7920,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620403139836,
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 89,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7335,6 +7977,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7386,6 +8034,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7437,6 +8091,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7488,6 +8148,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7548,7 +8214,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Percent"
+              "options": "Percent Chance"
             },
             "properties": [
               {
@@ -7588,7 +8254,7 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 10
+                "value": 30
               },
               {
                 "id": "custom.lineWidth",
@@ -7604,6 +8270,10 @@
               {
                 "id": "decimals",
                 "value": 2
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "opacity"
               }
             ]
           }
@@ -7611,11 +8281,11 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 41
       },
-      "id": 134,
+      "id": 143,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -7629,7 +8299,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620403139836,
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 90,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7641,7 +8311,7 @@
       },
       "targets": [
         {
-          "alias": "Percent",
+          "alias": "Percent Chance",
           "groupBy": [
             {
               "params": [
@@ -7680,6 +8350,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7731,12 +8407,241 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
         }
       ],
       "title": "Precipitation",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pressurehg"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "High"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Low"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 41
+      },
+      "id": 144,
+      "interval": "$interval",
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltipOptions": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "7.5.2",
+      "repeatIteration": 1620955857453,
+      "repeatPanelId": 138,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "station_name": {
+          "selected": false,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
+        }
+      },
+      "targets": [
+        {
+          "alias": "High",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_forecast_hourly",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Low",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_forecast_hourly",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "sea_level_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "title": "Sea Level Pressure",
       "type": "timeseries"
     },
     {
@@ -7850,7 +8755,7 @@
         "x": 0,
         "y": 49
       },
-      "id": 135,
+      "id": 145,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -7864,7 +8769,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620403139836,
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 116,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7910,7 +8815,7 @@
               },
               {
                 "params": [
-                  " * 2.236936"
+                  "* 2.236936"
                 ],
                 "type": "math"
               }
@@ -7921,6 +8826,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -7961,7 +8872,7 @@
               },
               {
                 "params": [
-                  " * 2.236936"
+                  "* 2.236936"
                 ],
                 "type": "math"
               }
@@ -7972,6 +8883,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -8093,7 +9010,7 @@
         "x": 8,
         "y": 49
       },
-      "id": 136,
+      "id": 146,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -8107,7 +9024,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620403139836,
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 115,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8158,6 +9075,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -8203,6 +9126,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -8279,7 +9208,7 @@
         "x": 16,
         "y": 49
       },
-      "id": 137,
+      "id": 147,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -8293,7 +9222,7 @@
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620403139836,
+      "repeatIteration": 1620955857453,
       "repeatPanelId": 117,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8344,6 +9273,12 @@
               "key": "station_name",
               "operator": "=~",
               "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "forecast_hourly_days_out",
+              "operator": "=",
+              "value": "0"
             }
           ],
           "tz": "$tz"
@@ -8422,59 +9357,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "12h",
-          "value": "12h"
-        },
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Interval",
-        "multi": false,
-        "name": "interval",
-        "options": [
-          {
-            "selected": false,
-            "text": "1d",
-            "value": "1d"
-          },
-          {
-            "selected": true,
-            "text": "12h",
-            "value": "12h"
-          },
-          {
-            "selected": false,
-            "text": "6h",
-            "value": "6h"
-          },
-          {
-            "selected": false,
-            "text": "4h",
-            "value": "4h"
-          },
-          {
-            "selected": false,
-            "text": "2h",
-            "value": "2h"
-          },
-          {
-            "selected": false,
-            "text": "1h",
-            "value": "1h"
-          }
-        ],
-        "query": "1d,12h,6h,4h,2h,1h",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "7",
-          "value": "7"
+          "text": "13",
+          "value": "13"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "select DISTINCT(\"local_day\") from (select \"local_day\",\"value\" from \"weatherflow_forecast_hourly\" WHERE $timeFilter)",
@@ -8496,6 +9380,57 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "12h",
+          "value": "12h"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Interval",
+        "multi": false,
+        "name": "interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "4h",
+            "value": "4h"
+          },
+          {
+            "selected": false,
+            "text": "2h",
+            "value": "2h"
+          },
+          {
+            "selected": true,
+            "text": "1h",
+            "value": "1h"
+          }
+        ],
+        "query": "1d,12h,6h,4h,2h,1h",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       },
       {
         "current": {
@@ -8529,5 +9464,5 @@
   "timezone": "",
   "title": "Forecast",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 36
+  "version": 64
 }

@@ -17,7 +17,7 @@
   "gnetId": 13857,
   "graphTooltip": 0,
   "id": 338,
-  "iteration": 1620404041684,
+  "iteration": 1620962655101,
   "links": [
     {
       "asDropdown": true,
@@ -589,7 +589,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -668,7 +668,9 @@
           "measurement": "weatherflow_evt_strike",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND $timeFilter GROUP BY time(1s) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -772,6 +774,24 @@
             "indexByName": {},
             "renameByName": {}
           }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Distance"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
         }
       ],
       "type": "table"
@@ -822,7 +842,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1010,7 +1030,9 @@
           "measurement": "weatherflow_evt_strike",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND $timeFilter GROUP BY time(1s) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -1192,7 +1214,7 @@
       },
       "id": 82,
       "panels": [],
-      "repeatIteration": 1620404041684,
+      "repeatIteration": 1620962655101,
       "repeatPanelId": 51,
       "scopedVars": {
         "station_name": {
@@ -1366,7 +1388,7 @@
         }
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1620404041684,
+      "repeatIteration": 1620962655101,
       "repeatPanelId": 81,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1737,15 +1759,10 @@
       "options": {
         "frameIndex": 2,
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Date"
-          }
-        ]
+        "sortBy": []
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404041684,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620962655101,
       "repeatPanelId": 68,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1826,7 +1843,9 @@
           "measurement": "weatherflow_evt_strike",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND $timeFilter GROUP BY time(1s) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -1930,6 +1949,24 @@
             "indexByName": {},
             "renameByName": {}
           }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Distance"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
         }
       ],
       "type": "table"
@@ -1980,8 +2017,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404041684,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620962655101,
       "repeatPanelId": 69,
       "repeatedByRow": true,
       "scopedVars": {
@@ -2091,7 +2128,7 @@
         "show": true
       },
       "pluginVersion": "7.5.4",
-      "repeatIteration": 1620404041684,
+      "repeatIteration": 1620962655101,
       "repeatPanelId": 74,
       "repeatedByRow": true,
       "reverseYBuckets": false,
@@ -2174,7 +2211,9 @@
           "measurement": "weatherflow_evt_strike",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND $timeFilter GROUP BY time(1s) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -2513,7 +2552,7 @@
             "value": "10m"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "5m",
             "value": "5m"
           },
@@ -2523,7 +2562,7 @@
             "value": "2m"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "1m",
             "value": "1m"
           },
@@ -2561,5 +2600,5 @@
   "timezone": "browser",
   "title": "Rain and Lightning",
   "uid": "lux4rd0labs_weatherflow_20",
-  "version": 73
+  "version": 78
 }

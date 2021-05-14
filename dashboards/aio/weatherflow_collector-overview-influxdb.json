@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 313,
-  "iteration": 1620404030682,
+  "iteration": 1620955894765,
   "links": [
     {
       "asDropdown": false,
@@ -26,7 +26,7 @@
       "tags": [],
       "targetBlank": true,
       "title": "WeatherFlow Collector Web Site",
-      "tooltip": "Visit Web Site",
+      "tooltip": "Visit WeatherFlow Collector Web Site",
       "type": "link",
       "url": "https://labs.lux4rd0.com/weatherflow-collector/"
     },
@@ -62,7 +62,7 @@
       "links": [],
       "options": {
         "folderId": null,
-        "maxItems": 10,
+        "maxItems": 20,
         "query": "",
         "showHeadings": false,
         "showRecentlyViewed": false,
@@ -72,7 +72,7 @@
           "weatherflow-collector"
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "timeFrom": null,
       "timeShift": null,
       "type": "dashlist"
@@ -95,7 +95,7 @@
         "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png\"></center>",
         "mode": "html"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "timeFrom": null,
       "timeShift": null,
       "transparent": true,
@@ -105,15 +105,17 @@
       "circleMaxSize": "40",
       "circleMinSize": 2,
       "colors": [
-        "#470834",
-        "#640d36",
-        "#7f1a32",
-        "#952e2a",
-        "#a5471e",
-        "#ad6207",
-        "#ad7f00",
-        "#a49c00",
-        "#91b910"
+        "#000000",
+        "#1b0c00",
+        "#351800",
+        "#502400",
+        "#6a3000",
+        "#853b00",
+        "#9f4700",
+        "#ba5300",
+        "#d45f00",
+        "#ef6b00",
+        "#ff780a"
       ],
       "datasource": "InfluxDB - weatherflow",
       "decimals": 1,
@@ -134,13 +136,13 @@
       "initialZoom": "7",
       "interval": null,
       "locationData": "table",
-      "mapCenter": "custom",
-      "mapCenterLatitude": "38.3",
-      "mapCenterLongitude": "-92.4",
+      "mapCenter": "Last GeoHash",
+      "mapCenterLatitude": "38.62049",
+      "mapCenterLongitude": "-90.52121",
       "maxDataPoints": null,
       "mouseWheelZoom": true,
       "pluginVersion": "7.5.4",
-      "showLegend": true,
+      "showLegend": false,
       "stickyLabels": false,
       "tableQueryOptions": {
         "geohashField": "geohash",
@@ -206,7 +208,7 @@
           "tags": []
         }
       ],
-      "thresholds": "1,2,3,4,5,6,7,8",
+      "thresholds": "1,2,3,4,5,6,7,8,9,10",
       "timeFrom": null,
       "title": "Wind Speed",
       "type": "grafana-worldmap-panel",
@@ -684,7 +686,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1204,7 +1206,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -1720,7 +1722,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2240,7 +2242,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2756,7 +2758,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -2825,6 +2827,150 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Observed Low",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#000000",
+                "value": null
+              },
+              {
+                "color": "#180a1f",
+                "value": 28.939498
+              },
+              {
+                "color": "#30143d",
+                "value": 29.234799
+              },
+              {
+                "color": "#471d5c",
+                "value": 29.5301
+              },
+              {
+                "color": "#5f277b",
+                "value": 29.825401
+              },
+              {
+                "color": "#773199",
+                "value": 30.416003
+              },
+              {
+                "color": "#8f3bb8",
+                "value": 30.711304
+              }
+            ]
+          },
+          "unit": "pressurehg"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 13
+      },
+      "id": 39,
+      "interval": null,
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.6",
+      "repeatDirection": "v",
+      "scopedVars": {
+        "station_name": {
+          "selected": false,
+          "text": "Buzzard Bend",
+          "value": "Buzzard Bend"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Station Pressure",
+          "groupBy": [
+            {
+              "params": [
+                "5m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "station_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=",
+              "value": "remote-rest"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Humidity",
       "transformations": [],
       "type": "stat"
     },
@@ -3267,40 +3413,48 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#470834",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#640d36",
+                      "color": "#1b0c00",
                       "value": 1
                     },
                     {
-                      "color": "#7f1a32",
+                      "color": "#351800",
                       "value": 2
                     },
                     {
-                      "color": "#952e2a",
+                      "color": "#502400",
                       "value": 3
                     },
                     {
-                      "color": "#a5471e",
+                      "color": "#6a3000",
                       "value": 4
                     },
                     {
-                      "color": "#ad6207",
+                      "color": "#853b00",
                       "value": 5
                     },
                     {
-                      "color": "#ad7f00",
+                      "color": "#9f4700",
                       "value": 6
                     },
                     {
-                      "color": "#a49c00",
+                      "color": "#ba5300",
                       "value": 7
                     },
                     {
-                      "color": "#91b910",
+                      "color": "#d45f00",
                       "value": 8
+                    },
+                    {
+                      "color": "#ef6b00",
+                      "value": 9
+                    },
+                    {
+                      "color": "#ff780a",
+                      "value": 10
                     }
                   ]
                 }
@@ -3311,8 +3465,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 10,
-        "x": 0,
+        "w": 5,
+        "x": 5,
         "y": 13
       },
       "id": 8,
@@ -3333,7 +3487,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": null,
       "repeatDirection": "v",
       "scopedVars": {
@@ -3515,7 +3669,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -4128,7 +4282,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "scopedVars": {
         "station_name": {
           "selected": false,
@@ -4628,79 +4782,79 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#404040",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#404047",
+                      "color": "#030803",
                       "value": 5
                     },
                     {
-                      "color": "#3f3f4e",
+                      "color": "#060f05",
                       "value": 10
                     },
                     {
-                      "color": "#3e3e56",
+                      "color": "#091708",
                       "value": 15
                     },
                     {
-                      "color": "#3d3d5e",
+                      "color": "#0c1e0a",
                       "value": 20
                     },
                     {
-                      "color": "#3b3b66",
+                      "color": "#0f260d",
                       "value": 25
                     },
                     {
-                      "color": "#3a3a6f",
+                      "color": "#122d0f",
                       "value": 30
                     },
                     {
-                      "color": "#373778",
+                      "color": "#153512",
                       "value": 35
                     },
                     {
-                      "color": "#353581",
+                      "color": "#183c14",
                       "value": 40
                     },
                     {
-                      "color": "#32328b",
+                      "color": "#1c4417",
                       "value": 45
                     },
                     {
-                      "color": "#2e2e95",
+                      "color": "#1f4b19",
                       "value": 50
                     },
                     {
-                      "color": "#2a2a9f",
+                      "color": "#22531c",
                       "value": 55
                     },
                     {
-                      "color": "#2626aa",
+                      "color": "#255a1e",
                       "value": 60
                     },
                     {
-                      "color": "#2222b5",
+                      "color": "#286221",
                       "value": 65
                     },
                     {
-                      "color": "#1d1dc0",
+                      "color": "#2b6923",
                       "value": 70
                     },
                     {
-                      "color": "#1818cc",
+                      "color": "#2e7126",
                       "value": 85
                     },
                     {
-                      "color": "#1313d8",
+                      "color": "#317828",
                       "value": 90
                     },
                     {
-                      "color": "#0d0de5",
+                      "color": "#34802b",
                       "value": 95
                     },
                     {
-                      "color": "#0707f2",
+                      "color": "#37872d",
                       "value": 100
                     }
                   ]
@@ -4734,7 +4888,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": null,
       "repeatDirection": "v",
       "scopedVars": {
@@ -4811,9 +4965,9 @@
         "x": 0,
         "y": 17
       },
-      "id": 29,
+      "id": 40,
       "panels": [],
-      "repeatIteration": 1620404030682,
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 28,
       "scopedVars": {
         "station_name": {
@@ -5255,7 +5409,7 @@
         "y": 18
       },
       "hideTimeOverride": true,
-      "id": 30,
+      "id": 41,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -5273,8 +5427,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404030682,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 4,
       "repeatedByRow": true,
       "scopedVars": {
@@ -5778,7 +5932,7 @@
         "y": 18
       },
       "hideTimeOverride": true,
-      "id": 31,
+      "id": 42,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -5796,8 +5950,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404030682,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 14,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6297,7 +6451,7 @@
         "y": 18
       },
       "hideTimeOverride": true,
-      "id": 32,
+      "id": 43,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -6315,8 +6469,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404030682,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 21,
       "repeatedByRow": true,
       "scopedVars": {
@@ -6820,7 +6974,7 @@
         "y": 18
       },
       "hideTimeOverride": true,
-      "id": 33,
+      "id": 44,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -6838,8 +6992,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404030682,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 16,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7339,7 +7493,7 @@
         "y": 18
       },
       "hideTimeOverride": true,
-      "id": 34,
+      "id": 45,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -7357,8 +7511,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404030682,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -7429,6 +7583,153 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Observed Low",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#000000",
+                "value": null
+              },
+              {
+                "color": "#180a1f",
+                "value": 28.939498
+              },
+              {
+                "color": "#30143d",
+                "value": 29.234799
+              },
+              {
+                "color": "#471d5c",
+                "value": 29.5301
+              },
+              {
+                "color": "#5f277b",
+                "value": 29.825401
+              },
+              {
+                "color": "#773199",
+                "value": 30.416003
+              },
+              {
+                "color": "#8f3bb8",
+                "value": 30.711304
+              }
+            ]
+          },
+          "unit": "pressurehg"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 22
+      },
+      "id": 46,
+      "interval": null,
+      "maxDataPoints": null,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.6",
+      "repeatDirection": "v",
+      "repeatIteration": 1620955894765,
+      "repeatPanelId": 39,
+      "repeatedByRow": true,
+      "scopedVars": {
+        "station_name": {
+          "selected": false,
+          "text": "Savannah Crossing",
+          "value": "Savannah Crossing"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Station Pressure",
+          "groupBy": [
+            {
+              "params": [
+                "5m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "station_pressure"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* .0295301"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=",
+              "value": "remote-rest"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Humidity",
       "transformations": [],
       "type": "stat"
     },
@@ -7871,40 +8172,48 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#470834",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#640d36",
+                      "color": "#1b0c00",
                       "value": 1
                     },
                     {
-                      "color": "#7f1a32",
+                      "color": "#351800",
                       "value": 2
                     },
                     {
-                      "color": "#952e2a",
+                      "color": "#502400",
                       "value": 3
                     },
                     {
-                      "color": "#a5471e",
+                      "color": "#6a3000",
                       "value": 4
                     },
                     {
-                      "color": "#ad6207",
+                      "color": "#853b00",
                       "value": 5
                     },
                     {
-                      "color": "#ad7f00",
+                      "color": "#9f4700",
                       "value": 6
                     },
                     {
-                      "color": "#a49c00",
+                      "color": "#ba5300",
                       "value": 7
                     },
                     {
-                      "color": "#91b910",
+                      "color": "#d45f00",
                       "value": 8
+                    },
+                    {
+                      "color": "#ef6b00",
+                      "value": 9
+                    },
+                    {
+                      "color": "#ff780a",
+                      "value": 10
                     }
                   ]
                 }
@@ -7915,11 +8224,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 10,
-        "x": 0,
+        "w": 5,
+        "x": 5,
         "y": 22
       },
-      "id": 35,
+      "id": 47,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -7937,10 +8246,10 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1620404030682,
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 8,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8103,7 +8412,7 @@
         "y": 22
       },
       "hideTimeOverride": true,
-      "id": 36,
+      "id": 48,
       "interval": null,
       "links": [],
       "maxDataPoints": 1,
@@ -8122,8 +8431,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404030682,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 10,
       "repeatedByRow": true,
       "scopedVars": {
@@ -8720,7 +9029,7 @@
         "x": 14,
         "y": 22
       },
-      "id": 37,
+      "id": 49,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -8738,8 +9047,8 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
-      "repeatIteration": 1620404030682,
+      "pluginVersion": "7.5.6",
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 18,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9241,79 +9550,79 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#404040",
+                      "color": "#000000",
                       "value": null
                     },
                     {
-                      "color": "#404047",
+                      "color": "#030803",
                       "value": 5
                     },
                     {
-                      "color": "#3f3f4e",
+                      "color": "#060f05",
                       "value": 10
                     },
                     {
-                      "color": "#3e3e56",
+                      "color": "#091708",
                       "value": 15
                     },
                     {
-                      "color": "#3d3d5e",
+                      "color": "#0c1e0a",
                       "value": 20
                     },
                     {
-                      "color": "#3b3b66",
+                      "color": "#0f260d",
                       "value": 25
                     },
                     {
-                      "color": "#3a3a6f",
+                      "color": "#122d0f",
                       "value": 30
                     },
                     {
-                      "color": "#373778",
+                      "color": "#153512",
                       "value": 35
                     },
                     {
-                      "color": "#353581",
+                      "color": "#183c14",
                       "value": 40
                     },
                     {
-                      "color": "#32328b",
+                      "color": "#1c4417",
                       "value": 45
                     },
                     {
-                      "color": "#2e2e95",
+                      "color": "#1f4b19",
                       "value": 50
                     },
                     {
-                      "color": "#2a2a9f",
+                      "color": "#22531c",
                       "value": 55
                     },
                     {
-                      "color": "#2626aa",
+                      "color": "#255a1e",
                       "value": 60
                     },
                     {
-                      "color": "#2222b5",
+                      "color": "#286221",
                       "value": 65
                     },
                     {
-                      "color": "#1d1dc0",
+                      "color": "#2b6923",
                       "value": 70
                     },
                     {
-                      "color": "#1818cc",
+                      "color": "#2e7126",
                       "value": 85
                     },
                     {
-                      "color": "#1313d8",
+                      "color": "#317828",
                       "value": 90
                     },
                     {
-                      "color": "#0d0de5",
+                      "color": "#34802b",
                       "value": 95
                     },
                     {
-                      "color": "#0707f2",
+                      "color": "#37872d",
                       "value": 100
                     }
                   ]
@@ -9329,7 +9638,7 @@
         "x": 19,
         "y": 22
       },
-      "id": 38,
+      "id": 50,
       "interval": null,
       "maxDataPoints": null,
       "options": {
@@ -9347,10 +9656,10 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.6",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1620404030682,
+      "repeatIteration": 1620955894765,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -9495,5 +9804,5 @@
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 42
+  "version": 51
 }
