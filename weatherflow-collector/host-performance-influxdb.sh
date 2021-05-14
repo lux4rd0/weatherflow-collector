@@ -246,4 +246,4 @@ echo "host_performance_duration:${host_performance_duration}"
 ##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${host_performance_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} duration=${host_performance_duration}"

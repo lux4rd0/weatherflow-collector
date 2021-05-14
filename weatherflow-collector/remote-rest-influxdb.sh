@@ -168,9 +168,9 @@ then
 ## Print Metrics
 ##
 
-echo "collector_type=${collector_type},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name},timezone=${timezone}"
+echo "collector_type=${collector_type},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name},timezone=${timezone}
 
-echo "timestamp=${timestamp}
+timestamp=${timestamp}
 air_temperature=${air_temperature}
 barometric_pressure=${barometric_pressure}
 station_pressure=${station_pressure}
@@ -192,7 +192,7 @@ wind_lull=${wind_lull}
 solar_radiation=${solar_radiation}
 uv=${uv}
 brightness=${brightness}
-illuminance=${illuminance}
+illuminance=${brightness}
 lightning_strike_last_epoch=${lightning_strike_last_epoch}
 lightning_strike_last_distance=${lightning_strike_last_distance}
 lightning_strike_count=${lightning_strike_count}
@@ -232,47 +232,47 @@ fi
 ## Remove Null Entries
 ##
 
-if [ "${rain_accumulated_final_rain_check}" = "null" ]
+if [ "${rain_accumulated_final_rain_check}" = "null" ] || [ -z "${rain_accumulated_final_rain_check}" ]
 then
 rain_accumulated_final_rain_check="0"
 fi
 
-if [ "${local_daily_rain_accumulation_final_rain_check}" = "null" ]
+if [ "${local_daily_rain_accumulation_final_rain_check}" = "null" ] || [ -z "${local_daily_rain_accumulation_final_rain_check}" ]
 then
 local_daily_rain_accumulation_final_rain_check="0"
 fi
 
-if [ "${strike_last_dist}" = "null" ]
+if [ "${strike_last_dist}" = "null" ] || [ -z "${strike_last_dist}" ]
 then
 strike_last_dist="0"
 fi
 
-if [ "${strike_last_epoch}" = "null" ]
+if [ "${strike_last_epoch}" = "null" ] || [ -z "${strike_last_epoch}" ]
 then
 strike_last_epoch="0"
 fi
 
-if [ "${precip_accum_local_yesterday_final}" = "null" ]
+if [ "${precip_accum_local_yesterday_final}" = "null" ] || [ -z "${precip_accum_local_yesterday_final}" ]
 then
 precip_accum_local_yesterday_final="0"
 fi
 
-if [ "${precip_minutes_local_yesterday}" = "null" ]
+if [ "${precip_minutes_local_yesterday}" = "null" ] || [ -z "${precip_minutes_local_yesterday}" ]
 then
 precip_minutes_local_yesterday="0"
 fi
 
-if [ "${precip_accum_local_yesterday_final}" = "null" ]
+if [ "${precip_accum_local_yesterday_final}" = "null" ] || [ -z "${precip_accum_local_yesterday_final}" ]
 then
 precip_accum_local_yesterday_final="0"
 fi
 
-if [ "${precip_analysis_type_yesterday}" = "null" ]
+if [ "${precip_analysis_type_yesterday}" = "null" ] || [ -z "${precip_analysis_type_yesterday}" ]
 then
 precip_analysis_type_yesterday="0"
 fi
 
-if [ "${precip_minutes_local_yesterday_final}" = "null" ]
+if [ "${precip_minutes_local_yesterday_final}" = "null" ] || [ -z "${precip_minutes_local_yesterday_final}" ]
 then
 precip_minutes_local_yesterday_final="0"
 fi
@@ -286,7 +286,7 @@ weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} air_temperature=${air_temperature} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} barometric_pressure=${barometric_pressure} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} brightness=${brightness} ${timestamp}000000000
-weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} illuminance=${illuminance} ${timestamp}000000000
+weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} illuminance=${brightness} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} delta_t=${delta_t} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} dew_point=${dew_point} ${timestamp}000000000
 weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} feels_like=${feels_like} ${timestamp}000000000
@@ -338,6 +338,6 @@ fi
 ##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},source=${function},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped} duration=${observations_duration}"
+weatherflow_system_stats,collector_type=${collector_type},host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${observations_duration}"
 
 done < /dev/stdin

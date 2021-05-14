@@ -30,7 +30,9 @@ threads=$WEATHERFLOW_COLLECTOR_THREADS
 timezone=$WEATHERFLOW_COLLECTOR_TIMEZONE
 token=$WEATHERFLOW_COLLECTOR_TOKEN
 
-# Run hourly build flag
+##
+## Run hourly build flag
+##
 
 hourly_time_build_check=$WEATHERFLOW_COLLECTOR_HOURLY_FORECAST_RUN
 
@@ -166,22 +168,13 @@ station_name_escaped="${station_name_escaped//=/\\=}"
 ##
 
 function ProgressBar {
-# Process data
     let _progress=(${1}*100/${2}*100)/100
     let _done=(${_progress}*4)/10
     let _left=40-$_done
-# Build progressbar string lengths
     _fill=$(printf "%${_done}s")
     _empty=$(printf "%${_left}s")
-
-# 1.2 Build progressbar strings and print the ProgressBar line
-# 1.2.1 Output example:                           
-# 1.2.1.1 Progress : [########################################] 100%
 printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
-
 }
-
-
 
 ##
 ## Only run Current Conditions in collector mode
@@ -261,18 +254,18 @@ then
 # Print Metrics
 #
 
-echo "${day}"
+echo "${day}
 
-echo "forecast_daily_air_temp_high ${air_temp_high}"
-echo "forecast_daily_air_temp_low ${air_temp_low}"
-echo "forecast_daily_conditions ${conditions}"
-echo "forecast_daily_day_num ${day_num}"
-echo "forecast_daily_day_start_local ${day_start_local}"
-echo "forecast_daily_icon ${icon}"
-echo "forecast_daily_month_num ${month_num}"
-echo "forecast_daily_precip_probability ${precip_probability}"
-echo "forecast_daily_sunrise ${sunrise}"
-echo "forecast_daily_sunset ${sunset}"
+air_temp_high: ${air_temp_high}
+air_temp_low: ${air_temp_low}
+conditions: ${conditions}
+day_num: ${day_num}
+day_start_local: ${day_start_local}
+icon: ${icon}
+month_num: ${month_num}
+precip_probability: ${precip_probability}
+sunrise: ${sunrise}
+sunset: ${sunset}"
 
 fi
 
@@ -350,7 +343,7 @@ fi
 ##
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} forecast_daily_build_duration=${daily_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} forecast_daily_build_duration=${daily_duration}"
 
 fi
 
@@ -607,7 +600,7 @@ fi
 ## Send Timer Metrics To InfluxDB
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} forecast_hourly_build_duration=${hourly_duration}"
+weatherflow_system_stats,collector_type=${collector_type},elevation=${elevation},host_hostname=${host_hostname},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} forecast_hourly_build_duration=${hourly_duration}"
 
 fi
 
