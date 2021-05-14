@@ -28,7 +28,7 @@ Like all projects - weatherflow-collector is always in a flux state based on try
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:2.8.5
+    lux4rd0/weatherflow-collector:2.9.0
     lux4rd0/weatherflow-collector:latest
     
 Correct environmental variables are required for the container to function. The following script may be used:
@@ -42,6 +42,7 @@ The script takes the following details about your InfluxDB and your WeatherFlow 
     WEATHERFLOW_COLLECTOR_INFLUXDB_URL
     WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
     WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL #optional
+    WEATHERFLOW_COLLECTOR_PERF_INTERVAL #option
     WEATHERFLOW_COLLECTOR_THREADS
     WEATHERFLOW_COLLECTOR_TOKEN
 
@@ -51,7 +52,7 @@ An example command line would be:
     WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD="4L851Jtjaasdset7AJoFasdoFYR3di5Zniew28" \
     WEATHERFLOW_COLLECTOR_INFLUXDB_URL="http://influxdb01.com:8086/write?db=weatherflow" \
     WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME="influxdb" \
-    WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL="http://loki:3100/loki/api/v1/push" \
+    WEATHERFLOW_COLLECTOR_PERF_INTERVAL="60" \
     WEATHERFLOW_COLLECTOR_THREADS="4" \
     WEATHERFLOW_COLLECTOR_TOKEN="a22afsa7-0dcc-4918-9f9a-923dfd339f41c" \
     bash ./generate_docker-compose.sh
@@ -81,6 +82,7 @@ This script will spin up a docker container to import all of the observed metric
 - [remote-rest](https://weatherflow.github.io/Tempest/api/swagger/#/observations/)
 - [remote-socket](https://weatherflow.github.io/Tempest/api/ws.html)
 - remote-import
+- host-performance
 
 ````WEATHERFLOW_COLLECTOR_DEBUG````
 
@@ -151,6 +153,10 @@ The URL connection string for your Grafana Loki endpoint. For example: http://lo
 
 The longitude of your WeatherFlow device.
 
+````WEATHERFLOW_COLLECTOR_PERF_INTERVAL````
+
+How often (in seconds) the host-performance container polls your host for performance metrics. Defaults to 60 seconds if not set.
+
 ````WEATHERFLOW_COLLECTOR_PUBLIC_NAME````
 
 The Public Name of your WeatherFlow device.
@@ -202,6 +208,10 @@ This setting populates the WeatherFlow Forecast dashboards by polling the daily 
 #### remote-import
 
 This setting populates the WeatherFlow local-udp metrics from the WeatherFlow Cloud or logs stored in Grafana Loki.
+
+#### host-performance
+
+This optional container populates a few metrics about the performance of the host (or hosts). Metrics for CPU percentage, process queue, and memory are shown in the System Stats dashboard.
 
 ## Grafana Dashboards
 
