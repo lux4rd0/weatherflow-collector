@@ -16,9 +16,9 @@ source weatherflow-collector_details.sh
 
 debug=$WEATHERFLOW_COLLECTOR_DEBUG
 function=$WEATHERFLOW_COLLECTOR_FUNCTION
-healthcheck=$WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED
-host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
+healthcheck=$WEATHERFLOW_COLLECTOR_HEALTHCHECK
 healthcheck_interval=$WEATHERFLOW_COLLECTOR_HEALTHCHECK_INTERVAL
+host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
 influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
@@ -50,6 +50,8 @@ fi
 ##
 ## Check for required intervals
 ##
+
+if [ -z "${healthcheck}" ]; then echo "${echo_bold}start:${echo_normal} WEATHERFLOW_COLLECTOR_HEALTHCHECK environmental variable not set. Defaulting to true."; healthcheck="true"; fi
 
 if [ -z "${healthcheck_interval}" ]; then echo "${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} WEATHERFLOW_COLLECTOR_HEALTHCHECK_INTERVAL environmental variable not set. Defaulting to 60 seconds"; healthcheck_interval="5"; fi
 

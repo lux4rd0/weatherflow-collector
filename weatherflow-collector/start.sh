@@ -52,6 +52,7 @@ disable_remote_forecast=$WEATHERFLOW_COLLECTOR_DISABLE_REMOTE_FORECAST
 disable_remote_rest=$WEATHERFLOW_COLLECTOR_DISABLE_REMOTE_REST
 disable_remote_socket=$WEATHERFLOW_COLLECTOR_DISABLE_REMOTE_SOCKET
 function=$WEATHERFLOW_COLLECTOR_FUNCTION
+healthcheck=$WEATHERFLOW_COLLECTOR_HEALTHCHECK
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
@@ -67,9 +68,11 @@ token=$WEATHERFLOW_COLLECTOR_TOKEN
 ## Check for required variables
 ##
 
+if [ -z "${collector_type}" ]; then echo "${echo_bold}${echo_color_start}start:${echo_normal} WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE environmental variable not set. Defaulting to start."; collector_type="start"; fi
+
 if [ -z "${function}" ]; then echo "${echo_bold}start:${echo_normal} WEATHERFLOW_COLLECTOR_FUNCTION environmental variable not set. Defaulting to collector."; function="collector"; fi
 
-if [ -z "${collector_type}" ]; then echo "${echo_bold}${echo_color_start}start:${echo_normal} WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE environmental variable not set. Defaulting to start."; collector_type="start"; fi
+if [ -z "${healthcheck}" ]; then echo "${echo_bold}start:${echo_normal} WEATHERFLOW_COLLECTOR_HEALTHCHECK environmental variable not set. Defaulting to true."; healthcheck="true"; fi
 
 if [ -z "${threads}" ]; then echo "WEATHERFLOW_COLLECTOR_THREADS environmental variable not set. Defaulting to 4 thread"; threads="4"; fi
 
@@ -423,7 +426,7 @@ echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} date_start
 echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} date_end: $date_end - ${days_end_echo}"
 
 #echo "./logcli-linux-amd64 query --addr=\"${logcli_host_url}\" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app=\"weatherflow-collector\",collector_type=\""${collector_type}"\",station_name=\""${station_name}"\"}' | jq --slurp | jq -r .[0].line"
-./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp | jq -r .[0].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./exec-remote-forecast.sh
+./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp | jq -r .[0].line | ./exec-remote-forecast.sh
 
 done
 
@@ -485,7 +488,7 @@ do
 
 (
 
-echo "${logs}" | jq -r .["${log}"].line | WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED="false" ./exec-remote-rest.sh
+echo "${logs}" | jq -r .["${log}"].line | ./exec-remote-rest.sh
 
 ) &
 

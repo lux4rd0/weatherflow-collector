@@ -15,7 +15,7 @@ source weatherflow-collector_details.sh
 ##
 
 debug=$WEATHERFLOW_COLLECTOR_DEBUG
-
+healthcheck=$WEATHERFLOW_COLLECTOR_HEALTHCHECK
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
 import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
@@ -64,6 +64,7 @@ Debug Environmental Variables
 
 collector_type=${collector_type}
 debug=${debug}
+healthcheck=${healthcheck}
 function=${function}
 host_hostname=${host_hostname}
 import_days=${import_days}
