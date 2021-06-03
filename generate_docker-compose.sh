@@ -114,6 +114,7 @@ for station_number in $(seq 0 $number_of_stations_minus_one) ; do
 
 station_name[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].name)
 station_name_dc[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].name | sed 's/ /\_/g' | sed 's/.*/\L&/' | sed 's|[<>,]||g')
+station_id[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].station_id)
 
 done
 
@@ -285,6 +286,7 @@ docker run --rm \\
   -e WEATHERFLOW_COLLECTOR_INFLUXDB_URL=${influxdb_url} \\
   -e WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME=${influxdb_username} \\
   -e WEATHERFLOW_COLLECTOR_LOGCLI_URL=${logcli_host_url} \\
+  -e WEATHERFLOW_COLLECTOR_STATION_ID=\"${station_id[$station_number]}\" \\
   -e WEATHERFLOW_COLLECTOR_THREADS=${threads} \\
   -e WEATHERFLOW_COLLECTOR_TOKEN=${token} \\
   lux4rd0/weatherflow-collector:latest
@@ -304,8 +306,6 @@ then
 # ╦  ┌─┐┬┌─┬  ╦┌┬┐┌─┐┌─┐┬─┐┌┬┐       ┬─┐┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌─┐┌─┐┌┬┐
 # ║  │ │├┴┐│  ║│││├─┘│ │├┬┘ │   ───  ├┬┘├┤ ││││ │ │ ├┤───├┤ │ │├┬┘├┤ │  ├─┤└─┐ │ 
 # ╩═╝└─┘┴ ┴┴  ╩┴ ┴┴  └─┘┴└─ ┴        ┴└─└─┘┴ ┴└─┘ ┴ └─┘  └  └─┘┴└─└─┘└─┘┴ ┴└─┘ ┴ 
-
-
 
 echo "
 
