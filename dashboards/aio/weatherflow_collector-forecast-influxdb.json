@@ -9356,9 +9356,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "13",
-          "value": "13"
+          "selected": false
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "select DISTINCT(\"local_day\") from (select \"local_day\",\"value\" from \"weatherflow_forecast_hourly\" WHERE $timeFilter)",
