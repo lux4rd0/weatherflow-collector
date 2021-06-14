@@ -20,13 +20,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.6"
+      "version": "8.0.1"
     },
     {
       "type": "panel",
       "id": "grafana-worldmap-panel",
       "name": "Worldmap Panel",
-      "version": "0.3.2"
+      "version": "0.3.3"
     },
     {
       "type": "datasource",
@@ -64,7 +64,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1620962403628,
+  "iteration": 1623693192888,
   "links": [
     {
       "asDropdown": false,
@@ -96,10 +96,6 @@
   "panels": [
     {
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 8,
         "w": 4,
@@ -120,7 +116,7 @@
           "weatherflow-collector"
         ]
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "timeFrom": null,
       "timeShift": null,
       "type": "dashlist"
@@ -128,10 +124,6 @@
     {
       "datasource": null,
       "description": "",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -143,7 +135,7 @@
         "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png\"></center>",
         "mode": "html"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "timeFrom": null,
       "timeShift": null,
       "transparent": true,
@@ -151,27 +143,22 @@
     },
     {
       "circleMaxSize": "40",
-      "circleMinSize": 2,
+      "circleMinSize": "20",
       "colors": [
-        "#000000",
-        "#1b0c00",
-        "#351800",
-        "#502400",
-        "#6a3000",
-        "#853b00",
-        "#9f4700",
-        "#ba5300",
-        "#d45f00",
-        "#ef6b00",
-        "#ff780a"
+        "#6e6e6e",
+        "#6b7676",
+        "#687e7e",
+        "#638687",
+        "#5d8e8f",
+        "#569697",
+        "#4d9ea0",
+        "#40a7a8",
+        "#2eafb1",
+        "#00b7ba"
       ],
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
       "decimals": 1,
       "esMetric": "Count",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 8,
         "w": 8,
@@ -256,7 +243,7 @@
           "tags": []
         }
       ],
-      "thresholds": "1,2,3,4,5,6,7,8,9,10",
+      "thresholds": ".5,1,1.5,2,2.5,3,4,5,6",
       "timeFrom": null,
       "title": "Wind Speed",
       "type": "grafana-worldmap-panel",
@@ -727,7 +714,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Current",
@@ -1240,7 +1227,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Forecast High",
@@ -1749,7 +1736,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Observed High",
@@ -2262,7 +2249,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2771,7 +2758,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Observed Low",
@@ -2906,7 +2893,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "repeatDirection": "v",
       "targets": [
         {
@@ -3486,7 +3473,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -3559,67 +3546,103 @@
           },
           "mappings": [
             {
-              "from": "0",
-              "id": 0,
-              "text": "↑",
-              "to": "22.5",
-              "type": 2
+              "options": {
+                "from": 337.5,
+                "result": {
+                  "index": 0,
+                  "text": "↓"
+                },
+                "to": 360
+              },
+              "type": "range"
             },
             {
-              "from": "22.5",
-              "id": 1,
-              "text": "↗",
-              "to": "77.5",
-              "type": 2
+              "options": {
+                "from": 292.5,
+                "result": {
+                  "index": 1,
+                  "text": "↘"
+                },
+                "to": 337.5
+              },
+              "type": "range"
             },
             {
-              "from": "77.5",
-              "id": 2,
-              "text": "→",
-              "to": "112.5",
-              "type": 2
+              "options": {
+                "from": 247.5,
+                "result": {
+                  "index": 2,
+                  "text": "→"
+                },
+                "to": 292.5
+              },
+              "type": "range"
             },
             {
-              "from": "112.5",
-              "id": 3,
-              "text": "↘",
-              "to": "157.5",
-              "type": 2
+              "options": {
+                "from": 202.5,
+                "result": {
+                  "index": 3,
+                  "text": "↗"
+                },
+                "to": 247.5
+              },
+              "type": "range"
             },
             {
-              "from": "157.5",
-              "id": 4,
-              "text": "↓",
-              "to": "202.5",
-              "type": 2
+              "options": {
+                "from": 157.5,
+                "result": {
+                  "index": 4,
+                  "text": "↑"
+                },
+                "to": 202.5
+              },
+              "type": "range"
             },
             {
-              "from": "202.5",
-              "id": 5,
-              "text": "↙",
-              "to": "247.5",
-              "type": 2
+              "options": {
+                "from": 112.5,
+                "result": {
+                  "index": 5,
+                  "text": "↖"
+                },
+                "to": 157.5
+              },
+              "type": "range"
             },
             {
-              "from": "247.5",
-              "id": 6,
-              "text": "←",
-              "to": "292.5",
-              "type": 2
+              "options": {
+                "from": 77.5,
+                "result": {
+                  "index": 6,
+                  "text": "←"
+                },
+                "to": 112.5
+              },
+              "type": "range"
             },
             {
-              "from": "292.5",
-              "id": 7,
-              "text": "↖",
-              "to": "337.5",
-              "type": 2
+              "options": {
+                "from": 22.5,
+                "result": {
+                  "index": 7,
+                  "text": "↙"
+                },
+                "to": 77.5
+              },
+              "type": "range"
             },
             {
-              "from": "337.5",
-              "id": 8,
-              "text": "↑",
-              "to": "360",
-              "type": 2
+              "options": {
+                "from": 0,
+                "result": {
+                  "index": 8,
+                  "text": "↓"
+                },
+                "to": 22.5
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -3661,7 +3684,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -3710,7 +3733,6 @@
       "timeFrom": "60s",
       "timeShift": "5s",
       "title": "Wind Direction",
-      "transparent": true,
       "type": "stat"
     },
     {
@@ -4267,7 +4289,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Chance",
@@ -4866,7 +4888,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4930,7 +4952,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "weatherflow-collector",
@@ -4957,7 +4979,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -4981,7 +5002,6 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -4994,7 +5014,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Overview",
+  "title": "WeatherFlow Collector - Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 11
+  "version": 55,
+  "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }
