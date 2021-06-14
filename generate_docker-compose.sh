@@ -247,11 +247,11 @@ if [ -n "$loki_client_url" ]
 
 then
 
-echo "WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL: ${loki_client_url}" >> docker-compose.yml
+echo "      WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL: ${loki_client_url}" >> docker-compose.yml
 
 fi
 
-echo "WEATHERFLOW_COLLECTOR_THREADS: ${threads}
+echo "      WEATHERFLOW_COLLECTOR_THREADS: ${threads}
       WEATHERFLOW_COLLECTOR_TOKEN: ${token}
     image: lux4rd0/weatherflow-collector:latest
     ports:
