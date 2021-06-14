@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 335,
-  "iteration": 1620955932796,
+  "id": 336,
+  "iteration": 1623692075482,
   "links": [
     {
       "asDropdown": true,
@@ -38,16 +38,9 @@
         "x": 0,
         "y": 0
       },
-      "id": 27,
+      "id": 28,
       "panels": [],
       "repeat": "station_name",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "title": "$station_name",
       "type": "row"
     },
@@ -69,7 +62,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
@@ -81,7 +75,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -218,18 +219,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "Air",
@@ -287,6 +281,336 @@
             }
           ],
           "tz": "$tz"
+        },
+        {
+          "alias": "Feels Like",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "feels_like"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 9/5 + 32"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Heat Index",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "heat_index"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 9/5 + 32"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Wind Chill",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wind_chill"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 9/5 + 32"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Dry Bulb",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)  tz('$tz')",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Wet Bulb",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wet_bulb_temperature"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 9/5 + 32"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Dew Point",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "dew_point"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 9/5 + 32"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -308,12 +632,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -322,7 +647,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -364,7 +696,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 8,
+        "w": 7,
         "x": 9,
         "y": 1
       },
@@ -377,18 +709,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "Relative Humidity",
@@ -434,15 +759,72 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "local-udp"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Air Density",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "air_density"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 0.062448979591837"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ],
           "tz": "$tz"
         }
       ],
       "timeFrom": null,
-      "title": "Relative Humidity",
+      "title": "Relative Humidity / Air Density",
       "type": "timeseries"
     },
     {
@@ -459,12 +841,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -473,7 +856,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "decimals": 3,
           "mappings": [],
@@ -492,8 +882,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 7,
-        "x": 17,
+        "w": 6,
+        "x": 16,
         "y": 1
       },
       "id": 4,
@@ -505,18 +895,11 @@
           "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "Station Pressure",
@@ -586,6 +969,139 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "text": "→"
+                },
+                "1": {
+                  "text": "↗"
+                },
+                "-1": {
+                  "text": "↘"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": -1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "dark-blue",
+                "value": -1
+              },
+              {
+                "color": "orange",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 2,
+        "x": 22,
+        "y": 1
+      },
+      "id": 26,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.1",
+      "targets": [
+        {
+          "alias": "Trending",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "pressure_trend"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Trending",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "fixedColor": "yellow",
             "mode": "fixed"
           },
@@ -594,12 +1110,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -608,7 +1125,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -620,44 +1144,9 @@
               }
             ]
           },
-          "unit": "kwatth"
+          "unit": "none"
         },
         "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "lux"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "C"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "UV"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-orange",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 58
-              }
-            ]
-          },
           {
             "matcher": {
               "id": "byName",
@@ -667,9 +1156,17 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-yellow",
+                  "fixedColor": "#8ab8ff",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "unit",
+                "value": "lux"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
               }
             ]
           },
@@ -682,9 +1179,21 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "light-orange",
+                  "fixedColor": "#1f60c4",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 40
+              },
+              {
+                "id": "unit",
+                "value": "UV"
+              },
+              {
+                "id": "decimals",
+                "value": 2
               }
             ]
           },
@@ -697,9 +1206,17 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "super-light-yellow",
+                  "fixedColor": "#8f3bb8",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 40
+              },
+              {
+                "id": "unit",
+                "value": "kwatth"
               }
             ]
           }
@@ -720,18 +1237,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "Solar Radiation",
@@ -901,67 +1411,103 @@
           },
           "mappings": [
             {
-              "from": "0",
-              "id": 0,
-              "text": "↑",
-              "to": "22.5",
-              "type": 2
+              "options": {
+                "from": 337.5,
+                "result": {
+                  "index": 0,
+                  "text": "↓"
+                },
+                "to": 360
+              },
+              "type": "range"
             },
             {
-              "from": "22.5",
-              "id": 1,
-              "text": "↗",
-              "to": "77.5",
-              "type": 2
+              "options": {
+                "from": 292.5,
+                "result": {
+                  "index": 1,
+                  "text": "↘"
+                },
+                "to": 337.5
+              },
+              "type": "range"
             },
             {
-              "from": "77.5",
-              "id": 2,
-              "text": "→",
-              "to": "112.5",
-              "type": 2
+              "options": {
+                "from": 247.5,
+                "result": {
+                  "index": 2,
+                  "text": "→"
+                },
+                "to": 292.5
+              },
+              "type": "range"
             },
             {
-              "from": "112.5",
-              "id": 3,
-              "text": "↘",
-              "to": "157.5",
-              "type": 2
+              "options": {
+                "from": 202.5,
+                "result": {
+                  "index": 3,
+                  "text": "↗"
+                },
+                "to": 247.5
+              },
+              "type": "range"
             },
             {
-              "from": "157.5",
-              "id": 4,
-              "text": "↓",
-              "to": "202.5",
-              "type": 2
+              "options": {
+                "from": 157.5,
+                "result": {
+                  "index": 4,
+                  "text": "↑"
+                },
+                "to": 202.5
+              },
+              "type": "range"
             },
             {
-              "from": "202.5",
-              "id": 5,
-              "text": "↙",
-              "to": "247.5",
-              "type": 2
+              "options": {
+                "from": 112.5,
+                "result": {
+                  "index": 5,
+                  "text": "↖"
+                },
+                "to": 157.5
+              },
+              "type": "range"
             },
             {
-              "from": "247.5",
-              "id": 6,
-              "text": "←",
-              "to": "292.5",
-              "type": 2
+              "options": {
+                "from": 77.5,
+                "result": {
+                  "index": 6,
+                  "text": "←"
+                },
+                "to": 112.5
+              },
+              "type": "range"
             },
             {
-              "from": "292.5",
-              "id": 7,
-              "text": "↖",
-              "to": "337.5",
-              "type": 2
+              "options": {
+                "from": 22.5,
+                "result": {
+                  "index": 7,
+                  "text": "↙"
+                },
+                "to": 77.5
+              },
+              "type": "range"
             },
             {
-              "from": "337.5",
-              "id": 8,
-              "text": "↑",
-              "to": "360",
-              "type": 2
+              "options": {
+                "from": 0,
+                "result": {
+                  "index": 8,
+                  "text": "↓"
+                },
+                "to": 22.5
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -1003,14 +1549,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -1077,12 +1616,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1091,7 +1631,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "min": 0,
@@ -1124,18 +1671,11 @@
           "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "Wind Speed",
@@ -1213,21 +1753,29 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
+            "fillOpacity": 40,
             "gradientMode": "none",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1251,7 +1799,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-purple",
+                  "fixedColor": "#1f60c4",
                   "mode": "fixed"
                 }
               },
@@ -1261,7 +1809,11 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 60
+                "value": 70
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "opacity"
               }
             ]
           },
@@ -1273,12 +1825,12 @@
             "properties": [
               {
                 "id": "custom.gradientMode",
-                "value": "none"
+                "value": "opacity"
               },
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-blue",
+                  "fixedColor": "#8f3bb8",
                   "mode": "fixed"
                 }
               },
@@ -1288,7 +1840,7 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 60
+                "value": 30
               }
             ]
           },
@@ -1301,17 +1853,17 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "yellow",
+                  "fixedColor": "#8ab8ff",
                   "mode": "fixed"
                 }
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 60
+                "value": 100
               },
               {
                 "id": "custom.gradientMode",
-                "value": "none"
+                "value": "opacity"
               },
               {
                 "id": "custom.fillBelowTo",
@@ -1355,18 +1907,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "Gust",
@@ -1589,12 +2134,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1603,7 +2149,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1634,18 +2187,11 @@
           "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "Accumulated Rain",
@@ -1690,9 +2236,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1700,7 +2246,65 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Accumulated Rain",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accum_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 0.039370"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1708,104 +2312,36 @@
       "type": "timeseries"
     },
     {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolatePlasma",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
       "datasource": "InfluxDB - weatherflow",
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "lengthmi"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Average Distance"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Strike Count"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "short"
-              }
-            ]
-          }
-        ]
-      },
       "gridPos": {
         "h": 6,
         "w": 12,
         "x": 12,
         "y": 19
       },
+      "heatmap": {},
+      "hideZeroBuckets": true,
+      "highlightCards": true,
       "id": 24,
       "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
+      "legend": {
+        "show": true
       },
       "pluginVersion": "7.4.0",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
+      "reverseYBuckets": false,
       "targets": [
         {
           "alias": "Average Distance",
@@ -1823,6 +2359,7 @@
               "type": "fill"
             }
           ],
+          "hide": true,
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1850,9 +2387,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1860,7 +2397,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Strike Count",
@@ -1878,7 +2416,7 @@
               "type": "fill"
             }
           ],
-          "hide": false,
+          "hide": true,
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1900,9 +2438,9 @@
           ],
           "tags": [
             {
-              "key": "hub_sn",
+              "key": "station_name",
               "operator": "=~",
-              "value": "/^$hub_sn$/"
+              "value": "/^$station_name$/"
             },
             {
               "condition": "AND",
@@ -1910,1931 +2448,44 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "title": "Lightning Strike",
-      "type": "timeseries"
-    },
-    {
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 25
-      },
-      "id": 28,
-      "panels": [],
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 27,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "title": "$station_name",
-      "type": "row"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "fahrenheit"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Air"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#8f3bb8",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Feels Like"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#fade2a",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Heat Index"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#f2495c",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Wind Chill"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#1f60c4",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Dry Bulb"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#5794f2",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Wet Bulb"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#8ab8ff",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Dew Point"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#1f60c4",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 9,
-        "x": 0,
-        "y": 26
-      },
-      "id": 29,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Air",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
           ],
+          "tz": "$tz"
+        },
+        {
           "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "air_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ],
-          "tz": "$tz"
+          "query": "SELECT distinct(\"lightning_strike_avg_distance\") * 0.62137 FROM \"weatherflow_obs\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND lightning_strike_avg_distance <= 42 AND lightning_strike_avg_distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
+          "rawQuery": true,
+          "refId": "C"
         }
       ],
       "timeFrom": null,
-      "title": "Temperature",
-      "transformations": [],
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "humidity"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "lb/ft^3"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgba(115, 191, 105, 0.72)",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+      "title": "Lightning Strikes / Distance",
+      "tooltip": {
+        "show": true,
+        "showHistogram": true
       },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 9,
-        "y": 26
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
       },
-      "id": 30,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": 0,
+        "format": "velocitymph",
+        "logBase": 1,
+        "max": null,
+        "min": "0",
+        "show": true,
+        "splitFactor": null
       },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 3,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Relative Humidity",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "relative_humidity"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=",
-              "value": "local-udp"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": null,
-      "title": "Relative Humidity",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false
-          },
-          "decimals": 3,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "pressurehg"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 7,
-        "x": 17,
-        "y": 26
-      },
-      "id": 31,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 4,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Station Pressure",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "station_pressure"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* .0295301"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Station Pressure",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "yellow",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "kwatth"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "lux"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "C"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "UV"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-orange",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 58
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Illuminance"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "UV"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Solar Radiation"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "super-light-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 15,
-        "x": 9,
-        "y": 32
-      },
-      "id": 32,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 22,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Solar Radiation",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "solar_radiation"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Illuminance",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "illuminance"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "UV",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "uv"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": null,
-      "title": "Solar Radiation / Illuminance / UV",
-      "type": "timeseries"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "0",
-              "id": 0,
-              "text": "↑",
-              "to": "22.5",
-              "type": 2
-            },
-            {
-              "from": "22.5",
-              "id": 1,
-              "text": "↗",
-              "to": "77.5",
-              "type": 2
-            },
-            {
-              "from": "77.5",
-              "id": 2,
-              "text": "→",
-              "to": "112.5",
-              "type": 2
-            },
-            {
-              "from": "112.5",
-              "id": 3,
-              "text": "↘",
-              "to": "157.5",
-              "type": 2
-            },
-            {
-              "from": "157.5",
-              "id": 4,
-              "text": "↓",
-              "to": "202.5",
-              "type": 2
-            },
-            {
-              "from": "202.5",
-              "id": 5,
-              "text": "↙",
-              "to": "247.5",
-              "type": 2
-            },
-            {
-              "from": "247.5",
-              "id": 6,
-              "text": "←",
-              "to": "292.5",
-              "type": 2
-            },
-            {
-              "from": "292.5",
-              "id": 7,
-              "text": "↖",
-              "to": "337.5",
-              "type": 2
-            },
-            {
-              "from": "337.5",
-              "id": 8,
-              "text": "↑",
-              "to": "360",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-purple",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 0,
-        "y": 38
-      },
-      "hideTimeOverride": true,
-      "id": 33,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 1,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.6",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 20,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Wind Direction",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "weatherflow_rapid_wind",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_direction"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": "60s",
-      "timeShift": "5s",
-      "title": "Wind Direction (Rapid)",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 60,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "velocitymph"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 4,
-        "y": 38
-      },
-      "hideTimeOverride": true,
-      "id": 34,
-      "interval": "5s",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 14,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Wind Speed",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_rapid_wind",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_speed"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 2.236936"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": "60s",
-      "timeShift": null,
-      "title": "Wind Speed (Rapid / 60 Seconds)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "green",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "velocitymph"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Average"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-purple",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillBelowTo",
-                "value": "Lull"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 60
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Gust"
-            },
-            "properties": [
-              {
-                "id": "custom.gradientMode",
-                "value": "none"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillBelowTo",
-                "value": "Average"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 60
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Lull"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "yellow",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 60
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "none"
-              },
-              {
-                "id": "custom.fillBelowTo",
-                "value": "Lull * 0"
-              },
-              {
-                "id": "custom.fillBelowTo",
-                "value": " "
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": " "
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgba(115, 191, 105, 0)",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 16,
-        "x": 8,
-        "y": 38
-      },
-      "id": 35,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 5,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Gust",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_gust"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " * 2.236936"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Average",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_avg"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " * 2.236936"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Lull",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_lull"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " * 2.236936"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": null,
-      "title": "Wind Speed",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "",
-            "binary": {
-              "left": "Lull",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "0"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Lull": false,
-              "Lull * 0": false
-            },
-            "indexByName": {},
-            "renameByName": {
-              " ": "",
-              "Lull * 0": " "
-            }
-          }
-        }
-      ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "in"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 0,
-        "y": 44
-      },
-      "id": 36,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 25,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Accumulated Rain",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "precip_accumulated"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 0.039370"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "hub_sn",
-              "operator": "=~",
-              "value": "/^$hub_sn$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "title": "Accumulated Rain",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "lengthmi"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Average Distance"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Strike Count"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "short"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 44
-      },
-      "id": 37,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.0",
-      "repeatIteration": 1620955932796,
-      "repeatPanelId": 24,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "Average Distance",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "lightning_strike_avg_distance"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 0.62137"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "hub_sn",
-              "operator": "=~",
-              "value": "/^$hub_sn$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ]
-        },
-        {
-          "alias": "Strike Count",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "lightning_strike_count"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "hub_sn",
-              "operator": "=~",
-              "value": "/^$hub_sn$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "title": "Lightning Strike",
-      "type": "timeseries"
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "weatherflow-collector",
@@ -3845,9 +2496,13 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -3865,60 +2520,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "local-udp",
-          "value": "local-udp"
-        },
-        "description": null,
-        "error": null,
-        "hide": 2,
-        "includeAll": false,
-        "label": "",
-        "multi": false,
-        "name": "collector_type",
-        "options": [
-          {
-            "selected": true,
-            "text": "local-udp",
-            "value": "local-udp"
-          }
-        ],
-        "query": "local-udp",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "InfluxDB - weatherflow",
-        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\" WHERE \"collector_type\" =~ /^$collector_type$/",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Hub",
-        "multi": true,
-        "name": "hub_sn",
-        "options": [],
-        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\" WHERE \"collector_type\" =~ /^$collector_type$/",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 5,
-        "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -3946,10 +2547,40 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "remote-socket",
+          "value": "remote-socket"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Collector Type",
+        "multi": false,
+        "name": "collector_type",
+        "options": [
+          {
+            "selected": false,
+            "text": "remote-rest",
+            "value": "remote-rest"
+          },
+          {
+            "selected": true,
+            "text": "remote-socket",
+            "value": "remote-socket"
+          }
+        ],
+        "query": "remote-rest,remote-socket",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       },
       {
         "allValue": null,
@@ -4050,7 +2681,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Today So Far (local-udp)",
-  "uid": "lux4rd0labs_weatherflow_18",
-  "version": 5
+  "title": "Today So Far (remote)",
+  "uid": "lux4rd0labs_weatherflow_19",
+  "version": 16
 }
