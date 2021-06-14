@@ -1,21 +1,43 @@
 FROM grafana/promtail:2.2.1
 
-RUN apt-get update && apt-get install -y bc curl dumb-init bash python procps coreutils sysstat
+RUN apt-get update && apt-get install -y bc curl dumb-init bash python procps coreutils sysstat vim
 
 RUN mkdir /weatherflow-collector
 
-COPY health_check.sh host-performance-influxdb.sh local-udp-influxdb.sh loki-config.yml remote-forecast-influxdb.sh remote-import-influxdb.sh remote-rest-influxdb.sh remote-socket-influxdb.sh start.sh logcli-linux-amd64 weatherflow-listener.py websocat_amd64-linux-static jq /weatherflow-collector/
+COPY exec-health-check.sh \
+exec-host-performance.sh \
+exec-local-udp.sh \
+exec-remote-forecast.sh \
+exec-remote-import.sh \
+exec-remote-rest.sh \
+exec-remote-socket.sh \
+health_check.sh \
+jq \
+logcli-linux-amd64 \
+loki-config.yml \
+start-health-check.sh \
+start-host-performance.sh \
+start-local-udp.sh \
+start-remote-forecast.sh \
+start-remote-import.sh \
+start-remote-rest.sh \
+start-remote-socket.sh \
+start.sh \
+weatherflow-collector_details.sh \
+weatherflow-listener.py \
+websocat_amd64-linux-static \
+/weatherflow-collector/
 
 COPY jq /usr/bin/
 
-RUN chmod +x /weatherflow-collector/health_check.sh /weatherflow-collector/host-performance-influxdb.sh /weatherflow-collector/local-udp-influxdb.sh /weatherflow-collector/remote-forecast-influxdb.sh /weatherflow-collector/remote-rest-influxdb.sh /weatherflow-collector/logcli-linux-amd64 /weatherflow-collector/jq /weatherflow-collector/remote-socket-influxdb.sh /weatherflow-collector/start.sh /weatherflow-collector/websocat_amd64-linux-static /weatherflow-collector/remote-import-influxdb.sh
+WORKDIR /weatherflow-collector
+
+RUN chmod a+x *.sh
+
+RUN chmod +x logcli-linux-amd64 websocat_amd64-linux-static
 
 RUN chmod +x /usr/bin/jq
 
-HEALTHCHECK --interval=5s --timeout=3s CMD /weatherflow-collector/health_check.sh
-
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-
-WORKDIR /weatherflow-collector
 
 CMD ["/weatherflow-collector/start.sh"]
