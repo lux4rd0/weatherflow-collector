@@ -14,7 +14,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.6"
+      "version": "8.0.1"
+    },
+    {
+      "type": "panel",
+      "id": "heatmap",
+      "name": "Heatmap",
+      "version": ""
     },
     {
       "type": "datasource",
@@ -53,7 +59,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1620962582065,
+  "iteration": 1623693307255,
   "links": [
     {
       "asDropdown": true,
@@ -98,7 +104,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
@@ -110,7 +117,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -247,7 +261,7 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -660,12 +674,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -674,7 +689,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -729,7 +751,7 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -861,12 +883,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -875,7 +898,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "decimals": 3,
           "mappings": [],
@@ -907,7 +937,7 @@
           "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -986,28 +1016,18 @@
           "decimals": 0,
           "mappings": [
             {
-              "from": "",
-              "id": 1,
-              "text": "↗",
-              "to": "",
-              "type": 1,
-              "value": "1"
-            },
-            {
-              "from": "",
-              "id": 2,
-              "text": "→",
-              "to": "",
-              "type": 1,
-              "value": "0"
-            },
-            {
-              "from": "",
-              "id": 3,
-              "text": "↘",
-              "to": "",
-              "type": 1,
-              "value": "-1"
+              "options": {
+                "0": {
+                  "text": "→"
+                },
+                "1": {
+                  "text": "↗"
+                },
+                "-1": {
+                  "text": "↘"
+                }
+              },
+              "type": "value"
             }
           ],
           "max": 1,
@@ -1060,7 +1080,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Trending",
@@ -1132,12 +1152,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1146,7 +1167,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1158,44 +1186,9 @@
               }
             ]
           },
-          "unit": "kwatth"
+          "unit": "none"
         },
         "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "lux"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "C"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "UV"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-orange",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 58
-              }
-            ]
-          },
           {
             "matcher": {
               "id": "byName",
@@ -1205,9 +1198,17 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "semi-dark-yellow",
+                  "fixedColor": "#8ab8ff",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "unit",
+                "value": "lux"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
               }
             ]
           },
@@ -1220,9 +1221,21 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "light-orange",
+                  "fixedColor": "#1f60c4",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 40
+              },
+              {
+                "id": "unit",
+                "value": "UV"
+              },
+              {
+                "id": "decimals",
+                "value": 2
               }
             ]
           },
@@ -1235,9 +1248,17 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "super-light-yellow",
+                  "fixedColor": "#8f3bb8",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 40
+              },
+              {
+                "id": "unit",
+                "value": "kwatth"
               }
             ]
           }
@@ -1258,7 +1279,7 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -1432,67 +1453,103 @@
           },
           "mappings": [
             {
-              "from": "0",
-              "id": 0,
-              "text": "↑",
-              "to": "22.5",
-              "type": 2
+              "options": {
+                "from": 337.5,
+                "result": {
+                  "index": 0,
+                  "text": "↓"
+                },
+                "to": 360
+              },
+              "type": "range"
             },
             {
-              "from": "22.5",
-              "id": 1,
-              "text": "↗",
-              "to": "77.5",
-              "type": 2
+              "options": {
+                "from": 292.5,
+                "result": {
+                  "index": 1,
+                  "text": "↘"
+                },
+                "to": 337.5
+              },
+              "type": "range"
             },
             {
-              "from": "77.5",
-              "id": 2,
-              "text": "→",
-              "to": "112.5",
-              "type": 2
+              "options": {
+                "from": 247.5,
+                "result": {
+                  "index": 2,
+                  "text": "→"
+                },
+                "to": 292.5
+              },
+              "type": "range"
             },
             {
-              "from": "112.5",
-              "id": 3,
-              "text": "↘",
-              "to": "157.5",
-              "type": 2
+              "options": {
+                "from": 202.5,
+                "result": {
+                  "index": 3,
+                  "text": "↗"
+                },
+                "to": 247.5
+              },
+              "type": "range"
             },
             {
-              "from": "157.5",
-              "id": 4,
-              "text": "↓",
-              "to": "202.5",
-              "type": 2
+              "options": {
+                "from": 157.5,
+                "result": {
+                  "index": 4,
+                  "text": "↑"
+                },
+                "to": 202.5
+              },
+              "type": "range"
             },
             {
-              "from": "202.5",
-              "id": 5,
-              "text": "↙",
-              "to": "247.5",
-              "type": 2
+              "options": {
+                "from": 112.5,
+                "result": {
+                  "index": 5,
+                  "text": "↖"
+                },
+                "to": 157.5
+              },
+              "type": "range"
             },
             {
-              "from": "247.5",
-              "id": 6,
-              "text": "←",
-              "to": "292.5",
-              "type": 2
+              "options": {
+                "from": 77.5,
+                "result": {
+                  "index": 6,
+                  "text": "←"
+                },
+                "to": 112.5
+              },
+              "type": "range"
             },
             {
-              "from": "292.5",
-              "id": 7,
-              "text": "↖",
-              "to": "337.5",
-              "type": 2
+              "options": {
+                "from": 22.5,
+                "result": {
+                  "index": 7,
+                  "text": "↙"
+                },
+                "to": 77.5
+              },
+              "type": "range"
             },
             {
-              "from": "337.5",
-              "id": 8,
-              "text": "↑",
-              "to": "360",
-              "type": 2
+              "options": {
+                "from": 0,
+                "result": {
+                  "index": 8,
+                  "text": "↓"
+                },
+                "to": 22.5
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -1534,7 +1591,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -1574,8 +1631,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ],
           "tz": "$tz"
@@ -1601,12 +1658,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1615,7 +1673,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "min": 0,
@@ -1648,7 +1713,7 @@
           "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -1704,8 +1769,8 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ],
           "tz": "$tz"
@@ -1730,21 +1795,29 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
+            "fillOpacity": 40,
             "gradientMode": "none",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1768,7 +1841,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-purple",
+                  "fixedColor": "#1f60c4",
                   "mode": "fixed"
                 }
               },
@@ -1778,7 +1851,11 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 60
+                "value": 70
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "opacity"
               }
             ]
           },
@@ -1790,12 +1867,12 @@
             "properties": [
               {
                 "id": "custom.gradientMode",
-                "value": "none"
+                "value": "opacity"
               },
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-blue",
+                  "fixedColor": "#8f3bb8",
                   "mode": "fixed"
                 }
               },
@@ -1805,7 +1882,7 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 60
+                "value": 30
               }
             ]
           },
@@ -1818,17 +1895,17 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "yellow",
+                  "fixedColor": "#8ab8ff",
                   "mode": "fixed"
                 }
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 60
+                "value": 100
               },
               {
                 "id": "custom.gradientMode",
-                "value": "none"
+                "value": "opacity"
               },
               {
                 "id": "custom.fillBelowTo",
@@ -1872,7 +1949,7 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -2099,12 +2176,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -2113,7 +2191,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -2144,7 +2229,7 @@
           "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -2200,8 +2285,65 @@
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=",
-              "value": "remote-socket"
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            }
+          ],
+          "tz": "$tz"
+        },
+        {
+          "alias": "Accumulated Rain",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accum_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 0.039370"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
             }
           ],
           "tz": "$tz"
@@ -2212,97 +2354,36 @@
       "type": "timeseries"
     },
     {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolatePlasma",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
       "datasource": "${DS_INFLUXDB_- WEATHERFLOW}",
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "lengthmi"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Average Distance"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Strike Count"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "short"
-              }
-            ]
-          }
-        ]
-      },
       "gridPos": {
         "h": 6,
         "w": 12,
         "x": 12,
         "y": 19
       },
+      "heatmap": {},
+      "hideZeroBuckets": true,
+      "highlightCards": true,
       "id": 24,
       "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
+      "legend": {
+        "show": true
       },
       "pluginVersion": "7.4.0",
+      "reverseYBuckets": false,
       "targets": [
         {
           "alias": "Average Distance",
@@ -2320,6 +2401,7 @@
               "type": "fill"
             }
           ],
+          "hide": true,
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2376,7 +2458,7 @@
               "type": "fill"
             }
           ],
-          "hide": false,
+          "hide": true,
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2410,15 +2492,42 @@
             }
           ],
           "tz": "$tz"
+        },
+        {
+          "hide": false,
+          "query": "SELECT distinct(\"lightning_strike_avg_distance\") * 0.62137 FROM \"weatherflow_obs\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND lightning_strike_avg_distance <= 42 AND lightning_strike_avg_distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
+          "rawQuery": true,
+          "refId": "C"
         }
       ],
       "timeFrom": null,
-      "title": "Lightning Strike",
-      "type": "timeseries"
+      "title": "Lightning Strikes / Distance",
+      "tooltip": {
+        "show": true,
+        "showHistogram": true
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": 0,
+        "format": "velocitymph",
+        "logBase": 1,
+        "max": null,
+        "min": "0",
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "weatherflow-collector",
@@ -2445,7 +2554,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2469,7 +2577,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2477,9 +2584,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "remote-rest",
-          "value": "remote-rest"
+          "selected": true,
+          "text": "remote-socket",
+          "value": "remote-socket"
         },
         "description": null,
         "error": null,
@@ -2490,12 +2597,12 @@
         "name": "collector_type",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "remote-rest",
             "value": "remote-rest"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "remote-socket",
             "value": "remote-socket"
           }
@@ -2508,7 +2615,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1m",
           "value": "1m"
         },
@@ -2604,7 +2711,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Today So Far (remote)",
+  "title": "WeatherFlow Collector - Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 8
+  "version": 16,
+  "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }

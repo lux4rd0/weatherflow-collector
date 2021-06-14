@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 309,
-  "iteration": 1620955866586,
+  "iteration": 1623692027163,
   "links": [
     {
       "asDropdown": true,
@@ -45,13 +45,6 @@
       "id": 119,
       "panels": [],
       "repeat": "station_name",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "title": "$station_name",
       "type": "row"
     },
@@ -72,7 +65,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
@@ -84,7 +78,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -290,8 +291,8 @@
         ]
       },
       "gridPos": {
-        "h": 14,
-        "w": 12,
+        "h": 12,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -304,18 +305,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.5.2",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "$tag_forecast_hourly_days_out Days Out",
@@ -459,7 +453,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -468,7 +463,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -678,9 +680,9 @@
         ]
       },
       "gridPos": {
-        "h": 14,
-        "w": 12,
-        "x": 12,
+        "h": 12,
+        "w": 8,
+        "x": 8,
         "y": 1
       },
       "id": 115,
@@ -692,18 +694,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.5.2",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "$tag_forecast_hourly_days_out Days Out",
@@ -833,7 +828,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -842,393 +838,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "velocitymph"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Observed"
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgb(255, 255, 255)",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 4
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    30,
-                    3,
-                    3
-                  ],
-                  "fill": "dash"
-                }
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "none"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 3
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "0 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0eb215",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "1 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0eb93d",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "2 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0dc068",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "3 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0dc797",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0ccec9",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "5 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0cabd5",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "6 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0b80dc",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "7 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0a52e3",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "8 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0a1feb",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "9 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#2909f2",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 14,
-        "w": 8,
-        "x": 0,
-        "y": 15
-      },
-      "id": 116,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.5.2",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
-      "targets": [
-        {
-          "alias": "$tag_forecast_hourly_days_out Days Out",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "forecast_hourly_days_out"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
+            "thresholdsStyle": {
+              "mode": "off"
             }
-          ],
-          "measurement": "weatherflow_forecast_hourly",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_avg"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " * 2.236936"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "forecast_hourly_days_out",
-              "operator": "=~",
-              "value": "/^$forecast_hourly_days_out$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Observed",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_avg"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " * 2.236936"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=",
-              "value": "local-udp"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "title": "Wind",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 10,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
           },
           "mappings": [],
           "thresholds": {
@@ -1434,10 +1051,10 @@
         ]
       },
       "gridPos": {
-        "h": 14,
+        "h": 12,
         "w": 8,
-        "x": 8,
-        "y": 15
+        "x": 16,
+        "y": 1
       },
       "id": 125,
       "interval": "$interval",
@@ -1448,18 +1065,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.5.2",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
       "targets": [
         {
           "alias": "$tag_forecast_hourly_days_out Days Out",
@@ -1574,6 +1184,7 @@
     },
     {
       "datasource": "InfluxDB - weatherflow",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1589,403 +1200,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 10,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Observed"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgb(255, 255, 255)",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 4
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 3
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "none"
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    30,
-                    3,
-                    3
-                  ],
-                  "fill": "dash"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "0 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e4f90c",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "1 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#eae500",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "2 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#edd200",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "3 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#efbe00",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#eeab00",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "5 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#eb9800",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "6 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e78500",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "7 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e07205",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "8 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#d86014",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "9 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#ce4e1d",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 14,
-        "w": 8,
-        "x": 16,
-        "y": 15
-      },
-      "id": 117,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.5.2",
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Buzzard Bend",
-          "value": "Buzzard Bend"
-        }
-      },
-      "targets": [
-        {
-          "alias": "$tag_forecast_hourly_days_out Days Out",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "forecast_hourly_days_out"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_forecast_hourly",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "uv"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "forecast_hourly_days_out",
-              "operator": "=~",
-              "value": "/^$forecast_hourly_days_out$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Observed",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "uv"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=",
-              "value": "local-udp"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "title": "UV",
-      "type": "timeseries"
-    },
-    {
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 29
-      },
-      "id": 126,
-      "panels": [],
-      "repeatIteration": 1620955866586,
-      "repeatPanelId": 119,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "title": "$station_name",
-      "type": "row"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
@@ -1997,7 +1213,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -2009,7 +1232,7 @@
               }
             ]
           },
-          "unit": "fahrenheit"
+          "unit": "lengthin"
         },
         "overrides": [
           {
@@ -2059,7 +1282,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#29a996",
+                  "fixedColor": "#25bf5d",
                   "mode": "fixed"
                 }
               }
@@ -2074,7 +1297,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#35969a",
+                  "fixedColor": "#5bb358",
                   "mode": "fixed"
                 }
               }
@@ -2089,7 +1312,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#41839d",
+                  "fixedColor": "#79a753",
                   "mode": "fixed"
                 }
               }
@@ -2104,7 +1327,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#4d71a1",
+                  "fixedColor": "#8e9a4e",
                   "mode": "fixed"
                 }
               }
@@ -2119,7 +1342,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#595ea4",
+                  "fixedColor": "#a08c49",
                   "mode": "fixed"
                 }
               }
@@ -2134,7 +1357,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#654ba8",
+                  "fixedColor": "#af7e45",
                   "mode": "fixed"
                 }
               }
@@ -2149,7 +1372,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#7138ab",
+                  "fixedColor": "#bc6d41",
                   "mode": "fixed"
                 }
               }
@@ -2164,7 +1387,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#7d26af",
+                  "fixedColor": "#c85a3c",
                   "mode": "fixed"
                 }
               }
@@ -2179,7 +1402,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#8913b2",
+                  "fixedColor": "#d24139",
                   "mode": "fixed"
                 }
               }
@@ -2194,7 +1417,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#9500b6",
+                  "fixedColor": "#dc1335",
                   "mode": "fixed"
                 }
               }
@@ -2203,12 +1426,12 @@
         ]
       },
       "gridPos": {
-        "h": 14,
-        "w": 12,
+        "h": 11,
+        "w": 8,
         "x": 0,
-        "y": 30
+        "y": 13
       },
-      "id": 127,
+      "id": 126,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -2217,21 +1440,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620955866586,
-      "repeatPanelId": 89,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
       "targets": [
         {
           "alias": "$tag_forecast_hourly_days_out Days Out",
@@ -2265,7 +1478,7 @@
             [
               {
                 "params": [
-                  "air_temperature"
+                  "precip"
                 ],
                 "type": "field"
               },
@@ -2275,7 +1488,7 @@
               },
               {
                 "params": [
-                  "* 9/5 + 32"
+                  "* 0.039370"
                 ],
                 "type": "math"
               }
@@ -2322,7 +1535,7 @@
             [
               {
                 "params": [
-                  "air_temperature"
+                  "precip_accumulated"
                 ],
                 "type": "field"
               },
@@ -2332,7 +1545,7 @@
               },
               {
                 "params": [
-                  "* 9/5 + 32"
+                  "* 0.039370"
                 ],
                 "type": "math"
               }
@@ -2355,7 +1568,7 @@
         }
       ],
       "timeFrom": null,
-      "title": "Temperature",
+      "title": "Precipitation",
       "type": "timeseries"
     },
     {
@@ -2375,7 +1588,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -2384,384 +1598,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Observed"
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
             },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgb(255, 255, 255)",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 4
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 3
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "none"
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    30,
-                    3,
-                    3
-                  ],
-                  "fill": "dash"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "0 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#ff8400",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "1 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e3751c",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "2 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#c66739",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "3 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#aa5855",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#8e4971",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "5 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#713b8e",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "6 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#552caa",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "7 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#391dc6",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "8 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#1c0fe3",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "9 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0000ff",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 14,
-        "w": 12,
-        "x": 12,
-        "y": 30
-      },
-      "id": 128,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.5.2",
-      "repeatIteration": 1620955866586,
-      "repeatPanelId": 115,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "$tag_forecast_hourly_days_out Days Out",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "forecast_hourly_days_out"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
+            "thresholdsStyle": {
+              "mode": "off"
             }
-          ],
-          "measurement": "weatherflow_forecast_hourly",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "relative_humidity"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "forecast_hourly_days_out",
-              "operator": "=~",
-              "value": "/^$forecast_hourly_days_out$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Observed",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "relative_humidity"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=",
-              "value": "local-udp"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "title": "Humidity",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 10,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
           },
           "mappings": [],
           "thresholds": {
@@ -2971,12 +1815,12 @@
         ]
       },
       "gridPos": {
-        "h": 14,
+        "h": 11,
         "w": 8,
-        "x": 0,
-        "y": 44
+        "x": 8,
+        "y": 13
       },
-      "id": 129,
+      "id": 116,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -2985,21 +1829,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620955866586,
-      "repeatPanelId": 116,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
       "targets": [
         {
           "alias": "$tag_forecast_hourly_days_out Days Out",
@@ -3137,384 +1971,12 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 10,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "pressurehg"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Observed"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "rgb(255, 255, 255)",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 4
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 3
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "none"
-              },
-              {
-                "id": "custom.lineStyle",
-                "value": {
-                  "dash": [
-                    30,
-                    3,
-                    3
-                  ],
-                  "fill": "dash"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "0 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#00c9ff",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "1 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#1ccfe3",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "2 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#39d5c6",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "3 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#55dbaa",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "4 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#71e18e",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "5 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#8ee771",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "6 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#aaed55",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "7 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#c6f339",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "8 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e3f91c",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "9 Days Out"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#ffff00",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 14,
-        "w": 8,
-        "x": 8,
-        "y": 44
-      },
-      "id": 130,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltipOptions": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.5.2",
-      "repeatIteration": 1620955866586,
-      "repeatPanelId": 125,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
-      "targets": [
-        {
-          "alias": "$tag_forecast_hourly_days_out Days Out",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "forecast_hourly_days_out"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_forecast_hourly",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "sea_level_pressure"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "forecast_hourly_days_out",
-              "operator": "=~",
-              "value": "/^$forecast_hourly_days_out$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Observed",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "sea_level_pressure"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=",
-              "value": "remote-rest"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "title": "Pressure",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -3523,7 +1985,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -3733,12 +2202,12 @@
         ]
       },
       "gridPos": {
-        "h": 14,
+        "h": 11,
         "w": 8,
         "x": 16,
-        "y": 44
+        "y": 13
       },
-      "id": 131,
+      "id": 117,
       "interval": "$interval",
       "options": {
         "graph": {},
@@ -3747,21 +2216,11 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
       "pluginVersion": "7.5.2",
-      "repeatIteration": 1620955866586,
-      "repeatPanelId": 117,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "station_name": {
-          "selected": false,
-          "text": "Savannah Crossing",
-          "value": "Savannah Crossing"
-        }
-      },
       "targets": [
         {
           "alias": "$tag_forecast_hourly_days_out Days Out",
@@ -3876,7 +2335,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "weatherflow-collector",
@@ -3911,7 +2370,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -3939,7 +2397,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -3967,7 +2424,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -4063,5 +2519,5 @@
   "timezone": "",
   "title": "Forecast Vs Observed",
   "uid": "lux4rd0labs_weatherflow_13",
-  "version": 72
+  "version": 84
 }

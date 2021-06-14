@@ -15,9 +15,9 @@
   "description": "",
   "editable": true,
   "gnetId": 13858,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": 308,
-  "iteration": 1620955848970,
+  "iteration": 1623692013108,
   "links": [
     {
       "asDropdown": true,
@@ -48,7 +48,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -57,7 +58,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "max": 0,
@@ -136,7 +144,7 @@
           "displayMode": "table",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -298,7 +306,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -307,7 +316,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -346,7 +362,7 @@
           "displayMode": "table",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -409,6 +425,7 @@
           },
           "custom": {
             "align": "center",
+            "displayMode": "auto",
             "filterable": false
           },
           "mappings": [],
@@ -453,28 +470,18 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Active",
-                    "to": "",
-                    "type": 1,
-                    "value": "3"
-                  },
-                  {
-                    "from": "",
-                    "id": 2,
-                    "text": "Off",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "On",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
+                    "options": {
+                      "0": {
+                        "text": "Off"
+                      },
+                      "1": {
+                        "text": "On"
+                      },
+                      "3": {
+                        "text": "Active"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               },
@@ -626,7 +633,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "Uptime",
@@ -960,6 +967,7 @@
           },
           "custom": {
             "align": "center",
+            "displayMode": "auto",
             "filterable": false
           },
           "mappings": [],
@@ -1192,84 +1200,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -1289,16 +1252,9 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "repeat": "serial_number",
       "repeatDirection": "v",
-      "scopedVars": {
-        "serial_number": {
-          "selected": true,
-          "text": "ST-00031267",
-          "value": "ST-00031267"
-        }
-      },
       "targets": [
         {
           "alias": "Firmware Version",
@@ -1648,84 +1604,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -1757,7 +1668,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "repeat": "obs_serial_number",
       "targets": [
         {
@@ -1884,84 +1795,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -1993,7 +1859,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -2120,84 +1986,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -2229,7 +2050,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -2356,84 +2177,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -2465,7 +2241,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -2592,84 +2368,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -2701,7 +2432,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -2828,84 +2559,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -2937,7 +2623,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -3064,84 +2750,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -3173,7 +2814,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -3300,84 +2941,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -3409,7 +3005,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -3535,84 +3131,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -3644,7 +3195,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -3771,84 +3322,39 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Sensors OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Lightning Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Lightning Noise",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Lightning Disturber",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Pressure Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "8"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Temperature Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "16"
-                  },
-                  {
-                    "from": "",
-                    "id": 8,
-                    "text": "RH Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "32"
-                  },
-                  {
-                    "from": "",
-                    "id": 9,
-                    "text": "Wind Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "64"
-                  },
-                  {
-                    "from": "",
-                    "id": 10,
-                    "text": "Precipitation Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "128"
-                  },
-                  {
-                    "from": "",
-                    "id": 11,
-                    "text": "Light/UV Failed",
-                    "to": "",
-                    "type": 1,
-                    "value": "256"
+                    "options": {
+                      "0": {
+                        "text": "Sensors OK"
+                      },
+                      "1": {
+                        "text": "Lightning Failed"
+                      },
+                      "2": {
+                        "text": "Lightning Noise"
+                      },
+                      "4": {
+                        "text": "Lightning Disturber"
+                      },
+                      "8": {
+                        "text": "Pressure Failed"
+                      },
+                      "16": {
+                        "text": "Temperature Failed"
+                      },
+                      "32": {
+                        "text": "RH Failed"
+                      },
+                      "64": {
+                        "text": "Wind Failed"
+                      },
+                      "128": {
+                        "text": "Precipitation Failed"
+                      },
+                      "256": {
+                        "text": "Light/UV Failed"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -3880,7 +3386,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "",
@@ -3976,7 +3482,7 @@
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "weatherflow-collector",
@@ -4007,7 +3513,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -4035,7 +3540,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -4063,7 +3567,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -4103,5 +3606,5 @@
   "timezone": "",
   "title": "Device Details",
   "uid": "lux4rd0labs_weatherflow_12",
-  "version": 7
+  "version": 8
 }

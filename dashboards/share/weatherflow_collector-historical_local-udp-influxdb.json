@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.6"
+      "version": "8.0.1"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1620962527902,
+  "iteration": 1623693240594,
   "links": [
     {
       "asDropdown": true,
@@ -93,12 +93,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 30,
-            "gradientMode": "none",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineStyle": {
@@ -110,7 +111,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -174,7 +182,7 @@
           "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -792,7 +800,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "alias": "High",
@@ -995,7 +1003,7 @@
               },
               {
                 "id": "unit",
-                "value": "in"
+                "value": "lengthin"
               },
               {
                 "id": "decimals",
@@ -1021,7 +1029,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.0.1",
       "targets": [
         {
           "groupBy": [
@@ -1125,12 +1133,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1139,7 +1148,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1198,10 +1214,10 @@
         "graph": {},
         "legend": {
           "calcs": [],
-          "displayMode": "list",
+          "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -1312,12 +1328,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1326,7 +1343,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "decimals": 3,
           "mappings": [],
@@ -1386,10 +1410,10 @@
         "graph": {},
         "legend": {
           "calcs": [],
-          "displayMode": "list",
+          "displayMode": "hidden",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -1520,7 +1544,8 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1529,7 +1554,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1546,36 +1578,58 @@
         "overrides": [
           {
             "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
+              "id": "byName",
+              "options": "Solar Radiation"
             },
             "properties": [
               {
-                "id": "unit",
-                "value": "lux"
+                "id": "color",
+                "value": {
+                  "fixedColor": "#8f3bb8",
+                  "mode": "fixed"
+                }
               }
             ]
           },
           {
             "matcher": {
-              "id": "byFrameRefID",
-              "options": "C"
+              "id": "byName",
+              "options": "UV"
             },
             "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#1f60c4",
+                  "mode": "fixed"
+                }
+              },
               {
                 "id": "unit",
                 "value": "UV"
               },
               {
+                "id": "custom.fillOpacity",
+                "value": 10
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Illuminance"
+            },
+            "properties": [
+              {
                 "id": "color",
                 "value": {
-                  "fixedColor": "light-orange",
+                  "fixedColor": "#8ab8ff",
                   "mode": "fixed"
                 }
               },
               {
-                "id": "custom.fillOpacity",
-                "value": 58
+                "id": "unit",
+                "value": "lux"
               }
             ]
           }
@@ -1596,7 +1650,7 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -1750,12 +1804,13 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 60,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 2,
@@ -1764,7 +1819,14 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1788,7 +1850,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-purple",
+                  "fixedColor": "#8F3BB8",
                   "mode": "fixed"
                 }
               }
@@ -1803,7 +1865,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-blue",
+                  "fixedColor": "#1F60C4",
                   "mode": "fixed"
                 }
               }
@@ -1818,7 +1880,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "light-blue",
+                  "fixedColor": "#8AB8FF",
                   "mode": "fixed"
                 }
               }
@@ -1841,7 +1903,7 @@
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "multi"
         }
       },
@@ -1894,7 +1956,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Average",
@@ -1944,7 +2007,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Lull",
@@ -1994,7 +2058,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2003,7 +2068,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "weatherflow-collector",
@@ -2030,7 +2095,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2054,7 +2118,6 @@
         "skipUrlSync": false,
         "sort": 5,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2201,7 +2264,8 @@
     ]
   },
   "timezone": "browser",
-  "title": "Historical (local-udp)",
+  "title": "WeatherFlow Collector - Historical (local-udp)",
   "uid": "lux4rd0labs_weatherflow_15",
-  "version": 9
+  "version": 15,
+  "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }
