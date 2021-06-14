@@ -69,7 +69,7 @@ if [ -z "${influxdb_username}" ]; then echo "${echo_bold}${echo_color_weatherflo
 
 if [ -z "${threads}" ]; then echo "${echo_bold}${echo_color_weatherflow}weatherflow-collector:${echo_normal} ${echo_bold}WEATHERFLOW_COLLECTOR_THREADS${echo_normal} was not set. Setting defaults: ${echo_bold}4${echo_normal} threads."; threads="4"; fi
 
-if [ -z "${token}" ]; then echo "${echo_bold}${echo_color_weatherflow}weatherflow-collector:${echo_normal} ${echo_bold}WEATHERFLOW_COLLECTOR_TOKEN${echo_normal} was not set. Missing authentication token. Please provide your token as an environmental variable."; exit 1; fi
+if [ -z "${token}" ]; then echo "${echo_bold}${echo_color_weatherflow}weatherflow-collector:${echo_normal} ${echo_bold}WEATHERFLOW_COLLECTOR_TOKEN${echo_normal} was not set. Missing authentication token. Please provide your token as an environmental variable."
 
 else
 
