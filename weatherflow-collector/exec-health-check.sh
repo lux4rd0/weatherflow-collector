@@ -126,16 +126,15 @@ then
 if [ "$(stat --format=%Y "${health_check_file}")" -le $(( $(date +%s) - health_check_interval )) ]
 then
 
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_events,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},source=${function},event=healthcheck,health_check_collector_type=${health_check_collector_type} up=0"
+if [ -n "$influxdb_url" ]; then curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "weatherflow_system_events,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},source=${function},event=healthcheck,health_check_collector_type=${health_check_collector_type} up=0"; fi
+
 echo "${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} $(date) - ${health_check_collector_type} check is more than ${health_check_interval} seconds old."; pkill -TERM -P "$(pgrep -f start-"${health_check_collector_type}".sh)"; pkill -f -TERM promtail
 echo "
-${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} ${health_check_collector_type} restarted."
+${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} $(date) - ${health_check_collector_type} restarted."
 
 else
 
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_events,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},source=${function},event=healthcheck,health_check_collector_type=${health_check_collector_type} up=1"
+if [ -n "$influxdb_url" ]; then curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "weatherflow_system_events,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},source=${function},event=healthcheck,health_check_collector_type=${health_check_collector_type} up=1"; fi
 
 if [ "$debug" == "true" ]
 then
@@ -145,11 +144,11 @@ fi
 
 else
 
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_events,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},source=${function},event=healthcheck,health_check_collector_type=${health_check_collector_type} up=0"
+if [ -n "$influxdb_url" ]; then curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "weatherflow_system_events,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},source=${function},event=healthcheck,health_check_collector_type=${health_check_collector_type} up=0"; fi
+
 echo "${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} $(date) - ${health_check_collector_type} check has failed. No check file found."; pkill -TERM -P "$(pgrep -f start-"${health_check_collector_type}".sh)"; pkill -f -TERM promtail
 echo "
-${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} ${health_check_collector_type} restarted."
+${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} $(date) - ${health_check_collector_type} restarted."
 
 fi
 
@@ -278,5 +277,7 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_health_check}${co
 ## Send Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="health_check",host_hostname=${host_hostname},source=${function} duration=${health_check_duration}"
+weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="health_check",host_hostname=${host_hostname},source=${function} duration=${health_check_duration}"; fi

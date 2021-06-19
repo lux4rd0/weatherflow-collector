@@ -151,10 +151,22 @@ fi
 done
 
 ##
+## Init Progress Bar
+##
+
+init_progress_full $(((import_days + 1) * number_of_devices))
+
+##
 ## Loop through the days for a full import
 ##
 
 for days_loop in $(seq "$import_days" -1 0) ; do
+
+##
+## Reset full import timer if reset_progress_total_full.txt file exists
+##
+
+if [ -f "reset_progress_total_full.txt" ]; then progress_start_date_full=$(date +%s); progress_total_full="$(((days_loop + 1) * number_of_devices))"; progress_count_full=0; rm reset_progress_total_full.txt; fi
 
 time_start=$(date --date="${days_loop} days ago 00:00" +%s)
 time_end=$((time_start + 86399))
@@ -173,6 +185,17 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_import}${c
 curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_import_url}&time_start=${time_start}&time_end=${time_end}" | ./exec-remote-import.sh
 
 #echo "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_import_url}&time_start=${time_start}&time_end=${time_end}"
+
+##
+## Increment Progress Bar
+##
+
+echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} Full Import Status Details"
+
+inc_progress_full
+
+echo "
+"
 
 done < "${remote_import_url}"
 

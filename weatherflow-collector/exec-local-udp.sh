@@ -190,7 +190,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} file doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "obs_st public_name is null"; fi; if [ -z "$station_name" ]; then echo "obs_st station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -227,9 +235,14 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_local_udp}${colle
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]
+
+then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -362,7 +375,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} file doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "obs_air public_name is null"; fi; if [ -z "$station_name" ]; then echo "obs_air station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -399,16 +420,15 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]
+
+then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
 fi
-
-##
-## Escape Names (Function)
-##
-
-escape_names
+fi
 
 ##
 ## Push to InfluxDB if WEATHERFLOW_COLLECTOR_INFLUXDB_URL is set
@@ -530,7 +550,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} file doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "obs_sky public_name is null"; fi; if [ -z "$station_name" ]; then echo "obs_sky station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -567,16 +595,13 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
 fi
-
-##
-## Escape Names (Function)
-##
-
-escape_names
+fi
 
 ##
 ## Push to InfluxDB if WEATHERFLOW_COLLECTOR_INFLUXDB_URL is set
@@ -679,7 +704,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "rapid_wind public_name is null"; fi; if [ -z "$station_name" ]; then echo "rapid_wind station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -716,16 +749,15 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]
+
+then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
 fi
-
-##
-## Escape Names (Function)
-##
-
-escape_names
+fi
 
 ##
 ## Push to InfluxDB if WEATHERFLOW_COLLECTOR_INFLUXDB_URL is set
@@ -817,7 +849,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} file doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "evt_strike public_name is null"; fi; if [ -z "$station_name" ]; then echo "evt_strike station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -854,16 +894,15 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]
+
+then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
 fi
-
-##
-## Escape Names (Function)
-##
-
-escape_names
+fi
 
 ##
 ## Push to InfluxDB if WEATHERFLOW_COLLECTOR_INFLUXDB_URL is set
@@ -952,7 +991,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} file doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "evt_precip public_name is null"; fi; if [ -z "$station_name" ]; then echo "evt_precip station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -989,9 +1036,14 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]
+
+then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -1076,7 +1128,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} file doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "device_status public_name is null"; fi; if [ -z "$station_name" ]; then echo "device_status station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -1113,16 +1173,15 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]
+
+then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
 fi
-
-##
-## Escape Names (Function)
-##
-
-escape_names
+fi
 
 ##
 ## Push to InfluxDB if WEATHERFLOW_COLLECTOR_INFLUXDB_URL is set
@@ -1233,7 +1292,15 @@ fi
 ##
 
 if [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
-if [ "${function}" == "collector" ]; then source local-udp-hub_sn-"${hub_sn}"-lookup.txt; fi
+if [ "${function}" == "collector" ]; then source_file="local-udp-hub_sn-"${hub_sn}"-lookup.txt"; if [ -f "${source_file}" ]; then source "${source_file}"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - meta lookup file ${echo_bold}${source_file}${echo_normal} file doesn't exist."; fi fi
+
+##
+## Escape Names (Function)
+##
+
+escape_names
+
+if [ -z "$public_name" ]; then echo "hub_status public_name is null"; fi; if [ -z "$station_name" ]; then echo "hub_status station_name is null"; fi
 
 ##
 ## Push to Loki if WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL is set
@@ -1274,9 +1341,14 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]
+
+then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##

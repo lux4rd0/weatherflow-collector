@@ -135,9 +135,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -202,9 +205,7 @@ if [ "${pressure_trend}" = "rising" ]; then pressure_trend="1"; fi
 ## Push to InfluxDB if WEATHERFLOW_COLLECTOR_INFLUXDB_URL is set
 ##
 
-if [ -n "$influxdb_url" ]
-
-then
+if [ -n "$influxdb_url" ]; then
 
 curl_message="weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
 
@@ -281,11 +282,14 @@ if [ "$curl_status_code" == "204" ]; then health_check; fi
 ## Send CURL Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 time_epoch=$(date +%s)
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_events,backend_function=obs,backend_status_code=${curl_status_code},backend_type=curl,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} time_epoch=${time_epoch}"
 
+fi
 fi
 
 ##
@@ -301,7 +305,17 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_rest}${col
 ## Send Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="observations",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${observations_duration}"
+
+fi
+
+##
+## Health Check Function
+##
+
+if [ -z "$influxdb_url" ]; then health_check; fi
 
 done < /dev/stdin
