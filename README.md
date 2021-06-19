@@ -77,7 +77,9 @@ If you want to export your data from the WeatherFlow cloud, run this Docker comm
       -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-export \
       -e WEATHERFLOW_COLLECTOR_FUNCTION=export \
       -e WEATHERFLOW_COLLECTOR_TOKEN=127d99f7-3s88-4d7d-bd73-0ba962d181ec \
+      -e WEATHERFLOW_COLLECTOR_EXPORT_DAYS=20 \
       -v $(pwd):/weatherflow-collector/export \
+      lux4rd0/weatherflow-collector:latest
 
 Files will be created in your current working directory the look something like this:
 
