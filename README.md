@@ -68,6 +68,22 @@ Running `docker-compose up -d' will spin up several containers for each of the t
 
 This script will spin up a docker container to import all of the observed metrics from the WeatherFlow cloud. Having an import function may be helpful if you're starting with this WeatherFlow Collector or if you've reset your InfluxDB database. This script essentially loads whatever is in the WeatherFlow cloud and imports it as your locally collected UDP data. If you have more than one device, a separate import file will be generated for each.
 
+#### Optional Export Command:
+
+If you want to export your data from the WeatherFlow cloud, run this Docker command substituting your own token:
+
+    docker run --rm \
+      --name=weatherflow-collector-remote-export \
+      -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-export \
+      -e WEATHERFLOW_COLLECTOR_FUNCTION=export \
+      -e WEATHERFLOW_COLLECTOR_TOKEN=127d99f7-3s88-4d7d-bd73-0ba962d181ec \
+      -v $(pwd):/weatherflow-collector/export \
+
+Files will be created in your current working directory the look something like this:
+
+weatherflow-collector_export-station_351-device_26040.csv
+weatherflow-collector_export-station_351-device_16029.csv
+
 ## Environmental flags:
 
 ````WEATHERFLOW_COLLECTOR_BACKEND_TYPE````
