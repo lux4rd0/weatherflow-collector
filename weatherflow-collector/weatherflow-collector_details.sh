@@ -17,7 +17,7 @@ collector_key=$(echo ${WEATHERFLOW_COLLECTOR_TOKEN} | awk -F"-" '{print $1}')
 echo_bold=$(tput -T xterm bold)
 echo_blink=$(tput -T xterm blink)
 echo_black=$(tput -T xterm setaf 0)
-echo_red=$(tput -T xterm setaf 1)
+echo_blue=$(tput -T xterm setaf 4)
 
 echo_color_health_check=$(echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m")
 echo_color_host_performance=$(echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m")
@@ -111,8 +111,12 @@ current_time=$(date +%s)
 
 #echo "${bold}${collector_type}:${normal} time_epoch: ${current_time}"
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_events,collector_key=${collector_key},collector_type=${collector_type},event="process_start",host_hostname=${host_hostname},source=${function} time_epoch=${current_time}000"
+
+fi
 
 }
 
@@ -137,12 +141,41 @@ function inc_progress() {
 	for i in {1..25}
 	do
 		if [ "$i" -gt "$progress_barlength" ]
-		then printf "%s" "${echo_bold}░${echo_normal}"
+		then printf "%s" "░"
 		else printf "%s" "${echo_red}${echo_bold}▒${echo_normal}"
 		fi
 	done
 
     printf "${echo_bold}]${echo_normal} - Remaining: "; show_progress_time $progress_remaining
+}
+
+function init_progress_full() {
+	progress_start_date_full=$(date +%s)
+	progress_total_full="$1"
+	progress_count_full=0
+}
+
+##
+## ProgressBar2 - http://geoffles.github.io/development/2019/01/31/progress-in-bash.html
+##
+
+function inc_progress_full() {
+	progress_count_full=$((progress_count_full+1))
+	progress_percent_full=$((100 * progress_count_full / progress_total_full))
+	progress_barlength_full=$((progress_percent_full / 4))
+	progress_time_full=$(( $(date +%s) - progress_start_date_full ))
+	progress_remaining_full=$(( ((100*progress_time_full/progress_count_full) * (progress_total_full-progress_count_full))/100 ))
+
+	printf "\r%d%% (%d of %d)  ${echo_bold}[${echo_normal}" "$progress_percent_full" "$progress_count_full" "$progress_total_full" 
+	for i in {1..25}
+	do
+		if [ "$i" -gt "$progress_barlength_full" ]
+		then printf "%s" "░"
+		else printf "%s" "${echo_blue}${echo_bold}▒${echo_normal}"
+		fi
+	done
+
+    printf "${echo_bold}]${echo_normal} - Remaining: "; show_progress_time $progress_remaining_full
 }
 
 function show_progress_time () {
@@ -168,5 +201,5 @@ function show_progress_time () {
     else
         ((sec=num))
     fi
-    echo -n "$hour"h "$min"m "$sec"s
+    echo -n "${echo_bold}$hour"h "$min"m "$sec"s"${echo_normal}"
 }

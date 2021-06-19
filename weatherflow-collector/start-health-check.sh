@@ -55,7 +55,7 @@ fi
 
 if [ -z "${healthcheck}" ]; then echo "${echo_bold}start:${echo_normal} $(date) - ${echo_bold}WEATHERFLOW_COLLECTOR_HEALTHCHECK${echo_normal} environmental variable not set. Defaulting to true."; healthcheck="true"; export WEATHERFLOW_COLLECTOR_HEALTHCHECK="true"; fi
 
-if [ -z "${healthcheck_interval}" ]; then echo "${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} $(date) - ${echo_bold}WEATHERFLOW_COLLECTOR_HEALTHCHECK_INTERVAL${echo_normal} environmental variable not set. Defaulting to ${echo_bold}15 ${echo_normal} seconds."; healthcheck_interval="15"; export WEATHERFLOW_COLLECTOR_HEALTHCHECK_INTERVAL="15"; fi
+if [ -z "${healthcheck_interval}" ]; then echo "${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} $(date) - ${echo_bold}WEATHERFLOW_COLLECTOR_HEALTHCHECK_INTERVAL${echo_normal} environmental variable not set. Defaulting to ${echo_bold}15${echo_normal} seconds."; healthcheck_interval="15"; export WEATHERFLOW_COLLECTOR_HEALTHCHECK_INTERVAL="15"; fi
 
 if [ -z "${host_hostname}" ]; then echo "${echo_bold}${echo_color_health_check}${collector_type}:${echo_normal} $(date) - ${echo_bold}WEATHERFLOW_COLLECTOR_HOST_HOSTNAME${echo_normal} environmental variable not set. Defaulting to ${echo_bold}weatherflow-collector${echo_normal}."; host_hostname="weatherflow-collector"; export WEATHERFLOW_COLLECTOR_HOST_HOSTNAME="weatherflow-collector"; fi
 

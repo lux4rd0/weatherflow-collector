@@ -90,6 +90,21 @@ obs_type=$(echo "${line}" | jq -r '.type')
 device_id=$(echo "${line}" | jq -r '.device_id')
 num_of_metrics=$(echo "${line}" | jq '.obs | length')
 
+##
+## Break loop if there's nothing to import. Reset the full loop date.
+##
+
+if [ "$num_of_metrics" == "0" ]
+
+then
+
+echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - No metrics found for this day for Station ID: ${echo_bold}${station_id}${echo_normal}, Device ID: ${echo_bold}${device_id}${echo_normal}."
+
+touch reset_progress_total_full.txt
+break
+
+fi
+
 echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - Number of time slices: ${echo_bold}${num_of_metrics}${echo_normal}"
 echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - Station ID: ${echo_bold}${station_id}${echo_normal}, Device ID: ${echo_bold}${device_id}${echo_normal}"
 
@@ -447,7 +462,7 @@ if [[ $(jobs -r -p | wc -l) -ge $threads ]]; then wait -n; fi
 ## Increment Progress Bar
 ##
 
-inc_progress;
+inc_progress
 
 done
 

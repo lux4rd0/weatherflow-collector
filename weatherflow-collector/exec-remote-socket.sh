@@ -124,7 +124,7 @@ if [ "${hub_sn}" = "null" ]
 
 then
 
-echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} $(date) - Skipping first socket message to InfluxDB - (Missing hub_sn)"
+echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} $(date) - Skipping first socket message - (Missing hub_sn)"
 
 else
 
@@ -290,9 +290,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -541,9 +544,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -770,9 +776,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -939,9 +948,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -1079,9 +1091,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -1210,9 +1225,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -1330,9 +1348,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -1453,9 +1474,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -1583,9 +1607,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
@@ -1713,9 +1740,12 @@ if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_socket}${c
 ## Send Loki Timer Metrics To InfluxDB
 ##
 
+if [ -n "$influxdb_url" ]; then
+
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_key=${collector_key},collector_type=${collector_type},duration_type="loki_push",host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} duration=${timer_loki_duration}"
 
+fi
 fi
 
 ##
