@@ -81,6 +81,7 @@ This script will spin up a docker container to import all of the observed metric
 - [remote-forecast](https://weatherflow.github.io/Tempest/api/swagger/#/forecast/)
 - [remote-rest](https://weatherflow.github.io/Tempest/api/swagger/#/observations/)
 - [remote-socket](https://weatherflow.github.io/Tempest/api/ws.html)
+- remote-export
 - remote-import
 - host-performance
 
@@ -93,10 +94,6 @@ This script will spin up a docker container to import all of the observed metric
 
 The Device ID of your Tempest
 
-````WEATHERFLOW_COLLECTOR_ELEVATION````
-
-The Elevation of your Tempest
-
 ````WEATHERFLOW_COLLECTOR_FORECAST_INTERVAL````
 
 How often (in seconds) forecast data is collected from WeatherFlow. Defaults to 60 seconds if not set.
@@ -105,6 +102,7 @@ How often (in seconds) forecast data is collected from WeatherFlow. Defaults to 
 
 - collector
 - import
+- export
 
 ````WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED````
 
@@ -112,6 +110,10 @@ How often (in seconds) forecast data is collected from WeatherFlow. Defaults to 
 - true
 
 A Docker health check function that runs every 60 seconds. If no data has been collected or persisted to InfluxDB and this parameter is set to true, the docker container will be marked as Unhealthy and terminate. Setting this to false will always return a healthy response to the Docker health check. The health check is included because there may be times where the local UDP listener or remote-socket connection goes silent, and recycling of the container is the only way to get it listening again. You may also find the remote-forecast container takes longer than 60 seconds to complete its hourly forecast transformation. A future update will change the 60 seconds to be a multiple of the interval rate rather than a fixed 60 seconds.
+
+````WEATHERFLOW_COLLECTOR_EXPORT_DAYS````
+
+The number of days you want to export to a file from either the WeatherFlow cloud or Grafana Loki.
 
 ````WEATHERFLOW_COLLECTOR_HOST_HOSTNAME````
 
@@ -149,17 +151,11 @@ The URL for your Grafana Loki instance. This parameter is used for importing bac
 
 The URL connection string for your Grafana Loki endpoint. For example: http://loki:3100/loki/api/v1/push
 
-````WEATHERFLOW_COLLECTOR_LONGITUDE````
-
-The longitude of your WeatherFlow device.
 
 ````WEATHERFLOW_COLLECTOR_PERF_INTERVAL````
 
 How often (in seconds) the host-performance container polls your host for performance metrics. Defaults to 60 seconds if not set.
 
-````WEATHERFLOW_COLLECTOR_PUBLIC_NAME````
-
-The Public Name of your WeatherFlow device.
 
 ````WEATHERFLOW_COLLECTOR_REST_INTERVAL````
 
