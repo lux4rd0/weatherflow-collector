@@ -108,6 +108,7 @@ for station_number in $(seq 0 $number_of_stations_minus_one) ; do
 station_name[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].name)
 station_name_dc[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].name | sed 's/ /\_/g' | sed 's/.*/\L&/' | sed 's|[<>,]||g')
 station_id[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].station_id)
+timezone[$station_number]=$(echo "${body_station}" | jq -r .stations[$station_number].timezone)
 
 done
 
@@ -226,9 +227,10 @@ fi
 ##
 
 echo "services:
-  weatherflow-collector:
+  weatherflow-collector-${collector_key}:
     container_name: weatherflow-collector-${collector_key}
     environment:
+      TZ: ${timezone[$station_number]}
       WEATHERFLOW_COLLECTOR_DEBUG: \"false\"
       WEATHERFLOW_COLLECTOR_DEBUG_CURL: \"false\"
       WEATHERFLOW_COLLECTOR_DISABLE_HEALTH_CHECK: \"false\"
@@ -270,6 +272,7 @@ version: '3.3'" >> docker-compose.yml
 
 echo "docker run --rm \\
   --name=weatherflow-collector-${station_name_dc[$station_number]}-remote-import \\
+  -e TZ=${timezone[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-import \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEBUG_CURL=false \\
@@ -306,6 +309,7 @@ then
 
 echo "docker run --rm \\
   --name=weatherflow-collector-${station_name_dc[$station_number]}-import-remote-forecast \\
+  -e TZ=${timezone[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-forecast \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEBUG_CURL=false \\
@@ -334,6 +338,7 @@ echo "${echo_bold}${echo_color_weatherflow}weatherflow-collector:${echo_normal} 
 
 echo "docker run --rm \\
   --name=weatherflow-collector-${station_name_dc[$station_number]}-import-remote-rest \\
+  -e TZ=${timezone[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-rest \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEBUG_CURL=false \\
@@ -362,6 +367,7 @@ echo "${echo_bold}${echo_color_weatherflow}weatherflow-collector:${echo_normal} 
 
 echo "docker run --rm \\
   --name=weatherflow-collector-${station_name_dc[$station_number]}-import-remote-socket \\
+  -e TZ=${timezone[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-socket \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEBUG_CURL=false \\
@@ -390,6 +396,7 @@ echo "${echo_bold}${echo_color_weatherflow}weatherflow-collector:${echo_normal} 
 
 echo "docker run --rm \\
   --name=weatherflow-collector-${station_name_dc[$station_number]}-import-local-udp \\
+  -e TZ=${timezone[$station_number]} \\
   -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=local-udp \\
   -e WEATHERFLOW_COLLECTOR_DEBUG=false \\
   -e WEATHERFLOW_COLLECTOR_DEBUG_CURL=false \\
