@@ -58,8 +58,6 @@ weatherflow_collector_version=${weatherflow_collector_version}"
 
 fi
 
-
-
 ##
 ## Curl Command
 ##
@@ -177,9 +175,9 @@ time_end=$((time_start + 86399))
 time_start_echo=$(date -d @"${time_start}")
 time_end_echo=$(date -d @${time_end})
 
-echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - Day: ${echo_bold}${days_loop}${echo_normal} days ago"
-echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - time_start: ${time_start} - ${time_start_echo}"
-echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - time_end: ${time_end} - ${time_end_echo}"
+#echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - Day: ${echo_bold}${days_loop}${echo_normal} days ago"
+#echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - time_start: ${time_start} - ${time_start_echo}"
+#echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - time_end: ${time_end} - ${time_end_echo}"
 
 remote_export_url="remote-export-url_${station_id}-station_list.txt"
 while IFS=, read -r lookup_export_url lookup_device_id; do
@@ -195,7 +193,7 @@ csv_data=$(curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' 
 #csv_head=$(echo "${csv_data}" | head -1)
 csv_tail=$(echo "${csv_data}" | tail -n +2)
 
-echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - lookup_export_url: ${lookup_export_url} lookup_device_id: ${lookup_device_id}"
+#echo "${echo_bold}${echo_color_remote_export}${collector_type}:${echo_normal} $(date) - lookup_export_url: ${lookup_export_url} lookup_device_id: ${lookup_device_id}"
 
 #echo "days_loop=${days_loop}"
 if [ $export_number = "0" ]; then 

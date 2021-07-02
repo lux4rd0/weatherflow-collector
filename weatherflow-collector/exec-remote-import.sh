@@ -37,7 +37,7 @@ function="import"
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Check for required intervals
@@ -245,7 +245,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -336,7 +336,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -445,7 +445,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 

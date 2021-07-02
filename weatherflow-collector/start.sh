@@ -17,8 +17,8 @@ echo -en "\033[01;38;5;202m░█░ █ ░█ ▒▓█  ▄░██▄▄▄
 echo -en "\033[01;38;5;208m░░██▒██▓ ░▒████▒▓█   ▓██▒ ▒██▒ ░ ░▓█▒░██▓░▒████▒░██▓ ▒██▒░▒█░   ░██████▒░ ████▓▒░░░██▒██▓ \n"
 echo -en "\033[01;38;5;214m░ ▓░▒ ▒  ░░ ▒░ ░▒▒   ▓▒█░ ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░░ ▒▓ ░▒▓░ ▒ ░   ░ ▒░▓  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  \n"
 echo -en "\033[01;38;5;220m  ▒ ░ ░   ░ ░  ░ ▒   ▒▒ ░   ░     ▒ ░▒░ ░ ░ ░  ░  ░▒ ░ ▒░ ░     ░ ░ ▒  ░  ░ ▒ ▒░   ▒ ░ ░  \n"
-echo -en "\033[01;38;5;226m  ░   ░     ░    ░   ▒    ░       ░  ░░ ░   ░     ░░   ░  ░ ░     ░ ░   ░ ░ ░ ▒    ░   ░  \n"
-echo -en "\033[01;38;5;228m    ░       ░  ░     ░  ░         ░  ░  ░   ░  ░   ░                ░  ░    ░ ░      ░    \n"
+echo -en "\033[01;38;5;228m  ░   ░     ░    ░   ▒    ░       ░  ░░ ░   ░     ░░   ░  ░ ░     ░ ░   ░ ░ ░ ▒    ░   ░  \n"
+echo -en "\033[01;38;5;231m    ░       ░  ░     ░  ░         ░  ░  ░   ░  ░   ░                ░  ░    ░ ░      ░    \n"
 
 echo ""
                                                                                  
@@ -29,9 +29,9 @@ echo -en "\033[01;38;5;202m      ▒▓▓▄ ▄██▒▒██   ██░�
 echo -en "\033[01;38;5;208m      ▒ ▓███▀ ░░ ████▓▒░░██████▒░██████▒░▒████▒▒ ▓███▀ ░  ▒██▒ ░ ░ ████▓▒░░██▓ ▒██▒       \n"
 echo -en "\033[01;38;5;214m      ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░▓  ░░ ▒░▓  ░░░ ▒░ ░░ ░▒ ▒  ░  ▒ ░░   ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░       \n"
 echo -en "\033[01;38;5;220m        ░  ▒     ░ ▒ ▒░ ░ ░ ▒  ░░ ░ ▒  ░ ░ ░  ░  ░  ▒       ░      ░ ▒ ▒░   ░▒ ░ ▒░       \n"
-echo -en "\033[01;38;5;226m      ░        ░ ░ ░ ▒    ░ ░     ░ ░      ░   ░          ░      ░ ░ ░ ▒    ░░   ░        \n"
-echo -en "\033[01;38;5;228m      ░ ░          ░ ░      ░  ░    ░  ░   ░  ░░ ░                   ░ ░     ░            \n"
-echo -en "\033[01;38;5;228m      ░                                        ░                                          \n"
+echo -en "\033[01;38;5;228m      ░        ░ ░ ░ ▒    ░ ░     ░ ░      ░   ░          ░      ░ ░ ░ ▒    ░░   ░        \n"
+echo -en "\033[01;38;5;231m      ░ ░          ░ ░      ░  ░    ░  ░   ░  ░░ ░                   ░ ░     ░            \n"
+echo -en "\033[01;38;5;231m      ░                                        ░                                          \n"
 
 echo "${echo_normal}"
 
@@ -66,8 +66,8 @@ token=$WEATHERFLOW_COLLECTOR_TOKEN
 ## State purposful details
 ##
 
-if [ -n "$loki_client_url" ]; then echo -en "${echo_bold}${echo_color_start}start:${echo_normal} $(date) - Using \033[01;38;5;52mG\033[01;38;5;124mr\033[01;38;5;196ma\033[01;38;5;202mf\033[01;38;5;208ma\033[01;38;5;214mn\033[01;38;5;220ma${echo_normal} ${echo_bold}Loki${echo_normal} ${loki_client_url}\n"; fi
-if [ -n "$influxdb_url" ]; then echo "${echo_bold}${echo_color_start}start:${echo_normal} $(date) - Using InfluxDB ${influxdb_url}"; fi
+if [ -n "$loki_client_url" ]; then echo -en "${echo_bold}${echo_color_start}start:${echo_normal} $(date) - Using \033[01;38;5;52mG\033[01;38;5;124mr\033[01;38;5;196ma\033[01;38;5;202mf\033[01;38;5;208ma\033[01;38;5;214mn\033[01;38;5;220ma${echo_normal} ${echo_bold}Loki${echo_normal} ${echo_bold}${loki_client_url}${echo_normal}\n"; fi
+if [ -n "$influxdb_url" ]; then echo "${echo_bold}${echo_color_start}start:${echo_normal} $(date) - Using InfluxDB ${echo_bold}${influxdb_url}${echo_normal}"; fi
 
 ##
 ## Check for required variables
@@ -114,7 +114,7 @@ fi
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Curl Command
@@ -122,6 +122,7 @@ if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 if [ "$debug_curl" == "true" ]; then curl=(  ); else curl=( --silent --output /dev/null --show-error --fail ); fi
 
+##
 ##  ::::::::   ::::::::  :::        :::        :::::::::: :::::::: ::::::::::: ::::::::  :::::::::  
 ## :+:    :+: :+:    :+: :+:        :+:        :+:       :+:    :+:    :+:    :+:    :+: :+:    :+: 
 ## +:+        +:+    +:+ +:+        +:+        +:+       +:+           +:+    +:+    +:+ +:+    +:+ 
@@ -129,6 +130,7 @@ if [ "$debug_curl" == "true" ]; then curl=(  ); else curl=( --silent --output /d
 ## +#+        +#+    +#+ +#+        +#+        +#+       +#+           +#+    +#+    +#+ +#+    +#+ 
 ## #+#    #+# #+#    #+# #+#        #+#        #+#       #+#    #+#    #+#    #+#    #+# #+#    #+# 
 ##  ########   ########  ########## ########## ########## ########     ###     ########  ###    ### 
+##
 
 if [ "${function}" == "collector" ]
 
@@ -225,6 +227,7 @@ echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - 
 
 fi
 
+##
 ## ::::::::::: ::::    ::::  :::::::::   ::::::::  ::::::::: ::::::::::: 
 ##     :+:     +:+:+: :+:+:+ :+:    :+: :+:    :+: :+:    :+:    :+:     
 ##     +:+     +:+ +:+:+ +:+ +:+    +:+ +:+    +:+ +:+    +:+    +:+     
@@ -232,6 +235,7 @@ fi
 ##     +#+     +#+       +#+ +#+        +#+    +#+ +#+    +#+    +#+     
 ##     #+#     #+#       #+# #+#        #+#    #+# #+#    #+#    #+#     
 ## ########### ###       ### ###         ########  ###    ###    ###  
+##
 
 if [ "${function}" == "import" ]
 
@@ -342,10 +346,12 @@ echo "${echo_normal}
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_type=${collector_type},source=${function},station_name=${station_name_escaped} duration=${import_duration}"
-done
-exit 1
-fi
 
+done
+
+exit 1
+
+fi
 
 ##
 ## ┬─┐┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┌─┐┌─┐┬┌─┌─┐┌┬┐
@@ -455,6 +461,7 @@ echo "${echo_normal}
 
 curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
 weatherflow_system_stats,collector_type=${collector_type},source=${function},station_name=${station_name_escaped} duration=${import_duration}"
+
 done
 
 exit 1
@@ -640,419 +647,7 @@ fi
 
 fi
 
-
- ########### ###       ### ###         ########  ###    ###    ###  
-
-if [ "${function}" == "import" ]
-
-then
-
 ##
-## Escape Names (Function)
-##
-
-escape_names
-
-##
-## ┬  ┌─┐┌─┐┌─┐┬   ┬ ┬┌┬┐┌─┐
-## │  │ ││  ├─┤│───│ │ ││├─┘
-## ┴─┘└─┘└─┘┴ ┴┴─┘ └─┘─┴┘┴  
-##
-
-if [ "${collector_type}" == "local-udp" ]
-
-then
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Retrieving Logs From ${echo_bold}${logcli_host_url}${echo_normal}, Pushing Metrics to ${echo_bold}${influxdb_url}${echo_normal}."
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - collector_type=${echo_bold}${collector_type}${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - function=${echo_bold}${function}${echo_normal}"
-
-hours=$((import_days * 24))
-
-for hours_loop in $(seq "$hours" -1 0) ; do
-hours_start=$(date --date="${hours_loop} hours ago 00:00" +%s)
-hours_end=$((hours_start + 3599))
-date_start=$(date -d @"${hours_start}" --rfc-3339=seconds | sed 's/ /T/')
-date_end=$(date -d @${hours_end} --rfc-3339=seconds | sed 's/ /T/')
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Hour Slices Remaining: ${echo_bold}$hours_loop${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_start: $date_start"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_end: $date_end"
-
-##
-## Start Timer
-##
-
-import_start=$(date +%s%N)
-
-##
-## Start "threading"
-##
-
-logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
-#echo "./logcli-linux-amd64 query --addr=\"${logcli_host_url}\" -q --limit=100000 --timezone=Local --forward --from=\"${date_start}\" --to=\"${date_end}\" --output=jsonl '{app=\"weatherflow-collector\",collector_type=\"'\"${collector_type}\"'\",station_name=\"'\"${station_name}\"'\"}')"
-num_of_logs=$(echo "${logs}" | jq -r ". | length")
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} Number of logs: ${echo_bold}${num_of_logs}${echo_normal}
-"
-num_of_logs_minus_one=$((num_of_logs-1))
-
-##
-## Init Progress
-##
-
-init_progress "${num_of_logs}"
-
-for log in $(seq 0 ${num_of_logs_minus_one})
-do
-
-(
-
-echo "${logs}" | jq -r .["${log}"].line | ./exec-local-udp.sh
-) &
-
-if [[ $(jobs -r -p | wc -l) -ge $threads ]]; then wait -n; fi
-
-##
-## Increment Progress Bar
-##
-
-inc_progress
-
-done
-
-wait
-
-echo "
-${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Finished!
-"
-
-##
-## End "threading"
-##
-
-##
-## End Timer
-##
-
-import_end=$(date +%s%N)
-import_duration=$((import_end-import_start))
-import_duration_seconds=$((import_duration/1000000000))
-
-echo -n "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Import Duration: ${echo_bold}"; show_progress_time ${import_duration_seconds}
-
-echo "${echo_normal}
-"
-
-#echo "import_duration:${import_duration}"
-
-##
-## Send Timer Metrics To InfluxDB
-##
-
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},source=${function},station_name=${station_name_escaped} duration=${import_duration}"
-done
-exit 1
-fi
-
-
-##
-## ┬─┐┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┌─┐┌─┐┬┌─┌─┐┌┬┐
-## ├┬┘├┤ ││││ │ │ ├┤───└─┐│ ││  ├┴┐├┤  │ 
-## ┴└─└─┘┴ ┴└─┘ ┴ └─┘  └─┘└─┘└─┘┴ ┴└─┘ ┴ 
-##
-
-if [ "${collector_type}" == "remote-socket" ]
-
-then
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Retrieving Logs From ${echo_bold}${logcli_host_url}${echo_normal}, Pushing Metrics to ${echo_bold}${influxdb_url}${echo_normal}."
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - collector_type=${echo_bold}${collector_type}${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - function=${echo_bold}${function}${echo_normal}"
-
-hours=$(("$import_days" * 24))
-
-for hours_loop in $(seq "$hours" -1 0) ; do
-
-hours_start=$(date --date="${hours_loop} hours ago 00:00" +%s)
-hours_end=$(("$hours_start" + 3599))
-
-date_start=$(date -d @"${hours_start}" --rfc-3339=seconds | sed 's/ /T/')
-date_end=$(date -d @${hours_end} --rfc-3339=seconds | sed 's/ /T/')
-
-hours_start_echo=$(date -d @"${hours_start}")
-hours_end_echo=$(date -d @${hours_end})
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Hour Slices Remaining: ${echo_bold}$hours_loop${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_start: $date_start - ${hours_start_echo}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_end: $date_end - ${hours_end_echo}"
-
-##
-## Start Timer
-##
-
-import_start=$(date +%s%N)
-
-##
-## Start "threading"
-##
-
-logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
-
-num_of_logs=$(echo "${logs}" | jq -r ". | length")
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Number of logs: ${echo_bold}${num_of_logs}${echo_normal}
-"
-
-num_of_logs_minus_one=$((num_of_logs-1))
-
-##
-## Init Progress Bar
-##
-
-init_progress "${num_of_logs}"
-
-
-for log in $(seq 0 ${num_of_logs_minus_one})
-
-do
-
-(
-
-echo "${logs}" | jq -r .["${log}"].line | ./exec-remote-socket.sh
-
-) &
-
-if [[ $(jobs -r -p | wc -l) -ge $threads ]]; then wait -n; fi
-
-##
-## Increment Progress Bar
-##
-
-inc_progress
-
-done
-
-wait
-
-echo "
-${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Finished!
-"
-
-##
-## End "threading"
-##
-
-##
-## End Timer
-##
-
-import_end=$(date +%s%N)
-import_duration=$((import_end-import_start))
-import_duration_seconds=$((import_duration/1000000000))
-
-echo -n "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Import Duration: ${echo_bold}"; show_progress_time ${import_duration_seconds}
-
-echo "${echo_normal}
-"
-
-#echo "import_duration:${import_duration}"
-
-##
-## Send Timer Metrics To InfluxDB
-##
-
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},source=${function},station_name=${station_name_escaped} duration=${import_duration}"
-done
-
-exit 1
-
-fi
-
-##
-## ┬─┐┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌─┐┌─┐┌┬┐
-## ├┬┘├┤ ││││ │ │ ├┤───├┤ │ │├┬┘├┤ │  ├─┤└─┐ │ 
-## ┴└─└─┘┴ ┴└─┘ ┴ └─┘  └  └─┘┴└─└─┘└─┘┴ ┴└─┘ ┴ 
-##
-
-if [ "${collector_type}" == "remote-forecast" ]
-
-then
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Retrieving Logs From ${echo_bold}${logcli_host_url}${echo_normal}, Pushing Metrics to ${echo_bold}${influxdb_url}${echo_normal}."
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - collector_type=${echo_bold}${collector_type}${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - function=${echo_bold}${function}${echo_normal}"
-
-for days_loop in $(seq "$import_days" -1 0) ; do
-
-##
-## Choose noon local as the collect log time to pull in the forecast
-##
-
-days_start=$(date --date="${days_loop} days ago 12:00" +%s)
-days_end=$(("$days_start" + 1800))
-
-date_start=$(date -d @"${days_start}" --rfc-3339=seconds | sed 's/ /T/')
-date_end=$(date -d @${days_end} --rfc-3339=seconds | sed 's/ /T/')
-
-days_start_echo=$(date -d @"${days_start}")
-days_end_echo=$(date -d @${days_end})
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Days Remaining: ${echo_bold}$days_loop${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_start: $date_start - ${days_start_echo}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_end: $date_end - ${days_end_echo}"
-
-#echo "./logcli-linux-amd64 query --addr=\"${logcli_host_url}\" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app=\"weatherflow-collector\",collector_type=\""${collector_type}"\",station_name=\""${station_name}"\"}' | jq --slurp | jq -r .[0].line"
-./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp | jq -r .[0].line | ./exec-remote-forecast.sh
-
-done
-
-exit 1
-
-fi
-
-##
-## ┬─┐┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┬─┐┌─┐┌─┐┌┬┐
-## ├┬┘├┤ ││││ │ │ ├┤───├┬┘├┤ └─┐ │ 
-## ┴└─└─┘┴ ┴└─┘ ┴ └─┘  ┴└─└─┘└─┘ ┴ 
-##
-
-if [ "${collector_type}" == "remote-rest" ]
-
-then
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Retrieving Logs From ${echo_bold}${logcli_host_url}${echo_normal}, Pushing Metrics to ${echo_bold}${influxdb_url}${echo_normal}."
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - collector_type=${echo_bold}${collector_type}${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - function=${echo_bold}${function}${echo_normal}"
-
-hours=$((import_days * 24))
-
-for hours_loop in $(seq "$hours" -1 0) ; do
-
-hours_start=$(date --date="${hours_loop} hours ago 00:00" +%s)
-
-hours_end=$(("$hours_start" + 3599))
-
-date_start=$(date -d @"${hours_start}" --rfc-3339=seconds | sed 's/ /T/')
-date_end=$(date -d @${hours_end} --rfc-3339=seconds | sed 's/ /T/')
-
-hours_start_echo=$(date -d @"${hours_start}")
-hours_end_echo=$(date -d @${hours_end})
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Hour Slices Remaining: ${echo_bold}$hours_loop${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_start: $date_start - ${hours_start_echo}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - date_end: $date_end - ${hours_end_echo}"
-
-##
-## Start Timer
-##
-
-import_start=$(date +%s%N)
-
-##
-## Start "threading"
-##
-
-logs=$(./logcli-linux-amd64 query --addr="${logcli_host_url}" -q --limit=100000 --timezone=Local --forward --from="${date_start}" --to="${date_end}" --output=jsonl '{app="weatherflow-collector",collector_type="'"${collector_type}"'",station_name="'"${station_name}"'"}' | jq --slurp)
-
-num_of_logs=$(echo "${logs}" | jq -r ". | length")
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Number of logs: ${echo_bold}${num_of_logs}${echo_normal}
-"
-
-num_of_logs_minus_one=$((num_of_logs-1))
-
-##
-## Init Progress Bar
-##
-
-init_progress "${num_of_logs}"
-
-for log in $(seq 0 ${num_of_logs_minus_one})
-
-do
-
-(
-
-echo "${logs}" | jq -r .["${log}"].line | ./exec-remote-rest.sh
-
-) &
-
-if [[ $(jobs -r -p | wc -l) -ge $threads ]]; then wait -n; fi
-
-##
-## Increment Progress Bar
-##
-
-inc_progress
-
-done
-
-wait
-
-echo "
-${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Finished!
-"
-
-##
-## End "threading"
-##
-
-##
-## End Timer
-##
-
-import_end=$(date +%s%N)
-import_duration=$((import_end-import_start))
-import_duration_seconds=$((import_duration/1000000000))
-
-echo -n "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Import Duration: ${echo_bold}"; show_progress_time ${import_duration_seconds}
-
-echo "${echo_normal}
-"
-
-#echo "import_duration:${import_duration}"
-
-##
-## Send Timer Metrics To InfluxDB
-##
-
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_stats,collector_type=${collector_type},source=${function},station_name=${station_name_escaped} duration=${import_duration}"
-
-done
-
-exit 1
-
-fi
-
-##
-## ┬─┐┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┬┌┬┐┌─┐┌─┐┬─┐┌┬┐
-## ├┬┘├┤ ││││ │ │ ├┤───││││├─┘│ │├┬┘ │ 
-## ┴└─└─┘┴ ┴└─┘ ┴ └─┘  ┴┴ ┴┴  └─┘┴└─ ┴ 
-##
-
-if [ "${collector_type}" == "remote-import" ]
-
-then
-
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - Retrieving Logs From ${echo_bold}https://swd.weatherflow.com/${echo_normal}, Pushing Metrics to ${echo_bold}${influxdb_url}${echo_normal}."
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - collector_type=${echo_bold}${collector_type}${echo_normal}"
-echo "${echo_bold}${echo_color_start}${collector_type}:${echo_normal} $(date) - function=${echo_bold}${function}${echo_normal}"
-
-./start-remote-import.sh
-
-exit 1
-
-fi
-
-fi
-
-
-
-
 ## :::::::::: :::    ::: :::::::::   ::::::::  ::::::::: ::::::::::: 
 ## :+:        :+:    :+: :+:    :+: :+:    :+: :+:    :+:    :+:     
 ## +:+         +:+  +:+  +:+    +:+ +:+    +:+ +:+    +:+    +:+     
@@ -1060,6 +655,7 @@ fi
 ## +#+         +#+  +#+  +#+        +#+    +#+ +#+    +#+    +#+     
 ## #+#        #+#    #+# #+#        #+#    #+# #+#    #+#    #+#     
 ## ########## ###    ### ###         ########  ###    ###    ###     
+##
 
 if [ "${function}" == "export" ]
 

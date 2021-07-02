@@ -62,7 +62,7 @@ fi
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Send Startup Event Timestamp to InfluxDB

@@ -62,7 +62,7 @@ fi
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Curl Command
@@ -150,7 +150,7 @@ fi
 if [ "$debug" == "true" ]
 then
 
-echo "collector_type=${collector_type},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone}
+echo "collector_key=${collector_key},collector_type=${collector_type},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone}
 
 timestamp=${timestamp}
 air_temperature=${air_temperature}
@@ -207,7 +207,7 @@ if [ "${pressure_trend}" = "rising" ]; then pressure_trend="1"; fi
 
 if [ -n "$influxdb_url" ]; then
 
-curl_message="weatherflow_obs,collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
+curl_message="weatherflow_obs,collector_key=${collector_key},collector_type=${collector_type},elevation=${elevation},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
 
 if [ -n "${timestamp}" ]; then curl_message="${curl_message}timestamp=${timestamp}000,"; else echo "${echo_bold}${echo_color_remote_rest}${collector_type}:${echo_normal} $(date) - ${echo_bold}${station_name}${echo_normal} timestamp is null"; fi
 if [ -n "${air_temperature}" ]; then curl_message="${curl_message}air_temperature=${air_temperature},"; else echo "${echo_bold}${echo_color_remote_rest}${collector_type}:${echo_normal} $(date) - ${echo_bold}${station_name}${echo_normal} air_temperature is null"; fi
@@ -262,7 +262,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${timestamp}";
+curl_message="${curl_message} ${timestamp}000000000";
 
 #echo "${curl_message}"
 
@@ -282,14 +282,15 @@ if [ "$curl_status_code" == "204" ]; then health_check; fi
 ## Send CURL Metrics To InfluxDB
 ##
 
-if [ -n "$influxdb_url" ]; then
+#if [ -n "$influxdb_url" ]; then
 
-time_epoch=$(date +%s)
+#time_epoch=$(date +%s)
 
-curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
-weatherflow_system_events,backend_function=obs,backend_status_code=${curl_status_code},backend_type=curl,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} time_epoch=${time_epoch}"
+#curl "${curl[@]}" -i -XPOST "${influxdb_url}" -u "${influxdb_username}":"${influxdb_password}" --data-binary "
+#weatherflow_system_stats,backend_function=obs,backend_status_code=${curl_status_code},backend_type=curl,collector_key=${collector_key},collector_type=${collector_type},host_hostname=${host_hostname},public_name=${public_name_escaped},source=${function},station_id=${station_id},station_name=${station_name_escaped} time_epoch=${time_epoch}000"
 
-fi
+
+#fi
 fi
 
 ##

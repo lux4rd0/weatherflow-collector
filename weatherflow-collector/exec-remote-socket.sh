@@ -62,7 +62,7 @@ fi
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Curl Command
@@ -100,6 +100,8 @@ fi
 ##
 
 if [[ $line == *"obs_st"* ]]; then
+
+function_type="obs_st"
 
 ##
 ## We need the HUB serial number. Skip the message if it's missing.
@@ -275,7 +277,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"device_id\":\"${device_id
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -312,7 +314,7 @@ then
 
 curl_message="weatherflow_obs,collector_key=${collector_key},collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},serial_number=${serial_number},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
 
-if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision}000,"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} firmware_revision is null"; fi
+if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} firmware_revision is null"; fi
 if [ "${time_epoch}" != "null" ]; then curl_message="${curl_message}time_epoch=${time_epoch}000,"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} time_epoch is null"; fi
 if [ "${wind_lull}" != "null" ]; then curl_message="${curl_message}wind_lull=${wind_lull},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} wind_lull is null"; fi
 if [ "${wind_avg}" != "null" ]; then curl_message="${curl_message}wind_avg=${wind_avg},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} wind_avg is null"; fi
@@ -363,7 +365,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -380,6 +382,8 @@ fi
 ##
 
 if [[ $line == *"obs_air"* ]]; then
+
+function_type="obs_air"
 
 ##
 ## We need the HUB serial number. Skip the message if it's missing.
@@ -529,7 +533,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"device_id\":\"${device_id
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -568,7 +572,7 @@ then
 
 curl_message="weatherflow_obs,collector_key=${collector_key},collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},serial_number=${serial_number},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
 
-if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision}000,"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} firmware_revision is null"; fi
+if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} firmware_revision is null"; fi
 if [ "${time_epoch}" != "null" ]; then curl_message="${curl_message}time_epoch=${time_epoch}000,"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} time_epoch is null"; fi
 if [ "${station_pressure}" != "null" ]; then curl_message="${curl_message}station_pressure=${station_pressure},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} station_pressure is null"; fi
 if [ "${air_temperature}" != "null" ]; then curl_message="${curl_message}air_temperature=${air_temperature},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} air_temperature is null"; fi
@@ -603,7 +607,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -620,6 +624,8 @@ fi
 ##
 
 if [[ $line == *"obs_sky"* ]]; then
+
+function_type="obs_sky"
 
 ##
 ## We need the HUB serial number. Skip the message if it's missing.
@@ -761,7 +767,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"device_id\":\"${device_id
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -800,7 +806,7 @@ then
 
 curl_message="weatherflow_obs,collector_key=${collector_key},collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},serial_number=${serial_number},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
 
-if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision}000,"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} firmware_revision is null"; fi
+if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} firmware_revision is null"; fi
 if [ "${time_epoch}" != "null" ]; then curl_message="${curl_message}time_epoch=${time_epoch}000,"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} time_epoch is null"; fi
 if [ "${illuminance}" != "null" ]; then curl_message="${curl_message}illuminance=${illuminance},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} illuminance is null"; fi
 if [ "${uv}" != "null" ]; then curl_message="${curl_message}uv=${uv},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} uv is null"; fi
@@ -833,7 +839,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -850,6 +856,8 @@ fi
 ##
 
 if [[ $line == *"rapid_wind"* ]]; then
+
+function_type="rapid_wind"
 
 ##
 ## Extract Metrics
@@ -933,7 +941,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"device_id\":\"${device_id
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -980,7 +988,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -997,6 +1005,8 @@ fi
 
 if [[ $line == *"evt_strike"* ]]; then
 
+function_type="evt_strike"
+
 ##
 ## Extract Metrics
 ##
@@ -1005,7 +1015,7 @@ if  [ "${function}" == "import" ]
 then
 
 device_id=$(echo "${line}" | jq -r '.[0].device_id')
-
+evt_source=$(echo "${line}" | jq -r '.[0].source')
 evt=($(echo "${line}" | jq -r '.[0].evt[] | @sh') )
 
 fi
@@ -1014,7 +1024,7 @@ if  [ "${function}" == "collector" ]
 then
 
 device_id=$(echo "${line}" | jq -r '.device_id')
-
+evt_source=$(echo "${line}" | jq -r '.source')
 evt=($(echo "${line}" | jq -r '.evt[] | @sh') )
 
 fi
@@ -1033,6 +1043,7 @@ then
 echo "device_id=${device_id}
 hub_sn=${hub_sn}
 serial_number=${serial_number}
+evt_source=${evt_source}
 
 time_epoch=${time_epoch}
 distance=${distance}
@@ -1047,8 +1058,8 @@ fi
 if [ -n "$logcli_host_url" ] && [ "${function}" == "import" ]; then eval "$(echo "${line}" | jq -r '.[1] | to_entries | .[]| .key + "=" + "\"" + ( .value|tostring ) + "\""')"; fi
 if [ "${function}" == "collector" ]; then source remote-socket-device_id-"${device_id}"-lookup.txt; fi
 
-hub_sn=$(echo "${line}" | jq -r .hub_sn)
-serial_number=$(echo "${line}" | jq -r .serial_number)
+#hub_sn=$(echo "${line}" | jq -r .hub_sn)
+#serial_number=$(echo "${line}" | jq -r .serial_number)
 
 ##
 ## Escape Names (Function)
@@ -1076,7 +1087,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"device_id\":\"${device_id
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -1107,7 +1118,7 @@ if [ -n "$influxdb_url" ]
 
 then
 
-curl_message="weatherflow_evt_strike,collector_key=${collector_key},collector_type=${collector_type},device_id=${device_id},elevation=${elevation},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},serial_number=${serial_number},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
+curl_message="weatherflow_evt_strike,collector_key=${collector_key},collector_type=${collector_type},device_id=${device_id},elevation=${elevation},evt_source=${evt_source},source=${function},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},serial_number=${serial_number},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
 
 if [ "${time_epoch}" != "null" ]; then curl_message="${curl_message}time_epoch=${time_epoch}000,"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} time_epoch is null"; fi
 if [ "${distance}" != "null" ]; then curl_message="${curl_message}distance=${distance},"; else echo "${echo_bold}${echo_color_remote_socket}${collector_type}:${echo_normal} distance is null"; fi
@@ -1123,7 +1134,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -1139,6 +1150,8 @@ fi
 ##
 
 if [[ $line == *"evt_precip"* ]]; then
+
+function_type="evt_precip"
 
 ##
 ## Extract Metrics
@@ -1210,7 +1223,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"device_id\":\"${device_id
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -1255,7 +1268,7 @@ if [ "${time_epoch}" != "null" ]; then curl_message="${curl_message}time_epoch=$
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -1271,6 +1284,12 @@ fi
 ##
 
 if [[ $line == *"evt_device_online"* ]]; then
+
+function_type="evt_device_online"
+
+##
+## Extract Metrics
+##
 
 if  [ "${function}" == "import" ]
 then
@@ -1333,7 +1352,7 @@ loki_meta="{\"time_epoch\":\"${time_epoch}\",\"collector_type\":\"${collector_ty
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${hub_sn}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -1378,7 +1397,7 @@ if [ -n "${time_epoch}" ]; then curl_message="${curl_message}time_epoch=${time_e
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -1394,6 +1413,12 @@ fi
 ##
 
 if [[ $line == *"evt_device_offline"* ]]; then
+
+function_type="evt_device_offline"
+
+##
+## Extract Metrics
+##
 
 if  [ "${function}" == "import" ]
 then
@@ -1459,7 +1484,7 @@ loki_meta="{\"time_epoch\":\"${time_epoch}\",\"collector_type\":\"${collector_ty
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",host_hostname="${host_hostname}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",host_hostname="${host_hostname}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -1508,7 +1533,7 @@ if [ -n "${time_epoch}" ]; then curl_message="${curl_message}time_epoch=${time_e
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -1524,6 +1549,12 @@ fi
 ##
 
 if [[ $line == *"evt_station_online"* ]]; then
+
+function_type="evt_station_online"
+
+##
+## Extract Metrics
+##
 
 if  [ "${function}" == "import" ]
 then
@@ -1592,7 +1623,7 @@ loki_meta="{\"time_epoch\":\"${time_epoch}\",\"collector_type\":\"${collector_ty
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${serial_number}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${serial_number}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -1641,7 +1672,7 @@ if [ -n "${time_epoch}" ]; then curl_message="${curl_message}time_epoch=${time_e
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -1657,6 +1688,12 @@ fi
 ##
 
 if [[ $line == *"evt_station_offline"* ]]; then
+
+function_type="evt_station_offline"
+
+##
+## Extract Metrics
+##
 
 if  [ "${function}" == "import" ]
 then
@@ -1725,7 +1762,7 @@ loki_meta="{\"time_epoch\":\"${time_epoch}\",\"collector_type\":\"${collector_ty
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${serial_number}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.min-backoff=100ms --client.max-backoff=2s --client.max-retries=3 --client.external-labels=collector_type="${collector_type}",device_id="${device_id}",source="${function}",hub_sn="${serial_number}",host_hostname="${host_hostname}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Timer
@@ -1774,7 +1811,7 @@ if [ -n "${time_epoch}" ]; then curl_message="${curl_message}time_epoch=${time_e
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 

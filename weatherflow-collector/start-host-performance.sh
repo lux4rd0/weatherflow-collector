@@ -63,7 +63,7 @@ if [ -z "${host_hostname}" ]; then echo "${echo_bold}${echo_color_host_performan
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Send Startup Event Timestamp to InfluxDB
