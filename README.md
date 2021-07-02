@@ -18,7 +18,7 @@ The project builds a pre-configured Docker container that takes different config
 - [Docker](https://docs.docker.com/install)
 - [Docker Compose](https://docs.docker.com/compose/install)
 - [InfluxDB 1.8](https://docs.influxdata.com/influxdb/v1.8/) or [Grafana Loki 2.2](https://grafana.com/oss/loki/)
-- [Grafana 8.0.2](https://grafana.com/oss/grafana/)
+- [Grafana 8.0.4](https://grafana.com/oss/grafana/)
 
 ## Notice
 
@@ -28,7 +28,7 @@ Like all projects - weatherflow-collector is always in a flux state based on try
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:3.3.0
+    lux4rd0/weatherflow-collector:3.5.0
     lux4rd0/weatherflow-collector:latest
     
 Correct environmental variables are required for the container to function. The following script may be used:
@@ -46,7 +46,7 @@ The script takes the following details about your InfluxDB and your WeatherFlow 
     WEATHERFLOW_COLLECTOR_THREADS #optional
     WEATHERFLOW_COLLECTOR_TOKEN
 
-An example command line would be:
+An example command line would be (be sure to use your own personal access token):
 
     WEATHERFLOW_COLLECTOR_IMPORT_DAYS="365" \
     WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD="4L851Jtjaasdset7AJoFasdoFYR3di5Zniew28" \

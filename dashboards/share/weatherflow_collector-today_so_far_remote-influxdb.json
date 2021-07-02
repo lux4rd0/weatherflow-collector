@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.1"
+      "version": "8.0.4"
     },
     {
       "type": "panel",
@@ -59,7 +59,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1623693307255,
+  "iteration": 1625254336788,
   "links": [
     {
       "asDropdown": true,
@@ -1080,7 +1080,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Trending",
@@ -1591,7 +1591,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -2411,7 +2411,7 @@
             [
               {
                 "params": [
-                  "lightning_strike_avg_distance"
+                  "lightning_strike_last_distance"
                 ],
                 "type": "field"
               },
@@ -2462,6 +2462,8 @@
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT mean(\"lightning_strike_count\") FROM \"weatherflow_obs\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND lightning_strike_last_distance <= 42 AND lightning_strike_last_distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
+          "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -2495,7 +2497,7 @@
         },
         {
           "hide": false,
-          "query": "SELECT distinct(\"lightning_strike_avg_distance\") * 0.62137 FROM \"weatherflow_obs\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND lightning_strike_avg_distance <= 42 AND lightning_strike_avg_distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
+          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
           "rawQuery": true,
           "refId": "C"
         }
@@ -2514,7 +2516,7 @@
       "xBucketSize": null,
       "yAxis": {
         "decimals": 0,
-        "format": "velocitymph",
+        "format": "miles",
         "logBase": 1,
         "max": null,
         "min": "0",
@@ -2713,6 +2715,6 @@
   "timezone": "",
   "title": "WeatherFlow Collector - Today So Far (remote)",
   "uid": "lux4rd0labs_weatherflow_19",
-  "version": 16,
+  "version": 1,
   "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }

@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.1"
+      "version": "8.0.4"
     },
     {
       "type": "datasource",
@@ -51,9 +51,9 @@
   "description": "",
   "editable": true,
   "gnetId": 13857,
-  "graphTooltip": 1,
+  "graphTooltip": 0,
   "id": null,
-  "iteration": 1623693240594,
+  "iteration": 1625254278671,
   "links": [
     {
       "asDropdown": true,
@@ -770,7 +770,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.align",
@@ -800,7 +800,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "High",
@@ -977,11 +977,11 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.width",
-                "value": 125
+                "value": 135
               }
             ]
           },
@@ -1029,7 +1029,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "groupBy": [
@@ -1041,7 +1041,7 @@
             },
             {
               "params": [
-                "previous"
+                "none"
               ],
               "type": "fill"
             }
@@ -1264,7 +1264,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Low",
@@ -1308,7 +1309,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1554,7 +1556,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1697,7 +1699,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -1741,7 +1744,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -1785,7 +1789,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2067,7 +2072,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -2266,6 +2271,6 @@
   "timezone": "browser",
   "title": "WeatherFlow Collector - Historical (local-udp)",
   "uid": "lux4rd0labs_weatherflow_15",
-  "version": 15,
+  "version": 1,
   "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }

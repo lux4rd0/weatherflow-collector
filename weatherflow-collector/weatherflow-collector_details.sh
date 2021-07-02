@@ -4,7 +4,7 @@
 ## WeatherFlow Collector - weatherflow-collector_details.sh
 ##
 
-weatherflow_collector_version="3.2.0"
+weatherflow_collector_version="3.4.0"
 #grafana_loki_binary_path="./promtail-linux-amd64"
 grafana_loki_binary_path="/usr/bin/promtail"
 debug_sleeping=$WEATHERFLOW_COLLECTOR_DEBUG_SLEEPING
@@ -18,6 +18,7 @@ echo_bold=$(tput -T xterm bold)
 echo_blink=$(tput -T xterm blink)
 echo_black=$(tput -T xterm setaf 0)
 echo_blue=$(tput -T xterm setaf 4)
+echo_dim=$(tput -T xterm dim)
 
 echo_color_health_check=$(echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m")
 echo_color_host_performance=$(echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m")
@@ -33,6 +34,12 @@ echo_normal=$(tput -T xterm sgr0)
 
 ##
 ## Functions
+##
+
+##
+## ┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐    ┌┐┌┌─┐┌┬┐┌─┐┌─┐
+## ├┤ └─┐│  ├─┤├─┘├┤     │││├─┤│││├┤ └─┐
+## └─┘└─┘└─┘┴ ┴┴  └─┘────┘└┘┴ ┴┴ ┴└─┘└─┘
 ##
 
 function escape_names () {
@@ -77,6 +84,10 @@ station_name_escaped="${station_name_escaped//=/\\=}"
 }
 
 ##
+## ╔═╗┬─┐┌─┐┌─┐┬─┐┌─┐┌─┐┌─┐╔╗ ┌─┐┬─┐
+## ╠═╝├┬┘│ ││ ┬├┬┘├┤ └─┐└─┐╠╩╗├─┤├┬┘
+## ╩  ┴└─└─┘└─┘┴└─└─┘└─┘└─┘╚═╝┴ ┴┴└─
+##
 ## ProgressBar - https://github.com/fearside/ProgressBar/
 ##
 
@@ -90,7 +101,9 @@ printf "\r${echo_bold}Progress${echo_normal} : ${echo_bold}[${echo_normal}${_fil
 }
 
 ##
-## Health Check
+## ┬ ┬┌─┐┌─┐┬ ┌┬┐┬ ┬    ┌─┐┬ ┬┌─┐┌─┐┬┌─
+## ├─┤├┤ ├─┤│  │ ├─┤    │  ├─┤├┤ │  ├┴┐
+## ┴ ┴└─┘┴ ┴┴─┘┴ ┴ ┴────└─┘┴ ┴└─┘└─┘┴ ┴
 ##
 
 function health_check () {
@@ -100,12 +113,18 @@ if [ "$healthcheck" == "true" ]; then health_check_file="health-check-${collecto
 }
 
 ##
+## ┌─┐┬─┐┌─┐┌─┐┌─┐┌─┐┌─┐    ┌─┐┌┬┐┌─┐┬─┐┌┬┐
+## ├─┘├┬┘│ ││  ├┤ └─┐└─┐    └─┐ │ ├─┤├┬┘ │ 
+## ┴  ┴└─└─┘└─┘└─┘└─┘└─┘────└─┘ ┴ ┴ ┴┴└─ ┴ 
+##
+
+##
 ## Send Startup Event Timestamp to InfluxDB
 ##
 
 function process_start () {
 
-if [ "$debug" == "true" ]; then curl=(  ); else curl=( --silent --output /dev/null --show-error --fail ); fi
+if [ "$curl_debug" == "true" ]; then curl=(  ); else curl=( --silent --output /dev/null --show-error --fail ); fi
 
 current_time=$(date +%s)
 
@@ -119,6 +138,12 @@ weatherflow_system_events,collector_key=${collector_key},collector_type=${collec
 fi
 
 }
+
+##
+## ┬┌┐┌┬┌┬┐   ┌─┐┬─┐┌─┐┌─┐┬─┐┌─┐┌─┐┌─┐
+## │││││ │    ├─┘├┬┘│ ││ ┬├┬┘├┤ └─┐└─┐
+## ┴┘└┘┴ ┴────┴  ┴└─└─┘└─┘┴└─└─┘└─┘└─┘
+##
 
 function init_progress() {
 	progress_start_date=$(date +%s)
@@ -141,13 +166,31 @@ function inc_progress() {
 	for i in {1..25}
 	do
 		if [ "$i" -gt "$progress_barlength" ]
-		then printf "%s" "░"
-		else printf "%s" "${echo_red}${echo_bold}▒${echo_normal}"
+		then printf "%s" "${echo_dim}░${echo_normal}"
+		else
+
+if [ "$i" -ge "1" ] && [ "$i" -le "3" ]; then printf "\033[01;38;5;52m${echo_bold}▒${echo_normal}"; fi
+if [ "$i" -ge "4" ] && [ "$i" -le "6" ]; then printf "\033[01;38;5;124m${echo_bold}▒${echo_normal}"; fi
+if [ "$i" -ge "7" ] && [ "$i" -le "9" ]; then printf "\033[01;38;5;196m${echo_bold}▒${echo_normal}"; fi
+if [ "$i" -ge "10" ] && [ "$i" -le "12" ]; then printf "\033[01;38;5;202m${echo_bold}▒${echo_normal}"; fi
+if [ "$i" -ge "13" ] && [ "$i" -le "15" ]; then printf "\033[01;38;5;214m${echo_bold}▒${echo_normal}"; fi
+if [ "$i" -ge "16" ] && [ "$i" -le "18" ]; then printf "\033[01;38;5;220m${echo_bold}▒${echo_normal}"; fi
+if [ "$i" -ge "19" ] && [ "$i" -le "21" ]; then printf "\033[01;38;5;228m${echo_bold}▒${echo_normal}"; fi
+if [ "$i" -ge "22" ] && [ "$i" -le "25" ]; then printf "\033[01;38;5;231m${echo_bold}▒${echo_normal}"; fi
+
 		fi
 	done
 
     printf "${echo_bold}]${echo_normal} - Remaining: "; show_progress_time $progress_remaining
 }
+
+##
+## ┬┌┐┌┬┌┬┐   ┌─┐┬─┐┌─┐┌─┐┬─┐┌─┐┌─┐┌─┐    ┌─┐┬ ┬┬  ┬  
+## │││││ │    ├─┘├┬┘│ ││ ┬├┬┘├┤ └─┐└─┐    ├┤ │ ││  │  
+## ┴┘└┘┴ ┴────┴  ┴└─└─┘└─┘┴└─└─┘└─┘└─┘────└  └─┘┴─┘┴─┘
+##
+## ProgressBar2 - http://geoffles.github.io/development/2019/01/31/progress-in-bash.html
+##
 
 function init_progress_full() {
 	progress_start_date_full=$(date +%s)
@@ -156,8 +199,11 @@ function init_progress_full() {
 }
 
 ##
-## ProgressBar2 - http://geoffles.github.io/development/2019/01/31/progress-in-bash.html
+## ┬┌┐┌┌─┐    ┌─┐┬─┐┌─┐┌─┐┬─┐┌─┐┌─┐┌─┐    ┌─┐┬ ┬┬  ┬  
+## │││││      ├─┘├┬┘│ ││ ┬├┬┘├┤ └─┐└─┐    ├┤ │ ││  │  
+## ┴┘└┘└─┘────┴  ┴└─└─┘└─┘┴└─└─┘└─┘└─┘────└  └─┘┴─┘┴─┘
 ##
+
 
 function inc_progress_full() {
 	progress_count_full=$((progress_count_full+1))
@@ -177,6 +223,12 @@ function inc_progress_full() {
 
     printf "${echo_bold}]${echo_normal} - Remaining: "; show_progress_time $progress_remaining_full
 }
+
+##
+## ┌─┐┬ ┬┌─┐┬ ┬    ┌─┐┬─┐┌─┐┌─┐┬─┐┌─┐┌─┐┌─┐   ┌┬┐┬┌┬┐┌─┐
+## └─┐├─┤│ ││││    ├─┘├┬┘│ ││ ┬├┬┘├┤ └─┐└─┐    │ ││││├┤ 
+## └─┘┴ ┴└─┘└┴┘────┴  ┴└─└─┘└─┘┴└─└─┘└─┘└─┘────┴ ┴┴ ┴└─┘
+##
 
 function show_progress_time () {
     num=$1

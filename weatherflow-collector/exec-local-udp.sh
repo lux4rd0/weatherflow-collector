@@ -19,15 +19,16 @@ debug_curl=$WEATHERFLOW_COLLECTOR_DEBUG_CURL
 function=$WEATHERFLOW_COLLECTOR_FUNCTION
 healthcheck=$WEATHERFLOW_COLLECTOR_HEALTHCHECK
 host_hostname=$WEATHERFLOW_COLLECTOR_HOST_HOSTNAME
-influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
-influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
-influxdb_username=$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME
 logcli_host_url=$WEATHERFLOW_COLLECTOR_LOGCLI_URL
-loki_client_url=$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL
 public_name=$WEATHERFLOW_COLLECTOR_PUBLIC_NAME
 station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
 station_name=$WEATHERFLOW_COLLECTOR_STATION_NAME
 token=$WEATHERFLOW_COLLECTOR_TOKEN
+
+IFS=',' read -r -a loki_client_url <<< "$WEATHERFLOW_COLLECTOR_LOKI_CLIENT_URL"
+IFS=',' read -r -a influxdb_password <<< "$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD"
+IFS=',' read -r -a influxdb_url <<< "$WEATHERFLOW_COLLECTOR_INFLUXDB_URL"
+IFS=',' read -r -a influxdb_username <<< "$WEATHERFLOW_COLLECTOR_INFLUXDB_USERNAME"
 
 ##
 ## Set Specific Variables
@@ -63,7 +64,7 @@ fi
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Curl Command
@@ -107,6 +108,8 @@ fi
 ##
 
 if [[ $line == *"obs_st"* ]]; then
+
+function_type="obs_st"
 
 ##
 ## Extract Metrics
@@ -220,7 +223,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -295,7 +298,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -311,6 +314,8 @@ fi
 ##
 
 if [[ $line == *"obs_air"* ]]; then
+
+function_type="obs_air"
 
 ##
 ## Extract Metrics
@@ -405,7 +410,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -440,7 +445,7 @@ then
 
 curl_message="weatherflow_obs,collector_key=${collector_key},collector_type=${collector_type},elevation=${elevation},hub_sn=${hub_sn},latitude=${latitude},longitude=${longitude},public_name=${public_name_escaped},serial_number=${serial_number},source=${function},station_id=${station_id},station_name=${station_name_escaped},timezone=${timezone} "
 
-if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision}000,"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - firmware_revision is null"; fi
+if [ "${firmware_revision}" != "null" ]; then curl_message="${curl_message}firmware_revision=${firmware_revision},"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - firmware_revision is null"; fi
 if [ "${time_epoch}" != "null" ]; then curl_message="${curl_message}time_epoch=${time_epoch}000,"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - time_epoch is null"; fi
 if [ "${station_pressure}" != "null" ]; then curl_message="${curl_message}station_pressure=${station_pressure},"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - station_pressure is null"; fi
 if [ "${air_temperature}" != "null" ]; then curl_message="${curl_message}air_temperature=${air_temperature},"; else echo "${echo_bold}${echo_color_local_udp}${collector_type}:${echo_normal} $(date) - air_temperature is null"; fi
@@ -460,7 +465,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -476,6 +481,8 @@ fi
 ##
 
 if [[ $line == *"obs_sky"* ]]; then
+
+function_type="obs_sky"
 
 ##
 ## Extract Metrics
@@ -580,7 +587,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -638,7 +645,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -654,6 +661,8 @@ fi
 ##
 
 if [[ $line == *"rapid_wind"* ]]; then
+
+function_type="rapid_wind"
 
 ##
 ## Extract Metrics
@@ -734,7 +743,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -783,7 +792,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -799,6 +808,8 @@ fi
 ##
 
 if [[ $line == *"evt_strike"* ]]; then
+
+function_type="evt_strike"
 
 ##
 ## Extract Metrics
@@ -879,7 +890,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -928,7 +939,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -944,6 +955,8 @@ fi
 ##
 
 if [[ $line == *"evt_precip"* ]]; then
+
+function_type="evt_precip"
 
 ##
 ## Extract Metrics
@@ -1021,7 +1034,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -1068,7 +1081,7 @@ if [ "${time_epoch}" != "null" ]; then curl_message="${curl_message}time_epoch=$
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time_epoch}";
+curl_message="${curl_message} ${time_epoch}000000000";
 
 #echo "${curl_message}"
 
@@ -1084,6 +1097,8 @@ fi
 ##
 
 if [[ $line == *"device_status"* ]]; then
+
+function_type="device_status"
 
 ##
 ## Extract Metrics
@@ -1158,7 +1173,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",serial_number="${serial_number}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -1211,7 +1226,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${timestamp}";
+curl_message="${curl_message} ${timestamp}000000000";
 
 #echo "${curl_message}"
 
@@ -1227,6 +1242,8 @@ fi
 ##
 
 if [[ $line == *"hub_status"* ]]; then
+
+function_type="hub_status"
 
 ##
 ## Extract Metrics
@@ -1326,7 +1343,7 @@ loki_meta="{\"collector_type\":\"${collector_type}\",\"elevation\":\"${elevation
 
 if [ "$debug" == "true" ]; then echo "${loki_meta}"; fi
 
-echo "[${line},${loki_meta}]" | ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml
+echo "[${line},${loki_meta}]" | /usr/bin/timeout -k 1 2s ${grafana_loki_binary_path} --stdin --client.url "${loki_client_url}" --client.external-labels=collector_key="${collector_key}",collector_type="${collector_type}",host_hostname="${host_hostname}",hub_sn="${hub_sn}",public_name="${public_name}",station_id="${station_id}",station_name="${station_name}" --config.file=loki-config.yml &
 
 ##
 ## End Loki Timer
@@ -1387,7 +1404,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${timestamp}";
+curl_message="${curl_message} ${timestamp}000000000";
 
 #echo "${curl_message}"
 

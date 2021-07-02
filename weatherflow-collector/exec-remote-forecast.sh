@@ -73,7 +73,7 @@ fi
 ## Set InfluxDB Precision to seconds
 ##
 
-if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
+#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Curl Command
@@ -192,7 +192,7 @@ if [ "${conditions}" != "null" ]; then curl_message="${curl_message}conditions=\
 if [ "${icon}" != "null" ]; then curl_message="${curl_message}icon=\"${icon}\""; else echo "${echo_bold}${echo_color_remote_forecast}${collector_type}:${echo_normal} icon is null"; fi
 
 ##
-## Timestamp set to InfluxDB time (no specific timestamp set
+## Timestamp set to InfluxDB time (no specific timestamp set)
 ##
 
 #echo "${curl_message}"
@@ -298,7 +298,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${day_start_local_eod}";
+curl_message="${curl_message} ${day_start_local_eod}000000000";
 
 #echo "${curl_message}"
 
@@ -538,7 +538,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time}";
+curl_message="${curl_message} ${time}000000000";
 
 #echo "${curl_message}"
 
@@ -548,7 +548,7 @@ fi
 
 ##
 ## Send a duplicate set of metrics with a forecast_hourly_days_out value of "0" since InfluxDB
-## will consider am exact match (to overwrite and use in Forecasts)
+## will consider an exact match (to overwrite and use in Forecasts)
 ##
 
 ##
@@ -588,7 +588,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time}";
+curl_message="${curl_message} ${time}000000000";
 
 #echo "${curl_message}"
 
@@ -643,7 +643,7 @@ curl_message="$(echo "${curl_message}" | sed 's/,$//')"
 ## Add the proper timestamp at the end of the curl_message
 ##
 
-curl_message="${curl_message} ${time}";
+curl_message="${curl_message} ${time}000000000";
 
 #echo "${curl_message}"
 

@@ -15,9 +15,9 @@
   "description": "",
   "editable": true,
   "gnetId": 13857,
-  "graphTooltip": 1,
+  "graphTooltip": 0,
   "id": 334,
-  "iteration": 1623692037077,
+  "iteration": 1625250929823,
   "links": [
     {
       "asDropdown": true,
@@ -734,7 +734,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.align",
@@ -764,7 +764,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "High",
@@ -941,11 +941,11 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.width",
-                "value": 125
+                "value": 135
               }
             ]
           },
@@ -993,7 +993,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "groupBy": [
@@ -1005,7 +1005,7 @@
             },
             {
               "params": [
-                "previous"
+                "none"
               ],
               "type": "fill"
             }
@@ -1228,7 +1228,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Low",
@@ -1272,7 +1273,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -1518,7 +1520,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1661,7 +1663,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -1705,7 +1708,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -1749,7 +1753,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -2031,7 +2036,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -2238,5 +2243,5 @@
   "timezone": "browser",
   "title": "Historical (local-udp)",
   "uid": "lux4rd0labs_weatherflow_15",
-  "version": 15
+  "version": 21
 }

@@ -1,8 +1,9 @@
 FROM grafana/promtail:2.2.1
 
-RUN apt-get update && apt-get install -y bc curl dumb-init bash python procps coreutils sysstat vim
+RUN apt-get update && apt-get install -y bc curl dumb-init bash python procps coreutils sysstat vim net-tools
 
 RUN mkdir /weatherflow-collector
+RUN mkdir /weatherflow-collector/export
 
 COPY exec-health-check.sh \
 exec-host-performance.sh \
@@ -18,6 +19,7 @@ loki-config.yml \
 start-health-check.sh \
 start-host-performance.sh \
 start-local-udp.sh \
+start-remote-export.sh \
 start-remote-forecast.sh \
 start-remote-import.sh \
 start-remote-rest.sh \

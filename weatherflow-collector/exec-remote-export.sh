@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## WeatherFlow Collector - start-remote-import.sh
+## WeatherFlow Collector - start-remote-export.sh
 ##
 
 ##
@@ -29,14 +29,14 @@ station_id=$WEATHERFLOW_COLLECTOR_STATION_ID
 ## Set Specific Variables
 ##
 
-collector_type="remote-import"
-function="import"
+collector_type="remote-export"
+function="export"
 
 if [ "$debug" == "true" ]
 
 then
 
-echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - Starting WeatherFlow Collector (start-remote-import.sh) - https://github.com/lux4rd0/weatherflow-collector
+echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - Starting WeatherFlow Collector (start-remote-export.sh) - https://github.com/lux4rd0/weatherflow-collector
 
 Debug Environmental Variables
 
@@ -58,11 +58,7 @@ weatherflow_collector_version=${weatherflow_collector_version}"
 
 fi
 
-##
-## Set InfluxDB Precision to seconds
-##
 
-#if [ -n "${influxdb_url}" ]; then influxdb_url="${influxdb_url}&precision=s"; fi
 
 ##
 ## Curl Command
@@ -106,7 +102,8 @@ number_of_devices=$(echo "${body_station}" |jq -r '.stations[] | select(.station
 
 #echo "${body_station}" | jq -r '.stations[] | select(.location_id == ${station_id}) | .devices'
 
-echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - number_of_devices: ${echo_bold}${number_of_devices}${echo_normal}"
+echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - number_of_devices: ${echo_bold}${number_of_devices}${echo_normal}, station_id: ${station_id}"
+
 
 number_of_devices_minus_one=$((number_of_devices-1))
 
@@ -157,6 +154,12 @@ done
 init_progress_full $(((import_days + 1) * number_of_devices))
 
 ##
+## Init Export
+##
+
+export_number=0
+
+##
 ## Loop through the days for a full import
 ##
 
@@ -174,15 +177,39 @@ time_end=$((time_start + 86399))
 time_start_echo=$(date -d @"${time_start}")
 time_end_echo=$(date -d @${time_end})
 
-echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - Day: ${echo_bold}${days_loop}${echo_normal} days ago"
-echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - time_start: ${time_start} - ${time_start_echo}"
-echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - time_end: ${time_end} - ${time_end_echo}"
+#echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - Day: ${echo_bold}${days_loop}${echo_normal} days ago"
+#echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - time_start: ${time_start} - ${time_start_echo}"
+#echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - time_end: ${time_end} - ${time_end_echo}"
 
 remote_import_url="remote-import-url_${station_id}-station_list.txt"
 while IFS=, read -r lookup_import_url lookup_station_id; do
 if [ "$debug" == "true" ]; then echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - lookup_import_url: ${lookup_import_url} lookup_station_id: ${lookup_station_id}"; fi
 
-curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_import_url}&time_start=${time_start}&time_end=${time_end}" | ./exec-remote-import.sh
+# curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_import_url}&time_start=${time_start}&time_end=${time_end}" | ./exec-remote-import.sh
+
+##
+## Capture csv data
+##
+
+csv_data=$(curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_import_url}&time_start=${time_start}&time_end=${time_end}&format=csv")
+#csv_head=$(echo "${csv_data}" | head -1)
+csv_tail=$(echo "${csv_data}" | tail -n +2)
+
+#echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} $(date) - lookup_import_url: ${lookup_import_url} lookup_station_id: ${lookup_station_id}"
+
+#echo "days_loop=${days_loop}"
+if [ $export_number = "0" ]; then 
+
+echo "${csv_data}" > export/export-"${station_id}".csv
+
+else
+
+echo "${csv_tail}" >> export/export-"${station_id}".csv
+
+fi
+
+
+#curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_import_url}&time_start=${time_start}&time_end=${time_end}&format=csv"
 
 #echo "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_import_url}&time_start=${time_start}&time_end=${time_end}"
 
@@ -190,13 +217,16 @@ curl "${curl[@]}" -w "\n" -X GET --header 'Accept: application/json' "${lookup_i
 ## Increment Progress Bar
 ##
 
-echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} Full Import Status Details"
+#echo "${echo_bold}${echo_color_remote_import}${collector_type}:${echo_normal} Full Import Status Details"
 
 inc_progress_full
 
-echo "
-"
+
+
+((export_number=export_number+1))
 
 done < "${remote_import_url}"
+
+
 
 done

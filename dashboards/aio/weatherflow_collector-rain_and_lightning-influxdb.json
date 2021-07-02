@@ -17,7 +17,7 @@
   "gnetId": 13857,
   "graphTooltip": 1,
   "id": 338,
-  "iteration": 1623692055127,
+  "iteration": 1625251032573,
   "links": [
     {
       "asDropdown": true,
@@ -44,6 +44,280 @@
       "repeat": "station_name",
       "title": "$station_name",
       "type": "row"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#37872d",
+            "mode": "fixed"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "lengthin"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 2,
+        "x": 0,
+        "y": 1
+      },
+      "id": 90,
+      "interval": "$interval",
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.4",
+      "targets": [
+        {
+          "alias": "Accumulation",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_accumulated"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "* 0.039370"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ]
+        },
+        {
+          "alias": "Accumulation",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": true,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "local_daily_rain_accumulation"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
+              },
+              {
+                "params": [
+                  "* 0.039370"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "title": "Accumulation",
+      "type": "stat"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 2,
+        "x": 2,
+        "y": 1
+      },
+      "id": 89,
+      "interval": "$interval",
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "delta"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.4",
+      "targets": [
+        {
+          "alias": "Minutes",
+          "groupBy": [
+            {
+              "params": [
+                "5m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "precip_minutes_local_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "title": "Duration",
+      "type": "stat"
     },
     {
       "datasource": "InfluxDB - weatherflow",
@@ -81,7 +355,7 @@
               "mode": "off"
             }
           },
-          "decimals": 4,
+          "decimals": 3,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -92,7 +366,7 @@
               }
             ]
           },
-          "unit": "in"
+          "unit": "lengthin"
         },
         "overrides": [
           {
@@ -120,7 +394,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "dark-green",
+                  "fixedColor": "#37872D",
                   "mode": "fixed"
                 }
               },
@@ -201,8 +475,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 24,
-        "x": 0,
+        "w": 20,
+        "x": 4,
         "y": 1
       },
       "id": 81,
@@ -490,286 +764,7 @@
     },
     {
       "datasource": "InfluxDB - weatherflow",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "left",
-            "displayMode": "auto",
-            "filterable": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Date"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "time:dddd, MMMM Do - h:mm a"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Distance"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "lengthmi"
-              },
-              {
-                "id": "decimals",
-                "value": 0
-              },
-              {
-                "id": "custom.align",
-                "value": "right"
-              },
-              {
-                "id": "custom.width",
-                "value": 80
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 5,
-        "x": 0,
-        "y": 10
-      },
-      "id": 68,
-      "options": {
-        "frameIndex": 2,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Date"
-          }
-        ]
-      },
-      "pluginVersion": "8.0.1",
-      "targets": [
-        {
-          "alias": "Date",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "weatherflow_evt_strike",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "queryType": "randomWalk",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "time_epoch"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ]
-        },
-        {
-          "alias": "Distance",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_evt_strike",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND $timeFilter GROUP BY time(1s) fill(null)",
-          "queryType": "randomWalk",
-          "rawQuery": true,
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "distance"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              },
-              {
-                "params": [
-                  "* 0.62137"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ]
-        },
-        {
-          "alias": "Energy",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": true,
-          "measurement": "weatherflow_evt_strike",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "queryType": "randomWalk",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "energy"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ]
-        }
-      ],
-      "title": "Lightning Strikes",
-      "transformations": [
-        {
-          "id": "seriesToColumns",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true
-            },
-            "indexByName": {},
-            "renameByName": {}
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "greater",
-                  "options": {
-                    "value": 0
-                  }
-                },
-                "fieldName": "Distance"
-              }
-            ],
-            "match": "any",
-            "type": "include"
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -793,20 +788,21 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 5,
+        "w": 4,
+        "x": 0,
         "y": 10
       },
-      "id": 69,
+      "hideTimeOverride": true,
+      "id": 91,
       "interval": "$interval",
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "count"
+            "sum"
           ],
           "fields": "",
           "values": false
@@ -814,8 +810,110 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": true,
+          "measurement": "weatherflow_evt_strike",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "distance"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ]
+        },
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": true,
+          "measurement": "weatherflow_obs",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT distinct(\"lightning_strike_avg_distance\") FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/ AND \"evt_source\" =~ /^$evt_source$/)  AND lightning_strike_avg_distance <= 42 AND lightning_strike_avg_distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "lightning_strike_count"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=~",
+              "value": "/^$collector_type$/"
+            },
+            {
+              "condition": "AND",
+              "key": "station_name",
+              "operator": "=~",
+              "value": "/^$station_name$/"
+            }
+          ]
+        },
         {
           "alias": "",
           "groupBy": [
@@ -832,17 +930,20 @@
               "type": "fill"
             }
           ],
+          "hide": false,
           "measurement": "weatherflow_evt_strike",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT count(\"distance\") FROM \"weatherflow_evt_strike\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/ AND \"evt_source\" =~ /^$evt_source$/) AND $timeFilter AND distance >= 1 GROUP BY time(1s)  fill(null)",
           "queryType": "randomWalk",
-          "refId": "A",
+          "rawQuery": true,
+          "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "time_epoch"
+                  "distance"
                 ],
                 "type": "field"
               },
@@ -855,31 +956,22 @@
           "tags": [
             {
               "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
+              "operator": "=",
+              "value": "Savannah Crossing"
             },
             {
               "condition": "AND",
               "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
+              "operator": "=",
+              "value": "local-udp"
             }
           ]
         }
       ],
-      "title": "Lightning Strikes",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true
-            },
-            "indexByName": {},
-            "renameByName": {}
-          }
-        }
-      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Time Range",
+      "transformations": [],
       "type": "stat"
     },
     {
@@ -898,8 +990,8 @@
       "datasource": "InfluxDB - weatherflow",
       "gridPos": {
         "h": 9,
-        "w": 16,
-        "x": 8,
+        "w": 20,
+        "x": 4,
         "y": 10
       },
       "heatmap": {},
@@ -984,7 +1076,7 @@
           "measurement": "weatherflow_evt_strike",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND $timeFilter GROUP BY time(1s) fill(null)",
+          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/ AND \"evt_source\" =~ /^$evt_source$/) AND distance <= 42 AND distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "B",
@@ -1090,11 +1182,13 @@
               "type": "fill"
             }
           ],
-          "hide": true,
+          "hide": false,
           "measurement": "weatherflow_obs",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT distinct(\"lightning_strike_avg_distance\") * 0.62137 FROM \"weatherflow_obs\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/ AND \"evt_source\" =~ /^$evt_source$/) AND lightning_strike_avg_distance <= 42 AND lightning_strike_avg_distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": true,
           "refId": "D",
           "resultFormat": "time_series",
           "select": [
@@ -1148,13 +1242,13 @@
         "decimals": 0,
         "format": "miles",
         "logBase": 1,
-        "max": null,
+        "max": "28",
         "min": "0",
         "show": true,
         "splitFactor": null
       },
       "yBucketBound": "auto",
-      "yBucketNumber": 8,
+      "yBucketNumber": 10,
       "yBucketSize": null
     }
   ],
@@ -1170,9 +1264,13 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -1224,7 +1322,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "remote-socket",
           "value": "remote-socket"
         },
@@ -1256,8 +1354,39 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "1h",
-          "value": "1h"
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "InfluxDB - weatherflow",
+        "definition": "SHOW TAG VALUES WITH KEY = \"evt_source\"",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Lightning Event Source",
+        "multi": false,
+        "name": "evt_source",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"evt_source\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "15m",
+          "value": "15m"
         },
         "description": null,
         "error": null,
@@ -1303,7 +1432,7 @@
             "value": "2h"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "1h",
             "value": "1h"
           },
@@ -1313,7 +1442,7 @@
             "value": "30m"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "15m",
             "value": "15m"
           },
@@ -1371,5 +1500,5 @@
   "timezone": "browser",
   "title": "Rain and Lightning",
   "uid": "lux4rd0labs_weatherflow_20",
-  "version": 82
+  "version": 128
 }

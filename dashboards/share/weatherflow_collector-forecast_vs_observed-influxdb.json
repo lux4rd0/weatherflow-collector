@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.1"
+      "version": "8.0.4"
     },
     {
       "type": "datasource",
@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1623693262882,
+  "iteration": 1625254269867,
   "links": [
     {
       "asDropdown": true,
@@ -1514,7 +1514,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               },
               {
                 "params": [
@@ -1571,7 +1571,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               },
               {
                 "params": [
@@ -2446,8 +2446,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "2h",
-          "value": "2h"
+          "text": "4h",
+          "value": "4h"
         },
         "description": null,
         "error": null,
@@ -2473,12 +2473,12 @@
             "value": "6h"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "4h",
             "value": "4h"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "2h",
             "value": "2h"
           },
@@ -2533,6 +2533,6 @@
   "timezone": "",
   "title": "WeatherFlow Collector - Forecast Vs Observed",
   "uid": "lux4rd0labs_weatherflow_13",
-  "version": 84,
+  "version": 1,
   "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }

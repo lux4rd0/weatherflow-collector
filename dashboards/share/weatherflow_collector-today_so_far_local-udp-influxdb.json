@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.1"
+      "version": "8.0.4"
     },
     {
       "type": "panel",
@@ -59,7 +59,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1623693300648,
+  "iteration": 1625254329182,
   "links": [
     {
       "asDropdown": true,
@@ -1059,7 +1059,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -2118,6 +2118,6 @@
   "timezone": "",
   "title": "WeatherFlow Collector - Today So Far (local-udp)",
   "uid": "lux4rd0labs_weatherflow_18",
-  "version": 14,
+  "version": 1,
   "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }
