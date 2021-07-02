@@ -12,11 +12,12 @@
       }
     ]
   },
+  "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting.",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 357,
-  "iteration": 1623692062373,
+  "id": 360,
+  "iteration": 1625251061308,
   "links": [
     {
       "asDropdown": true,
@@ -935,7 +936,7 @@
             "axisSoftMin": 0,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 20,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
@@ -999,7 +1000,7 @@
       "pluginVersion": "7.5.5",
       "targets": [
         {
-          "alias": "$tag_host_hostname - $col",
+          "alias": "$col",
           "groupBy": [
             {
               "params": [
@@ -1179,7 +1180,7 @@
       "pluginVersion": "7.5.5",
       "targets": [
         {
-          "alias": "$tag_host_hostname - $col",
+          "alias": "$col minute",
           "groupBy": [
             {
               "params": [
@@ -1310,6 +1311,389 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 15
+      },
+      "id": 71,
+      "interval": "$interval",
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "$tag_sysperf_command",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "sysperf_command"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_system_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "total_time"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [],
+                "type": "non_negative_difference"
+              },
+              {
+                "params": [
+                  " / 100"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "collector_type",
+              "operator": "=",
+              "value": "host-performance"
+            },
+            {
+              "condition": "AND",
+              "key": "source",
+              "operator": "=",
+              "value": "collector"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_key",
+              "operator": "=~",
+              "value": "/^$collector_key$/"
+            },
+            {
+              "condition": "AND",
+              "key": "sysperf_type",
+              "operator": "=",
+              "value": "process_utilization"
+            }
+          ],
+          "tz": "$tz"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Per Process CPU Usage (Seconds)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 101,
+      "interval": "$interval",
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "7.5.5",
+      "targets": [
+        {
+          "alias": "$tag_netstat_app - $col",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "host_hostname"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "netstat_app"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "weatherflow_system_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"cpu_idle\") AS \"Idle\", mean(\"cpu_iowait\"), mean(\"cpu_sys\"), mean(\"cpu_usr\") FROM \"weatherflow_system_stats\" WHERE (\"host_hostname\" = 'docker02.tylephony.com') AND $timeFilter GROUP BY time($__interval), \"host_hostname\" fill(previous)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "netstat_closewait"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "Close Wait"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "netstat_established"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "Established"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "netstat_finwait2"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "Finwait2"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "netstat_listen"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "Listen"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "netstat_timewait"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "Timewait"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host_hostname",
+              "operator": "=~",
+              "value": "/^$host_hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "collector_key",
+              "operator": "=~",
+              "value": "/^$collector_key$/"
+            },
+            {
+              "condition": "AND",
+              "key": "sysperf_type",
+              "operator": "=",
+              "value": "netstat"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Netstat (Container)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "InfluxDB - weatherflow",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -1340,8 +1724,8 @@
       "gridPos": {
         "h": 6,
         "w": 8,
-        "x": 16,
-        "y": 15
+        "x": 8,
+        "y": 21
       },
       "id": 69,
       "interval": "$interval",
@@ -1359,7 +1743,7 @@
       "pluginVersion": "7.5.5",
       "targets": [
         {
-          "alias": "$tag_host_hostname - $col",
+          "alias": "$col",
           "groupBy": [
             {
               "params": [
@@ -1493,7 +1877,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 10,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
@@ -1502,149 +1886,6 @@
               "viz": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 0,
-        "y": 21
-      },
-      "id": 71,
-      "interval": "$interval",
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.5.3",
-      "targets": [
-        {
-          "alias": "$tag_command",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "command"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "weatherflow_system_process_stats",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "total_time"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [],
-                "type": "non_negative_difference"
-              },
-              {
-                "params": [
-                  " / 100"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=",
-              "value": "host-performance"
-            },
-            {
-              "condition": "AND",
-              "key": "source",
-              "operator": "=",
-              "value": "collector"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_key",
-              "operator": "=~",
-              "value": "/^$collector_key$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Per Process CPU Usage (Seconds)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "stepBefore",
             "lineStyle": {
               "fill": "solid"
             },
@@ -1680,8 +1921,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 16,
         "y": 21
       },
       "id": 53,
@@ -1700,7 +1941,7 @@
       "pluginVersion": "7.5.5",
       "targets": [
         {
-          "alias": "$tag_host_hostname - $col",
+          "alias": "$col",
           "groupBy": [
             {
               "params": [
@@ -1936,7 +2177,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": null,
       "targets": [
         {
@@ -2045,7 +2286,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": null,
       "targets": [
         {
@@ -2183,7 +2424,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -2316,7 +2557,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.0.1",
+          "pluginVersion": "8.0.4",
           "targets": [
             {
               "expr": "sum by (collector_type, station_name) (bytes_over_time({app=\"weatherflow-collector\",collector_type=~\"$collector_type_logs\", station_name=~\"$station_name\"}[$__interval]))",
@@ -2497,7 +2738,7 @@
             "h": 11,
             "w": 24,
             "x": 0,
-            "y": 37
+            "y": 48
           },
           "id": 35,
           "interval": "$interval",
@@ -2540,7 +2781,7 @@
                 },
                 {
                   "params": [
-                    "previous"
+                    "0"
                   ],
                   "type": "fill"
                 }
@@ -2608,7 +2849,7 @@
                 },
                 {
                   "params": [
-                    "previous"
+                    "0"
                   ],
                   "type": "fill"
                 }
@@ -2676,13 +2917,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -2734,13 +2971,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"collector_type\"",
@@ -2765,13 +2998,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"source\"",
@@ -2796,13 +3025,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"collector_key\"",
@@ -2858,9 +3083,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "30m",
-          "value": "30m"
+          "selected": true,
+          "text": "15m",
+          "value": "15m"
         },
         "description": null,
         "error": null,
@@ -2911,12 +3136,12 @@
             "value": "1h"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "30m",
             "value": "30m"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "15m",
             "value": "15m"
           },
@@ -3007,5 +3232,5 @@
   "timezone": "",
   "title": "System Stats",
   "uid": "lux4rd0labs_weatherflow_10",
-  "version": 53
+  "version": 11
 }

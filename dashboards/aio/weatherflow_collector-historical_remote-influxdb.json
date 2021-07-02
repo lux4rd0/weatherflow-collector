@@ -17,7 +17,7 @@
   "gnetId": 13857,
   "graphTooltip": 1,
   "id": 312,
-  "iteration": 1623692044911,
+  "iteration": 1625251020019,
   "links": [
     {
       "asDropdown": true,
@@ -495,7 +495,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.align",
@@ -689,11 +689,11 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Date"
+            "displayName": "H - Heat Index"
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "H - Air",
@@ -1483,7 +1483,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.align",
@@ -1557,7 +1557,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Accum",
@@ -3628,7 +3628,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Average",
@@ -3678,7 +3679,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Lull",
@@ -3728,7 +3730,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -3907,7 +3910,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -3951,7 +3955,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -3995,7 +4000,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -4003,7 +4009,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -4220,5 +4226,5 @@
   "timezone": "browser",
   "title": "Historical (remote)",
   "uid": "lux4rd0labs_weatherflow_16",
-  "version": 40
+  "version": 43
 }

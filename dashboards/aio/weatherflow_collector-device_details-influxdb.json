@@ -17,7 +17,7 @@
   "gnetId": 13858,
   "graphTooltip": 1,
   "id": 308,
-  "iteration": 1623692013108,
+  "iteration": 1625250853990,
   "links": [
     {
       "asDropdown": true,
@@ -633,7 +633,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Uptime",
@@ -1252,7 +1252,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": "serial_number",
       "repeatDirection": "v",
       "targets": [
@@ -1668,7 +1668,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": "obs_serial_number",
       "targets": [
         {
@@ -1859,7 +1859,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2050,7 +2050,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2241,7 +2241,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2432,7 +2432,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2623,7 +2623,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2814,7 +2814,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3005,7 +3005,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3195,7 +3195,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3386,7 +3386,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3548,8 +3548,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "ST-00031267",
-          "value": "ST-00031267"
+          "text": "ST-00028209",
+          "value": "ST-00028209"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"serial_number\"  WHERE \"station_name\" =~ /^$station_name$/",

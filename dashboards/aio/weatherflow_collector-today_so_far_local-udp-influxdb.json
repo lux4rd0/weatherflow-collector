@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 336,
-  "iteration": 1623692075482,
+  "id": 335,
+  "iteration": 1625251076541,
   "links": [
     {
       "asDropdown": true,
@@ -38,7 +38,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 28,
+      "id": 27,
       "panels": [],
       "repeat": "station_name",
       "title": "$station_name",
@@ -57,7 +57,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 40,
             "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
@@ -69,7 +69,7 @@
             "lineStyle": {
               "fill": "solid"
             },
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -281,336 +281,6 @@
             }
           ],
           "tz": "$tz"
-        },
-        {
-          "alias": "Feels Like",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "feels_like"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Heat Index",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "heat_index"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Wind Chill",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wind_chill"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Dry Bulb",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"delta_t\") + mean(\"wet_bulb_temperature\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval)  tz('$tz')",
-          "rawQuery": true,
-          "refId": "E",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "Wet Bulb",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wet_bulb_temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Dew Point",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"wind_chill\") * 9/5 + 32 FROM \"weatherflow_obs\" WHERE (\"collector_type\" =~ /^$collector_type$/ AND \"station_name\" =~ /^$station_name$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "G",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "dew_point"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 9/5 + 32"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            },
-            {
-              "condition": "AND",
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            }
-          ],
-          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -696,7 +366,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 7,
+        "w": 8,
         "x": 9,
         "y": 1
       },
@@ -764,67 +434,10 @@
             }
           ],
           "tz": "$tz"
-        },
-        {
-          "alias": "Air Density",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "air_density"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 0.062448979591837"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
         }
       ],
       "timeFrom": null,
-      "title": "Relative Humidity / Air Density",
+      "title": "Relative Humidity",
       "type": "timeseries"
     },
     {
@@ -882,8 +495,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 6,
-        "x": 16,
+        "w": 7,
+        "x": 17,
         "y": 1
       },
       "id": 4,
@@ -969,139 +582,6 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "text": "→"
-                },
-                "1": {
-                  "text": "↗"
-                },
-                "-1": {
-                  "text": "↘"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "max": 1,
-          "min": -1,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              },
-              {
-                "color": "dark-blue",
-                "value": -1
-              },
-              {
-                "color": "orange",
-                "value": 0
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 2,
-        "x": 22,
-        "y": 1
-      },
-      "id": 26,
-      "interval": "1m",
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.0.1",
-      "targets": [
-        {
-          "alias": "Trending",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "pressure_trend"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Trending",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {}
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "InfluxDB - weatherflow",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
             "fixedColor": "yellow",
             "mode": "fixed"
           },
@@ -1163,10 +643,6 @@
               {
                 "id": "unit",
                 "value": "lux"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
               }
             ]
           },
@@ -1185,15 +661,11 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 40
+                "value": 10
               },
               {
                 "id": "unit",
                 "value": "UV"
-              },
-              {
-                "id": "decimals",
-                "value": 2
               }
             ]
           },
@@ -1209,10 +681,6 @@
                   "fixedColor": "#8f3bb8",
                   "mode": "fixed"
                 }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 40
               },
               {
                 "id": "unit",
@@ -1549,7 +1017,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -1631,7 +1099,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1754,7 +1222,7 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 40,
-            "gradientMode": "none",
+            "gradientMode": "opacity",
             "hideFrom": {
               "graph": false,
               "legend": false,
@@ -1806,14 +1274,6 @@
               {
                 "id": "custom.fillBelowTo",
                 "value": "Lull"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 70
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "opacity"
               }
             ]
           },
@@ -1824,10 +1284,6 @@
             },
             "properties": [
               {
-                "id": "custom.gradientMode",
-                "value": "opacity"
-              },
-              {
                 "id": "color",
                 "value": {
                   "fixedColor": "#8f3bb8",
@@ -1837,10 +1293,6 @@
               {
                 "id": "custom.fillBelowTo",
                 "value": "Average"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 30
               }
             ]
           },
@@ -1859,11 +1311,7 @@
               },
               {
                 "id": "custom.fillOpacity",
-                "value": 100
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "opacity"
+                "value": 60
               },
               {
                 "id": "custom.fillBelowTo",
@@ -2246,65 +1694,7 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ],
-          "tz": "$tz"
-        },
-        {
-          "alias": "Accumulated Rain",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "weatherflow_obs",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "precip_accum_local_day"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "* 0.039370"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "station_name",
-              "operator": "=~",
-              "value": "/^$station_name$/"
-            },
-            {
-              "condition": "AND",
-              "key": "collector_type",
-              "operator": "=~",
-              "value": "/^$collector_type$/"
-            }
-          ],
-          "tz": "$tz"
+          ]
         }
       ],
       "timeFrom": null,
@@ -2397,8 +1787,7 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ],
-          "tz": "$tz"
+          ]
         },
         {
           "alias": "Strike Count",
@@ -2448,12 +1837,11 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ],
-          "tz": "$tz"
+          ]
         },
         {
           "hide": false,
-          "query": "SELECT distinct(\"lightning_strike_avg_distance\") * 0.62137 FROM \"weatherflow_obs\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND lightning_strike_avg_distance <= 42 AND lightning_strike_avg_distance >= 1 AND $timeFilter GROUP BY time(1s) fill(null)",
+          "query": "SELECT distinct(\"distance\") * 0.62137 FROM \"weatherflow_evt_strike\" WHERE (\"station_name\" =~ /^$station_name$/ AND \"collector_type\" =~ /^$collector_type$/) AND distance <= 42 AND $timeFilter GROUP BY time(1s) fill(null)",
           "rawQuery": true,
           "refId": "C"
         }
@@ -2472,7 +1860,7 @@
       "xBucketSize": null,
       "yAxis": {
         "decimals": 0,
-        "format": "velocitymph",
+        "format": "miles",
         "logBase": 1,
         "max": null,
         "min": "0",
@@ -2496,13 +1884,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "InfluxDB - weatherflow",
         "definition": "SHOW TAG VALUES WITH KEY = \"station_name\"",
@@ -2515,6 +1899,58 @@
         "name": "station_name",
         "options": [],
         "query": "SHOW TAG VALUES WITH KEY = \"station_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "local-udp",
+          "value": "local-udp"
+        },
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "collector_type",
+        "options": [
+          {
+            "selected": true,
+            "text": "local-udp",
+            "value": "local-udp"
+          }
+        ],
+        "query": "local-udp",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "InfluxDB - weatherflow",
+        "definition": "SHOW TAG VALUES WITH KEY = \"hub_sn\" WHERE \"collector_type\" =~ /^$collector_type$/",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Hub",
+        "multi": true,
+        "name": "hub_sn",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"hub_sn\" WHERE \"collector_type\" =~ /^$collector_type$/",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2550,37 +1986,6 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "remote-socket",
-          "value": "remote-socket"
-        },
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Collector Type",
-        "multi": false,
-        "name": "collector_type",
-        "options": [
-          {
-            "selected": false,
-            "text": "remote-rest",
-            "value": "remote-rest"
-          },
-          {
-            "selected": true,
-            "text": "remote-socket",
-            "value": "remote-socket"
-          }
-        ],
-        "query": "remote-rest,remote-socket",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
       },
       {
         "allValue": null,
@@ -2681,7 +2086,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Today So Far (remote)",
-  "uid": "lux4rd0labs_weatherflow_19",
-  "version": 16
+  "title": "Today So Far (local-udp)",
+  "uid": "lux4rd0labs_weatherflow_18",
+  "version": 14
 }

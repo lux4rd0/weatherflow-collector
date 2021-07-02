@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 313,
-  "iteration": 1623691994284,
+  "iteration": 1625250825717,
   "links": [
     {
       "asDropdown": false,
@@ -68,7 +68,7 @@
           "weatherflow-collector"
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "timeFrom": null,
       "timeShift": null,
       "type": "dashlist"
@@ -87,7 +87,7 @@
         "content": "<center><img src=\"https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png\"></center>",
         "mode": "html"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "timeFrom": null,
       "timeShift": null,
       "transparent": true,
@@ -666,7 +666,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Current",
@@ -1179,7 +1179,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Forecast High",
@@ -1688,7 +1688,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Observed High",
@@ -2201,7 +2201,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Forecast High",
@@ -2710,7 +2710,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Observed Low",
@@ -2777,6 +2777,7 @@
     },
     {
       "datasource": "InfluxDB - weatherflow",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2845,7 +2846,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeatDirection": "v",
       "targets": [
         {
@@ -2908,7 +2909,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Humidity",
+      "title": "Station Pressure",
       "transformations": [],
       "type": "stat"
     },
@@ -3425,7 +3426,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -3636,7 +3637,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Wind Direction",
@@ -4241,7 +4242,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Chance",
@@ -4840,7 +4841,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": null,
       "repeatDirection": "v",
       "targets": [
@@ -4976,5 +4977,5 @@
   "timezone": "",
   "title": "Overview",
   "uid": "lux4rd0labs_weatherflow_17",
-  "version": 55
+  "version": 56
 }

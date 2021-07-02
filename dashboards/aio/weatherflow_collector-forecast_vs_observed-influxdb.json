@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 309,
-  "iteration": 1623692027163,
+  "iteration": 1625250871141,
   "links": [
     {
       "asDropdown": true,
@@ -1484,7 +1484,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               },
               {
                 "params": [
@@ -1541,7 +1541,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               },
               {
                 "params": [
@@ -2432,8 +2432,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "2h",
-          "value": "2h"
+          "text": "4h",
+          "value": "4h"
         },
         "description": null,
         "error": null,
@@ -2459,12 +2459,12 @@
             "value": "6h"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "4h",
             "value": "4h"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "2h",
             "value": "2h"
           },
@@ -2519,5 +2519,5 @@
   "timezone": "",
   "title": "Forecast Vs Observed",
   "uid": "lux4rd0labs_weatherflow_13",
-  "version": 84
+  "version": 87
 }
