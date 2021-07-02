@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.1"
+      "version": "8.0.4"
     },
     {
       "type": "datasource",
@@ -53,7 +53,7 @@
   "gnetId": 13857,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1623693249336,
+  "iteration": 1625254285808,
   "links": [
     {
       "asDropdown": true,
@@ -531,7 +531,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.align",
@@ -725,11 +725,11 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Date"
+            "displayName": "H - Heat Index"
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "H - Air",
@@ -1519,7 +1519,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "time:ddd, MMM Do"
+                "value": "time:ddd, MMM Do, 'YY"
               },
               {
                 "id": "custom.align",
@@ -1593,7 +1593,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Accum",
@@ -3664,7 +3664,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Average",
@@ -3714,7 +3715,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Lull",
@@ -3764,7 +3766,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -3943,7 +3946,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "Illuminance",
@@ -3987,7 +3991,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         },
         {
           "alias": "UV",
@@ -4031,7 +4036,8 @@
               "operator": "=~",
               "value": "/^$collector_type$/"
             }
-          ]
+          ],
+          "tz": "$tz"
         }
       ],
       "timeFrom": null,
@@ -4039,7 +4045,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -4244,6 +4250,6 @@
   "timezone": "browser",
   "title": "WeatherFlow Collector - Historical (remote)",
   "uid": "lux4rd0labs_weatherflow_16",
-  "version": 40,
+  "version": 1,
   "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }

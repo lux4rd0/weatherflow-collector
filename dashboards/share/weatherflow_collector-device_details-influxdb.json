@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.1"
+      "version": "8.0.4"
     },
     {
       "type": "datasource",
@@ -59,7 +59,7 @@
   "gnetId": 13858,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1623693224772,
+  "iteration": 1625254255667,
   "links": [
     {
       "asDropdown": true,
@@ -675,7 +675,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Uptime",
@@ -1294,7 +1294,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": "serial_number",
       "repeatDirection": "v",
       "targets": [
@@ -1710,7 +1710,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "repeat": "obs_serial_number",
       "targets": [
         {
@@ -1901,7 +1901,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2092,7 +2092,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2283,7 +2283,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2474,7 +2474,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2665,7 +2665,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -2856,7 +2856,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3047,7 +3047,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3237,7 +3237,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3428,7 +3428,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "",
@@ -3636,6 +3636,6 @@
   "timezone": "",
   "title": "WeatherFlow Collector - Device Details",
   "uid": "lux4rd0labs_weatherflow_12",
-  "version": 8,
+  "version": 1,
   "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }

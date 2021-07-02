@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.1"
+      "version": "8.0.4"
     },
     {
       "type": "datasource",
@@ -50,9 +50,9 @@
   },
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 1,
+  "graphTooltip": 0,
   "id": null,
-  "iteration": 1623693212205,
+  "iteration": 1625254262613,
   "links": [
     {
       "asDropdown": true,
@@ -638,7 +638,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 125
+                "value": 110
               },
               {
                 "id": "decimals",
@@ -662,7 +662,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 125
+                "value": 110
               },
               {
                 "id": "decimals",
@@ -778,7 +778,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 125
+                "value": 110
               }
             ]
           },
@@ -826,7 +826,7 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 12,
+        "w": 11,
         "x": 0,
         "y": 1
       },
@@ -849,7 +849,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Sky",
@@ -1745,7 +1745,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 63
+                "value": 65
               },
               {
                 "id": "unit",
@@ -1769,7 +1769,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 125
+                "value": 110
               },
               {
                 "id": "decimals",
@@ -1793,7 +1793,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 70
               },
               {
                 "id": "thresholds",
@@ -2005,7 +2005,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 90
+                "value": 85
               },
               {
                 "id": "custom.displayMode",
@@ -2172,7 +2172,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 80
+                "value": 75
               }
             ]
           },
@@ -2319,18 +2319,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 70
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "Pressure"
             },
             "properties": [
@@ -2387,25 +2375,13 @@
                 "value": "color-background"
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Conditions"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 220
-              }
-            ]
           }
         ]
       },
       "gridPos": {
         "h": 12,
-        "w": 12,
-        "x": 12,
+        "w": 13,
+        "x": 11,
         "y": 1
       },
       "id": 127,
@@ -2421,7 +2397,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.1",
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "alias": "Sky",
@@ -3658,7 +3634,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "first"
               }
             ]
           ],
@@ -3709,7 +3685,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "first"
               },
               {
                 "params": [
@@ -4522,7 +4498,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "first"
               }
             ]
           ],
@@ -4707,6 +4683,6 @@
   "timezone": "",
   "title": "WeatherFlow Collector - Forecast",
   "uid": "lux4rd0labs_weatherflow_14",
-  "version": 92,
+  "version": 1,
   "description": "WeatherFlow Collector provides multiple ways of collecting data from the WeatherFlow Tempest, Air, and Sky weather systems. These Grafana dashboards offer visualizations in real-time for current conditions, derived metrics, and forecasting."
 }
