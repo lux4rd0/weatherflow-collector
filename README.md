@@ -18,7 +18,7 @@ The project builds a pre-configured Docker container that takes different config
 - [Docker](https://docs.docker.com/install)
 - [Docker Compose](https://docs.docker.com/compose/install)
 - [InfluxDB 1.8](https://docs.influxdata.com/influxdb/v1.8/) or [Grafana Loki 2.2](https://grafana.com/oss/loki/)
-- [Grafana 8.0.2](https://grafana.com/oss/grafana/)
+- [Grafana 8.0.4](https://grafana.com/oss/grafana/)
 
 ## Notice
 
