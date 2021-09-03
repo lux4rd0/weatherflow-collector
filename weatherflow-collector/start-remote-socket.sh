@@ -201,4 +201,4 @@ done
 
 #echo "${socket_json}"
 
-echo -e "${socket_json}" | ./websocat_amd64-linux-static -n "wss://ws.weatherflow.com/swd/data?token=${token}" | ./exec-remote-socket.sh
+echo -e "${socket_json}" | ./websocat -n "wss://ws.weatherflow.com/swd/data?token=${token}" | ./exec-remote-socket.sh
