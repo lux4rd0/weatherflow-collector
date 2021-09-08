@@ -34,6 +34,9 @@ Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflo
     lux4rd0/weatherflow-collector:3.5.1-arm64
     lux4rd0/weatherflow-collector:latest-arm64
     
+    lux4rd0/weatherflow-collector:3.5.1-arm
+    lux4rd0/weatherflow-collector:latest-arm
+    
 Correct environmental variables are required for the container to function. The following script may be used:
 
     generate_docker-compose.sh
