@@ -133,14 +133,6 @@ How often (in seconds) forecast data is collected from WeatherFlow. Defaults to 
 - false
 - true
 
-````WEATHERFLOW_COLLECTOR_UDP_IP````
-
-Set the UDP listener IP to something other than the default (239.255.255.255).
-
-````WEATHERFLOW_COLLECTOR_UDP_PORT````
-
-Set the UDP listener PORT to something other than the default (50222).
-
 A Docker health check function that runs every 60 seconds. If no data has been collected or persisted to InfluxDB and this parameter is set to true, the docker container will be marked as Unhealthy and terminate. Setting this to false will always return a healthy response to the Docker health check. The health check is included because there may be times where the local UDP listener or remote-socket connection goes silent, and recycling of the container is the only way to get it listening again. You may also find the remote-forecast container takes longer than 60 seconds to complete its hourly forecast transformation. A future update will change the 60 seconds to be a multiple of the interval rate rather than a fixed 60 seconds.
 
 ````WEATHERFLOW_COLLECTOR_EXPORT_DAYS````
@@ -210,6 +202,14 @@ The number of threads used when populating the Forecast Hourly details or import
 The WeatherFlow Personal Access Token.
 
 #### *Note - If a change is made to the location details of your WeatherFlow device (such as station name, public name, longitude, latitude, etc.) - please rerun the `generate_docker-compose.sh` script or manually update the environmental variables to match.*
+
+````WEATHERFLOW_COLLECTOR_UDP_IP````
+
+Set the UDP listener IP to something other than the default (239.255.255.255).
+
+````WEATHERFLOW_COLLECTOR_UDP_PORT````
+
+Set the UDP listener PORT to something other than the default (50222).
 
 ## Obtaining Your Tempest Authentication Token
 
