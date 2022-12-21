@@ -33,7 +33,6 @@ def create_broadcast_listener_socket(broadcast_ip, broadcast_port):
 # ip/port to listen to
 
 if 'WEATHERFLOW_COLLECTOR_UDP_IP' in os.environ:
-    print ('WF_C_UI Set')
     BROADCAST_IP = os.environ['WEATHERFLOW_COLLECTOR_UDP_IP']
 else:
     BROADCAST_IP = '239.255.255.250'
