@@ -145,7 +145,7 @@ This value represents the hostname that is running the Docker containers. Docker
 
 ````WEATHERFLOW_COLLECTOR_UDP_IP````
 
-Set the UDP listener IP to something other than the default (239.255.255.255).
+Set the UDP listener IP to something other than the default (239.255.255.250).
 
 ````WEATHERFLOW_COLLECTOR_UDP_PORT````
 
