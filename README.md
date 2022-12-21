@@ -143,6 +143,14 @@ The number of days you want to export to a file from either the WeatherFlow clou
 
 This value represents the hostname that is running the Docker containers. Docker creates a unique hostname each time a docker container is recycled. This entry is used in the management dashboards to know where your collectors are running. It's also helpful if you run the collector across multiple hosts. This value is populated when the `generate_docker-compose.sh` script generates the `docker-compose.yml` file.
 
+````WEATHERFLOW_COLLECTOR_UDP_IP````
+
+Set the UDP listener IP to something other than the default (239.255.255.255).
+
+````WEATHERFLOW_COLLECTOR_UDP_PORT````
+
+Set the UDP listener PORT to something other than the default (50222).
+
 ````WEATHERFLOW_COLLECTOR_HUB_SN````
 
 The WeatherFlow Hub serial number.
@@ -202,14 +210,6 @@ The number of threads used when populating the Forecast Hourly details or import
 The WeatherFlow Personal Access Token.
 
 #### *Note - If a change is made to the location details of your WeatherFlow device (such as station name, public name, longitude, latitude, etc.) - please rerun the `generate_docker-compose.sh` script or manually update the environmental variables to match.*
-
-````WEATHERFLOW_COLLECTOR_UDP_IP````
-
-Set the UDP listener IP to something other than the default (239.255.255.255).
-
-````WEATHERFLOW_COLLECTOR_UDP_PORT````
-
-Set the UDP listener PORT to something other than the default (50222).
 
 ## Obtaining Your Tempest Authentication Token
 
