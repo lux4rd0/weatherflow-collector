@@ -147,7 +147,7 @@ echo "hub_sn=\"$(echo "${body_station}" | jq -r '.stations['"${station_number}"'
 echo "device_id=\"$(echo "${body_station}" | jq -r '.stations['"${station_number}"'].devices[] | select(.device_type == "HB") | .device_id')\"" >> remote-forecast-station_id-"${station_ids[${station_number}]}"-lookup.txt
 
 
-echo "${body_station}" | jq -r '.stations['"${station_number}"'] | to_entries | .[0,1,2,3,4,5,6] | .key + "=" + "\"" + ( .value|tostring ) + "\""' >> remote-forecast-station_id-"${station_ids[${station_number}]}"-lookup.txt
+echo "${body_station}" | jq -r '.stations['"${station_number}"'] | to_entries | .[4,5,6,7,8,9,12] | .key + "=" + "\"" + ( .value|tostring ) + "\""' >> remote-forecast-station_id-"${station_ids[${station_number}]}"-lookup.txt
 
 echo "elevation=\"$(echo "${body_station}" |jq -r '.stations['"${station_number}"'].station_meta.elevation')\"" >> remote-forecast-station_id-"${station_ids[${station_number}]}"-lookup.txt
 
