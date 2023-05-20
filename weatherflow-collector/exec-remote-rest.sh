@@ -95,7 +95,7 @@ observations_start=$(date +%s%N)
 ## Read Observations
 ##
 
-eval "$(echo "${line}" | jq -r '. | to_entries | .[0,1,2,3,4,5,6] | .key + "=" + "\"" + ( .value|tostring ) + "\""')"
+eval "$(echo "${line}" | jq -r '. | to_entries | .[0,2,3,4,5,6,7,8,11] | .key + "=" + "\"" + ( .value|tostring ) + "\""')"
 eval "$(echo "${line}" | jq -r '.obs[] | to_entries | .[] | .key + "=" + "\"" + ( .value|tostring ) + "\""')"
 
 ##
