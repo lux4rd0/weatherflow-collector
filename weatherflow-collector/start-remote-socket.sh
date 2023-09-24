@@ -163,7 +163,7 @@ json_variable=${device_ar[${device_number}]}
 socket_json="${socket_json}{\"type\":\"listen_start\",\"device_id\":\"$json_variable\",\"id\":\"weatherflow-collector-listen_start_${random_id}\"}\n"
 socket_json="${socket_json}{\"type\":\"listen_rapid_start\",\"device_id\":\"$json_variable\",\"id\":\"weatherflow-collector-listen_rapid_start_${random_id}\"}\n"
 
-echo "${body_station}" |jq -r '.stations['"${station_number}"'] | to_entries | .[0,1,2,3,4,5,6] | .key + "=" + "\"" + ( .value|tostring ) + "\""' > remote-socket-device_id-"${device_ar[${device_number}]}"-lookup.txt
+echo "${body_station}" |jq -r '.stations['"${station_number}"'] | to_entries | .[4,5,6,7,8,9,12] | .key + "=" + "\"" + ( .value|tostring ) + "\""' > remote-socket-device_id-"${device_ar[${device_number}]}"-lookup.txt
 echo "elevation=\"$(echo "${body_station}" |jq -r '.stations['"${station_number}"'].station_meta.elevation')\"" >> remote-socket-device_id-"${device_ar[${device_number}]}"-lookup.txt
 
 #echo "${socket_json}"
@@ -175,7 +175,7 @@ if [ -n "${device_sk[${device_number}]}" ]; then
 json_variable=${device_sk[${device_number}]}
 socket_json="${socket_json}{\"type\":\"listen_start\",\"device_id\":\"$json_variable\",\"id\":\"weatherflow-collector-start_${random_id}\"}\n"
 
-echo "${body_station}" |jq -r '.stations['"${station_number}"'] | to_entries | .[0,1,2,3,4,5,6] | .key + "=" + "\"" + ( .value|tostring ) + "\""' > remote-socket-device_id-"${device_sk[${device_number}]}"-lookup.txt
+echo "${body_station}" |jq -r '.stations['"${station_number}"'] | to_entries | .[4,5,6,7,8,9,12] | .key + "=" + "\"" + ( .value|tostring ) + "\""' > remote-socket-device_id-"${device_sk[${device_number}]}"-lookup.txt
 echo "elevation=\"$(echo "${body_station}" |jq -r '.stations['"${station_number}"'].station_meta.elevation')\"" >> remote-socket-device_id-"${device_sk[${device_number}]}"-lookup.txt
 
 #echo "${socket_json}"
@@ -188,7 +188,7 @@ json_variable=${device_st[${device_number}]}
 socket_json="${socket_json}{\"type\":\"listen_start\",\"device_id\":\"$json_variable\",\"id\":\"weatherflow-collector-start_${random_id}\"}\n"
 socket_json="${socket_json}{\"type\":\"listen_rapid_start\",\"device_id\":\"$json_variable\",\"id\":\"weatherflow-collector-listen_rapid_start_${random_id}\"}\n"
 
-echo "${body_station}" |jq -r '.stations['"${station_number}"'] | to_entries | .[0,1,2,3,4,5,6] | .key + "=" + "\"" + ( .value|tostring ) + "\""' > remote-socket-device_id-"${device_st[${device_number}]}"-lookup.txt
+echo "${body_station}" |jq -r '.stations['"${station_number}"'] | to_entries | .[4,5,6,7,8,9,12] | .key + "=" + "\"" + ( .value|tostring ) + "\""' > remote-socket-device_id-"${device_st[${device_number}]}"-lookup.txt
 echo "elevation=\"$(echo "${body_station}" |jq -r '.stations['"${station_number}"'].station_meta.elevation')\"" >> remote-socket-device_id-"${device_st[${device_number}]}"-lookup.txt
 
 #echo "${socket_json}"
