@@ -4,6 +4,13 @@
 ## WeatherFlow Collector - generate_docker-compose.sh
 ##
 
+# Check for jq and exit if not installed
+if ! command -v jq &> /dev/null
+then
+    echo "The 'jq' utility is not installed. Please install 'jq' to continue."
+    exit 1
+fi
+
 import_days=$WEATHERFLOW_COLLECTOR_IMPORT_DAYS
 influxdb_password=$WEATHERFLOW_COLLECTOR_INFLUXDB_PASSWORD
 influxdb_url=$WEATHERFLOW_COLLECTOR_INFLUXDB_URL
