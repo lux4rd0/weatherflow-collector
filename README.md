@@ -3,7 +3,7 @@
 
 <center><img src="https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png"></center>
 
-**weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once deployed, this collection of Grafana dashboards will help you start visualizing that data. If you're just getting started with Grafana, InfluxDB, and WeatherFlow Tempest - you may want to check out my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project.
+**weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once deployed, this collection of Grafana dashboards will help you start visualizing that data. If you're just getting started with Grafana, InfluxDB, and WeatherFlow Tempest - you may want to check out my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project. (Still being updated).
 
 A live set of dashboards using this collector [are available](https://labs.lux4rd0.com/weatherflow-collector/) for you to try out.
 
@@ -105,7 +105,7 @@ The rate limit for API requests (default: 15).
 
 ````WEATHERFLOW_COLLECTOR_API_DATA_SAVE_DIR````
 
-The base directory is used to save API data (default: "api_data_saver").
+The base directory where you can save your API data (default: "api_data_saver").
 
 ````WEATHERFLOW_COLLECTOR_CONFIG_FILE````
 
@@ -559,19 +559,19 @@ You can obtain this by signing in to the Tempest Web App at [tempestwx.com](http
 
 #### remote-socket
 
-This setting grabs all of the metrics from your Tempest and all of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html), accomplished with WeatherFlow backend AI systems. The metrics don't have the same metrics resolution as the local-udp collector but supports lightning suppression and sea level pressure adjustments along with additional events such as online and offline status.
+This setting grabs all of the metrics from your Tempest and all of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html), accomplished with WeatherFlow backend AI systems. The metrics don't have the same metrics resolution as the local-udp collector but support lightning suppression, sea level pressure adjustments, and additional events such as online and offline status.
 
 #### remote-rest
 
-This setting is similar to the remote-socket for obtaining Weatherflow observations but only pulls data once a minute from a REST call. A few additional metrics are available on this collector, such as sea level pressure. Still working out which metrics make sense and the right kind of polling mechanism to put in place - so I'm trying out both!
+This setting is similar to the remote socket for obtaining WeatherFlow observations but only pulls data from a REST call once a minute (configurable). This collector also provides a few additional metrics, such as sea level pressure. I'm still figuring out which metrics make sense and which polling mechanism to implement, so I'm trying out both!
 
 #### local-udp
 
-This setting provides a listener on UDP port 50222 for messages coming from your Tempest hub. It provides all of the raw observation details and details on the Hub and Tempest, such as RSSI Wifi details, uptime, sensor details, and device battery voltage. The observation metrics have a slightly higher resolution of data than the REST/Socket API calls provide. However, it does not give any of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) available with the REST/Socket API calls.
+This setting provides a listener on UDP port 50222 for messages coming from your Tempest hub. It provides all of the raw observation details and details on the Hub and Tempest, such as RSSI Wi-Fi details, uptime, sensor details, and device battery voltage. The observation metrics have a slightly higher data resolution than the REST/Socket API calls provide. However, it does not give any of the [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) available with the REST/Socket API calls.
 
 #### remote-forecast
 
-This setting populates the WeatherFlow Forecast dashboards by polling the daily and hourly forecasts for your location and stores them in InfluxDB. The forecasting process runs on startup and every quarter-hour - 00, 15, 30, and 45 minutes.
+This setting populates the WeatherFlow Forecast dashboards by polling the daily and hourly forecasts for your location and storing them in InfluxDB. The forecasting process runs on startup and every quarter-hour—00, 15, 30, and 45 minutes.
 
 #### remote-import
 
@@ -580,17 +580,17 @@ This setting populates the WeatherFlow local-udp metrics from the WeatherFlow Cl
 
 ## Grafana Dashboards
 
-Collecting data is only half the fun. Now it's time to provision some Grafana Dashboards to visualize all of your great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) with collectors and backends split out. You can also use the links/numbers next to each dashboard title to load the dashboards [directly from Grafana](https://grafana.com/grafana/dashboards?search=weatherflow%20collector).
+Collecting data is only half the fun. Now it's time to provision some Grafana Dashboards to visualize your great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) with collectors and backends split out. You can also use the links/numbers next to each dashboard title to load the dashboards [directly from Grafana](https://grafana.com/grafana/dashboards?search=weatherflow%20collector).
 
 ### Alerts
 
-<center><img src="./images/weatherflow_collector-alerts.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-alerts.jpg"></center>
 
 Coming soon: a set of Grafana alerts to notify you of deviations in expected collector performance or changes in weather metrics.
 
 ### Current Conditions - [14376](https://grafana.com/grafana/dashboards/14376)
 
-<center><img src="./images/weatherflow_collector-current_conditions.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-current_conditions.jpg"></center>
 
 This dashboard provides a comprehensive overview of your station location, combining all "at-a-glance" metrics from your WeatherFlow device. The current conditions dashboard is divided up into:
 
@@ -604,9 +604,9 @@ This dashboard provides a comprehensive overview of your station location, combi
 
 ### Device Details - [14378](https://grafana.com/grafana/dashboards/14378)
 
-<center><img src="./images/weatherflow_collector-device_details.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-device_details.jpg"></center>
 
-This dashboard provides the current status for both the Tempest and your WeatherFlow hub, such as Uptime, Radio Status, RSSI, Reboot Count, I2C Bus Count Error, Radio Version, Network ID, Firmware Version, and Voltage.
+This dashboard provides the current status for the Tempest and your WeatherFlow hub, such as Uptime, Radio Status, RSSI, Reboot Count, I2C Bus Count Error, Radio Version, Network ID, Firmware Version, and Voltage.
 
 RSSI and Battery Voltage over time defaulted to the last seven days are shown at the top of the dashboard, while current device details are shown below.
 
@@ -614,49 +614,49 @@ Sensor Status measurements are shown with a number related to each per-minute co
 
 ### Forecast - [14380](https://grafana.com/grafana/dashboards/14380)
 
-<center><img src="./images/weatherflow_collector-forecast.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-forecast.jpg"></center>
 
-A daily and hourly forecast in table format with charts below them. The default time range includes the current day plus the next nine upcoming days. The interval drop-down at the top defaults to 12 hours to provide for highs and lows forecasts. Clicking on any of the dates in the "Forecast - Daily" table will refresh the Forecast hourly table to that day's hourly forecasts. This can also be done from the top "Forecast Day" drop-down menu.
+A daily and hourly forecast in table format with charts below them. The default time range includes the current day and nine upcoming days. The interval drop-down at the top defaults to 12 hours to provide for highs and lows forecasts. Clicking on any of the dates in the "Forecast - Daily" table will refresh the Forecast hourly table to that day's hourly forecasts. This can also be done from the top "Forecast Day" drop-down menu.
 
 ### Forecast Vs. Observed - [14379](https://grafana.com/grafana/dashboards/14379)
 
-<center><img src="./images/weatherflow_collector-forecast_vs_observed.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-forecast_vs_observed.jpg"></center>
 
 As forecast data is collected, this dashboard may be used to compare what was forecasted (by how many days out) versus the observed metric from your WeatherFlow device. Temperature, Humidity, Wind, and UV measurements are covered here. By default, "All" available forecast days are overlayed over the observed metric. You can choose "Days Out" from the top drop-down menu to compare individual forecasts.
 
 ### Historical (local-udp) - [14381](https://grafana.com/grafana/dashboards/14381)
 
-<center><img src="./images/weatherflow_collector-historical_local-udp.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-historical_local-udp.jpg"></center>
 
 Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Precipitation Accumulation is displayed for any day that precipitation is detected.
 
 ### Historical (remote) - [14382](https://grafana.com/grafana/dashboards/14382)
 
-<center><img src="./images/weatherflow_collector-historical_remote.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-historical_remote.jpg"></center>
 
-This provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each of the Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. It includes [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) as well as Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point. Precipitation Accumulation is displayed for any day that precipitation is detected.
+This provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. It includes [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) as well as Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, and Dew Point. Precipitation Accumulation is displayed for any day that precipitation is detected.
 
 ### Overview - [14383](https://grafana.com/grafana/dashboards/14383)
 
-<center><img src="./images/weatherflow_collector-overview.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-overview.jpg"></center>
 
 Overview is the default landing page for the WeatherFlow Collector AIO. It provides an overview of current weather metrics and live updates on wind and direction. You can choose other dashboards from the top right-hand dashboard panel or the top left-hand side drop-downs under "WeatherFlow Collector Dashboards."
 
 ### Rain and Lightning - [14384](https://grafana.com/grafana/dashboards/14384)
 
-<center><img src="./images/weatherflow_collector-rain_and_lightning.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-rain_and_lightning.jpg"></center>
 
 A historical view (defaulted to seven days) shows the precipitation rate and daily accumulation. As you zoom into the specific precipitation events, change the Interval drop-down to smaller increments (up to 1-minute collections) for finer rates.
 
 For Lightning, Strikes and Distance are shown on a heatmap visualization. Time is across the x-axis, while the number of detected lightning strikes is bucketed by color (dark blue to yellow). The Y-axis shows the bucketed distances (up to 40 miles away). Hover over each square for a histogram of each strike/distance count.
 
-<center><img src="./images/weatherflow_collector-rain_and_lightning_histogram.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-rain_and_lightning_histogram.jpg"></center>
 
 ### System Stats - [14385](https://grafana.com/grafana/dashboards/14385)
 
-<center><img src="./images/weatherflow_collector-system_stats.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-system_stats.jpg"></center>
 
-This provides two different system metrics to understand the health of your weatherflow-collector. At the top, it shows which container is running and each of the times it last started. A default Docker health check is enabled for each container that requires some data to be received and persisted every 60 seconds, or the container is marked unhealthy. This check happens every 5 seconds and will restart the container after three failed checks.
+This provides two different system metrics to understand the health of your weatherflow-collector. At the top shows which container is running and when it last started. A default Docker health check is enabled for each container that requires some data to be received and persisted every 60 seconds, or the container is marked unhealthy. This check happens every 5 seconds and will restart the container after three failed checks.
 
 The second section shows how long it takes to receive and persist forecasts and observations.
 
@@ -666,13 +666,13 @@ The second section shows how long it takes to receive and persist forecasts and 
 
 ### Today So Far (local-udp) - [14386](https://grafana.com/grafana/dashboards/14386)
 
-<center><img src="./images/weatherflow_collector-today_so_far_local-udp.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-today_so_far_local-udp.jpg"></center>
 
 The dashboard provides for Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the direct measurements from the local-udp collector (or imported from WeatherFlow).
 
 ### Today So Far (remote) - [14387](https://grafana.com/grafana/dashboards/14387)
 
-<center><img src="./images/weatherflow_collector-today_so_far_remote.jpg"></center>
+<center><img src="./docs/images/weatherflow_collector-today_so_far_remote.jpg"></center>
 
 This dashboard provides for the Temperature (Air, Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, Dew Point), Relative Humidity, Air Density, Station Pressure (with Trending), Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the WeatherFlow measurements from data sent to WeatherFlow and include [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) in the response.
 
@@ -684,7 +684,7 @@ The data collector and dashboards support multiple WeatherFlow Tempest devices.
 
 A TZ variable is required when running the Docker containers. (It's populated automatically from the `generate_docker-compose.sh` scripts) 
 
-TZ is specific to each hub/device location and is required as part of the InluxDB query to identify day breaks and other 12/24 hour interval groups. For dashboards with multiple devices in different time zones, you may need to switch the time zones from the top drop-down to group midnight/noon periods correctly.
+TZ is specific to each hub/device location and is required as part of the InluxDB query to identify day breaks and other 12/24 hour interval groups. For dashboards with multiple devices in different time zones, you may need to correctly switch the time zones from the top drop-down to group midnight/noon periods.
 
 ## Roadmap
 
