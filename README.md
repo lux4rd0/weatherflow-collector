@@ -601,12 +601,6 @@ This setting populates the WeatherFlow local-udp metrics from the WeatherFlow Cl
 
 Collecting data is only half the fun. Now it's time to provision some Grafana Dashboards to visualize your great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) with collectors and backends split out. You can also use the links/numbers next to each dashboard title to load the dashboards [directly from Grafana](https://grafana.com/grafana/dashboards?search=weatherflow%20collector).
 
-### Alerts
-
-<center><img src="./docs/images/weatherflow_collector-alerts.jpg"></center>
-
-Coming soon: a set of Grafana alerts to notify you of deviations in expected collector performance or changes in weather metrics.
-
 ### Current Conditions - [14376](https://grafana.com/grafana/dashboards/14376)
 
 <center><img src="./docs/images/weatherflow_collector-current_conditions.jpg"></center>
@@ -643,12 +637,6 @@ A daily and hourly forecast in table format with charts below them. The default 
 
 As forecast data is collected, this dashboard may be used to compare what was forecasted (by how many days out) versus the observed metric from your WeatherFlow device. Temperature, Humidity, Wind, and UV measurements are covered here. By default, "All" available forecast days are overlayed over the observed metric. You can choose "Days Out" from the top drop-down menu to compare individual forecasts.
 
-### Historical (local-udp) - [14381](https://grafana.com/grafana/dashboards/14381)
-
-<center><img src="./docs/images/weatherflow_collector-historical_local-udp.jpg"></center>
-
-Provides a place to view weather details over longer periods of time. It defaults to 30 days with a 12-hour interval to show highs and lows for each Air Temperature, Humidity, Station Pressure, Solar, and Wind metrics. Precipitation Accumulation is displayed for any day that precipitation is detected.
-
 ### Historical (remote) - [14382](https://grafana.com/grafana/dashboards/14382)
 
 <center><img src="./docs/images/weatherflow_collector-historical_remote.jpg"></center>
@@ -671,7 +659,7 @@ For lightning, strikes and distance are shown in a heat map visualization. Time 
 
 <center><img src="./docs/images/weatherflow_collector-rain_and_lightning_histogram.jpg"></center>
 
-### System Stats - [14385](https://grafana.com/grafana/dashboards/14385)
+### System Stats - [14385](https://grafana.com/grafana/dashboards/14385) (Not Currently Update)
 
 <center><img src="./docs/images/weatherflow_collector-system_stats.jpg"></center>
 
@@ -683,13 +671,7 @@ The second section shows how long it takes to receive and persist forecasts and 
  - **Forecast Build Duration** - Hourly - between 30 and 45 seconds (note - if this takes longer than 60 seconds, the Docker Health Check will currently recycle the container. A future update will change this to take a longer build duration into account. For now - set the "WEATHERFLOW_COLLECTOR_DOCKER_HEALTHCHECK_ENABLED" environmental variable to "false."
  - **Rest Observations** - between 1 and 2 seconds
 
-### Today So Far (local-udp) - [14386](https://grafana.com/grafana/dashboards/14386)
-
-<center><img src="./docs/images/weatherflow_collector-today_so_far_local-udp.jpg"></center>
-
-The dashboard provides for Temperature, Relative Humidity, Station Pressure, Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the direct measurements from the local-udp collector (or imported from WeatherFlow).
-
-### Today So Far (remote) - [14387](https://grafana.com/grafana/dashboards/14387)
+### Today So Far - [14387](https://grafana.com/grafana/dashboards/14387)
 
 <center><img src="./docs/images/weatherflow_collector-today_so_far_remote.jpg"></center>
 
