@@ -1,15 +1,16 @@
 
+
 ## About The Project
 
 <center><img src="https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png"></center>
 
-**weatherflow-collector** is a set of scripts deployed with Docker that provide multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once deployed, this collection of Grafana dashboards will help you start visualizing that data. If you're just getting started with Grafana, InfluxDB, and WeatherFlow Tempest - you may want to check out my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project. (Still being updated).
+**weatherflow-collector** is an application that provides multiple ways of collecting data from the [WeatherFlow Tempest](https://weatherflow.com/tempest-weather-system/) weather system. Once deployed, this collection of Grafana dashboards will help visualize that data. If you're just getting started with Grafana, InfluxDB, and WeatherFlow Tempest, you may want to check out my [WeatherFlow Dashboards AIO](https://github.com/lux4rd0/weatherflow-dashboards-aio) (All In One) project. (It is still being updated.)
 
 A live set of dashboards using this collector [are available](https://labs.lux4rd0.com/weatherflow-collector/) for you to try out.
 
 ## Getting Started
 
-The project builds a pre-configured Docker container that takes different configurations based on how you want to collect and where you want to store the data.
+The project is typically deployed as a Docker container, which requires configurations based on how and where you want to collect and store the data.
 
 ## Prerequisites
 
@@ -20,7 +21,7 @@ The project builds a pre-configured Docker container that takes different config
 
 ## Notice
 
-Like all projects, weatherflow-collector is always in a flux state based on trying out new things and seeing what works and what doesn't. It started as a fun exercise to visualize "what's possible." I'm experimenting with different collectors and backends. Please expect breaking changes along the way.
+Version 5.1 is the most recent release of the collector, and it has been completely rewritten. However, there are still some issues that I am working on resolving. If you come across something that isn't working as expected or if you have suggestions for new features, please open an issue, and I will address it. I'm also updating the documentation as quickly as possible, as there's quite a big difference between versions. 
 
 ## Deploying the WeatherFlow Collector
 
@@ -29,7 +30,9 @@ Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflo
     lux4rd0/weatherflow-collector:5.1.53
     lux4rd0/weatherflow-collector:latest
     
-Correct environmental variables are required for the container to function. Below are the required minimum settings to get started:
+The provided container has a multi-architecture supporting both Linux/amd64 and Linux/arm64.
+
+Correct environmental variables are required for the application to function. Below are the required minimum settings to get started:
 
     WEATHERFLOW_COLLECTOR_API_TOKEN
     WEATHERFLOW_COLLECTOR_INFLUXDB_URL
@@ -41,8 +44,6 @@ Correct environmental variables are required for the container to function. Belo
 #### `docker-compose.yml`
 
 A minimal compose.yaml file would look like:
-
-
 
     name: weatherflow-collector-lux4rd0
     services:
@@ -75,7 +76,7 @@ If you want to run this as a docker run command, that would look like:
       --restart always \
       lux4rd0/weatherflow-collector:latest
 
-#### Optional Export Command:
+#### Optional Export Command (Still under rework with version 5.1):
 
 If you want to export your data from the WeatherFlow cloud, run this Docker command substituting your own token:
 
@@ -92,6 +93,24 @@ Files will be created in your current working directory that look something like
 
     weatherflow-collector_export-station_351-device_26040.csv
     weatherflow-collector_export-station_351-device_16029.csv
+
+#### Optional Import Command (Still under rework with version 5.1):
+
+If you want to import your data from the WeatherFlow cloud, run this Docker command substituting your own token:
+
+    docker run --rm \
+      --name=weatherflow-collector-remote-export \
+      -e WEATHERFLOW_COLLECTOR_COLLECTOR_TYPE=remote-export \
+      -e WEATHERFLOW_COLLECTOR_FUNCTION=export \
+      -e WEATHERFLOW_COLLECTOR_API_TOKEN=your_api_token \
+      -e WEATHERFLOW_COLLECTOR_IMPORT_DAYS=20 \
+      lux4rd0/weatherflow-collector:latest
+
+Files will be created in your current working directory that look something like this:
+
+    weatherflow-collector_export-station_351-device_26040.csv
+    weatherflow-collector_export-station_351-device_16029.csv
+
 
 ## Environmental flags:
 
@@ -648,7 +667,7 @@ Overview is the default landing page for the WeatherFlow Collector AIO. It provi
 
 A historical view (defaulted to seven days) shows the precipitation rate and daily accumulation. As you zoom into the specific precipitation events, change the Interval drop-down to smaller increments (up to 1-minute collections) for finer rates.
 
-For Lightning, Strikes and Distance are shown on a heatmap visualization. Time is across the x-axis, while the number of detected lightning strikes is bucketed by color (dark blue to yellow). The Y-axis shows the bucketed distances (up to 40 miles away). Hover over each square for a histogram of each strike/distance count.
+For lightning, strikes and distance are shown in a heat map visualization. Time is across the x-axis, while the number of detected lightning strikes is bucketed by color (dark blue to yellow). The Y-axis shows the bucketed distances (up to 40 miles away). Hover over each square for a histogram of each strike/distance count.
 
 <center><img src="./docs/images/weatherflow_collector-rain_and_lightning_histogram.jpg"></center>
 
