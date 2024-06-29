@@ -1,0 +1,12 @@
+apiVersion: 1
+datasources:
+  - name: websocket - weatherflow-collector
+    type: golioth-websocket-datasource
+    typeName: WebSocket API
+    typeLogoUrl: public/plugins/golioth-websocket-datasource/img/logo.svg
+    access: proxy
+    basicAuth: false
+    isDefault: false
+    jsonData:
+      host: 'ws://weatherflow-collector.lux4rd0.com:6789'
+    readOnly: false
