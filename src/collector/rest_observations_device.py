@@ -1,17 +1,11 @@
 # collector_rest_observations_device.py
 
-
-import aiohttp
 import asyncio
-import logging
 from datetime import datetime, timedelta
-import config
-import utils.utils as utils
 import time
 
-
-#from utils.calculate_weather_metrics import CalculateWeatherMetrics
-
+import config
+import utils.utils as utils
 import logger
 
 logger_RESTObservationsDeviceCollector = logger.get_module_logger(
@@ -30,75 +24,66 @@ class RESTObservationsDeviceCollector:
         self.collector_type = "collector_rest_observations_device"
 
     async def handle_latest_device_observation(self, device_id):
-        request_processing_start = time.time()  # Start time for processing
+        request_processing_start = time.time()
+        processing_duration = 0
 
         try:
             url = f"{self.base_url}/device/{device_id}?api_key={self.api_key}"
             logger_RESTObservationsDeviceCollector.debug(
-                f"Fetching data for device ID {device_id} from URL: {url}"
+                f"Fetching data for device ID {device_id}"
             )
 
             json_data = await utils.fetch_data_from_url(
                 url, self.collector_type, self.event_manager
             )
 
-            if json_data:
-                logger_RESTObservationsDeviceCollector.debug(
-                    f"Received JSON data for device ID {device_id}: {json_data}"
-                )
-
-                # Wrap the entire JSON response with metadata
-                data_with_metadata = {
-                    "metadata": {
-                        "collector_type": self.collector_type,
-                        "device_id": device_id,
-                    },
-                    "data": json_data,  # Assigning the entire JSON response to 'data'
-                }
-
-                await self.event_manager.publish(
-                    "collector_data_event",
-                    data_with_metadata,
-                    publisher="RESTObservationsDeviceCollector.handle_latest_device_observation",
-                )
-                logger_RESTObservationsDeviceCollector.debug(
-                    f"Published data to event manager for device ID {device_id}"
-                )
-            else:
+            if not json_data:
                 logger_RESTObservationsDeviceCollector.warning(
-                    f"No data received for device ID {device_id} from URL: {url}"
+                    f"No data received for device ID {device_id}"
                 )
+                return
 
-            # Increment request count
+            # Check if the response contains the expected data
+            if json_data.get("obs") is None or json_data.get("device_id") is None:
+                logger_RESTObservationsDeviceCollector.warning(
+                    f"Incomplete data received for device ID {device_id}: {json_data}"
+                )
+                return
+
+            logger_RESTObservationsDeviceCollector.debug(
+                f"Received valid JSON data for device ID {device_id}"
+            )
+
+            data_with_metadata = {
+                "metadata": {
+                    "collector_type": self.collector_type,
+                    "device_id": device_id,
+                },
+                "data": json_data,
+            }
+
+            await self.event_manager.publish(
+                "collector_data_event",
+                data_with_metadata,
+                publisher=f"{self.__class__.__name__}.handle_latest_device_observation",
+            )
+            logger_RESTObservationsDeviceCollector.debug(
+                f"Published data for device ID {device_id}"
+            )
+
             self.request_count += 1
 
-            # Calculate processing duration and publish metrics
-            processing_duration = time.time() - request_processing_start
-
-            logger_RESTObservationsDeviceCollector.debug(
-                f"Publishing metrics: message_count={self.request_count}, errors={self.error_count}, duration={processing_duration}"
-            )
-
-            await utils.async_publish_metrics(
-                self.event_manager,
-                metric_name="handle_latest_device_observation",
-                module_name=self.module_name,
-                rate=self.request_count,
-                errors=self.error_count,
-                duration=processing_duration,
-            )
-
         except Exception as e:
-            self.error_count += 1  # Increment error count
+            self.error_count += 1
             logger_RESTObservationsDeviceCollector.error(
-                f"Error in retrieving data: {e}"
+                f"Error processing device ID {device_id}: {e}"
             )
 
-            # Publish error metrics
+        finally:
             processing_duration = time.time() - request_processing_start
 
             logger_RESTObservationsDeviceCollector.debug(
-                f"Publishing metrics: message_count={self.request_count}, errors={self.error_count}, duration={processing_duration}"
+                f"Metrics: messages={self.request_count}, errors={self.error_count}, duration={processing_duration:.2f}s"
             )
 
             await utils.async_publish_metrics(
@@ -111,50 +96,69 @@ class RESTObservationsDeviceCollector:
             )
 
     async def retrieve_and_save_data(self):
-        station_metadata = utils.StationMetadataSingleton().get_metadata()
-        tasks = []
+        try:
+            station_metadata = utils.StationMetadataSingleton().get_metadata()
+            tasks = []
 
-        for station_id, station_info in station_metadata.items():
-            # Check if the station is enabled
-            if station_info.get("enabled", False):
-                devices = station_info.get("devices", [])
-                for device in devices:
-                    # Check if the device is enabled and its type is not 'HB'
-                    if (
-                        device.get("enabled", False)
-                        and device.get("device_type") != "HB"
-                    ):
-                        device_id = device["device_id"]
-                        task = asyncio.create_task(
-                            self.handle_latest_device_observation(device_id)
-                        )
-                        tasks.append(task)
+            for station_id, station_info in station_metadata.items():
+                if station_info.get("enabled", False):
+                    devices = station_info.get("devices", [])
+                    for device in devices:
+                        if (
+                            device.get("enabled", False)
+                            and device.get("device_type") != "HB"
+                        ):
+                            device_id = device.get("device_id")
+                            if device_id:
+                                task = asyncio.create_task(
+                                    self.handle_latest_device_observation(device_id)
+                                )
+                                tasks.append(task)
 
-        await asyncio.gather(*tasks)
+            await asyncio.gather(*tasks)
+        except Exception as e:
+            logger_RESTObservationsDeviceCollector.error(
+                f"Error in retrieve_and_save_data: {e}"
+            )
 
     async def run_forever(self):
         logger_RESTObservationsDeviceCollector.info(
             "Starting RESTObservationsDeviceCollector in run_forever mode."
         )
-        while True:
-            start_time = asyncio.get_event_loop().time()
-            await self.retrieve_and_save_data()
-            elapsed_time = asyncio.get_event_loop().time() - start_time
+        try:
+            while True:
+                start_time = asyncio.get_event_loop().time()
+                await self.retrieve_and_save_data()
+                elapsed_time = asyncio.get_event_loop().time() - start_time
 
+                logger_RESTObservationsDeviceCollector.info(
+                    f"Execution of data retrieval and processing took {elapsed_time:.2f} seconds."
+                )
+
+                sleep_time = max(
+                    config.WEATHERFLOW_COLLECTOR_COLLECTOR_REST_OBSERVATIONS_INTERVAL
+                    - elapsed_time,
+                    0,
+                )
+                next_start_time = datetime.now() + timedelta(seconds=sleep_time)
+                next_start_time_formatted = next_start_time.strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                )
+
+                logger_RESTObservationsDeviceCollector.info(
+                    f"Sleeping for {sleep_time:.2f} seconds. Next cycle will start at approximately {next_start_time_formatted}."
+                )
+
+                await asyncio.sleep(sleep_time)
+        except asyncio.CancelledError:
             logger_RESTObservationsDeviceCollector.info(
-                f"Execution of data retrieval and processing took {elapsed_time:.2f} seconds."
+                "RESTObservationsDeviceCollector received cancellation signal."
             )
-
-            sleep_time = max(
-                config.WEATHERFLOW_COLLECTOR_COLLECTOR_REST_OBSERVATIONS_INTERVAL
-                - elapsed_time,
-                0,
+        except Exception as e:
+            logger_RESTObservationsDeviceCollector.error(
+                f"Unexpected error in run_forever: {e}"
             )
-            next_start_time = datetime.now() + timedelta(seconds=sleep_time)
-            next_start_time_formatted = next_start_time.strftime("%Y-%m-%d %H:%M:%S")
-
+        finally:
             logger_RESTObservationsDeviceCollector.info(
-                f"Sleeping for {sleep_time:.2f} seconds. Next cycle will start at approximately {next_start_time_formatted}."
+                "RESTObservationsDeviceCollector shutting down."
             )
-
-            await asyncio.sleep(sleep_time)

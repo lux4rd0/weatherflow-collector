@@ -199,16 +199,28 @@ async def setup_app():
     else:
         logger_main.info("collector_rest_export disabled.")
 
-## Vineyard Vantage Conditional Startup Start
+    ## Vineyard Vantage Conditional Startup Start
 
     if config.WEATHERFLOW_COLLECTOR_VINEYARD_VANTAGE_HANDLER_ENABLED:
-        logger_main.info("vineyard_vantage_handler enabled.")
-        vineyard_vantage_handler = VineyardVantageHandler(
-            event_manager, collector_rest_stats.on_external_notification
-        )
-        event_manager.subscribe("processed_data_event", vineyard_vantage_handler)
+        if config.WEATHERFLOW_COLLECTOR_COLLECTOR_REST_STATS_ENABLED:
+            logger_main.info("vineyard_vantage_handler enabled.")
+            try:
+                vineyard_vantage_handler = VineyardVantageHandler(
+                    event_manager, collector_rest_stats.on_external_notification
+                )
+                event_manager.subscribe(
+                    "processed_data_event", vineyard_vantage_handler
+                )
+            except Exception as e:
+                logger_main.error(f"Failed to initialize vineyard_vantage_handler: {e}")
+                logger_main.info("vineyard_vantage_handler will be disabled.")
+        else:
+            logger_main.warning(
+                "vineyard_vantage_handler is enabled, but collector_rest_stats is disabled. Vineyard Vantage handler will not be initialized."
+            )
     else:
         logger_main.info("vineyard_vantage_handler disabled.")
+
 
 ## Vineyard Vantage Conditional Startup End
 
