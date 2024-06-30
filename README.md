@@ -27,7 +27,7 @@ Version 5.1 is the most recent release of the collector, and it has been complet
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:5.1.53
+    lux4rd0/weatherflow-collector:5.1.54
     lux4rd0/weatherflow-collector:latest
     
 The provided container has a multi-architecture supporting both Linux/amd64 and Linux/arm64.
