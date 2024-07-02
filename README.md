@@ -27,7 +27,7 @@ Version 5.1 is the most recent release of the collector, and it has been complet
 
 Use the following [Docker container](https://hub.docker.com/r/lux4rd0/weatherflow-collector):
 
-    lux4rd0/weatherflow-collector:5.1.54
+    lux4rd0/weatherflow-collector:5.1.55
     lux4rd0/weatherflow-collector:latest
     
 The provided container has a multi-architecture supporting both Linux/amd64 and Linux/arm64.
@@ -433,6 +433,10 @@ Retry wait for HTTP fetch (default: 2).
 ````WEATHERFLOW_COLLECTOR_UTILS_HTTP_FETCH_TIMEOUT````
 
 Timeout for HTTP fetch (default: 30).
+
+````WEATHERFLOW_COLLECTOR_HEALTHCHECK_WEBSOCKETCOLLECTOR_TIMEOUT_SOCKET````
+
+The parameter defines the maximum duration the WeatherFlow Collector WebSocket Client will wait without receiving any data before considering the connection inactive. If no data is received within this specified timeout period, the WebSocket connection is closed and re-established to ensure continuous data flow and system reliability (default: 60).
 
 ````WEATHERFLOW_COLLECTOR_ENABLE_HEALTHCHECK_FORECAST````
 

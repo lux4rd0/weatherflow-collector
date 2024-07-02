@@ -54,8 +54,6 @@ import asyncio
 import websockets
 
 
-
-
 import config
 import logger
 import random
@@ -68,7 +66,7 @@ import utils.utils as utils  # Assuming utils contains necessary methods
 logger_WebsocketCollector = logger.get_module_logger(__name__ + ".WebsocketCollector")
 
 
-logger_websockets = logger.get_module_logger('websockets')
+logger_websockets = logger.get_module_logger("websockets")
 
 
 class WebsocketCollector:
@@ -78,6 +76,11 @@ class WebsocketCollector:
         self.websocket_url = config.WEATHERFLOW_API_WEBSOCKET_URL
         self.api_token = config.WEATHERFLOW_COLLECTOR_API_TOKEN
         self.websocket = None
+        self.last_message_time = time.time()
+        self.timeout_duration = (
+            config.WEATHERFLOW_COLLECTOR_HEALTHCHECK_WEBSOCKETCOLLECTOR_TIMEOUT_SOCKET
+        )
+
         logger_WebsocketCollector.info("WebsocketCollector initialized.")
         self.message_count = 0  # Counter for processed messages
         self.error_count = 0  # Counter for errors
@@ -147,10 +150,12 @@ class WebsocketCollector:
         All other messages are expected to contain data relevant to the application and are therefore forwarded.
         """
         while True:
-
             try:
                 # Wait for a message to be received
                 message = await self.websocket.recv()
+                self.last_message_time = (
+                    time.time()
+                )  # Update the last received message time
 
                 # Start the timer after receiving the message
                 message_processing_start = time.time()
@@ -163,8 +168,6 @@ class WebsocketCollector:
 
                 message_size = len(message)  # Capture the size of the message
                 self.message_count += 1  # Increment message count
-
-                json_data = json.loads(message)
 
                 # Log and filter out "connection_opened", "ack", and "status" messages
                 message_type = json_data.get("type")
@@ -191,7 +194,9 @@ class WebsocketCollector:
                         "data": json_data,
                     }
                     await self.event_manager.publish(
-                        "collector_data_event", data_with_metadata, publisher="WebsocketCollector.receive_and_forward_messages"
+                        "collector_data_event",
+                        data_with_metadata,
+                        publisher="WebsocketCollector.receive_and_forward_messages",
                     )
 
             except websockets.ConnectionClosed:
@@ -280,7 +285,45 @@ class WebsocketCollector:
 
     async def start(self):
         await self.establish_connection()
+        asyncio.create_task(self.monitor_connection())  # Start the background task
         await self.receive_and_forward_messages()
+
+    async def monitor_connection(self):
+        """
+        Monitors the connection to check if messages are being received.
+        If no messages are received within the timeout duration, the connection is restarted.
+        """
+        while True:
+            current_time = time.time()
+            elapsed_time = current_time - self.last_message_time
+
+            if elapsed_time < 60:
+                elapsed_time_str = f"{elapsed_time:.2f} seconds"
+            else:
+                minutes = int(elapsed_time // 60)
+                seconds = elapsed_time % 60
+                elapsed_time_str = f"{minutes} minutes and {seconds:.2f} seconds"
+
+            logger_WebsocketCollector.debug(
+                f"Performing connection check. Last message received {elapsed_time_str} ago."
+            )
+
+            if elapsed_time > self.timeout_duration:
+                last_event_time = time.strftime(
+                    "%Y-%m-%d %H:%M:%S", time.localtime(self.last_message_time)
+                )
+                timeout_duration_str = (
+                    f"{self.timeout_duration} seconds"
+                    if self.timeout_duration < 60
+                    else f"{self.timeout_duration // 60} minutes"
+                )
+                logger_WebsocketCollector.warning(
+                    f"No data received within timeout duration of {timeout_duration_str}. Last event received at {last_event_time}. Restarting connection."
+                )
+                await self.close_connection()
+                await self.establish_connection()
+
+            await asyncio.sleep(self.timeout_duration)
 
     def update(self, data):
         logger_WebsocketCollector.debug("Updating WebsocketCollector with new data")
