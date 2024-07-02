@@ -1,5 +1,6 @@
 
 
+
 ## About The Project
 
 <center><img src="https://labs.lux4rd0.com/wp-content/uploads/2021/05/weatherflow_collector_header.png"></center>
@@ -600,7 +601,6 @@ This setting populates the WeatherFlow Forecast dashboards by polling the daily 
 
 This setting populates the WeatherFlow local-udp metrics from the WeatherFlow Cloud.
 
-
 ## Grafana Dashboards
 
 Collecting data is only half the fun. Now it's time to provision some Grafana Dashboards to visualize your great WeatherFlow data. You'll find a [folder of dashboards](https://github.com/lux4rd0/weatherflow-collector/tree/main/dashboards) with collectors and backends split out. You can also use the links/numbers next to each dashboard title to load the dashboards [directly from Grafana](https://grafana.com/grafana/dashboards?search=weatherflow%20collector).
@@ -680,6 +680,25 @@ The second section shows how long it takes to receive and persist forecasts and 
 <center><img src="./docs/images/weatherflow_collector-today_so_far_remote.jpg"></center>
 
 This dashboard provides for the Temperature (Air, Feels Like, Heat Index, Wind Chill, Dry Bulb, Wet Bulb, Dew Point), Relative Humidity, Air Density, Station Pressure (with Trending), Accumulated Rain, Solar Radiation, Illuminance, UV, Lightning Strike, and Wind Speed from midnight to the current time. These reflect the WeatherFlow measurements from data sent to WeatherFlow and include [derived metrics](https://weatherflow.github.io/Tempest/api/derived-metric-formulas.html) in the response.
+
+## Grafana Datasource
+
+This collector uses InfluxQL, and for the dashboards to function, you need to create a data source in Grafana using the credentials you set in InfluxDB V2. More details can be found on the InfluxDB V2 Web site:
+
+https://docs.influxdata.com/influxdb/v2/tools/grafana/?t=InfluxQL#configure-your-influxdb-connection
+
+The biggest change here is:
+
+ - Configure InfluxDB authentication:
+   
+   **Token authentication**
+   Under **Custom HTTP Headers**, select **Add Header**. Provide your InfluxDB API token:
+   
+   **Header**: Enter `Authorization`
+   
+   **Value**: Use the `Token` schema and provide your InfluxDB API token. For example:
+   
+       Token y0uR5uP3rSecr3tT0k3n
 
 ## Multiple Devices
 
