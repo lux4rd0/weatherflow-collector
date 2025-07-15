@@ -67,7 +67,6 @@ from storage.influxdb import InfluxDBStorage
 from handlers.system_metrics import SystemMetricsHandler
 from config_validator import validate_all
 
-from vineyard_vantage.vineyard_vantage_handler import VineyardVantageHandler
 
 
 # Initialize logger
@@ -202,6 +201,7 @@ async def setup_app():
     ## Vineyard Vantage Conditional Startup Start
 
     if config.WEATHERFLOW_COLLECTOR_VINEYARD_VANTAGE_HANDLER_ENABLED:
+        from vineyard_vantage.vineyard_vantage_handler import VineyardVantageHandler
         if config.WEATHERFLOW_COLLECTOR_COLLECTOR_REST_STATS_ENABLED:
             logger_main.info("vineyard_vantage_handler enabled.")
             try:
